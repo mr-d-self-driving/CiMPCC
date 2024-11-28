@@ -1,0 +1,32 @@
+# Parameter for CiMPCC solver
+# vehicle must start behind the start line for lap count
+
+is_sim: False
+map_name: map416_track
+
+# is_3D_vis: True         # Visualize 3D curvature data
+is_3D_vis: False          # Not visualize 3D curvature data
+
+# is_plot_data: True      # Visualize lap data
+is_plot_data: False       # Not visualize lap data
+
+window_size: 30
+N: 10
+Q: [800, 800]
+gamma: 40
+R1: [10, 3500, 0]
+R2: [0, 10, 0]
+R3: 40                    # ones(2,1).*R3
+dT: 0.15                  # second
+v_bar: 3.8                # m/s
+discount_factor: 0.65 
+
+################ Topic names ################
+odom_topic_name: /vesc/odom
+goal_topic_name: /move_base_simple/goal
+cmd_vel_topic_name: /vesc/high_level/ackermann_cmd_mux/input/nav_0
+localized_pose_topic_name: /pf/viz/inferred_pose
+joy_topic_name: /vesc/joy
+################ Topic names ################
+
+

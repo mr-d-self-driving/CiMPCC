@@ -1,0 +1,14 @@
+<launch>
+  <arg name="map" default="$(find racecar_simulator)/maps/ddrx416.yaml"/>
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map)"/>
+
+  <!-- Launch the racecar model -->
+  <include file="$(find racecar_simulator)/launch/racecar_model.launch"/>
+
+  <node pkg="racecar_simulator" name="racecar_simulator" type="simulate" output="screen">
+    <rosparam command="load" file="$(find racecar_simulator)/params.yaml"/>
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d /home/ddrx/f1tenth_ws/toolkit/racetrack.rviz" />
+
+</launch>

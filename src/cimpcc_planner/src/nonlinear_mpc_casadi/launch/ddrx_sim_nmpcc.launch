@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <!--  ****** MPCC Node ******  -->
+    <rosparam file="/home/ddrx/f1tenth_ws/toolkit/params/ddrx_sim_mpc_params.yaml" command="load" />
+    <node name="mpc_node" pkg="nonlinear_mpc_casadi" type="planner_loader.py" output="screen"/>
+
+    <node name="remap_simulator_pose" pkg="nonlinear_mpc_casadi" type="remap_light_simulator_pose.py" />
+
+</launch>
+
