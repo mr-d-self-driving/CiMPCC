@@ -4,7 +4,7 @@ Deploy and visualize the planner from Reduce Lap Time for Autonomous Racing with
 
 <div style="display: flex; justify-content: space-between; align-items: center;">
   <img src="./media/teaser.jpg" alt="teaser" width="440" />
-  <img src="./media/cimpcc.gif" alt="teaser" width="350" />
+  <img src="./media/cimpcc.gif" alt="teaser" width="360" />
 </div>
 
 
@@ -105,7 +105,7 @@ Feel that parameter tuning is troublesome? Check out my [latest work](https://ar
 
 ## 🤗 Acknowledgments
 
-Many thanks to the excellent open-source codebases listed below. This project would not have been possible without them
+Many thanks to the excellent open-source codebases listed below:
 
 - [Nonlinear_MPCC_for_autonomous_racing](https://github.com/nirajbasnet/Nonlinear_MPCC_for_autonomous_racing)
 - [f1tenth_system](https://github.com/f1tenth/f1tenth_system)
