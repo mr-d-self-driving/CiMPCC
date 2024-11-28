@@ -3,8 +3,8 @@
 Deploy and visualize the planner from Reduce Lap Time for Autonomous Racing with Curvature-Integrated MPCC Local Trajectory Planning Method. The main branch contains the F1tenth simulator and the CiMPCC planner.
 
 <div style="display: flex; justify-content: space-between; align-items: center;">
-  <img src="./media/teaser.jpg" alt="teaser" width="540" />
-  <img src="./media/cimpcc.gif" alt="teaser" width="450" />
+  <img src="./media/teaser.jpg" alt="teaser" width="440" />
+  <img src="./media/cimpcc.gif" alt="teaser" width="350" />
 </div>
 
 
@@ -83,8 +83,8 @@ roslaunch nonlinear_mpc_casadi ddrx_sim_nmpcc.launch
 **[3/3]** Use the '2D Nav Goal' as the starting signal for racing.
 
 <div style="display: flex; justify-content: space-between; align-items: center;">
-  <img src="./media/3Dcur.jpg" alt="teaser" width="530" />
-  <img src="./media/sim.gif" alt="teaser" width="440" />
+  <img src="./media/3Dcur.jpg" alt="teaser" width="430" />
+  <img src="./media/sim.gif" alt="teaser" width="340" />
 </div>
 
 ## 💻 Customization
