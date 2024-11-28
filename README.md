@@ -13,6 +13,12 @@ Two methods are provided to configure the runtime environment:
 1. Run directly using the pre-built Docker image.
 2. Reconfigure from scratch using Docker.
 
+Start by cloning this repository to the host:
+
+```bash
+git clone https://github.com/zhouhengli/CiMPCC.git f1tenth_ws
+```
+
 #### Configure
 
 Either of the following two methods can be used to deploy the environment.
