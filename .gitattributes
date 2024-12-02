@@ -1,1 +1,2 @@
-*.i linguist-language=Python 
+*.i linguist-language=Python
+*.so linguist-language=Python
