@@ -36,7 +36,7 @@ Coming soon.
 **[1/3]** Pull Docker image:
 
 ```bash
-sudo docker pull ros:melodic-robot
+sudo docker pull ros:melodic-robot-bionic
 ```
 
 **[2/3]** Set up a container:
