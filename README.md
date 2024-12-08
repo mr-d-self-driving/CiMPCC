@@ -8,7 +8,7 @@ Deploy and visualize the planner from Reduce Lap Time for Autonomous Racing with
 </div>
 
 
-## 🛠️ Quickstart
+## 🪄 Quickstart
 
 Two methods are provided to configure the runtime environment:
 
@@ -21,17 +21,17 @@ Start by cloning this repository to the host:
 git clone https://github.com/zhouhengli/CiMPCC.git f1tenth_ws
 ```
 
-#### Configure
+## 🛠️ Configure
 
 Either of the following two methods can be used to deploy the environment.
 
-##### Run directly using the pre-built Docker image
+### ✅ Run directly using the pre-built Docker image
 
 Alternatively, the Docker configuration can be pulled from Google Drive. Simply download it to your Linux system.
 
 Coming soon.
 
-##### [Optional] Reconfigure from scratch using Docker
+### ✅ [Optional] Reconfigure from scratch using Docker
 
 **[1/3]** Pull Docker image:
 
@@ -58,7 +58,7 @@ chmod +x setup_env.sh
 ./setup_env.sh
 ```
 
-#### Planning
+### 🚀 Planning
 
 **[1/3]** Set up a container and enter the following commands. After the final command, the map should pop up:
 
@@ -91,13 +91,13 @@ roslaunch nonlinear_mpc_casadi ddrx_sim_nmpcc.launch
 
 This project allows for the customization of the map and track files used by the CiMPCC method, as well as the parameters. Adjustments can be made according to specific needs.
 
-### Customized map and track
+### ✏️ Customized map and track
 
 Maps files can be found in `toolkit/maps/`, and the map in this project is generated using CartG.
 
 Track files are located in `toolkit/tracks/`, where path and boundaries are defined as a closed curve, and `<track_name>_center_derivates.csv` defines the deviations in the x and y directions.
 
-### Parameter Tuning
+### ✏️ Parameter Tuning
 
 Parameter files are saved in `toolkit/params/`, where the parameter definitions are consistent with those described in the paper. Try tuning the parameters to improve the performance (reduce the lap time) of the planner 🏁.
 
@@ -105,7 +105,7 @@ Feel that parameter tuning is troublesome? Check out my [latest work](https://ar
 
 ## 🤗 Acknowledgments
 
-Many thanks to the excellent open-source codebases listed below:
+Many thanks to the excellent open-source repositories listed below:
 
 - [Nonlinear_MPCC_for_autonomous_racing](https://github.com/nirajbasnet/Nonlinear_MPCC_for_autonomous_racing)
 - [f1tenth_system](https://github.com/f1tenth/f1tenth_system)
