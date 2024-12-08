@@ -93,7 +93,7 @@ This project allows for the customization of the map and track files used by the
 
 ### ✏️ Customized map and track
 
-Maps files can be found in `toolkit/maps/`, and the map in this project is generated using CartG.
+Maps files can be found in `toolkit/maps/`, and the map in this project is generated using Cartographer.
 
 Track files are located in `toolkit/tracks/`, where path and boundaries are defined as a closed curve, and `<track_name>_center_derivates.csv` defines the deviations in the x and y directions.
 
