@@ -112,7 +112,7 @@ Many thanks to the excellent open-source repositories listed below:
 - [Cartographer](https://github.com/cartographer-project/cartographer)
 - [CasADi](https://web.casadi.org/)
 
-Please contact [Zhouheng Li](https://zhouhengli.github.io/zhouhengli/) if you have any questions or suggestions.
+Please contact [Zhouheng Li](https://zhouhengli.github.io) if you have any questions or suggestions.
 
 ## 📑 Citations
 
