@@ -13,6 +13,8 @@ is_plot_data: False       # Not visualize lap data
 use_jit: True           # Enabling JIT compilation can typically significantly improve performance
 # use_jit: False          # Disable JIT compilation, more suitable for debugging or one-time computing scenarios
 
+root_path: /home/ddrx/f1tenth_ws/toolkit/tracks/
+
 window_size: 30
 N: 10
 Q: [800, 800]

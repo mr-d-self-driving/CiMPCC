@@ -7,6 +7,8 @@ Deploy and visualize the planner from Reduce Lap Time for Autonomous Racing with
   <img src="./media/cimpcc.gif" alt="teaser" width="360" />
 </div>
 
+Update:
+  The ROS environment for the current branch is neotic under Ubuntu 20.04. For the version of melodic, see the branch `melodic_py27`.
 
 ## 🪄 Quickstart
 
@@ -36,7 +38,7 @@ Coming soon.
 **[1/3]** Pull Docker image:
 
 ```bash
-sudo docker pull ros:melodic-robot-bionic
+sudo docker pull ros:noetic-robot-focal
 ```
 
 **[2/3]** Set up a container:
@@ -46,7 +48,7 @@ sudo docker run -it \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
   -e DISPLAY=$DISPLAY \
   -v <host_path>/f1tenth_ws:/home/ddrx/f1tenth_ws \
-  ros:melodic-robot-bionic \
+  ros:noetic-robot-focal \
   /bin/bash
 ```
 
@@ -63,18 +65,19 @@ chmod +x setup_env.sh
 **[1/3]** Set up a container and enter the following commands. After the final command, the map should pop up:
 
 ```bash
-source /opt/ros/melodic/setup.bash && source /home/ddrx/f1tenth_ws/devel/setup.bash
+source /opt/ros/noetic/setup.bash && source /home/ddrx/f1tenth_ws/devel/setup.bash
 ./toolkit/sim_setup.sh -n map416
 ```
 
-[Optional] If the RViz interface does not appear, it may be because Docker does not have permission to access the display server. Try the following command in the host machine: `xhost +local:docker`.
+[Optional] If the RViz interface does not appear and there is an error `qt.qpa.xcb: could not connect to display :0`, it may be because Docker does not have access to the display server.
+Try the following command in the host machine: `xhost +local:docker`.
 
 **[2/3]** Start a new container and run the CiMPCC planner:
 
 ```bash
 sudo docker exec -it <CONTAINER ID> /bin/bash
 export PYTHONPATH=$PYTHONPATH:/home/ddrx/f1tenth_ws/toolkit/casadi/
-source /opt/ros/melodic/setup.bash && source /home/ddrx/f1tenth_ws/devel/setup.bash
+source /opt/ros/noetic/setup.bash && source /home/ddrx/f1tenth_ws/devel/setup.bash
 roslaunch nonlinear_mpc_casadi ddrx_sim_nmpcc.launch
 ```
 
@@ -90,6 +93,8 @@ roslaunch nonlinear_mpc_casadi ddrx_sim_nmpcc.launch
 ## 💻 Customization
 
 This project allows for the customization of the map and track files used by the CiMPCC method, as well as the parameters. Adjustments can be made according to specific needs.
+
+Before modifying them, replace the `root_path` in `./toolkit/params/*.yaml` with the path to the track files. 
 
 ### ✏️ Customized map and track
 
