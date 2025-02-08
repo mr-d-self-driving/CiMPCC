@@ -1,6 +1,6 @@
 # 🏎️ Curvature-Integrated MPCC Local Trajectory Planning
 
-Deploy and visualize the planner from Reduce Lap Time for Autonomous Racing with Curvature-Integrated MPCC Local Trajectory Planning Method. The main branch contains the F1tenth simulator and the CiMPCC planner.
+Deploy and visualize the trajectory planner from ITSC 2024 paper "[Reduce Lap Time for Autonomous Racing with Curvature-Integrated MPCC Local Trajectory Planning Method](https://arxiv.org/abs/2502.03695v1)". The main branch contains the F1tenth simulator and the CiMPCC planner.
 
 <div style="display: flex; justify-content: space-between; align-items: center;">
   <img src="./media/teaser.jpg" alt="teaser" width="440" />
@@ -8,6 +8,7 @@ Deploy and visualize the planner from Reduce Lap Time for Autonomous Racing with
 </div>
 
 Update:
+
   The ROS environment for the current branch is neotic under Ubuntu 20.04. For the version of melodic, see the branch `melodic_py27`.
 
 ## 🪄 Quickstart
@@ -121,5 +122,17 @@ Please contact [Zhouheng Li](https://zhouhengli.github.io) if you have any quest
 
 ## 📑 Citations
 
-Coming soon.
+If you find our work useful, please consider citing:
+
+```
+@misc{li2025reducelaptimeautonomous,
+      title={Reduce Lap Time for Autonomous Racing with Curvature-Integrated MPCC Local Trajectory Planning Method}, 
+      author={Zhouheng Li and Lei Xie and Cheng Hu and Hongye Su},
+      year={2025},
+      eprint={2502.03695},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2502.03695}, 
+}
+```
 
