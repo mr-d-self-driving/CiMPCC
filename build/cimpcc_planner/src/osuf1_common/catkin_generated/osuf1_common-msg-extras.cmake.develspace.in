@@ -1,0 +1,2 @@
+set(osuf1_common_MESSAGE_FILES "/home/ddrx/f1tenth_ws/src/cimpcc_planner/src/osuf1_common/msg/MPC_metadata.msg;/home/ddrx/f1tenth_ws/src/cimpcc_planner/src/osuf1_common/msg/MPC_prediction.msg;/home/ddrx/f1tenth_ws/src/cimpcc_planner/src/osuf1_common/msg/MPC_trajectory.msg;/home/ddrx/f1tenth_ws/src/cimpcc_planner/src/osuf1_common/msg/NPoint.msg;/home/ddrx/f1tenth_ws/src/cimpcc_planner/src/osuf1_common/msg/NPointSet.msg;/home/ddrx/f1tenth_ws/src/cimpcc_planner/src/osuf1_common/msg/ReachSets.msg")
+set(osuf1_common_SERVICE_FILES "")

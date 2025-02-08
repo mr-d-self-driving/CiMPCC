@@ -1,0 +1,2 @@
+cimpcc_planner/src/ackermann_msgs:cimpcc_planner/src/nonlinear_mpc_casadi:cimpcc_planner/src/osuf1_common:racecar_simulator/src/racecar_simulator/racecar_simulator
+-DCATKIN_DEVEL_PREFIX=/home/ddrx/f1tenth_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ddrx/f1tenth_ws/install -G Unix Makefiles
