@@ -28,15 +28,21 @@ import os
 import numpy as np
 
 import sys
-if sys.version_info >= (3, 0):
-  from casadi.casadi import *
-else:
-  from casadi import *
-  import casadi
+
+backup_object = object
+
+try:
+  if sys.version_info >= (3, 0):
+    from casadi.casadi import *
+  else:
+    from casadi import *
+    import casadi
+finally:
+  object = backup_object
 
 # For plugin loading
 GlobalOptions.setCasadiPath(os.path.dirname(__file__))
-
+GlobalOptions.setCasadiIncludePath(os.path.join(os.path.dirname(__file__),"include"))
 import types
 
 def wrapper(f, warning,error=False):

@@ -41,8 +41,13 @@ unset(_targetsNotDefined)
 unset(_expectedTargets)
 
 
-# The installation prefix configured by this project.
-set(_IMPORT_PREFIX "/home/travis/build/casadi/binaries/casadi/python_install")
+# Compute the installation prefix relative to this file.
+get_filename_component(_IMPORT_PREFIX "${CMAKE_CURRENT_LIST_FILE}" PATH)
+get_filename_component(_IMPORT_PREFIX "${_IMPORT_PREFIX}" PATH)
+get_filename_component(_IMPORT_PREFIX "${_IMPORT_PREFIX}" PATH)
+if(_IMPORT_PREFIX STREQUAL "/")
+  set(_IMPORT_PREFIX "")
+endif()
 
 # Create imported target casadi
 add_library(casadi SHARED IMPORTED)

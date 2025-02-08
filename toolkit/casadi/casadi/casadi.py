@@ -110,14 +110,14 @@ CASADI_INT_TYPE_STR = _casadi.CASADI_INT_TYPE_STR
 
 import contextlib
 
-class _copyableObject(_object):
+class _copyableObject(object):
   def __copy__(self):
     return self.__class__(self)
 
   def __deepcopy__(self,dummy=None):
     return self.__class__(self)
 
-_object = _copyableObject
+_object = object = _copyableObject
 
 _swig_repr_default = _swig_repr
 def _swig_repr(self):
@@ -202,7 +202,7 @@ class SwigPyIterator(_object):
     __repr__ = _swig_repr
     __swig_destroy__ = _casadi.delete_SwigPyIterator
 
-    def value(self, *args):
+    def value(self, *args) -> "PyObject *":
         """
 
 
@@ -214,7 +214,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator_value(self, *args)
 
 
-    def incr(self, *args):
+    def incr(self, *args) -> "swig::SwigPyIterator *":
         """
 
 
@@ -226,7 +226,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator_incr(self, *args)
 
 
-    def decr(self, *args):
+    def decr(self, *args) -> "swig::SwigPyIterator *":
         """
 
 
@@ -238,7 +238,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator_decr(self, *args)
 
 
-    def distance(self, *args):
+    def distance(self, *args) -> "ptrdiff_t":
         """
 
 
@@ -250,7 +250,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator_distance(self, *args)
 
 
-    def equal(self, *args):
+    def equal(self, *args) -> "bool":
         """
 
 
@@ -262,7 +262,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator_equal(self, *args)
 
 
-    def copy(self, *args):
+    def copy(self, *args) -> "swig::SwigPyIterator *":
         """
 
 
@@ -274,7 +274,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator_copy(self, *args)
 
 
-    def next(self, *args):
+    def next(self, *args) -> "PyObject *":
         """
 
 
@@ -286,7 +286,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator_next(self, *args)
 
 
-    def __next__(self, *args):
+    def __next__(self, *args) -> "PyObject *":
         """
 
 
@@ -298,7 +298,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator___next__(self, *args)
 
 
-    def previous(self, *args):
+    def previous(self, *args) -> "PyObject *":
         """
 
 
@@ -310,7 +310,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator_previous(self, *args)
 
 
-    def advance(self, *args):
+    def advance(self, *args) -> "swig::SwigPyIterator *":
         """
 
 
@@ -322,7 +322,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator_advance(self, *args)
 
 
-    def __eq__(self, *args):
+    def __eq__(self, *args) -> "bool":
         """
 
 
@@ -334,7 +334,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator___eq__(self, *args)
 
 
-    def __ne__(self, *args):
+    def __ne__(self, *args) -> "bool":
         """
 
 
@@ -346,7 +346,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator___ne__(self, *args)
 
 
-    def __iadd__(self, *args):
+    def __iadd__(self, *args) -> "swig::SwigPyIterator &":
         """
 
 
@@ -358,7 +358,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator___iadd__(self, *args)
 
 
-    def __isub__(self, *args):
+    def __isub__(self, *args) -> "swig::SwigPyIterator &":
         """
 
 
@@ -370,7 +370,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator___isub__(self, *args)
 
 
-    def __add__(self, *args):
+    def __add__(self, *args) -> "swig::SwigPyIterator *":
         """
 
 
@@ -382,7 +382,7 @@ class SwigPyIterator(_object):
         return _casadi.SwigPyIterator___add__(self, *args)
 
 
-    def __sub__(self, *args):
+    def __sub__(self, *args) -> "ptrdiff_t":
         """
 
 
@@ -485,6 +485,11 @@ class NZproxy:
   def __len__(self):
     return self.matrix.nnz()
 
+  def __iter__(self):
+    for i in range(len(self)):
+      yield self[i]
+
+
 class PrintableCommon(_object):
     """
 
@@ -574,7 +579,7 @@ class SharedObject(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, SharedObject, name)
     __repr__ = _swig_repr
 
-    def class_name(self, *args):
+    def class_name(self, *args) -> "std::string":
         """
         Get class name.
 
@@ -588,7 +593,7 @@ class SharedObject(_object):
         return _casadi.SharedObject_class_name(self, *args)
 
 
-    def disp(self, *args):
+    def disp(self, *args) -> "void":
         """
         Print a description of the object.
 
@@ -602,7 +607,7 @@ class SharedObject(_object):
         return _casadi.SharedObject_disp(self, *args)
 
 
-    def str(self, *args):
+    def str(self, *args) -> "std::string":
         """
         Get string representation.
 
@@ -616,7 +621,7 @@ class SharedObject(_object):
         return _casadi.SharedObject_str(self, *args)
 
 
-    def print_ptr(self, *args):
+    def print_ptr(self, *args) -> "void":
         """
         [INTERNAL]  Print the pointer to the internal class
 
@@ -630,7 +635,7 @@ class SharedObject(_object):
         return _casadi.SharedObject_print_ptr(self, *args)
 
 
-    def is_null(self, *args):
+    def is_null(self, *args) -> "bool":
         """
         Is a null pointer?
 
@@ -644,7 +649,7 @@ class SharedObject(_object):
         return _casadi.SharedObject_is_null(self, *args)
 
 
-    def __hash__(self, *args):
+    def __hash__(self, *args) -> "casadi_int":
         """
           Returns a number that is unique for a given Node. If the Object does not
 
@@ -701,7 +706,7 @@ class WeakRef(SharedObject):
     __getattr__ = lambda self, name: _swig_getattr(self, WeakRef, name)
     __repr__ = _swig_repr
 
-    def shared(self, *args):
+    def shared(self, *args) -> "casadi::SharedObject":
         """
         Get a shared (owning) reference.
 
@@ -715,7 +720,7 @@ class WeakRef(SharedObject):
         return _casadi.WeakRef_shared(self, *args)
 
 
-    def alive(self, *args):
+    def alive(self, *args) -> "bool":
         """
         Check if alive.
 
@@ -734,27 +739,49 @@ class WeakRef(SharedObject):
 
 
           WeakRef(int dummy)
-            Default constructor.
           WeakRef(WeakRef other)
           WeakRef(SharedObject shared)
-            Construct from a shared object (also implicit type conversion)
 
-        > WeakRef(WeakRef other)
-        ------------------------------------------------------------------------
 
-        > WeakRef(SharedObject shared)
-        ------------------------------------------------------------------------
+        .......
+
+        ::
+
+          WeakRef(WeakRef other)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          WeakRef(SharedObject shared)
+
 
 
         Construct from a shared object (also implicit type conversion)
 
 
-        > WeakRef(int dummy)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          WeakRef(int dummy)
+
 
 
         Default constructor.
 
+
+
+        .............
 
 
 
@@ -769,7 +796,7 @@ WeakRef_swigregister = _casadi.WeakRef_swigregister
 WeakRef_swigregister(WeakRef)
 
 
-def complement(*args):
+def complement(*args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
     """
       Returns the list of all i in [0, size[ not found in supplied list.
 
@@ -786,19 +813,31 @@ def complement(*args):
     """
     return _casadi.complement(*args)
 
-def lookupvector(*args):
+def lookupvector(*args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
     """
 
 
       lookupvector([int] v) -> [int]
       lookupvector([int] v, int size) -> [int]
-        Returns a vector for quickly looking up entries of supplied list.
 
-    > lookupvector([int] v)
-    ------------------------------------------------------------------------
 
-    > lookupvector([int] v, int size)
-    ------------------------------------------------------------------------
+    .......
+
+    ::
+
+      lookupvector([int] v)
+
+
+
+    .............
+
+
+    .......
+
+    ::
+
+      lookupvector([int] v, int size)
+
 
 
     Returns a vector for quickly looking up entries of supplied list.
@@ -810,11 +849,14 @@ def lookupvector(*args):
 
 
 
+    .............
+
+
 
     """
     return _casadi.lookupvector(*args)
 
-def temporary_file(*args):
+def temporary_file(*args) -> "std::string":
     """
 
 
@@ -824,6 +866,40 @@ def temporary_file(*args):
 
     """
     return _casadi.temporary_file(*args)
+
+def normalized_setup(*args) -> "void":
+    """
+
+
+    normalized_setup()
+    normalized_setup(std::istream & stream)
+
+
+
+    """
+    return _casadi.normalized_setup(*args)
+
+def normalized_out(*args) -> "void":
+    """
+
+
+    normalized_out(float val)
+
+
+
+    """
+    return _casadi.normalized_out(*args)
+
+def normalized_in(*args) -> "int":
+    """
+
+
+    normalized_in(std::istream & stream, double & ret) -> int
+
+
+
+    """
+    return _casadi.normalized_in(*args)
 SWIG_IND1 = _casadi.SWIG_IND1
 class GenericType(PrintableCommon):
     """
@@ -849,6 +925,33 @@ class GenericType(PrintableCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, GenericType, name)
     __repr__ = _swig_repr
 
+    def serialize(self, *args) -> "void":
+        """
+        Serialize an object.
+
+        serialize(self, casadi::SerializingStream & s)
+
+
+
+
+
+        """
+        return _casadi.GenericType_serialize(self, *args)
+
+
+    def deserialize(*args) -> "casadi::GenericType":
+        """
+
+
+        deserialize(casadi::DeserializingStream & s) -> GenericType
+
+
+
+        """
+        return _casadi.GenericType_deserialize(*args)
+
+    deserialize = staticmethod(deserialize)
+
     def __init__(self, *args):
         """
 
@@ -867,6 +970,17 @@ class GenericType(PrintableCommon):
     __swig_destroy__ = _casadi.delete_GenericType
 GenericType_swigregister = _casadi.GenericType_swigregister
 GenericType_swigregister(GenericType)
+
+def GenericType_deserialize(*args) -> "casadi::GenericType":
+    """
+
+
+    deserialize(casadi::DeserializingStream & s) -> GenericType
+
+
+
+    """
+    return _casadi.GenericType_deserialize(*args)
 
 OP_ASSIGN = _casadi.OP_ASSIGN
 OP_ADD = _casadi.OP_ADD
@@ -918,6 +1032,7 @@ OP_OUTPUT = _casadi.OP_OUTPUT
 OP_PARAMETER = _casadi.OP_PARAMETER
 OP_CALL = _casadi.OP_CALL
 OP_FIND = _casadi.OP_FIND
+OP_LOW = _casadi.OP_LOW
 OP_MAP = _casadi.OP_MAP
 OP_MTIMES = _casadi.OP_MTIMES
 OP_SOLVE = _casadi.OP_SOLVE
@@ -937,10 +1052,11 @@ OP_RESHAPE = _casadi.OP_RESHAPE
 OP_SUBREF = _casadi.OP_SUBREF
 OP_SUBASSIGN = _casadi.OP_SUBASSIGN
 OP_GETNONZEROS = _casadi.OP_GETNONZEROS
+OP_GETNONZEROS_PARAM = _casadi.OP_GETNONZEROS_PARAM
 OP_ADDNONZEROS = _casadi.OP_ADDNONZEROS
+OP_ADDNONZEROS_PARAM = _casadi.OP_ADDNONZEROS_PARAM
 OP_SETNONZEROS = _casadi.OP_SETNONZEROS
-OP_GET_ELEMENTS = _casadi.OP_GET_ELEMENTS
-OP_ADD_ELEMENTS = _casadi.OP_ADD_ELEMENTS
+OP_SETNONZEROS_PARAM = _casadi.OP_SETNONZEROS_PARAM
 OP_PROJECT = _casadi.OP_PROJECT
 OP_ASSERTION = _casadi.OP_ASSERTION
 OP_MONITOR = _casadi.OP_MONITOR
@@ -956,6 +1072,8 @@ OP_ERFINV = _casadi.OP_ERFINV
 OP_PRINTME = _casadi.OP_PRINTME
 OP_LIFT = _casadi.OP_LIFT
 OP_EINSTEIN = _casadi.OP_EINSTEIN
+OP_BSPLINE = _casadi.OP_BSPLINE
+OP_CONVEXIFY = _casadi.OP_CONVEXIFY
 class SparsityInterfaceCommon(_object):
     """
 
@@ -1050,7 +1168,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, Sparsity, name)
     __repr__ = _swig_repr
 
-    def scalar(*args):
+    def scalar(*args) -> "casadi::Sparsity":
         """
         Create a scalar sparsity pattern.
 
@@ -1065,7 +1183,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     scalar = staticmethod(scalar)
 
-    def dense(*args):
+    def dense(*args) -> "casadi::Sparsity":
         """
         Create a dense rectangular sparsity pattern.
 
@@ -1081,7 +1199,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     dense = staticmethod(dense)
 
-    def unit(*args):
+    def unit(*args) -> "casadi::Sparsity":
         """
           Create the sparsity pattern for a unit vector of length n and a nonzero on
 
@@ -1097,7 +1215,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     unit = staticmethod(unit)
 
-    def upper(*args):
+    def upper(*args) -> "casadi::Sparsity":
         """
 
 
@@ -1110,7 +1228,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     upper = staticmethod(upper)
 
-    def lower(*args):
+    def lower(*args) -> "casadi::Sparsity":
         """
 
 
@@ -1123,7 +1241,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     lower = staticmethod(lower)
 
-    def diag(*args):
+    def diag(*args) -> "casadi::Sparsity":
         """
         Create diagonal sparsity pattern.
 
@@ -1140,7 +1258,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     diag = staticmethod(diag)
 
-    def band(*args):
+    def band(*args) -> "casadi::Sparsity":
         """
 
 
@@ -1153,7 +1271,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     band = staticmethod(band)
 
-    def banded(*args):
+    def banded(*args) -> "casadi::Sparsity":
         """
 
 
@@ -1166,7 +1284,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     banded = staticmethod(banded)
 
-    def rowcol(*args):
+    def rowcol(*args) -> "casadi::Sparsity":
         """
 
 
@@ -1179,7 +1297,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     rowcol = staticmethod(rowcol)
 
-    def triplet(*args):
+    def triplet(*args) -> "casadi::Sparsity":
         """
 
 
@@ -1193,7 +1311,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     triplet = staticmethod(triplet)
 
-    def nonzeros(*args):
+    def nonzeros(*args) -> "casadi::Sparsity":
         """
 
 
@@ -1206,7 +1324,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     nonzeros = staticmethod(nonzeros)
 
-    def compressed(*args):
+    def compressed(*args) -> "casadi::Sparsity":
         """
           Create from a single vector containing the pattern in compressed column
 
@@ -1225,7 +1343,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     compressed = staticmethod(compressed)
 
-    def sanity_check(self, *args):
+    def sanity_check(self, *args) -> "void":
         """
           [DEPRECATED] Correctness of sparsity patterns are checked during
 
@@ -1240,7 +1358,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_sanity_check(self, *args)
 
 
-    def get_diag(self, *args):
+    def get_diag(self, *args) -> "casadi::Sparsity":
         """
           Get the diagonal of the matrix/create a diagonal matrix (mapping will
 
@@ -1257,7 +1375,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_get_diag(self, *args)
 
 
-    def compress(self, *args):
+    def compress(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
         """
         Compress a sparsity pattern.
 
@@ -1271,7 +1389,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_compress(self, *args)
 
 
-    def is_equal(self, *args):
+    def is_equal(self, *args) -> "bool":
         """
 
 
@@ -1284,7 +1402,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_equal(self, *args)
 
 
-    def __eq__(self, *args):
+    def __eq__(self, *args) -> "bool":
         """
 
 
@@ -1296,7 +1414,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity___eq__(self, *args)
 
 
-    def __ne__(self, *args):
+    def __ne__(self, *args) -> "bool":
         """
 
 
@@ -1308,7 +1426,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity___ne__(self, *args)
 
 
-    def is_stacked(self, *args):
+    def is_stacked(self, *args) -> "bool":
         """
         Check if pattern is horizontal repeat of another.
 
@@ -1322,7 +1440,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_stacked(self, *args)
 
 
-    def size1(self, *args):
+    def size1(self, *args) -> "casadi_int":
         """
         Get the number of rows.
 
@@ -1336,7 +1454,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_size1(self, *args)
 
 
-    def rows(self, *args):
+    def rows(self, *args) -> "casadi_int":
         """
         Get the number of rows, Octave-style syntax.
 
@@ -1350,7 +1468,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_rows(self, *args)
 
 
-    def size2(self, *args):
+    def size2(self, *args) -> "casadi_int":
         """
         Get the number of columns.
 
@@ -1364,7 +1482,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_size2(self, *args)
 
 
-    def columns(self, *args):
+    def columns(self, *args) -> "casadi_int":
         """
         Get the number of columns, Octave-style syntax.
 
@@ -1378,7 +1496,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_columns(self, *args)
 
 
-    def numel(self, *args):
+    def numel(self, *args) -> "casadi_int":
         """
           The total number of elements, including structural zeros, i.e.
 
@@ -1395,7 +1513,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_numel(self, *args)
 
 
-    def density(self, *args):
+    def density(self, *args) -> "double":
         """
           The percentage of nonzero Equivalent to (100.0 * nnz())/numel(), but avoids
 
@@ -1410,7 +1528,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_density(self, *args)
 
 
-    def is_empty(self, *args):
+    def is_empty(self, *args) -> "bool":
         """
           Check if the sparsity is empty.
 
@@ -1427,7 +1545,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_empty(self, *args)
 
 
-    def nnz(self, *args):
+    def nnz(self, *args) -> "casadi_int":
         """
           Get the number of (structural) non-zeros.
 
@@ -1443,7 +1561,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_nnz(self, *args)
 
 
-    def nnz_upper(self, *args):
+    def nnz_upper(self, *args) -> "casadi_int":
         """
           Number of non-zeros in the upper triangular half, i.e. the number of
 
@@ -1458,7 +1576,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_nnz_upper(self, *args)
 
 
-    def nnz_lower(self, *args):
+    def nnz_lower(self, *args) -> "casadi_int":
         """
           Number of non-zeros in the lower triangular half, i.e. the number of
 
@@ -1473,7 +1591,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_nnz_lower(self, *args)
 
 
-    def nnz_diag(self, *args):
+    def nnz_diag(self, *args) -> "casadi_int":
         """
           Number of non-zeros on the diagonal, i.e. the number of elements (i, j) with
 
@@ -1488,7 +1606,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_nnz_diag(self, *args)
 
 
-    def bw_upper(self, *args):
+    def bw_upper(self, *args) -> "casadi_int":
         """
         Upper half-bandwidth.
 
@@ -1502,7 +1620,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_bw_upper(self, *args)
 
 
-    def bw_lower(self, *args):
+    def bw_lower(self, *args) -> "casadi_int":
         """
         Lower half-bandwidth.
 
@@ -1516,29 +1634,44 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_bw_lower(self, *args)
 
 
-    def size(self, *args):
+    def size(self, *args) -> "casadi_int":
         """
           Get the size along a particular dimensions.
 
           size(self) -> (int,int)
-            Get the shape.
           size(self, int axis) -> int
 
 
 
-        > size(self)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          size(self)
+
 
 
         Get the shape.
 
 
-        > size(self, int axis)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          size(self, int axis)
+
 
 
         Get the size along a particular dimensions.
 
+
+
+        .............
 
 
 
@@ -1546,7 +1679,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_size(self, *args)
 
 
-    def info(self, *args):
+    def info(self, *args) -> "casadi::Dict":
         """
         Obtain information about sparsity
 
@@ -1560,20 +1693,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_info(self, *args)
 
 
-    def from_info(*args):
-        """
-
-
-        from_info(dict info) -> Sparsity
-
-
-
-        """
-        return _casadi.Sparsity_from_info(*args)
-
-    from_info = staticmethod(from_info)
-
-    def to_file(self, *args):
+    def to_file(self, *args) -> "void":
         """
           Export sparsity pattern to file
 
@@ -1589,7 +1709,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_to_file(self, *args)
 
 
-    def from_file(*args):
+    def from_file(*args) -> "casadi::Sparsity":
         """
 
 
@@ -1602,13 +1722,44 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     from_file = staticmethod(from_file)
 
-    def serialize(self, *args):
+    def serialize(self, *args) -> "void":
         """
+          Serialize an object.
+
+          serialize(self) -> str
+          serialize(self, casadi::SerializingStream & s)
+
+
+
+
+        .......
+
+        ::
+
+          serialize(self, casadi::SerializingStream & s)
+
+
+
+        Serialize an object.
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          serialize(self)
+
+
+
         Serialize.
 
-        serialize(self) -> str
 
 
+        .............
 
 
 
@@ -1616,11 +1767,12 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_serialize(self, *args)
 
 
-    def deserialize(*args):
+    def deserialize(*args) -> "casadi::Sparsity":
         """
 
 
-        deserialize(std::istream & istream) -> Sparsity
+        deserialize(std::istream & stream) -> Sparsity
+        deserialize(casadi::DeserializingStream & s) -> Sparsity
         deserialize(str s) -> Sparsity
 
 
@@ -1630,30 +1782,45 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     deserialize = staticmethod(deserialize)
 
-    def colind(self, *args):
+    def colind(self, *args) -> "casadi_int":
         """
           Get a reference to the colindex of column cc (see class description)
 
           colind(self) -> [int]
-            Get the column index for each column Together with the row-vector, one
           colind(self, int cc) -> int
 
 
 
-        > colind(self)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          colind(self)
+
 
 
         Get the column index for each column Together with the row-vector, one
         obtains the sparsity pattern in the column compressed format.
 
 
-        > colind(self, int cc)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          colind(self, int cc)
+
 
 
         Get a reference to the colindex of column cc (see class description)
 
+
+
+        .............
 
 
 
@@ -1661,25 +1828,37 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_colind(self, *args)
 
 
-    def row(self, *args):
+    def row(self, *args) -> "casadi_int":
         """
           Get the row of a non-zero element.
 
           row(self) -> [int]
-            Get the row for each non-zero entry Together with the column-vector, this
           row(self, int el) -> int
 
 
 
-        > row(self, int el)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          row(self, int el)
+
 
 
         Get the row of a non-zero element.
 
 
-        > row(self)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          row(self)
+
 
 
         Get the row for each non-zero entry Together with the column-vector, this
@@ -1689,12 +1868,15 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
 
 
+        .............
+
+
 
         """
         return _casadi.Sparsity_row(self, *args)
 
 
-    def get_col(self, *args):
+    def get_col(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
         """
           Get the column for each non-zero entry Together with the row-vector, this
 
@@ -1710,7 +1892,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_get_col(self, *args)
 
 
-    def resize(self, *args):
+    def resize(self, *args) -> "void":
         """
         Resize.
 
@@ -1724,7 +1906,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_resize(self, *args)
 
 
-    def add_nz(self, *args):
+    def add_nz(self, *args) -> "casadi_int":
         """
           Get the index of a non-zero element Add the element if it does not exist and
 
@@ -1739,7 +1921,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_add_nz(self, *args)
 
 
-    def has_nz(self, *args):
+    def has_nz(self, *args) -> "bool":
         """
         Returns true if the pattern has a non-zero at location rr, cc.
 
@@ -1753,30 +1935,41 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_has_nz(self, *args)
 
 
-    def get_nz(self, *args):
+    def get_nz(self, *args) -> "void":
         """
           Get the nonzero index for a set of elements The index vector is used both
 
           get_nz(self) -> [int]
           get_nz(self, int rr, int cc) -> int
-            Get the index of an existing non-zero element return -1 if the element does
           get_nz(self, [int] rr, [int] cc) -> [int]
-            Get a set of non-zero element return -1 if the element does not exist.
 
         for input and outputs and must be sorted by increasing nonzero index, i.e.
         column-wise. Elements not found in the sparsity pattern are set to -1.
 
 
-        > get_nz(self, int rr, int cc)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          get_nz(self, int rr, int cc)
+
 
 
         Get the index of an existing non-zero element return -1 if the element does
         not exist.
 
 
-        > get_nz(self)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          get_nz(self)
+
 
 
         Get the nonzero index for a set of elements The index vector is used both
@@ -1784,12 +1977,23 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         column-wise. Elements not found in the sparsity pattern are set to -1.
 
 
-        > get_nz(self, [int] rr, [int] cc)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          get_nz(self, [int] rr, [int] cc)
+
 
 
         Get a set of non-zero element return -1 if the element does not exist.
 
+
+
+        .............
 
 
 
@@ -1797,7 +2001,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_get_nz(self, *args)
 
 
-    def get_lower(self, *args):
+    def get_lower(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
         """
         Get nonzeros in lower triangular part.
 
@@ -1811,7 +2015,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_get_lower(self, *args)
 
 
-    def get_upper(self, *args):
+    def get_upper(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
         """
         Get nonzeros in upper triangular part.
 
@@ -1825,7 +2029,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_get_upper(self, *args)
 
 
-    def get_ccs(self, *args):
+    def get_ccs(self, *args) -> "void":
         """
         Get the sparsity in compressed column storage (CCS) format.
 
@@ -1839,7 +2043,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_get_ccs(self, *args)
 
 
-    def get_crs(self, *args):
+    def get_crs(self, *args) -> "void":
         """
         Get the sparsity in compressed row storage (CRS) format.
 
@@ -1853,7 +2057,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_get_crs(self, *args)
 
 
-    def get_triplet(self, *args):
+    def get_triplet(self, *args) -> "void":
         """
         Get the sparsity in sparse triplet format.
 
@@ -1867,21 +2071,25 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_get_triplet(self, *args)
 
 
-    def sub(self, *args):
+    def sub(self, *args) -> "casadi::Sparsity":
         """
           Get a set of elements.
 
           sub(self, [int] rr, Sparsity sp, bool ind1) -> (Sparsity , [int] OUTPUT)
           sub(self, [int] rr, [int] cc, bool ind1) -> (Sparsity , [int] OUTPUT)
-            Get a submatrix.
 
 
         Returns the sparsity of the corresponding elements, with a mapping such that
         submatrix[k] = originalmatrix[mapping[k]]
 
 
-        > sub(self, [int] rr, Sparsity sp, bool ind1)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          sub(self, [int] rr, Sparsity sp, bool ind1)
+
 
 
         Get a set of elements.
@@ -1890,8 +2098,16 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         submatrix[k] = originalmatrix[mapping[k]]
 
 
-        > sub(self, [int] rr, [int] cc, bool ind1)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sub(self, [int] rr, [int] cc, bool ind1)
+
 
 
         Get a submatrix.
@@ -1901,12 +2117,15 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
 
 
+        .............
+
+
 
         """
         return _casadi.Sparsity_sub(self, *args)
 
 
-    def transpose(self, *args):
+    def transpose(self, *args) -> "casadi::Sparsity":
         """
           Transpose the matrix and get the reordering of the non-zero entries.
 
@@ -1926,7 +2145,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_transpose(self, *args)
 
 
-    def is_transpose(self, *args):
+    def is_transpose(self, *args) -> "bool":
         """
         Check if the sparsity is the transpose of another.
 
@@ -1940,7 +2159,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_transpose(self, *args)
 
 
-    def is_reshape(self, *args):
+    def is_reshape(self, *args) -> "bool":
         """
         Check if the sparsity is a reshape of another.
 
@@ -1954,11 +2173,11 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_reshape(self, *args)
 
 
-    def combine(self, *args):
+    def combine(self, *args) -> "casadi::Sparsity":
         """
           Combine two sparsity patterns Returns the new sparsity pattern as well as a
 
-          combine(self, Sparsity y, bool f0x_is_zero, bool fx0_is_zero) -> Sparsity
+          combine(self, Sparsity y, bool f0x_is_zero, bool function0_is_zero) -> Sparsity
 
         mapping with the same length as the number of non-zero elements The mapping
         matrix contains the arguments for each nonzero, the first bit indicates if
@@ -1973,7 +2192,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_combine(self, *args)
 
 
-    def unite(self, *args):
+    def unite(self, *args) -> "casadi::Sparsity":
         """
         Union of two sparsity patterns.
 
@@ -1987,7 +2206,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_unite(self, *args)
 
 
-    def __add__(self, *args):
+    def __add__(self, *args) -> "casadi::Sparsity":
         """
 
 
@@ -1999,7 +2218,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity___add__(self, *args)
 
 
-    def intersect(self, *args):
+    def intersect(self, *args) -> "casadi::Sparsity":
         """
           Intersection of two sparsity patterns Returns the new sparsity pattern as
 
@@ -2016,7 +2235,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_intersect(self, *args)
 
 
-    def __mul__(self, *args):
+    def __mul__(self, *args) -> "casadi::Sparsity":
         """
 
 
@@ -2028,7 +2247,21 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity___mul__(self, *args)
 
 
-    def pattern_inverse(self, *args):
+    def is_subset(self, *args) -> "bool":
+        """
+        Is subset?
+
+        is_subset(self, Sparsity rhs) -> bool
+
+
+
+
+
+        """
+        return _casadi.Sparsity_is_subset(self, *args)
+
+
+    def pattern_inverse(self, *args) -> "casadi::Sparsity":
         """
         Take the inverse of a sparsity pattern; flip zeros and non-zeros.
 
@@ -2042,7 +2275,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_pattern_inverse(self, *args)
 
 
-    def enlarge(self, *args):
+    def enlarge(self, *args) -> "void":
         """
           Enlarge matrix Make the matrix larger by inserting empty rows and columns,
 
@@ -2063,7 +2296,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_enlarge(self, *args)
 
 
-    def enlargeRows(self, *args):
+    def enlargeRows(self, *args) -> "void":
         """
         Enlarge the matrix along the first dimension (i.e. insert rows)
 
@@ -2077,7 +2310,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_enlargeRows(self, *args)
 
 
-    def enlargeColumns(self, *args):
+    def enlargeColumns(self, *args) -> "void":
         """
         Enlarge the matrix along the second dimension (i.e. insert columns)
 
@@ -2091,7 +2324,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_enlargeColumns(self, *args)
 
 
-    def makeDense(self, *args):
+    def makeDense(self, *args) -> "casadi::Sparsity":
         """
         Make a patten dense.
 
@@ -2105,29 +2338,44 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_makeDense(self, *args)
 
 
-    def erase(self, *args):
+    def erase(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
         """
           Erase elements of a matrix.
 
           erase(self, [int] rr, bool ind1) -> [int]
           erase(self, [int] rr, [int] cc, bool ind1) -> [int]
-            Erase rows and/or columns of a matrix.
 
 
 
-        > erase(self, [int] rr, bool ind1)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          erase(self, [int] rr, bool ind1)
+
 
 
         Erase elements of a matrix.
 
 
-        > erase(self, [int] rr, [int] cc, bool ind1)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          erase(self, [int] rr, [int] cc, bool ind1)
+
 
 
         Erase rows and/or columns of a matrix.
 
+
+
+        .............
 
 
 
@@ -2135,7 +2383,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_erase(self, *args)
 
 
-    def append(self, *args):
+    def append(self, *args) -> "void":
         """
         Append another sparsity patten vertically (NOTE: only efficient if vector)
 
@@ -2149,7 +2397,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_append(self, *args)
 
 
-    def appendColumns(self, *args):
+    def appendColumns(self, *args) -> "void":
         """
         Append another sparsity patten horizontally.
 
@@ -2163,7 +2411,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_appendColumns(self, *args)
 
 
-    def is_scalar(self, *args):
+    def is_scalar(self, *args) -> "bool":
         """
         Is scalar?
 
@@ -2177,7 +2425,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_scalar(self, *args)
 
 
-    def is_dense(self, *args):
+    def is_dense(self, *args) -> "bool":
         """
         Is dense?
 
@@ -2191,7 +2439,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_dense(self, *args)
 
 
-    def is_row(self, *args):
+    def is_row(self, *args) -> "bool":
         """
         Check if the pattern is a row vector (i.e. size1()==1)
 
@@ -2205,7 +2453,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_row(self, *args)
 
 
-    def is_column(self, *args):
+    def is_column(self, *args) -> "bool":
         """
         Check if the pattern is a column vector (i.e. size2()==1)
 
@@ -2219,7 +2467,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_column(self, *args)
 
 
-    def is_vector(self, *args):
+    def is_vector(self, *args) -> "bool":
         """
         Check if the pattern is a row or column vector.
 
@@ -2233,7 +2481,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_vector(self, *args)
 
 
-    def is_diag(self, *args):
+    def is_diag(self, *args) -> "bool":
         """
         Is diagonal?
 
@@ -2247,7 +2495,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_diag(self, *args)
 
 
-    def is_square(self, *args):
+    def is_square(self, *args) -> "bool":
         """
         Is square?
 
@@ -2261,7 +2509,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_square(self, *args)
 
 
-    def is_symmetric(self, *args):
+    def is_symmetric(self, *args) -> "bool":
         """
         Is symmetric?
 
@@ -2275,7 +2523,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_symmetric(self, *args)
 
 
-    def is_triu(self, *args):
+    def is_triu(self, *args) -> "bool":
         """
         Is upper triangular?
 
@@ -2289,7 +2537,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_triu(self, *args)
 
 
-    def is_tril(self, *args):
+    def is_tril(self, *args) -> "bool":
         """
         Is lower triangular?
 
@@ -2303,7 +2551,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_tril(self, *args)
 
 
-    def is_singular(self, *args):
+    def is_singular(self, *args) -> "bool":
         """
         Check whether the sparsity-pattern indicates structural singularity.
 
@@ -2317,7 +2565,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_is_singular(self, *args)
 
 
-    def rowsSequential(self, *args):
+    def rowsSequential(self, *args) -> "bool":
         """
           Do the rows appear sequentially on each column.
 
@@ -2336,7 +2584,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_rowsSequential(self, *args)
 
 
-    def removeDuplicates(self, *args):
+    def removeDuplicates(self, *args) -> "void":
         """
           Remove duplicate entries.
 
@@ -2353,7 +2601,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_removeDuplicates(self, *args)
 
 
-    def etree(self, *args):
+    def etree(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
         """
           Calculate the elimination tree See Direct Methods for Sparse Linear Systems
 
@@ -2373,7 +2621,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_etree(self, *args)
 
 
-    def ldl(self, *args):
+    def ldl(self, *args) -> "casadi::Sparsity":
         """
           Symbolic LDL factorization Returns the sparsity pattern of L^T.
 
@@ -2390,7 +2638,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_ldl(self, *args)
 
 
-    def qr_sparse(self, *args):
+    def qr_sparse(self, *args) -> "void":
         """
           Symbolic QR factorization Returns the sparsity pattern of V (compact
 
@@ -2408,7 +2656,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_qr_sparse(self, *args)
 
 
-    def dfs(self, *args):
+    def dfs(self, *args) -> "casadi_int":
         """
           Depth-first search on the adjacency graph of the sparsity See Direct Methods
 
@@ -2423,7 +2671,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_dfs(self, *args)
 
 
-    def scc(self, *args):
+    def scc(self, *args) -> "casadi_int":
         """
           Find the strongly connected components of the bigraph defined by the
 
@@ -2455,7 +2703,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_scc(self, *args)
 
 
-    def btf(self, *args):
+    def btf(self, *args) -> "casadi_int":
         """
           Calculate the block triangular form (BTF) See Direct Methods for Sparse
 
@@ -2485,7 +2733,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_btf(self, *args)
 
 
-    def amd(self, *args):
+    def amd(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
         """
           Approximate minimal degree preordering Fill-reducing ordering applied to the
 
@@ -2505,7 +2753,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_amd(self, *args)
 
 
-    def find(self, *args):
+    def find(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
         """
           Get the location of all non-zero elements as they would appear in a Dense
 
@@ -2525,7 +2773,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_find(self, *args)
 
 
-    def uni_coloring(self, *args):
+    def uni_coloring(self, *args) -> "casadi::Sparsity":
         """
           Perform a unidirectional coloring: A greedy distance-2 coloring algorithm
 
@@ -2540,7 +2788,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_uni_coloring(self, *args)
 
 
-    def star_coloring(self, *args):
+    def star_coloring(self, *args) -> "casadi::Sparsity":
         """
           Perform a star coloring of a symmetric matrix: A greedy distance-2 coloring
 
@@ -2559,7 +2807,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_star_coloring(self, *args)
 
 
-    def star_coloring2(self, *args):
+    def star_coloring2(self, *args) -> "casadi::Sparsity":
         """
           Perform a star coloring of a symmetric matrix: A new greedy distance-2
 
@@ -2578,7 +2826,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_star_coloring2(self, *args)
 
 
-    def largest_first(self, *args):
+    def largest_first(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
         """
         Order the columns by decreasing degree.
 
@@ -2592,7 +2840,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_largest_first(self, *args)
 
 
-    def pmult(self, *args):
+    def pmult(self, *args) -> "casadi::Sparsity":
         """
           Permute rows and/or columns Multiply the sparsity with a permutation matrix
 
@@ -2609,7 +2857,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_pmult(self, *args)
 
 
-    def dim(self, *args):
+    def dim(self, *args) -> "std::string":
         """
         Get the dimension as a string.
 
@@ -2623,7 +2871,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_dim(self, *args)
 
 
-    def postfix_dim(self, *args):
+    def postfix_dim(self, *args) -> "std::string":
         """
           Dimension string as a postfix to a name Rules:
 
@@ -2647,7 +2895,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_postfix_dim(self, *args)
 
 
-    def repr_el(self, *args):
+    def repr_el(self, *args) -> "std::string":
         """
         Describe the nonzero location k as a string.
 
@@ -2661,7 +2909,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_repr_el(self, *args)
 
 
-    def spy(self, *args):
+    def spy(self, *args) -> "void":
         """
         Print a textual representation of sparsity.
 
@@ -2675,7 +2923,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_spy(self, *args)
 
 
-    def spy_matlab(self, *args):
+    def spy_matlab(self, *args) -> "void":
         """
           Generate a script for Matlab or Octave which visualizes the sparsity using
 
@@ -2690,7 +2938,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_spy_matlab(self, *args)
 
 
-    def export_code(self, *args):
+    def export_code(self, *args) -> "void":
         """
           Export matrix in specific language.
 
@@ -2717,7 +2965,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_export_code(self, *args)
 
 
-    def type_name(*args):
+    def type_name(*args) -> "std::string":
         """
 
 
@@ -2730,7 +2978,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     type_name = staticmethod(type_name)
 
-    def hash(self, *args):
+    def hash(self, *args) -> "std::size_t":
         """
 
 
@@ -2742,7 +2990,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
         return _casadi.Sparsity_hash(self, *args)
 
 
-    def test_cast(*args):
+    def test_cast(*args) -> "bool":
         """
 
 
@@ -2755,7 +3003,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
     test_cast = staticmethod(test_cast)
 
-    def kkt(*args):
+    def kkt(*args) -> "casadi::Sparsity":
         """
 
 
@@ -2769,10 +3017,10 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
     kkt = staticmethod(kkt)
 
     def __setstate__(self, state):
-        self.__init__(Sparsity.from_info(state))
+        self.__init__(Sparsity.deserialize(state["serialization"]))
 
     def __getstate__(self):
-        return self.info()
+        return {"serialization": self.serialize()}
 
 
     @property
@@ -2792,46 +3040,82 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 
 
           Sparsity(int dummy)
-            Default constructor.
           Sparsity((int,int) rc)
-            Create a sparse matrix with all structural zeros.
           Sparsity(Sparsity other)
           Sparsity(int nrow, int ncol)
-            Pattern with all structural zeros.
           Sparsity(int nrow, int ncol, [int] colind, [int] row, bool order_rows)
-            Construct from sparsity pattern vectors given in compressed column storage
 
-        > Sparsity(Sparsity other)
-        ------------------------------------------------------------------------
 
-        > Sparsity(int nrow, int ncol)
-        ------------------------------------------------------------------------
+        .......
+
+        ::
+
+          Sparsity(Sparsity other)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          Sparsity(int nrow, int ncol)
+
 
 
         Pattern with all structural zeros.
 
 
-        > Sparsity(int nrow, int ncol, [int] colind, [int] row, bool order_rows)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          Sparsity(int nrow, int ncol, [int] colind, [int] row, bool order_rows)
+
 
 
         Construct from sparsity pattern vectors given in compressed column storage
         format.
 
 
-        > Sparsity(int dummy)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          Sparsity(int dummy)
+
 
 
         Default constructor.
 
 
-        > Sparsity((int,int) rc)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          Sparsity((int,int) rc)
+
 
 
         Create a sparse matrix with all structural zeros.
 
+
+
+        .............
 
 
 
@@ -2845,7 +3129,7 @@ class Sparsity(SharedObject, SparsityInterfaceCommon, PrintableCommon):
 Sparsity_swigregister = _casadi.Sparsity_swigregister
 Sparsity_swigregister(Sparsity)
 
-def Sparsity_scalar(*args):
+def Sparsity_scalar(*args) -> "casadi::Sparsity":
     """
     Create a scalar sparsity pattern.
 
@@ -2858,7 +3142,7 @@ def Sparsity_scalar(*args):
     """
     return _casadi.Sparsity_scalar(*args)
 
-def Sparsity_dense(*args):
+def Sparsity_dense(*args) -> "casadi::Sparsity":
     """
     Create a dense rectangular sparsity pattern.
 
@@ -2872,7 +3156,7 @@ def Sparsity_dense(*args):
     """
     return _casadi.Sparsity_dense(*args)
 
-def Sparsity_unit(*args):
+def Sparsity_unit(*args) -> "casadi::Sparsity":
     """
       Create the sparsity pattern for a unit vector of length n and a nonzero on
 
@@ -2886,7 +3170,7 @@ def Sparsity_unit(*args):
     """
     return _casadi.Sparsity_unit(*args)
 
-def Sparsity_upper(*args):
+def Sparsity_upper(*args) -> "casadi::Sparsity":
     """
 
 
@@ -2897,7 +3181,7 @@ def Sparsity_upper(*args):
     """
     return _casadi.Sparsity_upper(*args)
 
-def Sparsity_lower(*args):
+def Sparsity_lower(*args) -> "casadi::Sparsity":
     """
 
 
@@ -2908,7 +3192,7 @@ def Sparsity_lower(*args):
     """
     return _casadi.Sparsity_lower(*args)
 
-def Sparsity_diag(*args):
+def Sparsity_diag(*args) -> "casadi::Sparsity":
     """
     Create diagonal sparsity pattern.
 
@@ -2923,7 +3207,7 @@ def Sparsity_diag(*args):
     """
     return _casadi.Sparsity_diag(*args)
 
-def Sparsity_band(*args):
+def Sparsity_band(*args) -> "casadi::Sparsity":
     """
 
 
@@ -2934,7 +3218,7 @@ def Sparsity_band(*args):
     """
     return _casadi.Sparsity_band(*args)
 
-def Sparsity_banded(*args):
+def Sparsity_banded(*args) -> "casadi::Sparsity":
     """
 
 
@@ -2945,7 +3229,7 @@ def Sparsity_banded(*args):
     """
     return _casadi.Sparsity_banded(*args)
 
-def Sparsity_rowcol(*args):
+def Sparsity_rowcol(*args) -> "casadi::Sparsity":
     """
 
 
@@ -2956,7 +3240,7 @@ def Sparsity_rowcol(*args):
     """
     return _casadi.Sparsity_rowcol(*args)
 
-def Sparsity_triplet(*args):
+def Sparsity_triplet(*args) -> "casadi::Sparsity":
     """
 
 
@@ -2968,7 +3252,7 @@ def Sparsity_triplet(*args):
     """
     return _casadi.Sparsity_triplet(*args)
 
-def Sparsity_nonzeros(*args):
+def Sparsity_nonzeros(*args) -> "casadi::Sparsity":
     """
 
 
@@ -2979,7 +3263,7 @@ def Sparsity_nonzeros(*args):
     """
     return _casadi.Sparsity_nonzeros(*args)
 
-def Sparsity_compressed(*args):
+def Sparsity_compressed(*args) -> "casadi::Sparsity":
     """
       Create from a single vector containing the pattern in compressed column
 
@@ -2996,18 +3280,7 @@ def Sparsity_compressed(*args):
     """
     return _casadi.Sparsity_compressed(*args)
 
-def Sparsity_from_info(*args):
-    """
-
-
-    from_info(dict info) -> Sparsity
-
-
-
-    """
-    return _casadi.Sparsity_from_info(*args)
-
-def Sparsity_from_file(*args):
+def Sparsity_from_file(*args) -> "casadi::Sparsity":
     """
 
 
@@ -3018,11 +3291,12 @@ def Sparsity_from_file(*args):
     """
     return _casadi.Sparsity_from_file(*args)
 
-def Sparsity_deserialize(*args):
+def Sparsity_deserialize(*args) -> "casadi::Sparsity":
     """
 
 
-    deserialize(std::istream & istream) -> Sparsity
+    deserialize(std::istream & stream) -> Sparsity
+    deserialize(casadi::DeserializingStream & s) -> Sparsity
     deserialize(str s) -> Sparsity
 
 
@@ -3030,7 +3304,7 @@ def Sparsity_deserialize(*args):
     """
     return _casadi.Sparsity_deserialize(*args)
 
-def Sparsity_type_name(*args):
+def Sparsity_type_name(*args) -> "std::string":
     """
 
 
@@ -3041,7 +3315,7 @@ def Sparsity_type_name(*args):
     """
     return _casadi.Sparsity_type_name(*args)
 
-def Sparsity_test_cast(*args):
+def Sparsity_test_cast(*args) -> "bool":
     """
 
 
@@ -3052,7 +3326,7 @@ def Sparsity_test_cast(*args):
     """
     return _casadi.Sparsity_test_cast(*args)
 
-def Sparsity_kkt(*args):
+def Sparsity_kkt(*args) -> "casadi::Sparsity":
     """
 
 
@@ -3064,52 +3338,82 @@ def Sparsity_kkt(*args):
     return _casadi.Sparsity_kkt(*args)
 
 
-def hash_combine(*args):
+def hash_combine(*args) -> "void":
     """
       Generate a hash value incrementally (function taken from boost)
 
       hash_combine(std::size_t & seed, [int] v)
       hash_combine(std::size_t & seed, casadi_int const * v, std::size_t sz)
-        Generate a hash value incrementally, array.
 
 
 
-    > hash_combine(std::size_t & seed, [int] v)
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      hash_combine(std::size_t & seed, [int] v)
+
 
 
     Generate a hash value incrementally (function taken from boost)
 
 
-    > hash_combine(std::size_t & seed, casadi_int const * v, std::size_t sz)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      hash_combine(std::size_t & seed, casadi_int const * v, std::size_t sz)
+
 
 
     Generate a hash value incrementally, array.
 
 
 
+    .............
+
+
 
     """
     return _casadi.hash_combine(*args)
 
-def hash_sparsity(*args):
+def hash_sparsity(*args) -> "std::size_t":
     """
 
 
       hash_sparsity(int nrow, int ncol, casadi_int const * colind, casadi_int const * row) -> std::size_t
       hash_sparsity(int nrow, int ncol, [int] colind, [int] row) -> std::size_t
-        Hash a sparsity pattern.
 
-    > hash_sparsity(int nrow, int ncol, casadi_int const * colind, casadi_int const * row)
-    ------------------------------------------------------------------------
 
-    > hash_sparsity(int nrow, int ncol, [int] colind, [int] row)
-    ------------------------------------------------------------------------
+    .......
+
+    ::
+
+      hash_sparsity(int nrow, int ncol, casadi_int const * colind, casadi_int const * row)
+
+
+
+    .............
+
+
+    .......
+
+    ::
+
+      hash_sparsity(int nrow, int ncol, [int] colind, [int] row)
+
 
 
     Hash a sparsity pattern.
 
+
+
+    .............
 
 
 
@@ -3148,29 +3452,46 @@ class Slice(PrintableCommon):
     if _newclass:
         step = _swig_property(_casadi.Slice_step_get)
 
-    def all(self, *args):
+    def all(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
         """
           Get a vector of indices (nested slice)
 
+          all(self) -> [int]
           all(self, int len, bool ind1) -> [int]
-            Get a vector of indices.
           all(self, Slice outer, int len) -> [int]
 
 
 
-        > all(self, int len, bool ind1)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          all(self)
+          all(self, int len, bool ind1)
+
 
 
         Get a vector of indices.
 
 
-        > all(self, Slice outer, int len)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          all(self, Slice outer, int len)
+
 
 
         Get a vector of indices (nested slice)
 
+
+
+        .............
 
 
 
@@ -3178,7 +3499,35 @@ class Slice(PrintableCommon):
         return _casadi.Slice_all(self, *args)
 
 
-    def is_scalar(self, *args):
+    def size(self, *args) -> "size_t":
+        """
+        Get number of elements.
+
+        size(self) -> size_t
+
+
+
+
+
+        """
+        return _casadi.Slice_size(self, *args)
+
+
+    def is_empty(self, *args) -> "bool":
+        """
+        Check if slice is empty.
+
+        is_empty(self) -> bool
+
+
+
+
+
+        """
+        return _casadi.Slice_is_empty(self, *args)
+
+
+    def is_scalar(self, *args) -> "bool":
         """
         Is the slice a scalar.
 
@@ -3192,7 +3541,7 @@ class Slice(PrintableCommon):
         return _casadi.Slice_is_scalar(self, *args)
 
 
-    def scalar(self, *args):
+    def scalar(self, *args) -> "casadi_int":
         """
         Get scalar (if is_scalar)
 
@@ -3206,7 +3555,7 @@ class Slice(PrintableCommon):
         return _casadi.Slice_scalar(self, *args)
 
 
-    def __eq__(self, *args):
+    def __eq__(self, *args) -> "bool":
         """
 
 
@@ -3218,7 +3567,7 @@ class Slice(PrintableCommon):
         return _casadi.Slice___eq__(self, *args)
 
 
-    def __ne__(self, *args):
+    def __ne__(self, *args) -> "bool":
         """
 
 
@@ -3230,7 +3579,45 @@ class Slice(PrintableCommon):
         return _casadi.Slice___ne__(self, *args)
 
 
-    def type_name(self, *args):
+    def apply(self, *args) -> "casadi::Slice":
+        """
+        Apply concrete length.
+
+        apply(self, int len, bool ind1) -> Slice
+
+
+
+
+
+        """
+        return _casadi.Slice_apply(self, *args)
+
+
+    def __sub__(self, *args) -> "casadi::Slice":
+        """
+
+
+        __sub__(self, int i) -> Slice
+
+
+
+        """
+        return _casadi.Slice___sub__(self, *args)
+
+
+    def __mul__(self, *args) -> "casadi::Slice":
+        """
+
+
+        __mul__(self, int i) -> Slice
+
+
+
+        """
+        return _casadi.Slice___mul__(self, *args)
+
+
+    def type_name(self, *args) -> "std::string":
         """
         Get name of the class.
 
@@ -3244,7 +3631,7 @@ class Slice(PrintableCommon):
         return _casadi.Slice_type_name(self, *args)
 
 
-    def disp(self, *args):
+    def disp(self, *args) -> "void":
         """
         Print a description of the object.
 
@@ -3258,7 +3645,7 @@ class Slice(PrintableCommon):
         return _casadi.Slice_disp(self, *args)
 
 
-    def str(self, *args):
+    def str(self, *args) -> "std::string":
         """
         Get string representation.
 
@@ -3272,7 +3659,7 @@ class Slice(PrintableCommon):
         return _casadi.Slice_str(self, *args)
 
 
-    def info(self, *args):
+    def info(self, *args) -> "casadi::Dict":
         """
         Obtain information
 
@@ -3286,47 +3673,103 @@ class Slice(PrintableCommon):
         return _casadi.Slice_info(self, *args)
 
 
+    def serialize(self, *args) -> "void":
+        """
+        Serialize an object.
+
+        serialize(self, casadi::SerializingStream & s)
+
+
+
+
+
+        """
+        return _casadi.Slice_serialize(self, *args)
+
+
+    def deserialize(*args) -> "casadi::Slice":
+        """
+
+
+        deserialize(casadi::DeserializingStream & s) -> Slice
+
+
+
+        """
+        return _casadi.Slice_deserialize(*args)
+
+    deserialize = staticmethod(deserialize)
+
     def __init__(self, *args):
         """
 
 
           Slice()
-            Default constructor - all elements.
           Slice(int i, bool ind1)
-            A single element (explicit to avoid ambiguity with IM overload.
           Slice(Slice other)
           Slice(int start, int stop, int step)
           Slice(int start, int stop, int step)
           Slice(int start, int stop, int step)
           Slice(int start, int stop, int step)
-            A slice.
 
-        > Slice()
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          Slice()
+
 
 
         Default constructor - all elements.
 
 
-        > Slice(Slice other)
-        > Slice(int start, int stop, int step)
-        > Slice(int start, int stop, int step)
-        > Slice(int start, int stop, int step)
-        ------------------------------------------------------------------------
 
-        > Slice(int start, int stop, int step)
-        ------------------------------------------------------------------------
+        .............
+
+
+        .......
+
+        ::
+
+          Slice(Slice other)
+          Slice(int start, int stop, int step)
+          Slice(int start, int stop, int step)
+          Slice(int start, int stop, int step)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          Slice(int start, int stop, int step)
+
 
 
         A slice.
 
 
-        > Slice(int i, bool ind1)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          Slice(int i, bool ind1)
+
 
 
         A single element (explicit to avoid ambiguity with IM overload.
 
+
+
+        .............
 
 
 
@@ -3340,8 +3783,32 @@ class Slice(PrintableCommon):
 Slice_swigregister = _casadi.Slice_swigregister
 Slice_swigregister(Slice)
 
+def Slice_deserialize(*args) -> "casadi::Slice":
+    """
 
-def to_slice2(*args):
+
+    deserialize(casadi::DeserializingStream & s) -> Slice
+
+
+
+    """
+    return _casadi.Slice_deserialize(*args)
+
+
+def to_slice(*args) -> "casadi::Slice":
+    """
+    Construct from an index vector (requires is_slice(v) to be true)
+
+    to_slice([int] v, bool ind1) -> Slice
+
+
+
+
+
+    """
+    return _casadi.to_slice(*args)
+
+def to_slice2(*args) -> "std::pair< casadi::Slice,casadi::Slice >":
     """
       Construct nested slices from an index vector (requires is_slice2(v) to be
 
@@ -3355,7 +3822,20 @@ def to_slice2(*args):
     """
     return _casadi.to_slice2(*args)
 
-def is_slice2(*args):
+def is_slice(*args) -> "bool":
+    """
+    Check if an index vector can be represented more efficiently as a slice.
+
+    is_slice([int] v, bool ind1) -> bool
+
+
+
+
+
+    """
+    return _casadi.is_slice(*args)
+
+def is_slice2(*args) -> "bool":
     """
       Check if an index vector can be represented more efficiently as two nested
 
@@ -3428,7 +3908,7 @@ GenericMatrixCommon_swigregister = _casadi.GenericMatrixCommon_swigregister
 GenericMatrixCommon_swigregister(GenericMatrixCommon)
 
 
-def index_interp1d(*args):
+def index_interp1d(*args) -> "double":
     """
 
 
@@ -3438,612 +3918,6 @@ def index_interp1d(*args):
 
     """
     return _casadi.index_interp1d(*args)
-class GenIM(GenericMatrixCommon, SparsityInterfaceCommon):
-    """
-
-
-
-
-
-    """
-
-    __swig_setmethods__ = {}
-    for _s in [GenericMatrixCommon, SparsityInterfaceCommon]:
-        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, GenIM, name, value)
-    __swig_getmethods__ = {}
-    for _s in [GenericMatrixCommon, SparsityInterfaceCommon]:
-        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
-    __getattr__ = lambda self, name: _swig_getattr(self, GenIM, name)
-    __repr__ = _swig_repr
-
-    def nnz(self, *args):
-        """
-        Get the number of (structural) non-zero elements.
-
-        nnz(self) -> int
-
-
-
-
-
-        """
-        return _casadi.GenIM_nnz(self, *args)
-
-
-    def nnz_lower(self, *args):
-        """
-        Get the number of non-zeros in the lower triangular half.
-
-        nnz_lower(self) -> int
-
-
-
-
-
-        """
-        return _casadi.GenIM_nnz_lower(self, *args)
-
-
-    def nnz_upper(self, *args):
-        """
-        Get the number of non-zeros in the upper triangular half.
-
-        nnz_upper(self) -> int
-
-
-
-
-
-        """
-        return _casadi.GenIM_nnz_upper(self, *args)
-
-
-    def nnz_diag(self, *args):
-        """
-        Get get the number of non-zeros on the diagonal.
-
-        nnz_diag(self) -> int
-
-
-
-
-
-        """
-        return _casadi.GenIM_nnz_diag(self, *args)
-
-
-    def numel(self, *args):
-        """
-        Get the number of elements.
-
-        numel(self) -> int
-
-
-
-
-
-        """
-        return _casadi.GenIM_numel(self, *args)
-
-
-    def size1(self, *args):
-        """
-        Get the first dimension (i.e. number of rows)
-
-        size1(self) -> int
-
-
-
-
-
-        """
-        return _casadi.GenIM_size1(self, *args)
-
-
-    def rows(self, *args):
-        """
-        Get the number of rows, Octave-style syntax.
-
-        rows(self) -> int
-
-
-
-
-
-        """
-        return _casadi.GenIM_rows(self, *args)
-
-
-    def size2(self, *args):
-        """
-        Get the second dimension (i.e. number of columns)
-
-        size2(self) -> int
-
-
-
-
-
-        """
-        return _casadi.GenIM_size2(self, *args)
-
-
-    def columns(self, *args):
-        """
-        Get the number of columns, Octave-style syntax.
-
-        columns(self) -> int
-
-
-
-
-
-        """
-        return _casadi.GenIM_columns(self, *args)
-
-
-    def dim(self, *args):
-        """
-          Get string representation of dimensions. The representation is e.g. "4x5"
-
-          dim(self, bool with_nz) -> str
-
-        or "4x5,10nz".
-
-
-
-
-        """
-        return _casadi.GenIM_dim(self, *args)
-
-
-    def size(self, *args):
-        """
-          Get the size along a particular dimensions.
-
-          size(self) -> (int,int)
-            Get the shape.
-          size(self, int axis) -> int
-
-
-
-        > size(self)
-        ------------------------------------------------------------------------
-
-
-        Get the shape.
-
-
-        > size(self, int axis)
-        ------------------------------------------------------------------------
-
-
-        Get the size along a particular dimensions.
-
-
-
-
-        """
-        return _casadi.GenIM_size(self, *args)
-
-
-    def is_empty(self, *args):
-        """
-          Check if the sparsity is empty, i.e. if one of the dimensions is zero (or
-
-          is_empty(self, bool both) -> bool
-
-        optionally both dimensions)
-
-
-
-
-        """
-        return _casadi.GenIM_is_empty(self, *args)
-
-
-    def is_dense(self, *args):
-        """
-        Check if the matrix expression is dense.
-
-        is_dense(self) -> bool
-
-
-
-
-
-        """
-        return _casadi.GenIM_is_dense(self, *args)
-
-
-    def is_scalar(self, *args):
-        """
-        Check if the matrix expression is scalar.
-
-        is_scalar(self, bool scalar_and_dense) -> bool
-
-
-
-
-
-        """
-        return _casadi.GenIM_is_scalar(self, *args)
-
-
-    def is_square(self, *args):
-        """
-        Check if the matrix expression is square.
-
-        is_square(self) -> bool
-
-
-
-
-
-        """
-        return _casadi.GenIM_is_square(self, *args)
-
-
-    def is_vector(self, *args):
-        """
-        Check if the matrix is a row or column vector.
-
-        is_vector(self) -> bool
-
-
-
-
-
-        """
-        return _casadi.GenIM_is_vector(self, *args)
-
-
-    def is_row(self, *args):
-        """
-        Check if the matrix is a row vector (i.e. size1()==1)
-
-        is_row(self) -> bool
-
-
-
-
-
-        """
-        return _casadi.GenIM_is_row(self, *args)
-
-
-    def is_column(self, *args):
-        """
-        Check if the matrix is a column vector (i.e. size2()==1)
-
-        is_column(self) -> bool
-
-
-
-
-
-        """
-        return _casadi.GenIM_is_column(self, *args)
-
-
-    def is_triu(self, *args):
-        """
-        Check if the matrix is upper triangular.
-
-        is_triu(self) -> bool
-
-
-
-
-
-        """
-        return _casadi.GenIM_is_triu(self, *args)
-
-
-    def is_tril(self, *args):
-        """
-        Check if the matrix is lower triangular.
-
-        is_tril(self) -> bool
-
-
-
-
-
-        """
-        return _casadi.GenIM_is_tril(self, *args)
-
-
-    def row(self, *args):
-        """
-        Get the sparsity pattern. See the Sparsity class for details.
-
-        row(self) -> [int]
-        row(self, int el) -> int
-
-
-
-
-
-        """
-        return _casadi.GenIM_row(self, *args)
-
-
-    def colind(self, *args):
-        """
-        Get the sparsity pattern. See the Sparsity class for details.
-
-        colind(self) -> [int]
-        colind(self, int col) -> int
-
-
-
-
-
-        """
-        return _casadi.GenIM_colind(self, *args)
-
-
-    def sparsity(self, *args):
-        """
-        Get the sparsity pattern.
-
-        sparsity(self) -> Sparsity
-
-
-
-
-
-        """
-        return _casadi.GenIM_sparsity(self, *args)
-
-
-    def sym(*args):
-        """
-          Create a vector of length r of vectors of length p with nrow-by-ncol
-
-          sym(str name, int nrow, int ncol) -> IM
-            Create an nrow-by-ncol symbolic primitive.
-          sym(str name, (int,int) rc) -> IM
-            Construct a symbolic primitive with given dimensions.
-          sym(str name, Sparsity sp) -> IM
-            Create symbolic primitive with a given sparsity pattern.
-          sym(str name, Sparsity sp, int p) -> std::vector< casadi::Matrix< long long >,std::allocator< casadi::Matrix< long long > > >
-            Create a vector of length p with with matrices with symbolic primitives of
-          sym(str name, int nrow, int ncol, int p) -> std::vector< casadi::Matrix< long long >,std::allocator< casadi::Matrix< long long > > >
-            Create a vector of length p with nrow-by-ncol symbolic primitives.
-          sym(str name, Sparsity sp, int p, int r) -> [[IM]]
-            Create a vector of length r of vectors of length p with symbolic primitives
-          sym(str name, int nrow, int ncol, int p, int r) -> [[IM]]
-
-        symbolic primitives.
-
-
-        > sym(str name, (int,int) rc)
-        ------------------------------------------------------------------------
-
-
-        Construct a symbolic primitive with given dimensions.
-
-
-        > sym(str name, int nrow, int ncol, int p)
-        ------------------------------------------------------------------------
-
-
-        Create a vector of length p with nrow-by-ncol symbolic primitives.
-
-
-        > sym(str name, Sparsity sp, int p, int r)
-        ------------------------------------------------------------------------
-
-
-        Create a vector of length r of vectors of length p with symbolic primitives
-        with given sparsity.
-
-
-        > sym(str name, int nrow, int ncol, int p, int r)
-        ------------------------------------------------------------------------
-
-
-        Create a vector of length r of vectors of length p with nrow-by-ncol
-        symbolic primitives.
-
-
-        > sym(str name, Sparsity sp)
-        ------------------------------------------------------------------------
-
-
-        Create symbolic primitive with a given sparsity pattern.
-
-
-        > sym(str name, int nrow, int ncol)
-        ------------------------------------------------------------------------
-
-
-        Create an nrow-by-ncol symbolic primitive.
-
-
-        > sym(str name, Sparsity sp, int p)
-        ------------------------------------------------------------------------
-
-
-        Create a vector of length p with with matrices with symbolic primitives of
-        given sparsity.
-
-
-
-
-        """
-        return _casadi.GenIM_sym(*args)
-
-    sym = staticmethod(sym)
-
-    def zeros(*args):
-        """
-          Create a dense matrix or a matrix with specified sparsity with all entries
-
-          zeros(int nrow, int ncol) -> IM
-          zeros((int,int) rc) -> IM
-          zeros(Sparsity sp) -> IM
-
-        zero.
-
-
-
-
-        """
-        return _casadi.GenIM_zeros(*args)
-
-    zeros = staticmethod(zeros)
-
-    def ones(*args):
-        """
-          Create a dense matrix or a matrix with specified sparsity with all entries
-
-          ones(int nrow, int ncol) -> IM
-          ones((int,int) rc) -> IM
-          ones(Sparsity sp) -> IM
-
-        one.
-
-
-
-
-        """
-        return _casadi.GenIM_ones(*args)
-
-    ones = staticmethod(ones)
-
-    def __init__(self, *args):
-        """
-
-
-        GenIM()
-        GenIM(GenIM other)
-
-
-
-        """
-        this = _casadi.new_GenIM(*args)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
-    __swig_destroy__ = _casadi.delete_GenIM
-GenIM_swigregister = _casadi.GenIM_swigregister
-GenIM_swigregister(GenIM)
-
-def GenIM_sym(*args):
-    """
-      Create a vector of length r of vectors of length p with nrow-by-ncol
-
-      sym(str name, int nrow, int ncol) -> IM
-        Create an nrow-by-ncol symbolic primitive.
-      sym(str name, (int,int) rc) -> IM
-        Construct a symbolic primitive with given dimensions.
-      sym(str name, Sparsity sp) -> IM
-        Create symbolic primitive with a given sparsity pattern.
-      sym(str name, Sparsity sp, int p) -> std::vector< casadi::Matrix< long long >,std::allocator< casadi::Matrix< long long > > >
-        Create a vector of length p with with matrices with symbolic primitives of
-      sym(str name, int nrow, int ncol, int p) -> std::vector< casadi::Matrix< long long >,std::allocator< casadi::Matrix< long long > > >
-        Create a vector of length p with nrow-by-ncol symbolic primitives.
-      sym(str name, Sparsity sp, int p, int r) -> [[IM]]
-        Create a vector of length r of vectors of length p with symbolic primitives
-      sym(str name, int nrow, int ncol, int p, int r) -> [[IM]]
-
-    symbolic primitives.
-
-
-    > sym(str name, (int,int) rc)
-    ------------------------------------------------------------------------
-
-
-    Construct a symbolic primitive with given dimensions.
-
-
-    > sym(str name, int nrow, int ncol, int p)
-    ------------------------------------------------------------------------
-
-
-    Create a vector of length p with nrow-by-ncol symbolic primitives.
-
-
-    > sym(str name, Sparsity sp, int p, int r)
-    ------------------------------------------------------------------------
-
-
-    Create a vector of length r of vectors of length p with symbolic primitives
-    with given sparsity.
-
-
-    > sym(str name, int nrow, int ncol, int p, int r)
-    ------------------------------------------------------------------------
-
-
-    Create a vector of length r of vectors of length p with nrow-by-ncol
-    symbolic primitives.
-
-
-    > sym(str name, Sparsity sp)
-    ------------------------------------------------------------------------
-
-
-    Create symbolic primitive with a given sparsity pattern.
-
-
-    > sym(str name, int nrow, int ncol)
-    ------------------------------------------------------------------------
-
-
-    Create an nrow-by-ncol symbolic primitive.
-
-
-    > sym(str name, Sparsity sp, int p)
-    ------------------------------------------------------------------------
-
-
-    Create a vector of length p with with matrices with symbolic primitives of
-    given sparsity.
-
-
-
-
-    """
-    return _casadi.GenIM_sym(*args)
-
-def GenIM_zeros(*args):
-    """
-      Create a dense matrix or a matrix with specified sparsity with all entries
-
-      zeros(int nrow, int ncol) -> IM
-      zeros((int,int) rc) -> IM
-      zeros(Sparsity sp) -> IM
-
-    zero.
-
-
-
-
-    """
-    return _casadi.GenIM_zeros(*args)
-
-def GenIM_ones(*args):
-    """
-      Create a dense matrix or a matrix with specified sparsity with all entries
-
-      ones(int nrow, int ncol) -> IM
-      ones((int,int) rc) -> IM
-      ones(Sparsity sp) -> IM
-
-    one.
-
-
-
-
-    """
-    return _casadi.GenIM_ones(*args)
-
 class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
     """
 
@@ -4063,7 +3937,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, GenDM, name)
     __repr__ = _swig_repr
 
-    def nnz(self, *args):
+    def nnz(self, *args) -> "casadi_int":
         """
         Get the number of (structural) non-zero elements.
 
@@ -4077,7 +3951,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_nnz(self, *args)
 
 
-    def nnz_lower(self, *args):
+    def nnz_lower(self, *args) -> "casadi_int":
         """
         Get the number of non-zeros in the lower triangular half.
 
@@ -4091,7 +3965,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_nnz_lower(self, *args)
 
 
-    def nnz_upper(self, *args):
+    def nnz_upper(self, *args) -> "casadi_int":
         """
         Get the number of non-zeros in the upper triangular half.
 
@@ -4105,7 +3979,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_nnz_upper(self, *args)
 
 
-    def nnz_diag(self, *args):
+    def nnz_diag(self, *args) -> "casadi_int":
         """
         Get get the number of non-zeros on the diagonal.
 
@@ -4119,7 +3993,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_nnz_diag(self, *args)
 
 
-    def numel(self, *args):
+    def numel(self, *args) -> "casadi_int":
         """
         Get the number of elements.
 
@@ -4133,7 +4007,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_numel(self, *args)
 
 
-    def size1(self, *args):
+    def size1(self, *args) -> "casadi_int":
         """
         Get the first dimension (i.e. number of rows)
 
@@ -4147,7 +4021,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_size1(self, *args)
 
 
-    def rows(self, *args):
+    def rows(self, *args) -> "casadi_int":
         """
         Get the number of rows, Octave-style syntax.
 
@@ -4161,7 +4035,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_rows(self, *args)
 
 
-    def size2(self, *args):
+    def size2(self, *args) -> "casadi_int":
         """
         Get the second dimension (i.e. number of columns)
 
@@ -4175,7 +4049,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_size2(self, *args)
 
 
-    def columns(self, *args):
+    def columns(self, *args) -> "casadi_int":
         """
         Get the number of columns, Octave-style syntax.
 
@@ -4189,7 +4063,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_columns(self, *args)
 
 
-    def dim(self, *args):
+    def dim(self, *args) -> "std::string":
         """
           Get string representation of dimensions. The representation is e.g. "4x5"
 
@@ -4204,29 +4078,44 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_dim(self, *args)
 
 
-    def size(self, *args):
+    def size(self, *args) -> "casadi_int":
         """
           Get the size along a particular dimensions.
 
           size(self) -> (int,int)
-            Get the shape.
           size(self, int axis) -> int
 
 
 
-        > size(self)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          size(self)
+
 
 
         Get the shape.
 
 
-        > size(self, int axis)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          size(self, int axis)
+
 
 
         Get the size along a particular dimensions.
 
+
+
+        .............
 
 
 
@@ -4234,7 +4123,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_size(self, *args)
 
 
-    def is_empty(self, *args):
+    def is_empty(self, *args) -> "bool":
         """
           Check if the sparsity is empty, i.e. if one of the dimensions is zero (or
 
@@ -4249,7 +4138,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_is_empty(self, *args)
 
 
-    def is_dense(self, *args):
+    def is_dense(self, *args) -> "bool":
         """
         Check if the matrix expression is dense.
 
@@ -4263,7 +4152,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_is_dense(self, *args)
 
 
-    def is_scalar(self, *args):
+    def is_scalar(self, *args) -> "bool":
         """
         Check if the matrix expression is scalar.
 
@@ -4277,7 +4166,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_is_scalar(self, *args)
 
 
-    def is_square(self, *args):
+    def is_square(self, *args) -> "bool":
         """
         Check if the matrix expression is square.
 
@@ -4291,7 +4180,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_is_square(self, *args)
 
 
-    def is_vector(self, *args):
+    def is_vector(self, *args) -> "bool":
         """
         Check if the matrix is a row or column vector.
 
@@ -4305,7 +4194,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_is_vector(self, *args)
 
 
-    def is_row(self, *args):
+    def is_row(self, *args) -> "bool":
         """
         Check if the matrix is a row vector (i.e. size1()==1)
 
@@ -4319,7 +4208,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_is_row(self, *args)
 
 
-    def is_column(self, *args):
+    def is_column(self, *args) -> "bool":
         """
         Check if the matrix is a column vector (i.e. size2()==1)
 
@@ -4333,7 +4222,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_is_column(self, *args)
 
 
-    def is_triu(self, *args):
+    def is_triu(self, *args) -> "bool":
         """
         Check if the matrix is upper triangular.
 
@@ -4347,7 +4236,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_is_triu(self, *args)
 
 
-    def is_tril(self, *args):
+    def is_tril(self, *args) -> "bool":
         """
         Check if the matrix is lower triangular.
 
@@ -4361,7 +4250,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_is_tril(self, *args)
 
 
-    def row(self, *args):
+    def row(self, *args) -> "casadi_int":
         """
         Get the sparsity pattern. See the Sparsity class for details.
 
@@ -4376,7 +4265,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_row(self, *args)
 
 
-    def colind(self, *args):
+    def colind(self, *args) -> "casadi_int":
         """
         Get the sparsity pattern. See the Sparsity class for details.
 
@@ -4391,7 +4280,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_colind(self, *args)
 
 
-    def sparsity(self, *args):
+    def sparsity(self, *args) -> "casadi::Sparsity const":
         """
         Get the sparsity pattern.
 
@@ -4405,78 +4294,128 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenDM_sparsity(self, *args)
 
 
-    def sym(*args):
+    def sym(*args) -> "std::vector< std::vector< casadi::Matrix< double >,std::allocator< casadi::Matrix< double > > >,std::allocator< std::vector< casadi::Matrix< double >,std::allocator< casadi::Matrix< double > > > > >":
         """
           Create a vector of length r of vectors of length p with nrow-by-ncol
 
           sym(str name, int nrow, int ncol) -> DM
-            Create an nrow-by-ncol symbolic primitive.
           sym(str name, (int,int) rc) -> DM
-            Construct a symbolic primitive with given dimensions.
           sym(str name, Sparsity sp) -> DM
-            Create symbolic primitive with a given sparsity pattern.
           sym(str name, Sparsity sp, int p) -> [DM]
-            Create a vector of length p with with matrices with symbolic primitives of
           sym(str name, int nrow, int ncol, int p) -> [DM]
-            Create a vector of length p with nrow-by-ncol symbolic primitives.
           sym(str name, Sparsity sp, int p, int r) -> [[DM]]
-            Create a vector of length r of vectors of length p with symbolic primitives
           sym(str name, int nrow, int ncol, int p, int r) -> [[DM]]
 
         symbolic primitives.
 
 
-        > sym(str name, (int,int) rc)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          sym(str name, (int,int) rc)
+
 
 
         Construct a symbolic primitive with given dimensions.
 
 
-        > sym(str name, int nrow, int ncol, int p)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, int nrow, int ncol, int p)
+
 
 
         Create a vector of length p with nrow-by-ncol symbolic primitives.
 
 
-        > sym(str name, Sparsity sp, int p, int r)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, Sparsity sp, int p, int r)
+
 
 
         Create a vector of length r of vectors of length p with symbolic primitives
         with given sparsity.
 
 
-        > sym(str name, int nrow, int ncol, int p, int r)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, int nrow, int ncol, int p, int r)
+
 
 
         Create a vector of length r of vectors of length p with nrow-by-ncol
         symbolic primitives.
 
 
-        > sym(str name, Sparsity sp)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, Sparsity sp)
+
 
 
         Create symbolic primitive with a given sparsity pattern.
 
 
-        > sym(str name, int nrow, int ncol)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, int nrow, int ncol)
+
 
 
         Create an nrow-by-ncol symbolic primitive.
 
 
-        > sym(str name, Sparsity sp, int p)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, Sparsity sp, int p)
+
 
 
         Create a vector of length p with with matrices with symbolic primitives of
         given sparsity.
 
+
+
+        .............
 
 
 
@@ -4485,7 +4424,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
 
     sym = staticmethod(sym)
 
-    def zeros(*args):
+    def zeros(*args) -> "casadi::Matrix< double >":
         """
           Create a dense matrix or a matrix with specified sparsity with all entries
 
@@ -4503,7 +4442,7 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
 
     zeros = staticmethod(zeros)
 
-    def ones(*args):
+    def ones(*args) -> "casadi::Matrix< double >":
         """
           Create a dense matrix or a matrix with specified sparsity with all entries
 
@@ -4540,73 +4479,120 @@ class GenDM(GenericMatrixCommon, SparsityInterfaceCommon):
 GenDM_swigregister = _casadi.GenDM_swigregister
 GenDM_swigregister(GenDM)
 
-def GenDM_sym(*args):
+def GenDM_sym(*args) -> "std::vector< std::vector< casadi::Matrix< double >,std::allocator< casadi::Matrix< double > > >,std::allocator< std::vector< casadi::Matrix< double >,std::allocator< casadi::Matrix< double > > > > >":
     """
       Create a vector of length r of vectors of length p with nrow-by-ncol
 
       sym(str name, int nrow, int ncol) -> DM
-        Create an nrow-by-ncol symbolic primitive.
       sym(str name, (int,int) rc) -> DM
-        Construct a symbolic primitive with given dimensions.
       sym(str name, Sparsity sp) -> DM
-        Create symbolic primitive with a given sparsity pattern.
       sym(str name, Sparsity sp, int p) -> [DM]
-        Create a vector of length p with with matrices with symbolic primitives of
       sym(str name, int nrow, int ncol, int p) -> [DM]
-        Create a vector of length p with nrow-by-ncol symbolic primitives.
       sym(str name, Sparsity sp, int p, int r) -> [[DM]]
-        Create a vector of length r of vectors of length p with symbolic primitives
       sym(str name, int nrow, int ncol, int p, int r) -> [[DM]]
 
     symbolic primitives.
 
 
-    > sym(str name, (int,int) rc)
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      sym(str name, (int,int) rc)
+
 
 
     Construct a symbolic primitive with given dimensions.
 
 
-    > sym(str name, int nrow, int ncol, int p)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, int nrow, int ncol, int p)
+
 
 
     Create a vector of length p with nrow-by-ncol symbolic primitives.
 
 
-    > sym(str name, Sparsity sp, int p, int r)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, Sparsity sp, int p, int r)
+
 
 
     Create a vector of length r of vectors of length p with symbolic primitives
     with given sparsity.
 
 
-    > sym(str name, int nrow, int ncol, int p, int r)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, int nrow, int ncol, int p, int r)
+
 
 
     Create a vector of length r of vectors of length p with nrow-by-ncol
     symbolic primitives.
 
 
-    > sym(str name, Sparsity sp)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, Sparsity sp)
+
 
 
     Create symbolic primitive with a given sparsity pattern.
 
 
-    > sym(str name, int nrow, int ncol)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, int nrow, int ncol)
+
 
 
     Create an nrow-by-ncol symbolic primitive.
 
 
-    > sym(str name, Sparsity sp, int p)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, Sparsity sp, int p)
+
 
 
     Create a vector of length p with with matrices with symbolic primitives of
@@ -4614,11 +4600,14 @@ def GenDM_sym(*args):
 
 
 
+    .............
+
+
 
     """
     return _casadi.GenDM_sym(*args)
 
-def GenDM_zeros(*args):
+def GenDM_zeros(*args) -> "casadi::Matrix< double >":
     """
       Create a dense matrix or a matrix with specified sparsity with all entries
 
@@ -4634,7 +4623,7 @@ def GenDM_zeros(*args):
     """
     return _casadi.GenDM_zeros(*args)
 
-def GenDM_ones(*args):
+def GenDM_ones(*args) -> "casadi::Matrix< double >":
     """
       Create a dense matrix or a matrix with specified sparsity with all entries
 
@@ -4669,7 +4658,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, GenSX, name)
     __repr__ = _swig_repr
 
-    def nnz(self, *args):
+    def nnz(self, *args) -> "casadi_int":
         """
         Get the number of (structural) non-zero elements.
 
@@ -4683,7 +4672,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_nnz(self, *args)
 
 
-    def nnz_lower(self, *args):
+    def nnz_lower(self, *args) -> "casadi_int":
         """
         Get the number of non-zeros in the lower triangular half.
 
@@ -4697,7 +4686,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_nnz_lower(self, *args)
 
 
-    def nnz_upper(self, *args):
+    def nnz_upper(self, *args) -> "casadi_int":
         """
         Get the number of non-zeros in the upper triangular half.
 
@@ -4711,7 +4700,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_nnz_upper(self, *args)
 
 
-    def nnz_diag(self, *args):
+    def nnz_diag(self, *args) -> "casadi_int":
         """
         Get get the number of non-zeros on the diagonal.
 
@@ -4725,7 +4714,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_nnz_diag(self, *args)
 
 
-    def numel(self, *args):
+    def numel(self, *args) -> "casadi_int":
         """
         Get the number of elements.
 
@@ -4739,7 +4728,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_numel(self, *args)
 
 
-    def size1(self, *args):
+    def size1(self, *args) -> "casadi_int":
         """
         Get the first dimension (i.e. number of rows)
 
@@ -4753,7 +4742,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_size1(self, *args)
 
 
-    def rows(self, *args):
+    def rows(self, *args) -> "casadi_int":
         """
         Get the number of rows, Octave-style syntax.
 
@@ -4767,7 +4756,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_rows(self, *args)
 
 
-    def size2(self, *args):
+    def size2(self, *args) -> "casadi_int":
         """
         Get the second dimension (i.e. number of columns)
 
@@ -4781,7 +4770,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_size2(self, *args)
 
 
-    def columns(self, *args):
+    def columns(self, *args) -> "casadi_int":
         """
         Get the number of columns, Octave-style syntax.
 
@@ -4795,7 +4784,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_columns(self, *args)
 
 
-    def dim(self, *args):
+    def dim(self, *args) -> "std::string":
         """
           Get string representation of dimensions. The representation is e.g. "4x5"
 
@@ -4810,29 +4799,44 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_dim(self, *args)
 
 
-    def size(self, *args):
+    def size(self, *args) -> "casadi_int":
         """
           Get the size along a particular dimensions.
 
           size(self) -> (int,int)
-            Get the shape.
           size(self, int axis) -> int
 
 
 
-        > size(self)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          size(self)
+
 
 
         Get the shape.
 
 
-        > size(self, int axis)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          size(self, int axis)
+
 
 
         Get the size along a particular dimensions.
 
+
+
+        .............
 
 
 
@@ -4840,7 +4844,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_size(self, *args)
 
 
-    def is_empty(self, *args):
+    def is_empty(self, *args) -> "bool":
         """
           Check if the sparsity is empty, i.e. if one of the dimensions is zero (or
 
@@ -4855,7 +4859,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_is_empty(self, *args)
 
 
-    def is_dense(self, *args):
+    def is_dense(self, *args) -> "bool":
         """
         Check if the matrix expression is dense.
 
@@ -4869,7 +4873,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_is_dense(self, *args)
 
 
-    def is_scalar(self, *args):
+    def is_scalar(self, *args) -> "bool":
         """
         Check if the matrix expression is scalar.
 
@@ -4883,7 +4887,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_is_scalar(self, *args)
 
 
-    def is_square(self, *args):
+    def is_square(self, *args) -> "bool":
         """
         Check if the matrix expression is square.
 
@@ -4897,7 +4901,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_is_square(self, *args)
 
 
-    def is_vector(self, *args):
+    def is_vector(self, *args) -> "bool":
         """
         Check if the matrix is a row or column vector.
 
@@ -4911,7 +4915,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_is_vector(self, *args)
 
 
-    def is_row(self, *args):
+    def is_row(self, *args) -> "bool":
         """
         Check if the matrix is a row vector (i.e. size1()==1)
 
@@ -4925,7 +4929,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_is_row(self, *args)
 
 
-    def is_column(self, *args):
+    def is_column(self, *args) -> "bool":
         """
         Check if the matrix is a column vector (i.e. size2()==1)
 
@@ -4939,7 +4943,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_is_column(self, *args)
 
 
-    def is_triu(self, *args):
+    def is_triu(self, *args) -> "bool":
         """
         Check if the matrix is upper triangular.
 
@@ -4953,7 +4957,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_is_triu(self, *args)
 
 
-    def is_tril(self, *args):
+    def is_tril(self, *args) -> "bool":
         """
         Check if the matrix is lower triangular.
 
@@ -4967,7 +4971,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_is_tril(self, *args)
 
 
-    def row(self, *args):
+    def row(self, *args) -> "casadi_int":
         """
         Get the sparsity pattern. See the Sparsity class for details.
 
@@ -4982,7 +4986,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_row(self, *args)
 
 
-    def colind(self, *args):
+    def colind(self, *args) -> "casadi_int":
         """
         Get the sparsity pattern. See the Sparsity class for details.
 
@@ -4997,7 +5001,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_colind(self, *args)
 
 
-    def sparsity(self, *args):
+    def sparsity(self, *args) -> "casadi::Sparsity const":
         """
         Get the sparsity pattern.
 
@@ -5011,78 +5015,128 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenSX_sparsity(self, *args)
 
 
-    def sym(*args):
+    def sym(*args) -> "std::vector< std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >,std::allocator< std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > > > >":
         """
           Create a vector of length r of vectors of length p with nrow-by-ncol
 
           sym(str name, int nrow, int ncol) -> SX
-            Create an nrow-by-ncol symbolic primitive.
           sym(str name, (int,int) rc) -> SX
-            Construct a symbolic primitive with given dimensions.
           sym(str name, Sparsity sp) -> SX
-            Create symbolic primitive with a given sparsity pattern.
           sym(str name, Sparsity sp, int p) -> [SX]
-            Create a vector of length p with with matrices with symbolic primitives of
           sym(str name, int nrow, int ncol, int p) -> [SX]
-            Create a vector of length p with nrow-by-ncol symbolic primitives.
           sym(str name, Sparsity sp, int p, int r) -> [[SX]]
-            Create a vector of length r of vectors of length p with symbolic primitives
           sym(str name, int nrow, int ncol, int p, int r) -> [[SX]]
 
         symbolic primitives.
 
 
-        > sym(str name, (int,int) rc)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          sym(str name, (int,int) rc)
+
 
 
         Construct a symbolic primitive with given dimensions.
 
 
-        > sym(str name, int nrow, int ncol, int p)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, int nrow, int ncol, int p)
+
 
 
         Create a vector of length p with nrow-by-ncol symbolic primitives.
 
 
-        > sym(str name, Sparsity sp, int p, int r)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, Sparsity sp, int p, int r)
+
 
 
         Create a vector of length r of vectors of length p with symbolic primitives
         with given sparsity.
 
 
-        > sym(str name, int nrow, int ncol, int p, int r)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, int nrow, int ncol, int p, int r)
+
 
 
         Create a vector of length r of vectors of length p with nrow-by-ncol
         symbolic primitives.
 
 
-        > sym(str name, Sparsity sp)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, Sparsity sp)
+
 
 
         Create symbolic primitive with a given sparsity pattern.
 
 
-        > sym(str name, int nrow, int ncol)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, int nrow, int ncol)
+
 
 
         Create an nrow-by-ncol symbolic primitive.
 
 
-        > sym(str name, Sparsity sp, int p)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, Sparsity sp, int p)
+
 
 
         Create a vector of length p with with matrices with symbolic primitives of
         given sparsity.
 
+
+
+        .............
 
 
 
@@ -5091,7 +5145,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
 
     sym = staticmethod(sym)
 
-    def zeros(*args):
+    def zeros(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
           Create a dense matrix or a matrix with specified sparsity with all entries
 
@@ -5109,7 +5163,7 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
 
     zeros = staticmethod(zeros)
 
-    def ones(*args):
+    def ones(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
           Create a dense matrix or a matrix with specified sparsity with all entries
 
@@ -5146,73 +5200,120 @@ class GenSX(GenericMatrixCommon, SparsityInterfaceCommon):
 GenSX_swigregister = _casadi.GenSX_swigregister
 GenSX_swigregister(GenSX)
 
-def GenSX_sym(*args):
+def GenSX_sym(*args) -> "std::vector< std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >,std::allocator< std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > > > >":
     """
       Create a vector of length r of vectors of length p with nrow-by-ncol
 
       sym(str name, int nrow, int ncol) -> SX
-        Create an nrow-by-ncol symbolic primitive.
       sym(str name, (int,int) rc) -> SX
-        Construct a symbolic primitive with given dimensions.
       sym(str name, Sparsity sp) -> SX
-        Create symbolic primitive with a given sparsity pattern.
       sym(str name, Sparsity sp, int p) -> [SX]
-        Create a vector of length p with with matrices with symbolic primitives of
       sym(str name, int nrow, int ncol, int p) -> [SX]
-        Create a vector of length p with nrow-by-ncol symbolic primitives.
       sym(str name, Sparsity sp, int p, int r) -> [[SX]]
-        Create a vector of length r of vectors of length p with symbolic primitives
       sym(str name, int nrow, int ncol, int p, int r) -> [[SX]]
 
     symbolic primitives.
 
 
-    > sym(str name, (int,int) rc)
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      sym(str name, (int,int) rc)
+
 
 
     Construct a symbolic primitive with given dimensions.
 
 
-    > sym(str name, int nrow, int ncol, int p)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, int nrow, int ncol, int p)
+
 
 
     Create a vector of length p with nrow-by-ncol symbolic primitives.
 
 
-    > sym(str name, Sparsity sp, int p, int r)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, Sparsity sp, int p, int r)
+
 
 
     Create a vector of length r of vectors of length p with symbolic primitives
     with given sparsity.
 
 
-    > sym(str name, int nrow, int ncol, int p, int r)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, int nrow, int ncol, int p, int r)
+
 
 
     Create a vector of length r of vectors of length p with nrow-by-ncol
     symbolic primitives.
 
 
-    > sym(str name, Sparsity sp)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, Sparsity sp)
+
 
 
     Create symbolic primitive with a given sparsity pattern.
 
 
-    > sym(str name, int nrow, int ncol)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, int nrow, int ncol)
+
 
 
     Create an nrow-by-ncol symbolic primitive.
 
 
-    > sym(str name, Sparsity sp, int p)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, Sparsity sp, int p)
+
 
 
     Create a vector of length p with with matrices with symbolic primitives of
@@ -5220,11 +5321,14 @@ def GenSX_sym(*args):
 
 
 
+    .............
+
+
 
     """
     return _casadi.GenSX_sym(*args)
 
-def GenSX_zeros(*args):
+def GenSX_zeros(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Create a dense matrix or a matrix with specified sparsity with all entries
 
@@ -5240,7 +5344,7 @@ def GenSX_zeros(*args):
     """
     return _casadi.GenSX_zeros(*args)
 
-def GenSX_ones(*args):
+def GenSX_ones(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Create a dense matrix or a matrix with specified sparsity with all entries
 
@@ -5275,7 +5379,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, GenMX, name)
     __repr__ = _swig_repr
 
-    def nnz(self, *args):
+    def nnz(self, *args) -> "casadi_int":
         """
         Get the number of (structural) non-zero elements.
 
@@ -5289,7 +5393,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_nnz(self, *args)
 
 
-    def nnz_lower(self, *args):
+    def nnz_lower(self, *args) -> "casadi_int":
         """
         Get the number of non-zeros in the lower triangular half.
 
@@ -5303,7 +5407,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_nnz_lower(self, *args)
 
 
-    def nnz_upper(self, *args):
+    def nnz_upper(self, *args) -> "casadi_int":
         """
         Get the number of non-zeros in the upper triangular half.
 
@@ -5317,7 +5421,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_nnz_upper(self, *args)
 
 
-    def nnz_diag(self, *args):
+    def nnz_diag(self, *args) -> "casadi_int":
         """
         Get get the number of non-zeros on the diagonal.
 
@@ -5331,7 +5435,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_nnz_diag(self, *args)
 
 
-    def numel(self, *args):
+    def numel(self, *args) -> "casadi_int":
         """
         Get the number of elements.
 
@@ -5345,7 +5449,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_numel(self, *args)
 
 
-    def size1(self, *args):
+    def size1(self, *args) -> "casadi_int":
         """
         Get the first dimension (i.e. number of rows)
 
@@ -5359,7 +5463,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_size1(self, *args)
 
 
-    def rows(self, *args):
+    def rows(self, *args) -> "casadi_int":
         """
         Get the number of rows, Octave-style syntax.
 
@@ -5373,7 +5477,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_rows(self, *args)
 
 
-    def size2(self, *args):
+    def size2(self, *args) -> "casadi_int":
         """
         Get the second dimension (i.e. number of columns)
 
@@ -5387,7 +5491,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_size2(self, *args)
 
 
-    def columns(self, *args):
+    def columns(self, *args) -> "casadi_int":
         """
         Get the number of columns, Octave-style syntax.
 
@@ -5401,7 +5505,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_columns(self, *args)
 
 
-    def dim(self, *args):
+    def dim(self, *args) -> "std::string":
         """
           Get string representation of dimensions. The representation is e.g. "4x5"
 
@@ -5416,29 +5520,44 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_dim(self, *args)
 
 
-    def size(self, *args):
+    def size(self, *args) -> "casadi_int":
         """
           Get the size along a particular dimensions.
 
           size(self) -> (int,int)
-            Get the shape.
           size(self, int axis) -> int
 
 
 
-        > size(self)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          size(self)
+
 
 
         Get the shape.
 
 
-        > size(self, int axis)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          size(self, int axis)
+
 
 
         Get the size along a particular dimensions.
 
+
+
+        .............
 
 
 
@@ -5446,7 +5565,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_size(self, *args)
 
 
-    def is_empty(self, *args):
+    def is_empty(self, *args) -> "bool":
         """
           Check if the sparsity is empty, i.e. if one of the dimensions is zero (or
 
@@ -5461,7 +5580,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_is_empty(self, *args)
 
 
-    def is_dense(self, *args):
+    def is_dense(self, *args) -> "bool":
         """
         Check if the matrix expression is dense.
 
@@ -5475,7 +5594,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_is_dense(self, *args)
 
 
-    def is_scalar(self, *args):
+    def is_scalar(self, *args) -> "bool":
         """
         Check if the matrix expression is scalar.
 
@@ -5489,7 +5608,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_is_scalar(self, *args)
 
 
-    def is_square(self, *args):
+    def is_square(self, *args) -> "bool":
         """
         Check if the matrix expression is square.
 
@@ -5503,7 +5622,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_is_square(self, *args)
 
 
-    def is_vector(self, *args):
+    def is_vector(self, *args) -> "bool":
         """
         Check if the matrix is a row or column vector.
 
@@ -5517,7 +5636,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_is_vector(self, *args)
 
 
-    def is_row(self, *args):
+    def is_row(self, *args) -> "bool":
         """
         Check if the matrix is a row vector (i.e. size1()==1)
 
@@ -5531,7 +5650,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_is_row(self, *args)
 
 
-    def is_column(self, *args):
+    def is_column(self, *args) -> "bool":
         """
         Check if the matrix is a column vector (i.e. size2()==1)
 
@@ -5545,7 +5664,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_is_column(self, *args)
 
 
-    def is_triu(self, *args):
+    def is_triu(self, *args) -> "bool":
         """
         Check if the matrix is upper triangular.
 
@@ -5559,7 +5678,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_is_triu(self, *args)
 
 
-    def is_tril(self, *args):
+    def is_tril(self, *args) -> "bool":
         """
         Check if the matrix is lower triangular.
 
@@ -5573,7 +5692,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_is_tril(self, *args)
 
 
-    def row(self, *args):
+    def row(self, *args) -> "casadi_int":
         """
         Get the sparsity pattern. See the Sparsity class for details.
 
@@ -5588,7 +5707,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_row(self, *args)
 
 
-    def colind(self, *args):
+    def colind(self, *args) -> "casadi_int":
         """
         Get the sparsity pattern. See the Sparsity class for details.
 
@@ -5603,7 +5722,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_colind(self, *args)
 
 
-    def sparsity(self, *args):
+    def sparsity(self, *args) -> "casadi::Sparsity const":
         """
         Get the sparsity pattern.
 
@@ -5617,78 +5736,128 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
         return _casadi.GenMX_sparsity(self, *args)
 
 
-    def sym(*args):
+    def sym(*args) -> "std::vector< std::vector< casadi::MX,std::allocator< casadi::MX > >,std::allocator< std::vector< casadi::MX,std::allocator< casadi::MX > > > >":
         """
           Create a vector of length r of vectors of length p with nrow-by-ncol
 
           sym(str name, int nrow, int ncol) -> MX
-            Create an nrow-by-ncol symbolic primitive.
           sym(str name, (int,int) rc) -> MX
-            Construct a symbolic primitive with given dimensions.
           sym(str name, Sparsity sp) -> MX
-            Create symbolic primitive with a given sparsity pattern.
           sym(str name, Sparsity sp, int p) -> [MX]
-            Create a vector of length p with with matrices with symbolic primitives of
           sym(str name, int nrow, int ncol, int p) -> [MX]
-            Create a vector of length p with nrow-by-ncol symbolic primitives.
           sym(str name, Sparsity sp, int p, int r) -> [[MX]]
-            Create a vector of length r of vectors of length p with symbolic primitives
           sym(str name, int nrow, int ncol, int p, int r) -> [[MX]]
 
         symbolic primitives.
 
 
-        > sym(str name, (int,int) rc)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          sym(str name, (int,int) rc)
+
 
 
         Construct a symbolic primitive with given dimensions.
 
 
-        > sym(str name, int nrow, int ncol, int p)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, int nrow, int ncol, int p)
+
 
 
         Create a vector of length p with nrow-by-ncol symbolic primitives.
 
 
-        > sym(str name, Sparsity sp, int p, int r)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, Sparsity sp, int p, int r)
+
 
 
         Create a vector of length r of vectors of length p with symbolic primitives
         with given sparsity.
 
 
-        > sym(str name, int nrow, int ncol, int p, int r)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, int nrow, int ncol, int p, int r)
+
 
 
         Create a vector of length r of vectors of length p with nrow-by-ncol
         symbolic primitives.
 
 
-        > sym(str name, Sparsity sp)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, Sparsity sp)
+
 
 
         Create symbolic primitive with a given sparsity pattern.
 
 
-        > sym(str name, int nrow, int ncol)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, int nrow, int ncol)
+
 
 
         Create an nrow-by-ncol symbolic primitive.
 
 
-        > sym(str name, Sparsity sp, int p)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          sym(str name, Sparsity sp, int p)
+
 
 
         Create a vector of length p with with matrices with symbolic primitives of
         given sparsity.
 
+
+
+        .............
 
 
 
@@ -5697,7 +5866,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
 
     sym = staticmethod(sym)
 
-    def zeros(*args):
+    def zeros(*args) -> "casadi::MX":
         """
           Create a dense matrix or a matrix with specified sparsity with all entries
 
@@ -5715,7 +5884,7 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
 
     zeros = staticmethod(zeros)
 
-    def ones(*args):
+    def ones(*args) -> "casadi::MX":
         """
           Create a dense matrix or a matrix with specified sparsity with all entries
 
@@ -5752,73 +5921,120 @@ class GenMX(GenericMatrixCommon, SparsityInterfaceCommon):
 GenMX_swigregister = _casadi.GenMX_swigregister
 GenMX_swigregister(GenMX)
 
-def GenMX_sym(*args):
+def GenMX_sym(*args) -> "std::vector< std::vector< casadi::MX,std::allocator< casadi::MX > >,std::allocator< std::vector< casadi::MX,std::allocator< casadi::MX > > > >":
     """
       Create a vector of length r of vectors of length p with nrow-by-ncol
 
       sym(str name, int nrow, int ncol) -> MX
-        Create an nrow-by-ncol symbolic primitive.
       sym(str name, (int,int) rc) -> MX
-        Construct a symbolic primitive with given dimensions.
       sym(str name, Sparsity sp) -> MX
-        Create symbolic primitive with a given sparsity pattern.
       sym(str name, Sparsity sp, int p) -> [MX]
-        Create a vector of length p with with matrices with symbolic primitives of
       sym(str name, int nrow, int ncol, int p) -> [MX]
-        Create a vector of length p with nrow-by-ncol symbolic primitives.
       sym(str name, Sparsity sp, int p, int r) -> [[MX]]
-        Create a vector of length r of vectors of length p with symbolic primitives
       sym(str name, int nrow, int ncol, int p, int r) -> [[MX]]
 
     symbolic primitives.
 
 
-    > sym(str name, (int,int) rc)
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      sym(str name, (int,int) rc)
+
 
 
     Construct a symbolic primitive with given dimensions.
 
 
-    > sym(str name, int nrow, int ncol, int p)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, int nrow, int ncol, int p)
+
 
 
     Create a vector of length p with nrow-by-ncol symbolic primitives.
 
 
-    > sym(str name, Sparsity sp, int p, int r)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, Sparsity sp, int p, int r)
+
 
 
     Create a vector of length r of vectors of length p with symbolic primitives
     with given sparsity.
 
 
-    > sym(str name, int nrow, int ncol, int p, int r)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, int nrow, int ncol, int p, int r)
+
 
 
     Create a vector of length r of vectors of length p with nrow-by-ncol
     symbolic primitives.
 
 
-    > sym(str name, Sparsity sp)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, Sparsity sp)
+
 
 
     Create symbolic primitive with a given sparsity pattern.
 
 
-    > sym(str name, int nrow, int ncol)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, int nrow, int ncol)
+
 
 
     Create an nrow-by-ncol symbolic primitive.
 
 
-    > sym(str name, Sparsity sp, int p)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      sym(str name, Sparsity sp, int p)
+
 
 
     Create a vector of length p with with matrices with symbolic primitives of
@@ -5826,11 +6042,14 @@ def GenMX_sym(*args):
 
 
 
+    .............
+
+
 
     """
     return _casadi.GenMX_sym(*args)
 
-def GenMX_zeros(*args):
+def GenMX_zeros(*args) -> "casadi::MX":
     """
       Create a dense matrix or a matrix with specified sparsity with all entries
 
@@ -5846,7 +6065,7 @@ def GenMX_zeros(*args):
     """
     return _casadi.GenMX_zeros(*args)
 
-def GenMX_ones(*args):
+def GenMX_ones(*args) -> "casadi::MX":
     """
       Create a dense matrix or a matrix with specified sparsity with all entries
 
@@ -5877,6 +6096,15 @@ class GenericExpressionCommon(_object):
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, GenericExpressionCommon, name)
     __repr__ = _swig_repr
+
+    def __hash__(self):
+      try:
+        return self.element_hash()
+      except:
+        return SharedObject.__hash__(self)
+    def __matmul__(x, y): return _casadi.mtimes(x, y)
+    def __rmatmul__(x, y): return _casadi.mtimes(y, x)
+
 
     def __add__(x, y): return _casadi.plus(x, y)
     def __radd__(x, y): return _casadi.plus(y, x)
@@ -6005,20 +6233,35 @@ class MatrixCommon(_object):
 
 
           MatrixCommon()
-            constructors
           MatrixCommon(MatrixCommon other)
 
-        > MatrixCommon(MatrixCommon other)
-        ------------------------------------------------------------------------
 
-        > MatrixCommon()
-        ------------------------------------------------------------------------
+        .......
+
+        ::
+
+          MatrixCommon(MatrixCommon other)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          MatrixCommon()
+
 
 
         constructors
 
         empty 0-by-0 matrix constructor
 
+
+
+        .............
 
 
 
@@ -6032,64 +6275,6 @@ class MatrixCommon(_object):
 MatrixCommon_swigregister = _casadi.MatrixCommon_swigregister
 MatrixCommon_swigregister(MatrixCommon)
 
-
-def is_slice(*args):
-    """
-      Is the IM a Slice.
-
-      is_slice([int] v, bool ind1) -> bool
-        Check if an index vector can be represented more efficiently as a slice.
-      is_slice(IM x, bool ind1) -> bool
-
-
-
-    > is_slice(IM x, bool ind1)
-    ------------------------------------------------------------------------
-
-
-    Is the IM a Slice.
-
-
-    > is_slice([int] v, bool ind1)
-    ------------------------------------------------------------------------
-
-
-    Check if an index vector can be represented more efficiently as a slice.
-
-
-
-
-    """
-    return _casadi.is_slice(*args)
-
-def to_slice(*args):
-    """
-      Convert IM to Slice.
-
-      to_slice([int] v, bool ind1) -> Slice
-        Construct from an index vector (requires is_slice(v) to be true)
-      to_slice(IM x, bool ind1) -> Slice
-
-
-
-    > to_slice(IM x, bool ind1)
-    ------------------------------------------------------------------------
-
-
-    Convert IM to Slice.
-
-
-    > to_slice([int] v, bool ind1)
-    ------------------------------------------------------------------------
-
-
-    Construct from an index vector (requires is_slice(v) to be true)
-
-
-
-
-    """
-    return _casadi.to_slice(*args)
 class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
     """
 
@@ -6109,7 +6294,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, DM, name)
     __repr__ = _swig_repr
 
-    def sanity_check(self, *args):
+    def sanity_check(self, *args) -> "void":
         """
         [DEPRECATED] Correctness is checked during construction
 
@@ -6123,7 +6308,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_sanity_check(self, *args)
 
 
-    def has_nz(self, *args):
+    def has_nz(self, *args) -> "bool":
         """
         Returns true if the matrix has a non-zero at location rr, cc.
 
@@ -6137,19 +6322,21 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_has_nz(self, *args)
 
 
-    def __nonzero__(self, *args):
+    def __bool__(self, *args) -> "bool":
         """
-        [INTERNAL] 
+        Returns the truth value of a Matrix.
 
-        __nonzero__(self) -> bool
+        __bool__(self) -> bool
+
+
 
 
 
         """
-        return _casadi.DM___nonzero__(self, *args)
+        return _casadi.DM___bool__(self, *args)
 
 
-    def get(self, *args):
+    def get(self, *args) -> "void":
         """
 
 
@@ -6167,7 +6354,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_get(self, *args)
 
 
-    def set(self, *args):
+    def set(self, *args) -> "void":
         """
 
 
@@ -6185,7 +6372,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_set(self, *args)
 
 
-    def get_nz(self, *args):
+    def get_nz(self, *args) -> "void":
         """
 
 
@@ -6198,7 +6385,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_get_nz(self, *args)
 
 
-    def set_nz(self, *args):
+    def set_nz(self, *args) -> "void":
         """
 
 
@@ -6211,7 +6398,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_set_nz(self, *args)
 
 
-    def __pos__(self, *args):
+    def __pos__(self, *args) -> "casadi::Matrix< double >":
         """
 
 
@@ -6223,7 +6410,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM___pos__(self, *args)
 
 
-    def __neg__(self, *args):
+    def __neg__(self, *args) -> "casadi::Matrix< double >":
         """
 
 
@@ -6235,7 +6422,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM___neg__(self, *args)
 
 
-    def binary(*args):
+    def binary(*args) -> "casadi::Matrix< double >":
         """
 
 
@@ -6248,7 +6435,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     binary = staticmethod(binary)
 
-    def unary(*args):
+    def unary(*args) -> "casadi::Matrix< double >":
         """
 
 
@@ -6261,7 +6448,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     unary = staticmethod(unary)
 
-    def scalar_matrix(*args):
+    def scalar_matrix(*args) -> "casadi::Matrix< double >":
         """
 
 
@@ -6274,7 +6461,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     scalar_matrix = staticmethod(scalar_matrix)
 
-    def matrix_scalar(*args):
+    def matrix_scalar(*args) -> "casadi::Matrix< double >":
         """
 
 
@@ -6287,7 +6474,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     matrix_scalar = staticmethod(matrix_scalar)
 
-    def matrix_matrix(*args):
+    def matrix_matrix(*args) -> "casadi::Matrix< double >":
         """
 
 
@@ -6300,7 +6487,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     matrix_matrix = staticmethod(matrix_matrix)
 
-    def printme(self, *args):
+    def printme(self, *args) -> "casadi::Matrix< double >":
         """
 
 
@@ -6312,7 +6499,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_printme(self, *args)
 
 
-    def set_max_depth(*args):
+    def set_max_depth(*args) -> "void":
         """
 
 
@@ -6325,7 +6512,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     set_max_depth = staticmethod(set_max_depth)
 
-    def get_max_depth(*args):
+    def get_max_depth(*args) -> "casadi_int":
         """
 
 
@@ -6338,7 +6525,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     get_max_depth = staticmethod(get_max_depth)
 
-    def get_input(*args):
+    def get_input(*args) -> "std::vector< casadi::Matrix< double >,std::allocator< casadi::Matrix< double > > >":
         """
 
 
@@ -6351,7 +6538,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     get_input = staticmethod(get_input)
 
-    def get_free(*args):
+    def get_free(*args) -> "std::vector< casadi::Matrix< double >,std::allocator< casadi::Matrix< double > > >":
         """
 
 
@@ -6364,7 +6551,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     get_free = staticmethod(get_free)
 
-    def type_name(*args):
+    def type_name(*args) -> "std::string":
         """
 
 
@@ -6377,11 +6564,13 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     type_name = staticmethod(type_name)
 
-    def print_split(self, *args):
+    def print_split(self, *args) -> "void":
         """
-
+        Get strings corresponding to the nonzeros and the interdependencies.
 
         print_split(self) -> ([str] OUTPUT, [str] OUTPUT)
+
+
 
 
 
@@ -6389,7 +6578,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_print_split(self, *args)
 
 
-    def disp(self, *args):
+    def disp(self, *args) -> "void":
         """
         Print a representation of the object.
 
@@ -6403,7 +6592,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_disp(self, *args)
 
 
-    def str(self, *args):
+    def str(self, *args) -> "std::string":
         """
         Get string representation.
 
@@ -6417,7 +6606,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_str(self, *args)
 
 
-    def print_scalar(self, *args):
+    def print_scalar(self, *args) -> "void":
         """
         Print scalar.
 
@@ -6431,7 +6620,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_print_scalar(self, *args)
 
 
-    def print_vector(self, *args):
+    def print_vector(self, *args) -> "void":
         """
         Print vector-style.
 
@@ -6445,7 +6634,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_print_vector(self, *args)
 
 
-    def print_dense(self, *args):
+    def print_dense(self, *args) -> "void":
         """
         Print dense matrix-stype.
 
@@ -6459,7 +6648,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_print_dense(self, *args)
 
 
-    def print_sparse(self, *args):
+    def print_sparse(self, *args) -> "void":
         """
         Print sparse matrix style.
 
@@ -6473,7 +6662,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_print_sparse(self, *args)
 
 
-    def clear(self, *args):
+    def clear(self, *args) -> "void":
         """
 
 
@@ -6485,7 +6674,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_clear(self, *args)
 
 
-    def resize(self, *args):
+    def resize(self, *args) -> "void":
         """
 
 
@@ -6497,7 +6686,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_resize(self, *args)
 
 
-    def reserve(self, *args):
+    def reserve(self, *args) -> "void":
         """
 
 
@@ -6510,27 +6699,39 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_reserve(self, *args)
 
 
-    def erase(self, *args):
+    def erase(self, *args) -> "void":
         """
           Erase a submatrix (leaving structural zeros in its place) Erase elements of
 
           erase(self, [int] rr, bool ind1)
           erase(self, [int] rr, [int] cc, bool ind1)
-            Erase a submatrix (leaving structural zeros in its place) Erase rows and/or
 
         a matrix.
 
 
-        > erase(self, [int] rr, bool ind1)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          erase(self, [int] rr, bool ind1)
+
 
 
         Erase a submatrix (leaving structural zeros in its place) Erase elements of
         a matrix.
 
 
-        > erase(self, [int] rr, [int] cc, bool ind1)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          erase(self, [int] rr, [int] cc, bool ind1)
+
 
 
         Erase a submatrix (leaving structural zeros in its place) Erase rows and/or
@@ -6538,12 +6739,15 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
 
 
+        .............
+
+
 
         """
         return _casadi.DM_erase(self, *args)
 
 
-    def remove(self, *args):
+    def remove(self, *args) -> "void":
         """
         Remove columns and rows Remove/delete rows and/or columns of a matrix.
 
@@ -6557,7 +6761,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_remove(self, *args)
 
 
-    def enlarge(self, *args):
+    def enlarge(self, *args) -> "void":
         """
           Enlarge matrix Make the matrix larger by inserting empty rows and columns,
 
@@ -6572,7 +6776,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_enlarge(self, *args)
 
 
-    def sparsity(self, *args):
+    def sparsity(self, *args) -> "casadi::Sparsity":
         """
         Get an owning reference to the sparsity pattern.
 
@@ -6586,7 +6790,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_sparsity(self, *args)
 
 
-    def triplet(*args):
+    def triplet(*args) -> "casadi::Matrix< double >":
         """
 
 
@@ -6601,7 +6805,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     triplet = staticmethod(triplet)
 
-    def inf(*args):
+    def inf(*args) -> "casadi::Matrix< double >":
         """
         create a matrix with all inf
 
@@ -6618,7 +6822,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     inf = staticmethod(inf)
 
-    def nan(*args):
+    def nan(*args) -> "casadi::Matrix< double >":
         """
         create a matrix with all nan
 
@@ -6635,11 +6839,11 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     nan = staticmethod(nan)
 
-    def eye(*args):
+    def eye(*args) -> "casadi::Matrix< double >":
         """
 
 
-        eye(int ncol) -> DM
+        eye(int n) -> DM
 
 
 
@@ -6648,7 +6852,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     eye = staticmethod(eye)
 
-    def element_hash(self, *args):
+    def element_hash(self, *args) -> "casadi_int":
         """
 
 
@@ -6660,7 +6864,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_element_hash(self, *args)
 
 
-    def is_regular(self, *args):
+    def is_regular(self, *args) -> "bool":
         """
 
 
@@ -6672,7 +6876,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_regular(self, *args)
 
 
-    def is_smooth(self, *args):
+    def is_smooth(self, *args) -> "bool":
         """
 
 
@@ -6684,7 +6888,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_smooth(self, *args)
 
 
-    def is_leaf(self, *args):
+    def is_leaf(self, *args) -> "bool":
         """
 
 
@@ -6696,7 +6900,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_leaf(self, *args)
 
 
-    def is_commutative(self, *args):
+    def is_commutative(self, *args) -> "bool":
         """
 
 
@@ -6708,7 +6912,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_commutative(self, *args)
 
 
-    def is_symbolic(self, *args):
+    def is_symbolic(self, *args) -> "bool":
         """
 
 
@@ -6720,7 +6924,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_symbolic(self, *args)
 
 
-    def is_valid_input(self, *args):
+    def is_valid_input(self, *args) -> "bool":
         """
 
 
@@ -6732,7 +6936,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_valid_input(self, *args)
 
 
-    def has_duplicates(self, *args):
+    def has_duplicates(self, *args) -> "bool":
         """
 
 
@@ -6744,7 +6948,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_has_duplicates(self, *args)
 
 
-    def reset_input(self, *args):
+    def reset_input(self, *args) -> "void":
         """
 
 
@@ -6756,7 +6960,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_reset_input(self, *args)
 
 
-    def is_constant(self, *args):
+    def is_constant(self, *args) -> "bool":
         """
           Check if the matrix is constant (note that false negative answers are
 
@@ -6771,7 +6975,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_constant(self, *args)
 
 
-    def is_integer(self, *args):
+    def is_integer(self, *args) -> "bool":
         """
           Check if the matrix is integer-valued (note that false negative answers are
 
@@ -6786,7 +6990,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_integer(self, *args)
 
 
-    def is_zero(self, *args):
+    def is_zero(self, *args) -> "bool":
         """
         check if the matrix is 0 (note that false negative answers are possible)
 
@@ -6800,7 +7004,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_zero(self, *args)
 
 
-    def is_one(self, *args):
+    def is_one(self, *args) -> "bool":
         """
         check if the matrix is 1 (note that false negative answers are possible)
 
@@ -6814,7 +7018,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_one(self, *args)
 
 
-    def is_minus_one(self, *args):
+    def is_minus_one(self, *args) -> "bool":
         """
         check if the matrix is -1 (note that false negative answers are possible)
 
@@ -6828,7 +7032,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_minus_one(self, *args)
 
 
-    def is_eye(self, *args):
+    def is_eye(self, *args) -> "bool":
         """
           check if the matrix is an identity matrix (note that false negative answers
 
@@ -6843,7 +7047,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_eye(self, *args)
 
 
-    def op(self, *args):
+    def op(self, *args) -> "casadi_int":
         """
 
 
@@ -6855,7 +7059,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_op(self, *args)
 
 
-    def is_op(self, *args):
+    def is_op(self, *args) -> "bool":
         """
 
 
@@ -6867,7 +7071,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_is_op(self, *args)
 
 
-    def has_zeros(self, *args):
+    def has_zeros(self, *args) -> "bool":
         """
         Check if the matrix has any zero entries which are not structural zeros.
 
@@ -6881,7 +7085,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_has_zeros(self, *args)
 
 
-    def nonzeros(self, *args):
+    def nonzeros(self, *args) -> "std::vector< double,std::allocator< double > >":
         """
           Get all nonzeros.
 
@@ -6897,7 +7101,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_nonzeros(self, *args)
 
 
-    def elements(self, *args):
+    def elements(self, *args) -> "std::vector< double,std::allocator< double > >":
         """
         Get all elements.
 
@@ -6911,7 +7115,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_elements(self, *args)
 
 
-    def __float__(self, *args):
+    def __float__(self, *args) -> "double":
         """
 
 
@@ -6923,7 +7127,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM___float__(self, *args)
 
 
-    def __int__(self, *args):
+    def __int__(self, *args) -> "casadi_int":
         """
 
 
@@ -6935,7 +7139,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM___int__(self, *args)
 
 
-    def name(self, *args):
+    def name(self, *args) -> "std::string":
         """
 
 
@@ -6947,7 +7151,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_name(self, *args)
 
 
-    def dep(self, *args):
+    def dep(self, *args) -> "casadi::Matrix< double >":
         """
 
 
@@ -6959,7 +7163,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_dep(self, *args)
 
 
-    def n_dep(self, *args):
+    def n_dep(self, *args) -> "casadi_int":
         """
 
 
@@ -6971,7 +7175,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_n_dep(self, *args)
 
 
-    def set_precision(*args):
+    def set_precision(*args) -> "void":
         """
           Set the 'precision, width & scientific' used in printing and serializing to
 
@@ -6987,7 +7191,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     set_precision = staticmethod(set_precision)
 
-    def set_width(*args):
+    def set_width(*args) -> "void":
         """
           Set the 'precision, width & scientific' used in printing and serializing to
 
@@ -7003,7 +7207,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     set_width = staticmethod(set_width)
 
-    def set_scientific(*args):
+    def set_scientific(*args) -> "void":
         """
           Set the 'precision, width & scientific' used in printing and serializing to
 
@@ -7019,7 +7223,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     set_scientific = staticmethod(set_scientific)
 
-    def rng(*args):
+    def rng(*args) -> "void":
         """
 
 
@@ -7032,7 +7236,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     rng = staticmethod(rng)
 
-    def rand(*args):
+    def rand(*args) -> "casadi::Matrix< double >":
         """
         Create a matrix with uniformly distributed random numbers.
 
@@ -7049,7 +7253,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
     rand = staticmethod(rand)
 
-    def export_code(self, *args):
+    def export_code(self, *args) -> "void":
         """
           Export matrix in specific language.
 
@@ -7078,13 +7282,11 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_export_code(self, *args)
 
 
-    def info(self, *args):
+    def info(self, *args) -> "casadi::Dict":
         """
-        Obtain information about sparsity
+
 
         info(self) -> dict
-
-
 
 
 
@@ -7092,27 +7294,89 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_info(self, *args)
 
 
-    def from_info(*args):
+    def serialize(self, *args) -> "void":
+        """
+          Serialize an object.
+
+          serialize(self) -> str
+          serialize(self, casadi::SerializingStream & s)
+
+
+
+
+        .......
+
+        ::
+
+          serialize(self, casadi::SerializingStream & s)
+
+
+
+        Serialize an object.
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          serialize(self)
+
+
+
+        Serialize.
+
+
+
+        .............
+
+
+
+        """
+        return _casadi.DM_serialize(self, *args)
+
+
+    def deserialize(*args) -> "casadi::Matrix< double >":
         """
 
 
-        from_info(dict info) -> DM
+        deserialize(std::istream & stream) -> DM
+        deserialize(casadi::DeserializingStream & s) -> DM
+        deserialize(str s) -> DM
 
 
 
         """
-        return _casadi.DM_from_info(*args)
+        return _casadi.DM_deserialize(*args)
 
-    from_info = staticmethod(from_info)
+    deserialize = staticmethod(deserialize)
 
-    def to_file(self, *args):
+    def to_file(self, *args) -> "void":
         """
           Export numerical matrix to file
 
           to_file(self, str filename, str format)
 
 
-        Supported formats: .mtx Matrix Market
+        Supported formats:
+
+
+
+        ::
+
+          *   - .mtx   Matrix Market (sparse)
+          *   - .txt   Ascii full precision representation (sparse)
+          *            Whitespace separated, aligned.
+          *            Comments with # % or /
+          *            Uses C locale
+          *            Structural zeros represented by 00
+          *            Does not scale well for large sparse matrices
+          * 
+
+
 
 
 
@@ -7120,6 +7384,38 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         """
         return _casadi.DM_to_file(self, *args)
 
+
+    def from_file(*args) -> "casadi::Matrix< double >":
+        """
+          Export numerical matrix to file
+
+          from_file(str filename, str format_hint) -> DM
+
+
+        Supported formats:
+
+
+
+        ::
+
+          *   - .mtx   Matrix Market (sparse)
+          *   - .txt   Ascii full precision representation (sparse)
+          *            Whitespace separated, aligned.
+          *            Comments with # % or /
+          *            Uses C locale
+          *            Structural zeros represented by 00
+          *            Does not scale well for large sparse matrices
+          * 
+
+
+
+
+
+
+        """
+        return _casadi.DM_from_file(*args)
+
+    from_file = staticmethod(from_file)
 
     def __init__(self, *args):
         """
@@ -7129,8 +7425,6 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         DM(Sparsity sp)
         DM(float val)
         DM([[float]] m)
-        DM([int] x)
-        DM(IM x)
         DM(DM m)
         DM([SXElem] x)
         DM(SX x)
@@ -7146,7 +7440,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         except __builtin__.Exception:
             self.this = this
 
-    def assign(self, *args):
+    def assign(self, *args) -> "void":
         """
 
 
@@ -7175,6 +7469,12 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
             return self.get(False, s[0], s[1])
           return self.get(False, s)
 
+    def __iter__(self):
+      raise Exception("""CasADi matrices are not iterable by design.
+                      Did you mean to iterate over m.nz, with m IM/DM/SX?
+                      Did you mean to iterate over horzsplit(m,1)/vertsplit(m,1) with m IM/DM/SX/MX?
+                      """)
+
     def __setitem__(self,s,val):
           if isinstance(s,tuple) and len(s)==2:
             return self.set(val, False, s[0], s[1])
@@ -7186,7 +7486,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
 
 
-    def full(self, *args):
+    def full(self, *args) -> "PyObject *":
         """
 
 
@@ -7198,7 +7498,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         return _casadi.DM_full(self, *args)
 
 
-    def sparse(self, *args):
+    def sparse(self, *args) -> "PyObject *":
         """
 
 
@@ -7235,6 +7535,40 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
         name = '__' + name + '__'
       fun=getattr(self, name)
       return fun(*args[1:])
+
+    def __array_ufunc__(self, ufunc, method, *inputs, **kwargs):
+      conversion = {"multiply": "mul", "divide": "div", "true_divide": "div", "subtract":"sub","power":"pow","greater_equal":"ge","less_equal": "le", "less": "lt", "greater": "gt"}
+      name = ufunc.__name__
+      inputs = list(inputs)
+      if len(inputs)==3:
+        import warnings
+        warnings.warn("Error with %s. Looks like you are using an assignment operator, such as 'a+=b' where 'a' is a numpy type. This is not supported, and cannot be supported without changing numpy." % name, RuntimeWarning)
+        return NotImplemented
+      if "vectorized" in name:
+          name = name[:-len(" (vectorized)")]
+      if name in conversion:
+        name = conversion[name]
+      if len(inputs)==2 and inputs[1] is self and not(inputs[0] is self):
+        name = 'r' + name
+        inputs.reverse()
+      if not(hasattr(self,name)) or ('mul' in name):
+        name = '__' + name + '__'
+      try:
+        assert method=="__call__"
+        fun=getattr(self, name)
+        return fun(*inputs[1:])
+      except:
+#Fall back to numpy conversion
+        new_inputs = list(inputs)
+        try:
+          new_inputs[0] = new_inputs[0].full()
+        except:
+          import warnings
+          warnings.warn("Implicit conversion of symbolic CasADi type to numeric matrix not supported.\n"
+                                 + "This may occur when you pass a CasADi object to a numpy function.\n"
+                                 + "Use an equivalent CasADi function instead of that numpy function.", RuntimeWarning)
+          return NotImplemented
+        return new_inputs[0].__array_ufunc__(ufunc, method, *new_inputs, **kwargs)
 
 
     def __array__(self,*args,**kwargs):
@@ -7280,7 +7614,7 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
       return np.array(self.T.elements()).reshape(self.shape)
 
 
-    def __nonzero__(self):
+    def __bool__(self):
       if self.numel()!=1:
         raise Exception("Only a scalar can be cast to a float")
       if self.nnz()==0:
@@ -7293,16 +7627,16 @@ class DM(MatrixCommon, GenericExpressionCommon, GenDM, PrintableCommon):
 
 
     def __setstate__(self, state):
-        self.__init__(self.from_info(state))
+        self.__init__(DM.deserialize(state["serialization"]))
 
     def __getstate__(self):
-        return self.info()
+        return {"serialization": self.serialize()}
 
     __swig_destroy__ = _casadi.delete_DM
 DM_swigregister = _casadi.DM_swigregister
 DM_swigregister(DM)
 
-def DM_binary(*args):
+def DM_binary(*args) -> "casadi::Matrix< double >":
     """
 
 
@@ -7313,7 +7647,7 @@ def DM_binary(*args):
     """
     return _casadi.DM_binary(*args)
 
-def DM_unary(*args):
+def DM_unary(*args) -> "casadi::Matrix< double >":
     """
 
 
@@ -7324,7 +7658,7 @@ def DM_unary(*args):
     """
     return _casadi.DM_unary(*args)
 
-def DM_scalar_matrix(*args):
+def DM_scalar_matrix(*args) -> "casadi::Matrix< double >":
     """
 
 
@@ -7335,7 +7669,7 @@ def DM_scalar_matrix(*args):
     """
     return _casadi.DM_scalar_matrix(*args)
 
-def DM_matrix_scalar(*args):
+def DM_matrix_scalar(*args) -> "casadi::Matrix< double >":
     """
 
 
@@ -7346,7 +7680,7 @@ def DM_matrix_scalar(*args):
     """
     return _casadi.DM_matrix_scalar(*args)
 
-def DM_matrix_matrix(*args):
+def DM_matrix_matrix(*args) -> "casadi::Matrix< double >":
     """
 
 
@@ -7357,7 +7691,7 @@ def DM_matrix_matrix(*args):
     """
     return _casadi.DM_matrix_matrix(*args)
 
-def DM_set_max_depth(*args):
+def DM_set_max_depth(*args) -> "void":
     """
 
 
@@ -7368,7 +7702,7 @@ def DM_set_max_depth(*args):
     """
     return _casadi.DM_set_max_depth(*args)
 
-def DM_get_max_depth(*args):
+def DM_get_max_depth(*args) -> "casadi_int":
     """
 
 
@@ -7379,7 +7713,7 @@ def DM_get_max_depth(*args):
     """
     return _casadi.DM_get_max_depth(*args)
 
-def DM_get_input(*args):
+def DM_get_input(*args) -> "std::vector< casadi::Matrix< double >,std::allocator< casadi::Matrix< double > > >":
     """
 
 
@@ -7390,7 +7724,7 @@ def DM_get_input(*args):
     """
     return _casadi.DM_get_input(*args)
 
-def DM_get_free(*args):
+def DM_get_free(*args) -> "std::vector< casadi::Matrix< double >,std::allocator< casadi::Matrix< double > > >":
     """
 
 
@@ -7401,7 +7735,7 @@ def DM_get_free(*args):
     """
     return _casadi.DM_get_free(*args)
 
-def DM_type_name(*args):
+def DM_type_name(*args) -> "std::string":
     """
 
 
@@ -7412,7 +7746,7 @@ def DM_type_name(*args):
     """
     return _casadi.DM_type_name(*args)
 
-def DM_triplet(*args):
+def DM_triplet(*args) -> "casadi::Matrix< double >":
     """
 
 
@@ -7425,7 +7759,7 @@ def DM_triplet(*args):
     """
     return _casadi.DM_triplet(*args)
 
-def DM_inf(*args):
+def DM_inf(*args) -> "casadi::Matrix< double >":
     """
     create a matrix with all inf
 
@@ -7440,7 +7774,7 @@ def DM_inf(*args):
     """
     return _casadi.DM_inf(*args)
 
-def DM_nan(*args):
+def DM_nan(*args) -> "casadi::Matrix< double >":
     """
     create a matrix with all nan
 
@@ -7455,18 +7789,18 @@ def DM_nan(*args):
     """
     return _casadi.DM_nan(*args)
 
-def DM_eye(*args):
+def DM_eye(*args) -> "casadi::Matrix< double >":
     """
 
 
-    eye(int ncol) -> DM
+    eye(int n) -> DM
 
 
 
     """
     return _casadi.DM_eye(*args)
 
-def DM_set_precision(*args):
+def DM_set_precision(*args) -> "void":
     """
       Set the 'precision, width & scientific' used in printing and serializing to
 
@@ -7480,7 +7814,7 @@ def DM_set_precision(*args):
     """
     return _casadi.DM_set_precision(*args)
 
-def DM_set_width(*args):
+def DM_set_width(*args) -> "void":
     """
       Set the 'precision, width & scientific' used in printing and serializing to
 
@@ -7494,7 +7828,7 @@ def DM_set_width(*args):
     """
     return _casadi.DM_set_width(*args)
 
-def DM_set_scientific(*args):
+def DM_set_scientific(*args) -> "void":
     """
       Set the 'precision, width & scientific' used in printing and serializing to
 
@@ -7508,7 +7842,7 @@ def DM_set_scientific(*args):
     """
     return _casadi.DM_set_scientific(*args)
 
-def DM_rng(*args):
+def DM_rng(*args) -> "void":
     """
 
 
@@ -7519,7 +7853,7 @@ def DM_rng(*args):
     """
     return _casadi.DM_rng(*args)
 
-def DM_rand(*args):
+def DM_rand(*args) -> "casadi::Matrix< double >":
     """
     Create a matrix with uniformly distributed random numbers.
 
@@ -7534,1451 +7868,48 @@ def DM_rand(*args):
     """
     return _casadi.DM_rand(*args)
 
-def DM_from_info(*args):
+def DM_deserialize(*args) -> "casadi::Matrix< double >":
     """
 
 
-    from_info(dict info) -> DM
-
-
-
-    """
-    return _casadi.DM_from_info(*args)
-
-class IM(MatrixCommon, GenericExpressionCommon, GenIM, PrintableCommon):
-    """
-
-
+    deserialize(std::istream & stream) -> DM
+    deserialize(casadi::DeserializingStream & s) -> DM
+    deserialize(str s) -> DM
 
 
 
     """
+    return _casadi.DM_deserialize(*args)
 
-    __swig_setmethods__ = {}
-    for _s in [MatrixCommon, GenericExpressionCommon, GenIM, PrintableCommon]:
-        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
-    __setattr__ = lambda self, name, value: _swig_setattr(self, IM, name, value)
-    __swig_getmethods__ = {}
-    for _s in [MatrixCommon, GenericExpressionCommon, GenIM, PrintableCommon]:
-        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
-    __getattr__ = lambda self, name: _swig_getattr(self, IM, name)
-    __repr__ = _swig_repr
-
-    def sanity_check(self, *args):
-        """
-        [DEPRECATED] Correctness is checked during construction
-
-        sanity_check(self, bool complete)
-
-
-
-
-
-        """
-        return _casadi.IM_sanity_check(self, *args)
-
-
-    def has_nz(self, *args):
-        """
-        Returns true if the matrix has a non-zero at location rr, cc.
-
-        has_nz(self, int rr, int cc) -> bool
-
-
-
-
-
-        """
-        return _casadi.IM_has_nz(self, *args)
-
-
-    def __nonzero__(self, *args):
-        """
-        [INTERNAL] 
-
-        __nonzero__(self) -> bool
-
-
-
-        """
-        return _casadi.IM___nonzero__(self, *args)
-
-
-    def get(self, *args):
-        """
-
-
-        get(self, bool ind1, Sparsity sp) -> IM
-        get(self, bool ind1, Slice rr) -> IM
-        get(self, bool ind1, IM rr) -> IM
-        get(self, bool ind1, Slice rr, Slice cc) -> IM
-        get(self, bool ind1, Slice rr, IM cc) -> IM
-        get(self, bool ind1, IM rr, Slice cc) -> IM
-        get(self, bool ind1, IM rr, IM cc) -> IM
-
-
-
-        """
-        return _casadi.IM_get(self, *args)
-
-
-    def set(self, *args):
-        """
-
-
-        set(self, IM m, bool ind1, Sparsity sp)
-        set(self, IM m, bool ind1, Slice rr)
-        set(self, IM m, bool ind1, IM rr)
-        set(self, IM m, bool ind1, Slice rr, Slice cc)
-        set(self, IM m, bool ind1, Slice rr, IM cc)
-        set(self, IM m, bool ind1, IM rr, Slice cc)
-        set(self, IM m, bool ind1, IM rr, IM cc)
-
-
-
-        """
-        return _casadi.IM_set(self, *args)
-
-
-    def get_nz(self, *args):
-        """
-
-
-        get_nz(self, bool ind1, Slice k) -> IM
-        get_nz(self, bool ind1, IM k) -> IM
-
-
-
-        """
-        return _casadi.IM_get_nz(self, *args)
-
-
-    def set_nz(self, *args):
-        """
-
-
-        set_nz(self, IM m, bool ind1, Slice k)
-        set_nz(self, IM m, bool ind1, IM k)
-
-
-
-        """
-        return _casadi.IM_set_nz(self, *args)
-
-
-    def __pos__(self, *args):
-        """
-
-
-        __pos__(self) -> IM
-
-
-
-        """
-        return _casadi.IM___pos__(self, *args)
-
-
-    def __neg__(self, *args):
-        """
-
-
-        __neg__(self) -> IM
-
-
-
-        """
-        return _casadi.IM___neg__(self, *args)
-
-
-    def binary(*args):
-        """
-
-
-        binary(int op, IM x, IM y) -> IM
-
-
-
-        """
-        return _casadi.IM_binary(*args)
-
-    binary = staticmethod(binary)
-
-    def unary(*args):
-        """
-
-
-        unary(int op, IM x) -> IM
-
-
-
-        """
-        return _casadi.IM_unary(*args)
-
-    unary = staticmethod(unary)
-
-    def scalar_matrix(*args):
-        """
-
-
-        scalar_matrix(int op, IM x, IM y) -> IM
-
-
-
-        """
-        return _casadi.IM_scalar_matrix(*args)
-
-    scalar_matrix = staticmethod(scalar_matrix)
-
-    def matrix_scalar(*args):
-        """
-
-
-        matrix_scalar(int op, IM x, IM y) -> IM
-
-
-
-        """
-        return _casadi.IM_matrix_scalar(*args)
-
-    matrix_scalar = staticmethod(matrix_scalar)
-
-    def matrix_matrix(*args):
-        """
-
-
-        matrix_matrix(int op, IM x, IM y) -> IM
-
-
-
-        """
-        return _casadi.IM_matrix_matrix(*args)
-
-    matrix_matrix = staticmethod(matrix_matrix)
-
-    def printme(self, *args):
-        """
-
-
-        printme(self, IM y) -> IM
-
-
-
-        """
-        return _casadi.IM_printme(self, *args)
-
-
-    def set_max_depth(*args):
-        """
-
-
-        set_max_depth(int eq_depth)
-
-
-
-        """
-        return _casadi.IM_set_max_depth(*args)
-
-    set_max_depth = staticmethod(set_max_depth)
-
-    def get_max_depth(*args):
-        """
-
-
-        get_max_depth() -> int
-
-
-
-        """
-        return _casadi.IM_get_max_depth(*args)
-
-    get_max_depth = staticmethod(get_max_depth)
-
-    def get_input(*args):
-        """
-
-
-        get_input(Function f) -> std::vector< casadi::Matrix< long long >,std::allocator< casadi::Matrix< casadi_int > > >
-
-
-
-        """
-        return _casadi.IM_get_input(*args)
-
-    get_input = staticmethod(get_input)
-
-    def get_free(*args):
-        """
-
-
-        get_free(Function f) -> std::vector< casadi::Matrix< long long >,std::allocator< casadi::Matrix< casadi_int > > >
-
-
-
-        """
-        return _casadi.IM_get_free(*args)
-
-    get_free = staticmethod(get_free)
-
-    def type_name(*args):
-        """
-
-
-        type_name() -> str
-
-
-
-        """
-        return _casadi.IM_type_name(*args)
-
-    type_name = staticmethod(type_name)
-
-    def print_split(self, *args):
-        """
-
-
-        print_split(self) -> ([str] OUTPUT, [str] OUTPUT)
-
-
-
-        """
-        return _casadi.IM_print_split(self, *args)
-
-
-    def disp(self, *args):
-        """
-        Print a representation of the object.
-
-        disp(self, bool more)
-
-
-
-
-
-        """
-        return _casadi.IM_disp(self, *args)
-
-
-    def str(self, *args):
-        """
-        Get string representation.
-
-        str(self, bool more) -> str
-
-
-
-
-
-        """
-        return _casadi.IM_str(self, *args)
-
-
-    def print_scalar(self, *args):
-        """
-        Print scalar.
-
-        print_scalar(self)
-
-
-
-
-
-        """
-        return _casadi.IM_print_scalar(self, *args)
-
-
-    def print_vector(self, *args):
-        """
-        Print vector-style.
-
-        print_vector(self, bool truncate)
-
-
-
-
-
-        """
-        return _casadi.IM_print_vector(self, *args)
-
-
-    def print_dense(self, *args):
-        """
-        Print dense matrix-stype.
-
-        print_dense(self, bool truncate)
-
-
-
-
-
-        """
-        return _casadi.IM_print_dense(self, *args)
-
-
-    def print_sparse(self, *args):
-        """
-        Print sparse matrix style.
-
-        print_sparse(self, bool truncate)
-
-
-
-
-
-        """
-        return _casadi.IM_print_sparse(self, *args)
-
-
-    def clear(self, *args):
-        """
-
-
-        clear(self)
-
-
-
-        """
-        return _casadi.IM_clear(self, *args)
-
-
-    def resize(self, *args):
-        """
-
-
-        resize(self, int nrow, int ncol)
-
-
-
-        """
-        return _casadi.IM_resize(self, *args)
-
-
-    def reserve(self, *args):
-        """
-
-
-        reserve(self, int nnz)
-        reserve(self, int nnz, int ncol)
-
-
-
-        """
-        return _casadi.IM_reserve(self, *args)
-
-
-    def erase(self, *args):
-        """
-          Erase a submatrix (leaving structural zeros in its place) Erase elements of
-
-          erase(self, [int] rr, bool ind1)
-          erase(self, [int] rr, [int] cc, bool ind1)
-            Erase a submatrix (leaving structural zeros in its place) Erase rows and/or
-
-        a matrix.
-
-
-        > erase(self, [int] rr, bool ind1)
-        ------------------------------------------------------------------------
-
-
-        Erase a submatrix (leaving structural zeros in its place) Erase elements of
-        a matrix.
-
-
-        > erase(self, [int] rr, [int] cc, bool ind1)
-        ------------------------------------------------------------------------
-
-
-        Erase a submatrix (leaving structural zeros in its place) Erase rows and/or
-        columns of a matrix.
-
-
-
-
-        """
-        return _casadi.IM_erase(self, *args)
-
-
-    def remove(self, *args):
-        """
-        Remove columns and rows Remove/delete rows and/or columns of a matrix.
-
-        remove(self, [int] rr, [int] cc)
-
-
-
-
-
-        """
-        return _casadi.IM_remove(self, *args)
-
-
-    def enlarge(self, *args):
-        """
-          Enlarge matrix Make the matrix larger by inserting empty rows and columns,
-
-          enlarge(self, int nrow, int ncol, [int] rr, [int] cc, bool ind1)
-
-        keeping the existing non-zeros.
-
-
-
-
-        """
-        return _casadi.IM_enlarge(self, *args)
-
-
-    def sparsity(self, *args):
-        """
-        Get an owning reference to the sparsity pattern.
-
-        sparsity(self) -> Sparsity
-
-
-
-
-
-        """
-        return _casadi.IM_sparsity(self, *args)
-
-
-    def triplet(*args):
-        """
-
-
-        triplet([int] row, [int] col, IM d) -> IM
-        triplet([int] row, [int] col, IM d, (int,int) rc) -> IM
-        triplet([int] row, [int] col, IM d, int nrow, int ncol) -> IM
-
-
-
-        """
-        return _casadi.IM_triplet(*args)
-
-    triplet = staticmethod(triplet)
-
-    def inf(*args):
-        """
-        create a matrix with all inf
-
-        inf(int nrow, int ncol) -> IM
-        inf((int,int) rc) -> IM
-        inf(Sparsity sp) -> IM
-
-
-
-
-
-        """
-        return _casadi.IM_inf(*args)
-
-    inf = staticmethod(inf)
-
-    def nan(*args):
-        """
-        create a matrix with all nan
-
-        nan(int nrow, int ncol) -> IM
-        nan((int,int) rc) -> IM
-        nan(Sparsity sp) -> IM
-
-
-
-
-
-        """
-        return _casadi.IM_nan(*args)
-
-    nan = staticmethod(nan)
-
-    def eye(*args):
-        """
-
-
-        eye(int ncol) -> IM
-
-
-
-        """
-        return _casadi.IM_eye(*args)
-
-    eye = staticmethod(eye)
-
-    def element_hash(self, *args):
-        """
-
-
-        element_hash(self) -> int
-
-
-
-        """
-        return _casadi.IM_element_hash(self, *args)
-
-
-    def is_regular(self, *args):
-        """
-
-
-        is_regular(self) -> bool
-
-
-
-        """
-        return _casadi.IM_is_regular(self, *args)
-
-
-    def is_smooth(self, *args):
-        """
-
-
-        is_smooth(self) -> bool
-
-
-
-        """
-        return _casadi.IM_is_smooth(self, *args)
-
-
-    def is_leaf(self, *args):
-        """
-
-
-        is_leaf(self) -> bool
-
-
-
-        """
-        return _casadi.IM_is_leaf(self, *args)
-
-
-    def is_commutative(self, *args):
-        """
-
-
-        is_commutative(self) -> bool
-
-
-
-        """
-        return _casadi.IM_is_commutative(self, *args)
-
-
-    def is_symbolic(self, *args):
-        """
-
-
-        is_symbolic(self) -> bool
-
-
-
-        """
-        return _casadi.IM_is_symbolic(self, *args)
-
-
-    def is_valid_input(self, *args):
-        """
-
-
-        is_valid_input(self) -> bool
-
-
-
-        """
-        return _casadi.IM_is_valid_input(self, *args)
-
-
-    def has_duplicates(self, *args):
-        """
-
-
-        has_duplicates(self) -> bool
-
-
-
-        """
-        return _casadi.IM_has_duplicates(self, *args)
-
-
-    def reset_input(self, *args):
-        """
-
-
-        reset_input(self)
-
-
-
-        """
-        return _casadi.IM_reset_input(self, *args)
-
-
-    def is_constant(self, *args):
-        """
-          Check if the matrix is constant (note that false negative answers are
-
-          is_constant(self) -> bool
-
-        possible)
-
-
-
-
-        """
-        return _casadi.IM_is_constant(self, *args)
-
-
-    def is_integer(self, *args):
-        """
-          Check if the matrix is integer-valued (note that false negative answers are
-
-          is_integer(self) -> bool
-
-        possible)
-
-
-
-
-        """
-        return _casadi.IM_is_integer(self, *args)
-
-
-    def is_zero(self, *args):
-        """
-        check if the matrix is 0 (note that false negative answers are possible)
-
-        is_zero(self) -> bool
-
-
-
-
-
-        """
-        return _casadi.IM_is_zero(self, *args)
-
-
-    def is_one(self, *args):
-        """
-        check if the matrix is 1 (note that false negative answers are possible)
-
-        is_one(self) -> bool
-
-
-
-
-
-        """
-        return _casadi.IM_is_one(self, *args)
-
-
-    def is_minus_one(self, *args):
-        """
-        check if the matrix is -1 (note that false negative answers are possible)
-
-        is_minus_one(self) -> bool
-
-
-
-
-
-        """
-        return _casadi.IM_is_minus_one(self, *args)
-
-
-    def is_eye(self, *args):
-        """
-          check if the matrix is an identity matrix (note that false negative answers
-
-          is_eye(self) -> bool
-
-        are possible)
-
-
-
-
-        """
-        return _casadi.IM_is_eye(self, *args)
-
-
-    def op(self, *args):
-        """
-
-
-        op(self) -> int
-
-
-
-        """
-        return _casadi.IM_op(self, *args)
-
-
-    def is_op(self, *args):
-        """
-
-
-        is_op(self, int op) -> bool
-
-
-
-        """
-        return _casadi.IM_is_op(self, *args)
-
-
-    def has_zeros(self, *args):
-        """
-        Check if the matrix has any zero entries which are not structural zeros.
-
-        has_zeros(self) -> bool
-
-
-
-
-
-        """
-        return _casadi.IM_has_zeros(self, *args)
-
-
-    def nonzeros(self, *args):
-        """
-          Get all nonzeros.
-
-          nonzeros(self) -> [int]
-
-
-        Implementation of Matrix::get_nonzeros (in public API)
-
-
-
-
-        """
-        return _casadi.IM_nonzeros(self, *args)
-
-
-    def elements(self, *args):
-        """
-        Get all elements.
-
-        elements(self) -> [int]
-
-
-
-
-
-        """
-        return _casadi.IM_elements(self, *args)
-
-
-    def __float__(self, *args):
-        """
-
-
-        __float__(self) -> float
-
-
-
-        """
-        return _casadi.IM___float__(self, *args)
-
-
-    def __int__(self, *args):
-        """
-
-
-        __int__(self) -> int
-
-
-
-        """
-        return _casadi.IM___int__(self, *args)
-
-
-    def name(self, *args):
-        """
-
-
-        name(self) -> str
-
-
-
-        """
-        return _casadi.IM_name(self, *args)
-
-
-    def dep(self, *args):
-        """
-
-
-        dep(self, int ch) -> IM
-
-
-
-        """
-        return _casadi.IM_dep(self, *args)
-
-
-    def n_dep(self, *args):
-        """
-
-
-        n_dep(self) -> int
-
-
-
-        """
-        return _casadi.IM_n_dep(self, *args)
-
-
-    def set_precision(*args):
-        """
-          Set the 'precision, width & scientific' used in printing and serializing to
-
-          set_precision(int precision)
-
-        streams.
-
-
-
-
-        """
-        return _casadi.IM_set_precision(*args)
-
-    set_precision = staticmethod(set_precision)
-
-    def set_width(*args):
-        """
-          Set the 'precision, width & scientific' used in printing and serializing to
-
-          set_width(int width)
-
-        streams.
-
-
-
-
-        """
-        return _casadi.IM_set_width(*args)
-
-    set_width = staticmethod(set_width)
-
-    def set_scientific(*args):
-        """
-          Set the 'precision, width & scientific' used in printing and serializing to
-
-          set_scientific(bool scientific)
-
-        streams.
-
-
-
-
-        """
-        return _casadi.IM_set_scientific(*args)
-
-    set_scientific = staticmethod(set_scientific)
-
-    def rng(*args):
-        """
-
-
-        rng(int seed)
-
-
-
-        """
-        return _casadi.IM_rng(*args)
-
-    rng = staticmethod(rng)
-
-    def rand(*args):
-        """
-        Create a matrix with uniformly distributed random numbers.
-
-        rand(int nrow, int ncol) -> IM
-        rand((int,int) rc) -> IM
-        rand(Sparsity sp) -> IM
-
-
-
-
-
-        """
-        return _casadi.IM_rand(*args)
-
-    rand = staticmethod(rand)
-
-    def export_code(self, *args):
-        """
-          Export matrix in specific language.
-
-          export_code(self, str lang, dict options)
-
-
-        lang: only 'matlab' supported for now
-
-        ::
-
-          * options:
-          *   inline: Indicates if you want everything on a single line (default: False)
-          *   name: Name of exported variable (default: 'm')
-          *   indent_level: Level of indentation (default: 0)
-          *   spoof_zero: Replace numerical zero by a 1e-200 (default: false)
-          *               might be needed for matlab sparse construct,
-          *               which doesn't allow numerical zero
-          * 
-
-
-
-
-
-
-        """
-        return _casadi.IM_export_code(self, *args)
-
-
-    def info(self, *args):
-        """
-        Obtain information about sparsity
-
-        info(self) -> dict
-
-
-
-
-
-        """
-        return _casadi.IM_info(self, *args)
-
-
-    def from_info(*args):
-        """
-
-
-        from_info(dict info) -> IM
-
-
-
-        """
-        return _casadi.IM_from_info(*args)
-
-    from_info = staticmethod(from_info)
-
-    def to_file(self, *args):
-        """
-          Export numerical matrix to file
-
-          to_file(self, str filename, str format)
-
-
-        Supported formats: .mtx Matrix Market
-
-
-
-
-        """
-        return _casadi.IM_to_file(self, *args)
-
-
-    def __init__(self, *args):
-        """
-
-
-        IM()
-        IM(Sparsity sp)
-        IM(float val)
-        IM([[float]] m)
-        IM([float] x)
-        IM(IM m)
-        IM(DM x)
-        IM([SXElem] x)
-        IM(SX x)
-        IM(int nrow, int ncol)
-        IM(Sparsity sp, IM d)
-
-
-
-        """
-        this = _casadi.new_IM(*args)
-        try:
-            self.this.append(this)
-        except __builtin__.Exception:
-            self.this = this
-
-    def assign(self, *args):
-        """
-
-
-        assign(self, IM rhs)
-
-
-
-        """
-        return _casadi.IM_assign(self, *args)
-
-
-    @property
-    def shape(self):
-        return (self.size1(),self.size2())
-
-    def reshape(self,arg):
-        return _casadi.reshape(self,arg)
-
-    @property
-    def T(self):
-        return _casadi.transpose(self)
-
-    def __getitem__(self, s):
-          if isinstance(s, tuple) and len(s)==2:
-            if s[1] is None: raise TypeError("Cannot slice with None")
-            return self.get(False, s[0], s[1])
-          return self.get(False, s)
-
-    def __setitem__(self,s,val):
-          if isinstance(s,tuple) and len(s)==2:
-            return self.set(val, False, s[0], s[1])
-          return self.set(val, False, s)
-
-    @property
-    def nz(self):
-      return NZproxy(self)
-
-
-
-    def full(self, *args):
-        """
-
-
-        full(self) -> PyObject *
-
-
-
-        """
-        return _casadi.IM_full(self, *args)
-
-
-    def sparse(self, *args):
-        """
-
-
-        sparse(self) -> PyObject *
-
-
-
-        """
-        return _casadi.IM_sparse(self, *args)
-
-
-
-    __array_priority__ = 998.0
-
-    def __array_wrap__(self,out_arr,context=None):
-      if context is None:
-        return out_arr
-      name = context[0].__name__
-      args = list(context[1])
-
-      if len(context[1])==3:
-        raise Exception("Error with %s. Looks like you are using an assignment operator, such as 'a+=b' where 'a' is a numpy type. This is not supported, and cannot be supported without changing numpy." % name)
-
-      if "vectorized" in name:
-          name = name[:-len(" (vectorized)")]
-
-      conversion = {"multiply": "mul", "divide": "div", "true_divide": "div", "subtract":"sub","power":"pow","greater_equal":"ge","less_equal": "le", "less": "lt", "greater": "gt"}
-      if name in conversion:
-        name = conversion[name]
-      if len(context[1])==2 and context[1][1] is self and not(context[1][0] is self):
-        name = 'r' + name
-        args.reverse()
-      if not(hasattr(self,name)) or ('mul' in name):
-        name = '__' + name + '__'
-      fun=getattr(self, name)
-      return fun(*args[1:])
-
-
-    def __array__(self,*args,**kwargs):
-      import numpy as n
-      if len(args) > 1 and isinstance(args[1],tuple) and isinstance(args[1][0],n.ufunc) and isinstance(args[1][0],n.ufunc) and len(args[1])>1 and args[1][0].nin==len(args[1][1]):
-        if len(args[1][1])==3:
-          raise Exception("Error with %s. Looks like you are using an assignment operator, such as 'a+=b'. This is not supported when 'a' is a numpy type, and cannot be supported without changing numpy itself. Either upgrade a to a CasADi type first, or use 'a = a + b'. " % args[1][0].__name__)
-        return n.array([n.nan])
-      else:
-        if hasattr(self,'__array_custom__'):
-          return self.__array_custom__(*args,**kwargs)
-        else:
-          try:
-            return self.full()
-          except:
-            raise Exception("Implicit conversion of symbolic CasADi type to numeric matrix not supported.\n"
-                       + "This may occur when you pass a CasADi object to a numpy function.\n"
-                       + "Use an equivalent CasADi function instead of that numpy function.")
-
-
-
-    def __abs__(self):
-      return abs(int(self))
-
-
-    def tocsc(self):
-      import numpy as np
-      import warnings
-      with warnings.catch_warnings():
-        warnings.simplefilter("ignore")
-        from scipy.sparse import csc_matrix
-      return csc_matrix( (self.nonzeros(),self.row(),self.colind()), shape = self.shape, dtype=np.int )
-    def toarray(self):
-      import numpy as np
-      return np.array(self.T.elements()).reshape(self.shape)
-
-
-    def __setstate__(self, state):
-        self.__init__(self.from_info(state))
-
-    def __getstate__(self):
-        return self.info()
-
-    __swig_destroy__ = _casadi.delete_IM
-IM_swigregister = _casadi.IM_swigregister
-IM_swigregister(IM)
-
-def IM_binary(*args):
+def DM_from_file(*args) -> "casadi::Matrix< double >":
     """
+      Export numerical matrix to file
 
+      from_file(str filename, str format_hint) -> DM
 
-    binary(int op, IM x, IM y) -> IM
 
+    Supported formats:
 
 
-    """
-    return _casadi.IM_binary(*args)
 
-def IM_unary(*args):
-    """
+    ::
 
+      *   - .mtx   Matrix Market (sparse)
+      *   - .txt   Ascii full precision representation (sparse)
+      *            Whitespace separated, aligned.
+      *            Comments with # % or /
+      *            Uses C locale
+      *            Structural zeros represented by 00
+      *            Does not scale well for large sparse matrices
+      * 
 
-    unary(int op, IM x) -> IM
-
-
-
-    """
-    return _casadi.IM_unary(*args)
-
-def IM_scalar_matrix(*args):
-    """
-
-
-    scalar_matrix(int op, IM x, IM y) -> IM
-
-
-
-    """
-    return _casadi.IM_scalar_matrix(*args)
-
-def IM_matrix_scalar(*args):
-    """
-
-
-    matrix_scalar(int op, IM x, IM y) -> IM
-
-
-
-    """
-    return _casadi.IM_matrix_scalar(*args)
-
-def IM_matrix_matrix(*args):
-    """
-
-
-    matrix_matrix(int op, IM x, IM y) -> IM
-
-
-
-    """
-    return _casadi.IM_matrix_matrix(*args)
-
-def IM_set_max_depth(*args):
-    """
-
-
-    set_max_depth(int eq_depth)
-
-
-
-    """
-    return _casadi.IM_set_max_depth(*args)
-
-def IM_get_max_depth(*args):
-    """
-
-
-    get_max_depth() -> int
-
-
-
-    """
-    return _casadi.IM_get_max_depth(*args)
-
-def IM_get_input(*args):
-    """
-
-
-    get_input(Function f) -> std::vector< casadi::Matrix< long long >,std::allocator< casadi::Matrix< casadi_int > > >
-
-
-
-    """
-    return _casadi.IM_get_input(*args)
-
-def IM_get_free(*args):
-    """
-
-
-    get_free(Function f) -> std::vector< casadi::Matrix< long long >,std::allocator< casadi::Matrix< casadi_int > > >
-
-
-
-    """
-    return _casadi.IM_get_free(*args)
-
-def IM_type_name(*args):
-    """
-
-
-    type_name() -> str
-
-
-
-    """
-    return _casadi.IM_type_name(*args)
-
-def IM_triplet(*args):
-    """
-
-
-    triplet([int] row, [int] col, IM d) -> IM
-    triplet([int] row, [int] col, IM d, (int,int) rc) -> IM
-    triplet([int] row, [int] col, IM d, int nrow, int ncol) -> IM
-
-
-
-    """
-    return _casadi.IM_triplet(*args)
-
-def IM_inf(*args):
-    """
-    create a matrix with all inf
-
-    inf(int nrow, int ncol) -> IM
-    inf((int,int) rc) -> IM
-    inf(Sparsity sp) -> IM
 
 
 
 
 
     """
-    return _casadi.IM_inf(*args)
-
-def IM_nan(*args):
-    """
-    create a matrix with all nan
-
-    nan(int nrow, int ncol) -> IM
-    nan((int,int) rc) -> IM
-    nan(Sparsity sp) -> IM
-
-
-
-
-
-    """
-    return _casadi.IM_nan(*args)
-
-def IM_eye(*args):
-    """
-
-
-    eye(int ncol) -> IM
-
-
-
-    """
-    return _casadi.IM_eye(*args)
-
-def IM_set_precision(*args):
-    """
-      Set the 'precision, width & scientific' used in printing and serializing to
-
-      set_precision(int precision)
-
-    streams.
-
-
-
-
-    """
-    return _casadi.IM_set_precision(*args)
-
-def IM_set_width(*args):
-    """
-      Set the 'precision, width & scientific' used in printing and serializing to
-
-      set_width(int width)
-
-    streams.
-
-
-
-
-    """
-    return _casadi.IM_set_width(*args)
-
-def IM_set_scientific(*args):
-    """
-      Set the 'precision, width & scientific' used in printing and serializing to
-
-      set_scientific(bool scientific)
-
-    streams.
-
-
-
-
-    """
-    return _casadi.IM_set_scientific(*args)
-
-def IM_rng(*args):
-    """
-
-
-    rng(int seed)
-
-
-
-    """
-    return _casadi.IM_rng(*args)
-
-def IM_rand(*args):
-    """
-    Create a matrix with uniformly distributed random numbers.
-
-    rand(int nrow, int ncol) -> IM
-    rand((int,int) rc) -> IM
-    rand(Sparsity sp) -> IM
-
-
-
-
-
-    """
-    return _casadi.IM_rand(*args)
-
-def IM_from_info(*args):
-    """
-
-
-    from_info(dict info) -> IM
-
-
-
-    """
-    return _casadi.IM_from_info(*args)
+    return _casadi.DM_from_file(*args)
 
 class SXElem(_object):
     """
@@ -9046,7 +7977,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, SX, name)
     __repr__ = _swig_repr
 
-    def sanity_check(self, *args):
+    def sanity_check(self, *args) -> "void":
         """
         [DEPRECATED] Correctness is checked during construction
 
@@ -9060,7 +7991,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_sanity_check(self, *args)
 
 
-    def has_nz(self, *args):
+    def has_nz(self, *args) -> "bool":
         """
         Returns true if the matrix has a non-zero at location rr, cc.
 
@@ -9074,19 +8005,21 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_has_nz(self, *args)
 
 
-    def __nonzero__(self, *args):
+    def __bool__(self, *args) -> "bool":
         """
-        [INTERNAL] 
+        Returns the truth value of a Matrix.
 
-        __nonzero__(self) -> bool
+        __bool__(self) -> bool
+
+
 
 
 
         """
-        return _casadi.SX___nonzero__(self, *args)
+        return _casadi.SX___bool__(self, *args)
 
 
-    def get(self, *args):
+    def get(self, *args) -> "void":
         """
 
 
@@ -9104,7 +8037,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_get(self, *args)
 
 
-    def set(self, *args):
+    def set(self, *args) -> "void":
         """
 
 
@@ -9122,7 +8055,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_set(self, *args)
 
 
-    def get_nz(self, *args):
+    def get_nz(self, *args) -> "void":
         """
 
 
@@ -9135,7 +8068,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_get_nz(self, *args)
 
 
-    def set_nz(self, *args):
+    def set_nz(self, *args) -> "void":
         """
 
 
@@ -9148,7 +8081,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_set_nz(self, *args)
 
 
-    def __pos__(self, *args):
+    def __pos__(self, *args) -> "casadi::Matrix< casadi::SXElem >":
         """
 
 
@@ -9160,7 +8093,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX___pos__(self, *args)
 
 
-    def __neg__(self, *args):
+    def __neg__(self, *args) -> "casadi::Matrix< casadi::SXElem >":
         """
 
 
@@ -9172,7 +8105,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX___neg__(self, *args)
 
 
-    def binary(*args):
+    def binary(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
 
 
@@ -9185,7 +8118,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     binary = staticmethod(binary)
 
-    def unary(*args):
+    def unary(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
 
 
@@ -9198,7 +8131,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     unary = staticmethod(unary)
 
-    def scalar_matrix(*args):
+    def scalar_matrix(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
 
 
@@ -9211,7 +8144,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     scalar_matrix = staticmethod(scalar_matrix)
 
-    def matrix_scalar(*args):
+    def matrix_scalar(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
 
 
@@ -9224,7 +8157,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     matrix_scalar = staticmethod(matrix_scalar)
 
-    def matrix_matrix(*args):
+    def matrix_matrix(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
 
 
@@ -9237,7 +8170,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     matrix_matrix = staticmethod(matrix_matrix)
 
-    def printme(self, *args):
+    def printme(self, *args) -> "casadi::Matrix< casadi::SXElem >":
         """
 
 
@@ -9249,7 +8182,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_printme(self, *args)
 
 
-    def set_max_depth(*args):
+    def set_max_depth(*args) -> "void":
         """
 
 
@@ -9262,7 +8195,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     set_max_depth = staticmethod(set_max_depth)
 
-    def get_max_depth(*args):
+    def get_max_depth(*args) -> "casadi_int":
         """
 
 
@@ -9275,7 +8208,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     get_max_depth = staticmethod(get_max_depth)
 
-    def get_input(*args):
+    def get_input(*args) -> "std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >":
         """
 
 
@@ -9288,7 +8221,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     get_input = staticmethod(get_input)
 
-    def get_free(*args):
+    def get_free(*args) -> "std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >":
         """
 
 
@@ -9301,7 +8234,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     get_free = staticmethod(get_free)
 
-    def type_name(*args):
+    def type_name(*args) -> "std::string":
         """
 
 
@@ -9314,11 +8247,13 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     type_name = staticmethod(type_name)
 
-    def print_split(self, *args):
+    def print_split(self, *args) -> "void":
         """
-
+        Get strings corresponding to the nonzeros and the interdependencies.
 
         print_split(self) -> ([str] OUTPUT, [str] OUTPUT)
+
+
 
 
 
@@ -9326,7 +8261,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_print_split(self, *args)
 
 
-    def disp(self, *args):
+    def disp(self, *args) -> "void":
         """
         Print a representation of the object.
 
@@ -9340,7 +8275,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_disp(self, *args)
 
 
-    def str(self, *args):
+    def str(self, *args) -> "std::string":
         """
         Get string representation.
 
@@ -9354,7 +8289,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_str(self, *args)
 
 
-    def print_scalar(self, *args):
+    def print_scalar(self, *args) -> "void":
         """
         Print scalar.
 
@@ -9368,7 +8303,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_print_scalar(self, *args)
 
 
-    def print_vector(self, *args):
+    def print_vector(self, *args) -> "void":
         """
         Print vector-style.
 
@@ -9382,7 +8317,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_print_vector(self, *args)
 
 
-    def print_dense(self, *args):
+    def print_dense(self, *args) -> "void":
         """
         Print dense matrix-stype.
 
@@ -9396,7 +8331,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_print_dense(self, *args)
 
 
-    def print_sparse(self, *args):
+    def print_sparse(self, *args) -> "void":
         """
         Print sparse matrix style.
 
@@ -9410,7 +8345,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_print_sparse(self, *args)
 
 
-    def clear(self, *args):
+    def clear(self, *args) -> "void":
         """
 
 
@@ -9422,7 +8357,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_clear(self, *args)
 
 
-    def resize(self, *args):
+    def resize(self, *args) -> "void":
         """
 
 
@@ -9434,7 +8369,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_resize(self, *args)
 
 
-    def reserve(self, *args):
+    def reserve(self, *args) -> "void":
         """
 
 
@@ -9447,27 +8382,39 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_reserve(self, *args)
 
 
-    def erase(self, *args):
+    def erase(self, *args) -> "void":
         """
           Erase a submatrix (leaving structural zeros in its place) Erase elements of
 
           erase(self, [int] rr, bool ind1)
           erase(self, [int] rr, [int] cc, bool ind1)
-            Erase a submatrix (leaving structural zeros in its place) Erase rows and/or
 
         a matrix.
 
 
-        > erase(self, [int] rr, bool ind1)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          erase(self, [int] rr, bool ind1)
+
 
 
         Erase a submatrix (leaving structural zeros in its place) Erase elements of
         a matrix.
 
 
-        > erase(self, [int] rr, [int] cc, bool ind1)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          erase(self, [int] rr, [int] cc, bool ind1)
+
 
 
         Erase a submatrix (leaving structural zeros in its place) Erase rows and/or
@@ -9475,12 +8422,15 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
 
 
+        .............
+
+
 
         """
         return _casadi.SX_erase(self, *args)
 
 
-    def remove(self, *args):
+    def remove(self, *args) -> "void":
         """
         Remove columns and rows Remove/delete rows and/or columns of a matrix.
 
@@ -9494,7 +8444,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_remove(self, *args)
 
 
-    def enlarge(self, *args):
+    def enlarge(self, *args) -> "void":
         """
           Enlarge matrix Make the matrix larger by inserting empty rows and columns,
 
@@ -9509,7 +8459,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_enlarge(self, *args)
 
 
-    def sparsity(self, *args):
+    def sparsity(self, *args) -> "casadi::Sparsity":
         """
         Get an owning reference to the sparsity pattern.
 
@@ -9523,7 +8473,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_sparsity(self, *args)
 
 
-    def triplet(*args):
+    def triplet(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
 
 
@@ -9538,7 +8488,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     triplet = staticmethod(triplet)
 
-    def inf(*args):
+    def inf(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
         create a matrix with all inf
 
@@ -9555,7 +8505,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     inf = staticmethod(inf)
 
-    def nan(*args):
+    def nan(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
         create a matrix with all nan
 
@@ -9572,11 +8522,11 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     nan = staticmethod(nan)
 
-    def eye(*args):
+    def eye(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
 
 
-        eye(int ncol) -> SX
+        eye(int n) -> SX
 
 
 
@@ -9585,7 +8535,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     eye = staticmethod(eye)
 
-    def element_hash(self, *args):
+    def element_hash(self, *args) -> "casadi_int":
         """
 
 
@@ -9597,7 +8547,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_element_hash(self, *args)
 
 
-    def is_regular(self, *args):
+    def is_regular(self, *args) -> "bool":
         """
 
 
@@ -9609,7 +8559,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_regular(self, *args)
 
 
-    def is_smooth(self, *args):
+    def is_smooth(self, *args) -> "bool":
         """
 
 
@@ -9621,7 +8571,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_smooth(self, *args)
 
 
-    def is_leaf(self, *args):
+    def is_leaf(self, *args) -> "bool":
         """
 
 
@@ -9633,7 +8583,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_leaf(self, *args)
 
 
-    def is_commutative(self, *args):
+    def is_commutative(self, *args) -> "bool":
         """
 
 
@@ -9645,7 +8595,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_commutative(self, *args)
 
 
-    def is_symbolic(self, *args):
+    def is_symbolic(self, *args) -> "bool":
         """
 
 
@@ -9657,7 +8607,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_symbolic(self, *args)
 
 
-    def is_valid_input(self, *args):
+    def is_valid_input(self, *args) -> "bool":
         """
 
 
@@ -9669,7 +8619,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_valid_input(self, *args)
 
 
-    def has_duplicates(self, *args):
+    def has_duplicates(self, *args) -> "bool":
         """
 
 
@@ -9681,7 +8631,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_has_duplicates(self, *args)
 
 
-    def reset_input(self, *args):
+    def reset_input(self, *args) -> "void":
         """
 
 
@@ -9693,7 +8643,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_reset_input(self, *args)
 
 
-    def is_constant(self, *args):
+    def is_constant(self, *args) -> "bool":
         """
           Check if the matrix is constant (note that false negative answers are
 
@@ -9708,7 +8658,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_constant(self, *args)
 
 
-    def is_integer(self, *args):
+    def is_integer(self, *args) -> "bool":
         """
           Check if the matrix is integer-valued (note that false negative answers are
 
@@ -9723,7 +8673,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_integer(self, *args)
 
 
-    def is_zero(self, *args):
+    def is_zero(self, *args) -> "bool":
         """
         check if the matrix is 0 (note that false negative answers are possible)
 
@@ -9737,7 +8687,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_zero(self, *args)
 
 
-    def is_one(self, *args):
+    def is_one(self, *args) -> "bool":
         """
         check if the matrix is 1 (note that false negative answers are possible)
 
@@ -9751,7 +8701,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_one(self, *args)
 
 
-    def is_minus_one(self, *args):
+    def is_minus_one(self, *args) -> "bool":
         """
         check if the matrix is -1 (note that false negative answers are possible)
 
@@ -9765,7 +8715,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_minus_one(self, *args)
 
 
-    def is_eye(self, *args):
+    def is_eye(self, *args) -> "bool":
         """
           check if the matrix is an identity matrix (note that false negative answers
 
@@ -9780,7 +8730,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_eye(self, *args)
 
 
-    def op(self, *args):
+    def op(self, *args) -> "casadi_int":
         """
 
 
@@ -9792,7 +8742,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_op(self, *args)
 
 
-    def is_op(self, *args):
+    def is_op(self, *args) -> "bool":
         """
 
 
@@ -9804,7 +8754,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_is_op(self, *args)
 
 
-    def has_zeros(self, *args):
+    def has_zeros(self, *args) -> "bool":
         """
         Check if the matrix has any zero entries which are not structural zeros.
 
@@ -9818,7 +8768,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_has_zeros(self, *args)
 
 
-    def nonzeros(self, *args):
+    def nonzeros(self, *args) -> "std::vector< casadi::SXElem,std::allocator< casadi::SXElem > >":
         """
           Get all nonzeros.
 
@@ -9834,7 +8784,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_nonzeros(self, *args)
 
 
-    def elements(self, *args):
+    def elements(self, *args) -> "std::vector< casadi::SXElem,std::allocator< casadi::SXElem > >":
         """
         Get all elements.
 
@@ -9848,7 +8798,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_elements(self, *args)
 
 
-    def __float__(self, *args):
+    def __float__(self, *args) -> "double":
         """
 
 
@@ -9860,7 +8810,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX___float__(self, *args)
 
 
-    def __int__(self, *args):
+    def __int__(self, *args) -> "casadi_int":
         """
 
 
@@ -9872,7 +8822,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX___int__(self, *args)
 
 
-    def name(self, *args):
+    def name(self, *args) -> "std::string":
         """
 
 
@@ -9884,7 +8834,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_name(self, *args)
 
 
-    def dep(self, *args):
+    def dep(self, *args) -> "casadi::Matrix< casadi::SXElem >":
         """
 
 
@@ -9896,7 +8846,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_dep(self, *args)
 
 
-    def n_dep(self, *args):
+    def n_dep(self, *args) -> "casadi_int":
         """
 
 
@@ -9908,7 +8858,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_n_dep(self, *args)
 
 
-    def set_precision(*args):
+    def set_precision(*args) -> "void":
         """
           Set the 'precision, width & scientific' used in printing and serializing to
 
@@ -9924,7 +8874,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     set_precision = staticmethod(set_precision)
 
-    def set_width(*args):
+    def set_width(*args) -> "void":
         """
           Set the 'precision, width & scientific' used in printing and serializing to
 
@@ -9940,7 +8890,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     set_width = staticmethod(set_width)
 
-    def set_scientific(*args):
+    def set_scientific(*args) -> "void":
         """
           Set the 'precision, width & scientific' used in printing and serializing to
 
@@ -9956,7 +8906,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     set_scientific = staticmethod(set_scientific)
 
-    def rng(*args):
+    def rng(*args) -> "void":
         """
 
 
@@ -9969,7 +8919,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     rng = staticmethod(rng)
 
-    def rand(*args):
+    def rand(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
         Create a matrix with uniformly distributed random numbers.
 
@@ -9986,7 +8936,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 
     rand = staticmethod(rand)
 
-    def export_code(self, *args):
+    def export_code(self, *args) -> "void":
         """
           Export matrix in specific language.
 
@@ -10015,13 +8965,11 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_export_code(self, *args)
 
 
-    def info(self, *args):
+    def info(self, *args) -> "casadi::Dict":
         """
-        Obtain information about sparsity
+
 
         info(self) -> dict
-
-
 
 
 
@@ -10029,27 +8977,89 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         return _casadi.SX_info(self, *args)
 
 
-    def from_info(*args):
+    def serialize(self, *args) -> "void":
+        """
+          Serialize an object.
+
+          serialize(self) -> str
+          serialize(self, casadi::SerializingStream & s)
+
+
+
+
+        .......
+
+        ::
+
+          serialize(self, casadi::SerializingStream & s)
+
+
+
+        Serialize an object.
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          serialize(self)
+
+
+
+        Serialize.
+
+
+
+        .............
+
+
+
+        """
+        return _casadi.SX_serialize(self, *args)
+
+
+    def deserialize(*args) -> "casadi::Matrix< casadi::SXElem >":
         """
 
 
-        from_info(dict info) -> SX
+        deserialize(std::istream & stream) -> SX
+        deserialize(casadi::DeserializingStream & s) -> SX
+        deserialize(str s) -> SX
 
 
 
         """
-        return _casadi.SX_from_info(*args)
+        return _casadi.SX_deserialize(*args)
 
-    from_info = staticmethod(from_info)
+    deserialize = staticmethod(deserialize)
 
-    def to_file(self, *args):
+    def to_file(self, *args) -> "void":
         """
           Export numerical matrix to file
 
           to_file(self, str filename, str format)
 
 
-        Supported formats: .mtx Matrix Market
+        Supported formats:
+
+
+
+        ::
+
+          *   - .mtx   Matrix Market (sparse)
+          *   - .txt   Ascii full precision representation (sparse)
+          *            Whitespace separated, aligned.
+          *            Comments with # % or /
+          *            Uses C locale
+          *            Structural zeros represented by 00
+          *            Does not scale well for large sparse matrices
+          * 
+
+
 
 
 
@@ -10057,6 +9067,38 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         """
         return _casadi.SX_to_file(self, *args)
 
+
+    def from_file(*args) -> "casadi::Matrix< double >":
+        """
+          Export numerical matrix to file
+
+          from_file(str filename, str format_hint) -> DM
+
+
+        Supported formats:
+
+
+
+        ::
+
+          *   - .mtx   Matrix Market (sparse)
+          *   - .txt   Ascii full precision representation (sparse)
+          *            Whitespace separated, aligned.
+          *            Comments with # % or /
+          *            Uses C locale
+          *            Structural zeros represented by 00
+          *            Does not scale well for large sparse matrices
+          * 
+
+
+
+
+
+
+        """
+        return _casadi.SX_from_file(*args)
+
+    from_file = staticmethod(from_file)
 
     @property
     def shape(self):
@@ -10074,6 +9116,12 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
             if s[1] is None: raise TypeError("Cannot slice with None")
             return self.get(False, s[0], s[1])
           return self.get(False, s)
+
+    def __iter__(self):
+      raise Exception("""CasADi matrices are not iterable by design.
+                      Did you mean to iterate over m.nz, with m IM/DM/SX?
+                      Did you mean to iterate over horzsplit(m,1)/vertsplit(m,1) with m IM/DM/SX/MX?
+                      """)
 
     def __setitem__(self,s,val):
           if isinstance(s,tuple) and len(s)==2:
@@ -10112,6 +9160,40 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
       fun=getattr(self, name)
       return fun(*args[1:])
 
+    def __array_ufunc__(self, ufunc, method, *inputs, **kwargs):
+      conversion = {"multiply": "mul", "divide": "div", "true_divide": "div", "subtract":"sub","power":"pow","greater_equal":"ge","less_equal": "le", "less": "lt", "greater": "gt"}
+      name = ufunc.__name__
+      inputs = list(inputs)
+      if len(inputs)==3:
+        import warnings
+        warnings.warn("Error with %s. Looks like you are using an assignment operator, such as 'a+=b' where 'a' is a numpy type. This is not supported, and cannot be supported without changing numpy." % name, RuntimeWarning)
+        return NotImplemented
+      if "vectorized" in name:
+          name = name[:-len(" (vectorized)")]
+      if name in conversion:
+        name = conversion[name]
+      if len(inputs)==2 and inputs[1] is self and not(inputs[0] is self):
+        name = 'r' + name
+        inputs.reverse()
+      if not(hasattr(self,name)) or ('mul' in name):
+        name = '__' + name + '__'
+      try:
+        assert method=="__call__"
+        fun=getattr(self, name)
+        return fun(*inputs[1:])
+      except:
+#Fall back to numpy conversion
+        new_inputs = list(inputs)
+        try:
+          new_inputs[0] = new_inputs[0].full()
+        except:
+          import warnings
+          warnings.warn("Implicit conversion of symbolic CasADi type to numeric matrix not supported.\n"
+                                 + "This may occur when you pass a CasADi object to a numpy function.\n"
+                                 + "Use an equivalent CasADi function instead of that numpy function.", RuntimeWarning)
+          return NotImplemented
+        return new_inputs[0].__array_ufunc__(ufunc, method, *new_inputs, **kwargs)
+
 
     def __array__(self,*args,**kwargs):
       import numpy as n
@@ -10141,8 +9223,6 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
         SX(float val)
         SX([[float]] m)
         SX([float] x)
-        SX([int] x)
-        SX(IM x)
         SX(DM x)
         SX(SX m)
         SX(int nrow, int ncol)
@@ -10160,7 +9240,7 @@ class SX(MatrixCommon, GenericExpressionCommon, GenSX, PrintableCommon):
 SX_swigregister = _casadi.SX_swigregister
 SX_swigregister(SX)
 
-def SX_binary(*args):
+def SX_binary(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
@@ -10171,7 +9251,7 @@ def SX_binary(*args):
     """
     return _casadi.SX_binary(*args)
 
-def SX_unary(*args):
+def SX_unary(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
@@ -10182,7 +9262,7 @@ def SX_unary(*args):
     """
     return _casadi.SX_unary(*args)
 
-def SX_scalar_matrix(*args):
+def SX_scalar_matrix(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
@@ -10193,7 +9273,7 @@ def SX_scalar_matrix(*args):
     """
     return _casadi.SX_scalar_matrix(*args)
 
-def SX_matrix_scalar(*args):
+def SX_matrix_scalar(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
@@ -10204,7 +9284,7 @@ def SX_matrix_scalar(*args):
     """
     return _casadi.SX_matrix_scalar(*args)
 
-def SX_matrix_matrix(*args):
+def SX_matrix_matrix(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
@@ -10215,7 +9295,7 @@ def SX_matrix_matrix(*args):
     """
     return _casadi.SX_matrix_matrix(*args)
 
-def SX_set_max_depth(*args):
+def SX_set_max_depth(*args) -> "void":
     """
 
 
@@ -10226,7 +9306,7 @@ def SX_set_max_depth(*args):
     """
     return _casadi.SX_set_max_depth(*args)
 
-def SX_get_max_depth(*args):
+def SX_get_max_depth(*args) -> "casadi_int":
     """
 
 
@@ -10237,7 +9317,7 @@ def SX_get_max_depth(*args):
     """
     return _casadi.SX_get_max_depth(*args)
 
-def SX_get_input(*args):
+def SX_get_input(*args) -> "std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >":
     """
 
 
@@ -10248,7 +9328,7 @@ def SX_get_input(*args):
     """
     return _casadi.SX_get_input(*args)
 
-def SX_get_free(*args):
+def SX_get_free(*args) -> "std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >":
     """
 
 
@@ -10259,7 +9339,7 @@ def SX_get_free(*args):
     """
     return _casadi.SX_get_free(*args)
 
-def SX_type_name(*args):
+def SX_type_name(*args) -> "std::string":
     """
 
 
@@ -10270,7 +9350,7 @@ def SX_type_name(*args):
     """
     return _casadi.SX_type_name(*args)
 
-def SX_triplet(*args):
+def SX_triplet(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
@@ -10283,7 +9363,7 @@ def SX_triplet(*args):
     """
     return _casadi.SX_triplet(*args)
 
-def SX_inf(*args):
+def SX_inf(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     create a matrix with all inf
 
@@ -10298,7 +9378,7 @@ def SX_inf(*args):
     """
     return _casadi.SX_inf(*args)
 
-def SX_nan(*args):
+def SX_nan(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     create a matrix with all nan
 
@@ -10313,18 +9393,18 @@ def SX_nan(*args):
     """
     return _casadi.SX_nan(*args)
 
-def SX_eye(*args):
+def SX_eye(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
-    eye(int ncol) -> SX
+    eye(int n) -> SX
 
 
 
     """
     return _casadi.SX_eye(*args)
 
-def SX_set_precision(*args):
+def SX_set_precision(*args) -> "void":
     """
       Set the 'precision, width & scientific' used in printing and serializing to
 
@@ -10338,7 +9418,7 @@ def SX_set_precision(*args):
     """
     return _casadi.SX_set_precision(*args)
 
-def SX_set_width(*args):
+def SX_set_width(*args) -> "void":
     """
       Set the 'precision, width & scientific' used in printing and serializing to
 
@@ -10352,7 +9432,7 @@ def SX_set_width(*args):
     """
     return _casadi.SX_set_width(*args)
 
-def SX_set_scientific(*args):
+def SX_set_scientific(*args) -> "void":
     """
       Set the 'precision, width & scientific' used in printing and serializing to
 
@@ -10366,7 +9446,7 @@ def SX_set_scientific(*args):
     """
     return _casadi.SX_set_scientific(*args)
 
-def SX_rng(*args):
+def SX_rng(*args) -> "void":
     """
 
 
@@ -10377,7 +9457,7 @@ def SX_rng(*args):
     """
     return _casadi.SX_rng(*args)
 
-def SX_rand(*args):
+def SX_rand(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Create a matrix with uniformly distributed random numbers.
 
@@ -10392,16 +9472,48 @@ def SX_rand(*args):
     """
     return _casadi.SX_rand(*args)
 
-def SX_from_info(*args):
+def SX_deserialize(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
-    from_info(dict info) -> SX
+    deserialize(std::istream & stream) -> SX
+    deserialize(casadi::DeserializingStream & s) -> SX
+    deserialize(str s) -> SX
 
 
 
     """
-    return _casadi.SX_from_info(*args)
+    return _casadi.SX_deserialize(*args)
+
+def SX_from_file(*args) -> "casadi::Matrix< double >":
+    """
+      Export numerical matrix to file
+
+      from_file(str filename, str format_hint) -> DM
+
+
+    Supported formats:
+
+
+
+    ::
+
+      *   - .mtx   Matrix Market (sparse)
+      *   - .txt   Ascii full precision representation (sparse)
+      *            Whitespace separated, aligned.
+      *            Comments with # % or /
+      *            Uses C locale
+      *            Structural zeros represented by 00
+      *            Does not scale well for large sparse matrices
+      * 
+
+
+
+
+
+
+    """
+    return _casadi.SX_from_file(*args)
 
 class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
     """
@@ -10442,7 +9554,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
     __getattr__ = lambda self, name: _swig_getattr(self, MX, name)
     __repr__ = _swig_repr
 
-    def type_name(*args):
+    def type_name(*args) -> "std::string":
         """
 
 
@@ -10460,72 +9572,129 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 
 
           MX()
-            Default constructor.
           MX(Sparsity sp)
-            Create a sparse matrix from a sparsity pattern. Same as MX::ones(sparsity)
           MX(float x)
-            Create scalar constant (also implicit type conversion)
-          MX([float] x)
-            Create vector constant (also implicit type conversion)
           MX(DM x)
           MX(MX x)
-            Copy constructor.
           MX(int nrow, int ncol)
-            Create a sparse matrix with all structural zeros.
           MX(Sparsity sp, MX val)
-            Construct matrix with a given sparsity and nonzeros.
+          MX(Sparsity sp, str fname)
 
-        > MX(DM x)
-        ------------------------------------------------------------------------
 
-        > MX(Sparsity sp)
-        ------------------------------------------------------------------------
+        .......
+
+        ::
+
+          MX(DM x)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          MX(Sparsity sp)
+
 
 
         Create a sparse matrix from a sparsity pattern. Same as MX::ones(sparsity)
 
 
-        > MX(Sparsity sp, MX val)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          MX(Sparsity sp, MX val)
+
 
 
         Construct matrix with a given sparsity and nonzeros.
 
 
-        > MX()
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          MX()
+
 
 
         Default constructor.
 
 
-        > MX(float x)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          MX(float x)
+
 
 
         Create scalar constant (also implicit type conversion)
 
 
-        > MX([float] x)
-        ------------------------------------------------------------------------
+
+        .............
 
 
-        Create vector constant (also implicit type conversion)
+        .......
 
+        ::
 
-        > MX(MX x)
-        ------------------------------------------------------------------------
+          MX(MX x)
+
 
 
         Copy constructor.
 
 
-        > MX(int nrow, int ncol)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          MX(int nrow, int ncol)
+
 
 
         Create a sparse matrix with all structural zeros.
 
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          MX(Sparsity sp, str fname)
+
+
+
+        Construct matrix with a given sparsity and a file with nonzeros.
+
+
+
+        .............
 
 
 
@@ -10537,21 +9706,21 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
             self.this = this
     __swig_destroy__ = _casadi.delete_MX
 
-    def __nonzero__(self, *args):
+    def __bool__(self, *args) -> "bool":
         """
         Returns the truth value of an MX expression.
 
-        __nonzero__(self) -> bool
+        __bool__(self) -> bool
 
 
 
 
 
         """
-        return _casadi.MX___nonzero__(self, *args)
+        return _casadi.MX___bool__(self, *args)
 
 
-    def sparsity(self, *args):
+    def sparsity(self, *args) -> "casadi::Sparsity":
         """
         Get an owning reference to the sparsity pattern.
 
@@ -10565,27 +9734,39 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_sparsity(self, *args)
 
 
-    def erase(self, *args):
+    def erase(self, *args) -> "void":
         """
           Erase a submatrix (leaving structural zeros in its place) Erase elements of
 
           erase(self, [int] rr, bool ind1)
           erase(self, [int] rr, [int] cc, bool ind1)
-            Erase a submatrix (leaving structural zeros in its place) Erase rows and/or
 
         a matrix.
 
 
-        > erase(self, [int] rr, bool ind1)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          erase(self, [int] rr, bool ind1)
+
 
 
         Erase a submatrix (leaving structural zeros in its place) Erase elements of
         a matrix.
 
 
-        > erase(self, [int] rr, [int] cc, bool ind1)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          erase(self, [int] rr, [int] cc, bool ind1)
+
 
 
         Erase a submatrix (leaving structural zeros in its place) Erase rows and/or
@@ -10593,12 +9774,15 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 
 
 
+        .............
+
+
 
         """
         return _casadi.MX_erase(self, *args)
 
 
-    def enlarge(self, *args):
+    def enlarge(self, *args) -> "void":
         """
           Enlarge matrix Make the matrix larger by inserting empty rows and columns,
 
@@ -10613,7 +9797,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_enlarge(self, *args)
 
 
-    def __neg__(self, *args):
+    def __neg__(self, *args) -> "casadi::MX":
         """
 
 
@@ -10625,7 +9809,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX___neg__(self, *args)
 
 
-    def dep(self, *args):
+    def dep(self, *args) -> "casadi::MX":
         """
         Get the nth dependency as MX.
 
@@ -10639,7 +9823,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_dep(self, *args)
 
 
-    def n_out(self, *args):
+    def n_out(self, *args) -> "casadi_int":
         """
         Number of outputs.
 
@@ -10653,7 +9837,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_n_out(self, *args)
 
 
-    def get_output(self, *args):
+    def get_output(self, *args) -> "casadi::MX":
         """
         Get an output.
 
@@ -10667,7 +9851,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_get_output(self, *args)
 
 
-    def n_dep(self, *args):
+    def n_dep(self, *args) -> "casadi_int":
         """
         Get the number of dependencies of a binary SXElem.
 
@@ -10681,7 +9865,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_n_dep(self, *args)
 
 
-    def name(self, *args):
+    def name(self, *args) -> "std::string":
         """
         Get the name.
 
@@ -10695,7 +9879,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_name(self, *args)
 
 
-    def __float__(self, *args):
+    def __float__(self, *args) -> "double":
         """
 
 
@@ -10707,7 +9891,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX___float__(self, *args)
 
 
-    def to_DM(self, *args):
+    def to_DM(self, *args) -> "casadi::Matrix< double >":
         """
 
 
@@ -10719,7 +9903,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_to_DM(self, *args)
 
 
-    def is_symbolic(self, *args):
+    def is_symbolic(self, *args) -> "bool":
         """
         Check if symbolic.
 
@@ -10733,7 +9917,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_symbolic(self, *args)
 
 
-    def is_constant(self, *args):
+    def is_constant(self, *args) -> "bool":
         """
         Check if constant.
 
@@ -10747,7 +9931,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_constant(self, *args)
 
 
-    def is_call(self, *args):
+    def is_call(self, *args) -> "bool":
         """
         Check if evaluation.
 
@@ -10761,7 +9945,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_call(self, *args)
 
 
-    def which_function(self, *args):
+    def which_function(self, *args) -> "casadi::Function":
         """
         Get function - only valid when is_call() is true.
 
@@ -10775,7 +9959,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_which_function(self, *args)
 
 
-    def is_output(self, *args):
+    def is_output(self, *args) -> "bool":
         """
         Check if evaluation output.
 
@@ -10789,7 +9973,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_output(self, *args)
 
 
-    def which_output(self, *args):
+    def which_output(self, *args) -> "casadi_int":
         """
         Get the index of evaluation output - only valid when is_output() is true.
 
@@ -10803,7 +9987,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_which_output(self, *args)
 
 
-    def is_op(self, *args):
+    def is_op(self, *args) -> "bool":
         """
         Is it a certain operation.
 
@@ -10817,7 +10001,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_op(self, *args)
 
 
-    def is_multiplication(self, *args):
+    def is_multiplication(self, *args) -> "bool":
         """
         Check if multiplication.
 
@@ -10831,7 +10015,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_multiplication(self, *args)
 
 
-    def is_commutative(self, *args):
+    def is_commutative(self, *args) -> "bool":
         """
         Check if commutative operation.
 
@@ -10845,7 +10029,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_commutative(self, *args)
 
 
-    def is_norm(self, *args):
+    def is_norm(self, *args) -> "bool":
         """
         Check if norm.
 
@@ -10859,7 +10043,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_norm(self, *args)
 
 
-    def is_valid_input(self, *args):
+    def is_valid_input(self, *args) -> "bool":
         """
           Check if matrix can be used to define function inputs. Valid inputs for
 
@@ -10874,7 +10058,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_valid_input(self, *args)
 
 
-    def n_primitives(self, *args):
+    def n_primitives(self, *args) -> "casadi_int":
         """
         Get the number of primitives for MXFunction inputs/outputs.
 
@@ -10888,7 +10072,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_n_primitives(self, *args)
 
 
-    def primitives(self, *args):
+    def primitives(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
         Get primitives.
 
@@ -10902,7 +10086,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_primitives(self, *args)
 
 
-    def split_primitives(self, *args):
+    def split_primitives(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
         Split up an expression along symbolic primitives.
 
@@ -10916,7 +10100,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_split_primitives(self, *args)
 
 
-    def join_primitives(self, *args):
+    def join_primitives(self, *args) -> "casadi::MX":
         """
         Join an expression along symbolic primitives.
 
@@ -10930,7 +10114,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_join_primitives(self, *args)
 
 
-    def has_duplicates(self, *args):
+    def has_duplicates(self, *args) -> "bool":
         """
           [INTERNAL]  Detect duplicate symbolic expressions If there are symbolic
 
@@ -10948,7 +10132,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_has_duplicates(self, *args)
 
 
-    def reset_input(self, *args):
+    def reset_input(self, *args) -> "void":
         """
         [INTERNAL]  Reset the marker for an input expression.
 
@@ -10962,7 +10146,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_reset_input(self, *args)
 
 
-    def is_eye(self, *args):
+    def is_eye(self, *args) -> "bool":
         """
         check if identity
 
@@ -10976,7 +10160,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_eye(self, *args)
 
 
-    def is_zero(self, *args):
+    def is_zero(self, *args) -> "bool":
         """
         check if zero (note that false negative answers are possible)
 
@@ -10990,7 +10174,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_zero(self, *args)
 
 
-    def is_one(self, *args):
+    def is_one(self, *args) -> "bool":
         """
         check if zero (note that false negative answers are possible)
 
@@ -11004,7 +10188,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_one(self, *args)
 
 
-    def is_minus_one(self, *args):
+    def is_minus_one(self, *args) -> "bool":
         """
         check if zero (note that false negative answers are possible)
 
@@ -11018,7 +10202,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_minus_one(self, *args)
 
 
-    def is_transpose(self, *args):
+    def is_transpose(self, *args) -> "bool":
         """
         Is the expression a transpose?
 
@@ -11032,7 +10216,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_transpose(self, *args)
 
 
-    def is_regular(self, *args):
+    def is_regular(self, *args) -> "bool":
         """
         Checks if expression does not contain NaN or Inf.
 
@@ -11046,7 +10230,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_regular(self, *args)
 
 
-    def is_binary(self, *args):
+    def is_binary(self, *args) -> "bool":
         """
         Is binary operation.
 
@@ -11060,7 +10244,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_binary(self, *args)
 
 
-    def is_unary(self, *args):
+    def is_unary(self, *args) -> "bool":
         """
         Is unary operation.
 
@@ -11074,7 +10258,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_is_unary(self, *args)
 
 
-    def op(self, *args):
+    def op(self, *args) -> "casadi_int":
         """
         Get operation type.
 
@@ -11088,7 +10272,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_op(self, *args)
 
 
-    def info(self, *args):
+    def info(self, *args) -> "casadi::Dict":
         """
         Obtain information about node
 
@@ -11102,7 +10286,34 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_info(self, *args)
 
 
-    def get_temp(self, *args):
+    def serialize(self, *args) -> "void":
+        """
+        Serialize an object.
+
+        serialize(self, casadi::SerializingStream & s)
+
+
+
+
+
+        """
+        return _casadi.MX_serialize(self, *args)
+
+
+    def deserialize(*args) -> "casadi::MX":
+        """
+
+
+        deserialize(casadi::DeserializingStream & s) -> MX
+
+
+
+        """
+        return _casadi.MX_deserialize(*args)
+
+    deserialize = staticmethod(deserialize)
+
+    def get_temp(self, *args) -> "casadi_int":
         """
         [INTERNAL]  Get the temporary variable
 
@@ -11116,7 +10327,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_get_temp(self, *args)
 
 
-    def set_temp(self, *args):
+    def set_temp(self, *args) -> "void":
         """
         [INTERNAL]  Set the temporary variable.
 
@@ -11130,7 +10341,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_set_temp(self, *args)
 
 
-    def binary(*args):
+    def binary(*args) -> "casadi::MX":
         """
         Create nodes by their ID.
 
@@ -11145,7 +10356,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 
     binary = staticmethod(binary)
 
-    def unary(*args):
+    def unary(*args) -> "casadi::MX":
         """
         Create nodes by their ID.
 
@@ -11160,7 +10371,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 
     unary = staticmethod(unary)
 
-    def inf(*args):
+    def inf(*args) -> "casadi::MX":
         """
         create a matrix with all inf
 
@@ -11177,7 +10388,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 
     inf = staticmethod(inf)
 
-    def nan(*args):
+    def nan(*args) -> "casadi::MX":
         """
         create a matrix with all nan
 
@@ -11194,11 +10405,11 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 
     nan = staticmethod(nan)
 
-    def eye(*args):
+    def eye(*args) -> "casadi::MX":
         """
 
 
-        eye(int ncol) -> MX
+        eye(int n) -> MX
 
 
 
@@ -11207,41 +10418,80 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 
     eye = staticmethod(eye)
 
-    def get(self, *args):
+    def get(self, *args) -> "void":
         """
+          Get a submatrix, two arguments
 
-
+          get(self, bool ind1, int rr) -> MX
           get(self, bool ind1, Sparsity sp) -> MX
-            Get a submatrix, single argument
           get(self, bool ind1, Slice rr) -> MX
-            Get a submatrix, single argument
           get(self, bool ind1, IM rr) -> MX
+          get(self, bool ind1, MX rr) -> MX
+          get(self, bool ind1, int rr, int cc) -> MX
+          get(self, bool ind1, int rr, Slice cc) -> MX
+          get(self, bool ind1, Slice rr, int cc) -> MX
           get(self, bool ind1, Slice rr, Slice cc) -> MX
-            Get a submatrix, two arguments
           get(self, bool ind1, Slice rr, IM cc) -> MX
+          get(self, bool ind1, Slice rr, MX cc) -> MX
           get(self, bool ind1, IM rr, Slice cc) -> MX
           get(self, bool ind1, IM rr, IM cc) -> MX
+          get(self, bool ind1, MX rr, Slice cc) -> MX
+          get(self, bool ind1, MX rr, MX cc) -> MX
 
-        > get(self, bool ind1, IM rr)
-        > get(self, bool ind1, Slice rr, IM cc)
-        > get(self, bool ind1, IM rr, Slice cc)
-        > get(self, bool ind1, IM rr, IM cc)
-        ------------------------------------------------------------------------
 
-        > get(self, bool ind1, Sparsity sp)
-        > get(self, bool ind1, Slice rr)
-        ------------------------------------------------------------------------
+
+
+        .......
+
+        ::
+
+          get(self, bool ind1, IM rr)
+          get(self, bool ind1, Slice rr, IM cc)
+          get(self, bool ind1, IM rr, Slice cc)
+          get(self, bool ind1, IM rr, IM cc)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          get(self, bool ind1, int rr)
+          get(self, bool ind1, Sparsity sp)
+          get(self, bool ind1, Slice rr)
+          get(self, bool ind1, MX rr)
+
 
 
         Get a submatrix, single argument
 
 
-        > get(self, bool ind1, Slice rr, Slice cc)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          get(self, bool ind1, int rr, int cc)
+          get(self, bool ind1, int rr, Slice cc)
+          get(self, bool ind1, Slice rr, int cc)
+          get(self, bool ind1, Slice rr, Slice cc)
+          get(self, bool ind1, Slice rr, MX cc)
+          get(self, bool ind1, MX rr, Slice cc)
+          get(self, bool ind1, MX rr, MX cc)
+
 
 
         Get a submatrix, two arguments
 
+
+
+        .............
 
 
 
@@ -11249,34 +10499,48 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_get(self, *args)
 
 
-    def set(self, *args):
+    def set(self, *args) -> "void":
         """
 
 
           set(self, MX m, bool ind1, Sparsity sp)
-            Set a submatrix, single argument
           set(self, MX m, bool ind1, Slice rr)
-            Set a submatrix, single argument
           set(self, MX m, bool ind1, IM rr)
           set(self, MX m, bool ind1, Slice rr, Slice cc)
           set(self, MX m, bool ind1, Slice rr, IM cc)
           set(self, MX m, bool ind1, IM rr, Slice cc)
           set(self, MX m, bool ind1, IM rr, IM cc)
 
-        > set(self, MX m, bool ind1, IM rr)
-        > set(self, MX m, bool ind1, Slice rr, Slice cc)
-        > set(self, MX m, bool ind1, Slice rr, IM cc)
-        > set(self, MX m, bool ind1, IM rr, Slice cc)
-        > set(self, MX m, bool ind1, IM rr, IM cc)
-        ------------------------------------------------------------------------
 
-        > set(self, MX m, bool ind1, Sparsity sp)
-        > set(self, MX m, bool ind1, Slice rr)
-        ------------------------------------------------------------------------
+        .......
+
+        ::
+
+          set(self, MX m, bool ind1, IM rr)
+          set(self, MX m, bool ind1, Slice rr, Slice cc)
+          set(self, MX m, bool ind1, Slice rr, IM cc)
+          set(self, MX m, bool ind1, IM rr, Slice cc)
+          set(self, MX m, bool ind1, IM rr, IM cc)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          set(self, MX m, bool ind1, Sparsity sp)
+          set(self, MX m, bool ind1, Slice rr)
+
 
 
         Set a submatrix, single argument
 
+
+
+        .............
 
 
 
@@ -11284,23 +10548,50 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_set(self, *args)
 
 
-    def get_nz(self, *args):
+    def get_nz(self, *args) -> "void":
         """
+          Get a set of nonzeros
 
-
+          get_nz(self, bool ind1, int kk) -> MX
           get_nz(self, bool ind1, Slice kk) -> MX
-            Get a set of nonzeros
           get_nz(self, bool ind1, IM kk) -> MX
+          get_nz(self, bool ind1, MX kk) -> MX
+          get_nz(self, bool ind1, Slice inner, MX outer) -> MX
+          get_nz(self, bool ind1, MX inner, Slice outer) -> MX
+          get_nz(self, bool ind1, MX inner, MX outer) -> MX
 
-        > get_nz(self, bool ind1, IM kk)
-        ------------------------------------------------------------------------
 
-        > get_nz(self, bool ind1, Slice kk)
-        ------------------------------------------------------------------------
+
+
+        .......
+
+        ::
+
+          get_nz(self, bool ind1, IM kk)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          get_nz(self, bool ind1, int kk)
+          get_nz(self, bool ind1, Slice kk)
+          get_nz(self, bool ind1, MX kk)
+          get_nz(self, bool ind1, Slice inner, MX outer)
+          get_nz(self, bool ind1, MX inner, Slice outer)
+          get_nz(self, bool ind1, MX inner, MX outer)
+
 
 
         Get a set of nonzeros
 
+
+
+        .............
 
 
 
@@ -11308,23 +10599,44 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_get_nz(self, *args)
 
 
-    def set_nz(self, *args):
+    def set_nz(self, *args) -> "void":
         """
+          Set a set of nonzeros
 
-
+          set_nz(self, MX m, bool ind1, int kk)
           set_nz(self, MX m, bool ind1, Slice kk)
-            Set a set of nonzeros
+          set_nz(self, MX m, bool ind1, IM kk)
+          set_nz(self, MX m, bool ind1, MX kk)
+
+
+
+
+        .......
+
+        ::
+
           set_nz(self, MX m, bool ind1, IM kk)
 
-        > set_nz(self, MX m, bool ind1, IM kk)
-        ------------------------------------------------------------------------
 
-        > set_nz(self, MX m, bool ind1, Slice kk)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          set_nz(self, MX m, bool ind1, int kk)
+          set_nz(self, MX m, bool ind1, Slice kk)
+          set_nz(self, MX m, bool ind1, MX kk)
+
 
 
         Set a set of nonzeros
 
+
+
+        .............
 
 
 
@@ -11332,7 +10644,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_set_nz(self, *args)
 
 
-    def einstein(*args):
+    def einstein(*args) -> "casadi::MX":
         """
           Computes an einstein dense tensor contraction.
 
@@ -11356,11 +10668,39 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 
     einstein = staticmethod(einstein)
 
-    def printme(self, *args):
+    def bspline_dual(*args) -> "casadi::DM":
+        """
+        Find first nonzero If failed, returns the number of rows.
+
+        bspline_dual([float] x, [[float]] knots, [int] degree, dict opts) -> DM
+
+
+
+
+
+        """
+        return _casadi.MX_bspline_dual(*args)
+
+    bspline_dual = staticmethod(bspline_dual)
+
+    def interpn_linear(*args) -> "casadi::MX":
         """
 
 
-        printme(self, MX y) -> MX
+        interpn_linear([MX] x, MX v, [MX] xq, dict opts) -> MX
+
+
+
+        """
+        return _casadi.MX_interpn_linear(*args)
+
+    interpn_linear = staticmethod(interpn_linear)
+
+    def printme(self, *args) -> "casadi::MX":
+        """
+
+
+        printme(self, MX b) -> MX
 
 
 
@@ -11368,7 +10708,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_printme(self, *args)
 
 
-    def attachAssert(self, *args):
+    def attachAssert(self, *args) -> "casadi::MX":
         """
           returns itself, but with an assertion attached
 
@@ -11384,7 +10724,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_attachAssert(self, *args)
 
 
-    def monitor(self, *args):
+    def monitor(self, *args) -> "casadi::MX":
         """
           Monitor an expression Returns itself, but with the side effect of printing
 
@@ -11399,7 +10739,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_monitor(self, *args)
 
 
-    def mapping(self, *args):
+    def mapping(self, *args) -> "casadi::Matrix< casadi_int >":
         """
         Get an IM representation of a GetNonzeros or SetNonzeros node.
 
@@ -11413,7 +10753,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
         return _casadi.MX_mapping(self, *args)
 
 
-    def set_max_depth(*args):
+    def set_max_depth(*args) -> "void":
         """
 
 
@@ -11426,7 +10766,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 
     set_max_depth = staticmethod(set_max_depth)
 
-    def get_max_depth(*args):
+    def get_max_depth(*args) -> "casadi_int":
         """
 
 
@@ -11439,7 +10779,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 
     get_max_depth = staticmethod(get_max_depth)
 
-    def test_cast(*args):
+    def test_cast(*args) -> "bool":
         """
 
 
@@ -11452,7 +10792,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 
     test_cast = staticmethod(test_cast)
 
-    def get_input(*args):
+    def get_input(*args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
 
 
@@ -11465,7 +10805,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 
     get_input = staticmethod(get_input)
 
-    def get_free(*args):
+    def get_free(*args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
 
 
@@ -11494,6 +10834,12 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
             if s[1] is None: raise TypeError("Cannot slice with None")
             return self.get(False, s[0], s[1])
           return self.get(False, s)
+
+    def __iter__(self):
+      raise Exception("""CasADi matrices are not iterable by design.
+                      Did you mean to iterate over m.nz, with m IM/DM/SX?
+                      Did you mean to iterate over horzsplit(m,1)/vertsplit(m,1) with m IM/DM/SX/MX?
+                      """)
 
     def __setitem__(self,s,val):
           if isinstance(s,tuple) and len(s)==2:
@@ -11532,6 +10878,40 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
       fun=getattr(self, name)
       return fun(*args[1:])
 
+    def __array_ufunc__(self, ufunc, method, *inputs, **kwargs):
+      conversion = {"multiply": "mul", "divide": "div", "true_divide": "div", "subtract":"sub","power":"pow","greater_equal":"ge","less_equal": "le", "less": "lt", "greater": "gt"}
+      name = ufunc.__name__
+      inputs = list(inputs)
+      if len(inputs)==3:
+        import warnings
+        warnings.warn("Error with %s. Looks like you are using an assignment operator, such as 'a+=b' where 'a' is a numpy type. This is not supported, and cannot be supported without changing numpy." % name, RuntimeWarning)
+        return NotImplemented
+      if "vectorized" in name:
+          name = name[:-len(" (vectorized)")]
+      if name in conversion:
+        name = conversion[name]
+      if len(inputs)==2 and inputs[1] is self and not(inputs[0] is self):
+        name = 'r' + name
+        inputs.reverse()
+      if not(hasattr(self,name)) or ('mul' in name):
+        name = '__' + name + '__'
+      try:
+        assert method=="__call__"
+        fun=getattr(self, name)
+        return fun(*inputs[1:])
+      except:
+#Fall back to numpy conversion
+        new_inputs = list(inputs)
+        try:
+          new_inputs[0] = new_inputs[0].full()
+        except:
+          import warnings
+          warnings.warn("Implicit conversion of symbolic CasADi type to numeric matrix not supported.\n"
+                                 + "This may occur when you pass a CasADi object to a numpy function.\n"
+                                 + "Use an equivalent CasADi function instead of that numpy function.", RuntimeWarning)
+          return NotImplemented
+        return new_inputs[0].__array_ufunc__(ufunc, method, *new_inputs, **kwargs)
+
 
     def __array__(self,*args,**kwargs):
       import numpy as n
@@ -11554,7 +10934,7 @@ class MX(GenericExpressionCommon, PrintableCommon, GenMX, SharedObject):
 MX_swigregister = _casadi.MX_swigregister
 MX_swigregister(MX)
 
-def MX_type_name(*args):
+def MX_type_name(*args) -> "std::string":
     """
 
 
@@ -11565,7 +10945,18 @@ def MX_type_name(*args):
     """
     return _casadi.MX_type_name(*args)
 
-def MX_binary(*args):
+def MX_deserialize(*args) -> "casadi::MX":
+    """
+
+
+    deserialize(casadi::DeserializingStream & s) -> MX
+
+
+
+    """
+    return _casadi.MX_deserialize(*args)
+
+def MX_binary(*args) -> "casadi::MX":
     """
     Create nodes by their ID.
 
@@ -11578,7 +10969,7 @@ def MX_binary(*args):
     """
     return _casadi.MX_binary(*args)
 
-def MX_unary(*args):
+def MX_unary(*args) -> "casadi::MX":
     """
     Create nodes by their ID.
 
@@ -11591,7 +10982,7 @@ def MX_unary(*args):
     """
     return _casadi.MX_unary(*args)
 
-def MX_inf(*args):
+def MX_inf(*args) -> "casadi::MX":
     """
     create a matrix with all inf
 
@@ -11606,7 +10997,7 @@ def MX_inf(*args):
     """
     return _casadi.MX_inf(*args)
 
-def MX_nan(*args):
+def MX_nan(*args) -> "casadi::MX":
     """
     create a matrix with all nan
 
@@ -11621,18 +11012,18 @@ def MX_nan(*args):
     """
     return _casadi.MX_nan(*args)
 
-def MX_eye(*args):
+def MX_eye(*args) -> "casadi::MX":
     """
 
 
-    eye(int ncol) -> MX
+    eye(int n) -> MX
 
 
 
     """
     return _casadi.MX_eye(*args)
 
-def MX_einstein(*args):
+def MX_einstein(*args) -> "casadi::MX":
     """
       Computes an einstein dense tensor contraction.
 
@@ -11654,7 +11045,31 @@ def MX_einstein(*args):
     """
     return _casadi.MX_einstein(*args)
 
-def MX_set_max_depth(*args):
+def MX_bspline_dual(*args) -> "casadi::DM":
+    """
+    Find first nonzero If failed, returns the number of rows.
+
+    bspline_dual([float] x, [[float]] knots, [int] degree, dict opts) -> DM
+
+
+
+
+
+    """
+    return _casadi.MX_bspline_dual(*args)
+
+def MX_interpn_linear(*args) -> "casadi::MX":
+    """
+
+
+    interpn_linear([MX] x, MX v, [MX] xq, dict opts) -> MX
+
+
+
+    """
+    return _casadi.MX_interpn_linear(*args)
+
+def MX_set_max_depth(*args) -> "void":
     """
 
 
@@ -11665,7 +11080,7 @@ def MX_set_max_depth(*args):
     """
     return _casadi.MX_set_max_depth(*args)
 
-def MX_get_max_depth(*args):
+def MX_get_max_depth(*args) -> "casadi_int":
     """
 
 
@@ -11676,7 +11091,7 @@ def MX_get_max_depth(*args):
     """
     return _casadi.MX_get_max_depth(*args)
 
-def MX_test_cast(*args):
+def MX_test_cast(*args) -> "bool":
     """
 
 
@@ -11687,7 +11102,7 @@ def MX_test_cast(*args):
     """
     return _casadi.MX_test_cast(*args)
 
-def MX_get_input(*args):
+def MX_get_input(*args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
     """
 
 
@@ -11698,7 +11113,7 @@ def MX_get_input(*args):
     """
     return _casadi.MX_get_input(*args)
 
-def MX_get_free(*args):
+def MX_get_free(*args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
     """
 
 
@@ -11823,10 +11238,28 @@ class Function(SharedObject, PrintableCommon):
     |                  |                 | respectively.    |                  |
     |                  |                 | Cf. option       |                  |
     |                  |                 | "ad_weight".     |                  |
+    |                  |                 | When set to -1,  |                  |
+    |                  |                 | sparsity is      |                  |
+    |                  |                 | completely       |                  |
+    |                  |                 | ignored and      |                  |
+    |                  |                 | dense matrices   |                  |
+    |                  |                 | are used.        |                  |
+    +------------------+-----------------+------------------+------------------+
+    | always_inline    | OT_BOOL         | Force inlining.  | casadi::Function |
+    |                  |                 |                  | Internal         |
     +------------------+-----------------+------------------+------------------+
     | compiler         | OT_STRING       | Just-in-time     | casadi::Function |
     |                  |                 | compiler plugin  | Internal         |
     |                  |                 | to be used.      |                  |
+    +------------------+-----------------+------------------+------------------+
+    | custom_jacobian  | OT_FUNCTION     | Override         | casadi::Function |
+    |                  |                 | CasADi's AD. Use | Internal         |
+    |                  |                 | together with    |                  |
+    |                  |                 | 'jac_penalty':   |                  |
+    |                  |                 | 0. Note: Highly  |                  |
+    |                  |                 | experimental.    |                  |
+    |                  |                 | Syntax may break |                  |
+    |                  |                 | often.           |                  |
     +------------------+-----------------+------------------+------------------+
     | derivative_of    | OT_FUNCTION     | The function is  | casadi::Function |
     |                  |                 | a derivative of  | Internal         |
@@ -11840,6 +11273,38 @@ class Function(SharedObject, PrintableCommon):
     |                  |                 | inferred from    |                  |
     |                  |                 | the function     |                  |
     |                  |                 | name.            |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump             | OT_BOOL         | Dump function to | casadi::Function |
+    |                  |                 | file upon first  | Internal         |
+    |                  |                 | evaluation.      |                  |
+    |                  |                 | [false]          |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_dir         | OT_STRING       | Directory to     | casadi::Function |
+    |                  |                 | dump             | Internal         |
+    |                  |                 | inputs/outputs   |                  |
+    |                  |                 | to. Make sure    |                  |
+    |                  |                 | the directory    |                  |
+    |                  |                 | exists [.]       |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_format      | OT_STRING       | Choose file      | casadi::Function |
+    |                  |                 | format to dump   | Internal         |
+    |                  |                 | matrices. See    |                  |
+    |                  |                 | DM.from_file     |                  |
+    |                  |                 | [mtx]            |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_in          | OT_BOOL         | Dump numerical   | casadi::Function |
+    |                  |                 | values of inputs | Internal         |
+    |                  |                 | to file          |                  |
+    |                  |                 | (readable with   |                  |
+    |                  |                 | DM.from_file )   |                  |
+    |                  |                 | [default: false] |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_out         | OT_BOOL         | Dump numerical   | casadi::Function |
+    |                  |                 | values of        | Internal         |
+    |                  |                 | outputs to file  |                  |
+    |                  |                 | (readable with   |                  |
+    |                  |                 | DM.from_file )   |                  |
+    |                  |                 | [default: false] |                  |
     +------------------+-----------------+------------------+------------------+
     | enable_fd        | OT_BOOL         | Enable           | casadi::Function |
     |                  |                 | derivative       | Internal         |
@@ -11902,6 +11367,11 @@ class Function(SharedObject, PrintableCommon):
     |                  |                 | difference       |                  |
     |                  |                 | instance         |                  |
     +------------------+-----------------+------------------+------------------+
+    | forward_options  | OT_DICT         | Options to be    | casadi::Function |
+    |                  |                 | passed to a      | Internal         |
+    |                  |                 | forward mode     |                  |
+    |                  |                 | constructor      |                  |
+    +------------------+-----------------+------------------+------------------+
     | gather_stats     | OT_BOOL         | Deprecated       | casadi::Function |
     |                  |                 | option           | Internal         |
     |                  |                 | (ignored):       |                  |
@@ -11917,6 +11387,16 @@ class Function(SharedObject, PrintableCommon):
     |                  |                 | numerical values |                  |
     |                  |                 | of the inputs    |                  |
     |                  |                 | don't make sense |                  |
+    +------------------+-----------------+------------------+------------------+
+    | is_diff_in       | OT_BOOLVECTOR   | Indicate for     | casadi::Function |
+    |                  |                 | each input if it | Internal         |
+    |                  |                 | should be        |                  |
+    |                  |                 | differentiable.  |                  |
+    +------------------+-----------------+------------------+------------------+
+    | is_diff_out      | OT_BOOLVECTOR   | Indicate for     | casadi::Function |
+    |                  |                 | each output if   | Internal         |
+    |                  |                 | it should be     |                  |
+    |                  |                 | differentiable.  |                  |
     +------------------+-----------------+------------------+------------------+
     | jac_penalty      | OT_DOUBLE       | When requested   | casadi::Function |
     |                  |                 | for a number of  | Internal         |
@@ -11956,9 +11436,49 @@ class Function(SharedObject, PrintableCommon):
     |                  |                 | speed up the     |                  |
     |                  |                 | evaluation       |                  |
     +------------------+-----------------+------------------+------------------+
+    | jit_cleanup      | OT_BOOL         | Cleanup up the   | casadi::Function |
+    |                  |                 | temporary source | Internal         |
+    |                  |                 | file that jit    |                  |
+    |                  |                 | creates.         |                  |
+    |                  |                 | Default: true    |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_name         | OT_STRING       | The file name    | casadi::Function |
+    |                  |                 | used to write    | Internal         |
+    |                  |                 | out code. The    |                  |
+    |                  |                 | actual file      |                  |
+    |                  |                 | names used       |                  |
+    |                  |                 | depend on 'jit_t |                  |
+    |                  |                 | emp_suffix' and  |                  |
+    |                  |                 | include          |                  |
+    |                  |                 | extensions.      |                  |
+    |                  |                 | Default:         |                  |
+    |                  |                 | 'jit_tmp'        |                  |
+    +------------------+-----------------+------------------+------------------+
     | jit_options      | OT_DICT         | Options to be    | casadi::Function |
     |                  |                 | passed to the    | Internal         |
     |                  |                 | jit compiler.    |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_serialize    | OT_STRING       | Specify          | casadi::Function |
+    |                  |                 | behaviour when   | Internal         |
+    |                  |                 | serializing a    |                  |
+    |                  |                 | jitted function: |                  |
+    |                  |                 | SOURCE|link|embe |                  |
+    |                  |                 | d.               |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_temp_suffix  | OT_BOOL         | Use a temporary  | casadi::Function |
+    |                  |                 | (seemingly       | Internal         |
+    |                  |                 | random) filename |                  |
+    |                  |                 | suffix for       |                  |
+    |                  |                 | generated code   |                  |
+    |                  |                 | and libraries.   |                  |
+    |                  |                 | This is desired  |                  |
+    |                  |                 | for thread-      |                  |
+    |                  |                 | safety. This     |                  |
+    |                  |                 | behaviour may    |                  |
+    |                  |                 | defeat caching   |                  |
+    |                  |                 | compiler         |                  |
+    |                  |                 | wrappers.        |                  |
+    |                  |                 | Default: true    |                  |
     +------------------+-----------------+------------------+------------------+
     | max_num_dir      | OT_INT          | Specify the      | casadi::Function |
     |                  |                 | maximum number   | Internal         |
@@ -11969,18 +11489,43 @@ class Function(SharedObject, PrintableCommon):
     |                  |                 | builtin optimize |                  |
     |                  |                 | d_num_dir.       |                  |
     +------------------+-----------------+------------------+------------------+
+    | never_inline     | OT_BOOL         | Forbid inlining. | casadi::Function |
+    |                  |                 |                  | Internal         |
+    +------------------+-----------------+------------------+------------------+
     | output_scheme    | OT_STRINGVECTOR | Deprecated       | casadi::Function |
     |                  |                 | option (ignored) | Internal         |
+    +------------------+-----------------+------------------+------------------+
+    | print_in         | OT_BOOL         | Print numerical  | casadi::Function |
+    |                  |                 | values of inputs | Internal         |
+    |                  |                 | [default: false] |                  |
+    +------------------+-----------------+------------------+------------------+
+    | print_out        | OT_BOOL         | Print numerical  | casadi::Function |
+    |                  |                 | values of        | Internal         |
+    |                  |                 | outputs          |                  |
+    |                  |                 | [default: false] |                  |
     +------------------+-----------------+------------------+------------------+
     | print_time       | OT_BOOL         | print            | casadi::Function |
     |                  |                 | information      | Internal         |
     |                  |                 | about execution  |                  |
-    |                  |                 | time             |                  |
+    |                  |                 | time. Implies    |                  |
+    |                  |                 | record_time.     |                  |
+    +------------------+-----------------+------------------+------------------+
+    | record_time      | OT_BOOL         | record           | casadi::Function |
+    |                  |                 | information      | Internal         |
+    |                  |                 | about execution  |                  |
+    |                  |                 | time, for        |                  |
+    |                  |                 | retrieval with   |                  |
+    |                  |                 | stats() .        |                  |
     +------------------+-----------------+------------------+------------------+
     | regularity_check | OT_BOOL         | Throw exceptions | casadi::Function |
     |                  |                 | when NaN or Inf  | Internal         |
     |                  |                 | appears during   |                  |
     |                  |                 | evaluation       |                  |
+    +------------------+-----------------+------------------+------------------+
+    | reverse_options  | OT_DICT         | Options to be    | casadi::Function |
+    |                  |                 | passed to a      | Internal         |
+    |                  |                 | reverse mode     |                  |
+    |                  |                 | constructor      |                  |
     +------------------+-----------------+------------------+------------------+
     | user_data        | OT_VOIDPTR      | A user-defined   | casadi::Function |
     |                  |                 | field that can   | Internal         |
@@ -12010,7 +11555,7 @@ class Function(SharedObject, PrintableCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, Function, name)
     __repr__ = _swig_repr
 
-    def type_name(*args):
+    def type_name(*args) -> "std::string":
         """
 
 
@@ -12023,7 +11568,7 @@ class Function(SharedObject, PrintableCommon):
 
     type_name = staticmethod(type_name)
 
-    def jit(*args):
+    def jit(*args) -> "casadi::Function":
         """
           To resolve ambiguity on some compilers.
 
@@ -12061,7 +11606,7 @@ class Function(SharedObject, PrintableCommon):
     jit = staticmethod(jit)
     __swig_destroy__ = _casadi.delete_Function
 
-    def expand(self, *args):
+    def expand(self, *args) -> "casadi::Function":
         """
         Expand a function to SX.
 
@@ -12076,7 +11621,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_expand(self, *args)
 
 
-    def n_in(self, *args):
+    def n_in(self, *args) -> "casadi_int":
         """
         Get the number of function inputs.
 
@@ -12090,7 +11635,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_n_in(self, *args)
 
 
-    def n_out(self, *args):
+    def n_out(self, *args) -> "casadi_int":
         """
         Get the number of function outputs.
 
@@ -12104,7 +11649,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_n_out(self, *args)
 
 
-    def size1_in(self, *args):
+    def size1_in(self, *args) -> "casadi_int":
         """
         Get input dimension.
 
@@ -12119,7 +11664,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_size1_in(self, *args)
 
 
-    def size2_in(self, *args):
+    def size2_in(self, *args) -> "casadi_int":
         """
         Get input dimension.
 
@@ -12134,7 +11679,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_size2_in(self, *args)
 
 
-    def size_in(self, *args):
+    def size_in(self, *args) -> "std::pair< casadi_int,casadi_int >":
         """
         Get input dimension.
 
@@ -12149,7 +11694,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_size_in(self, *args)
 
 
-    def size1_out(self, *args):
+    def size1_out(self, *args) -> "casadi_int":
         """
         Get output dimension.
 
@@ -12164,7 +11709,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_size1_out(self, *args)
 
 
-    def size2_out(self, *args):
+    def size2_out(self, *args) -> "casadi_int":
         """
         Get output dimension.
 
@@ -12179,7 +11724,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_size2_out(self, *args)
 
 
-    def size_out(self, *args):
+    def size_out(self, *args) -> "std::pair< casadi_int,casadi_int >":
         """
         Get output dimension.
 
@@ -12194,7 +11739,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_size_out(self, *args)
 
 
-    def nnz_in(self, *args):
+    def nnz_in(self, *args) -> "casadi_int":
         """
           Get number of input nonzeros.
 
@@ -12212,7 +11757,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_nnz_in(self, *args)
 
 
-    def nnz_out(self, *args):
+    def nnz_out(self, *args) -> "casadi_int":
         """
           Get number of output nonzeros.
 
@@ -12230,7 +11775,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_nnz_out(self, *args)
 
 
-    def numel_in(self, *args):
+    def numel_in(self, *args) -> "casadi_int":
         """
           Get number of input elements.
 
@@ -12248,7 +11793,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_numel_in(self, *args)
 
 
-    def numel_out(self, *args):
+    def numel_out(self, *args) -> "casadi_int":
         """
           Get number of output elements.
 
@@ -12266,29 +11811,44 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_numel_out(self, *args)
 
 
-    def name_in(self, *args):
+    def name_in(self, *args) -> "std::string const &":
         """
           Get input scheme name by index.
 
           name_in(self) -> [str]
-            Get input scheme.
           name_in(self, int ind) -> str
 
 
 
-        > name_in(self, int ind)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          name_in(self, int ind)
+
 
 
         Get input scheme name by index.
 
 
-        > name_in(self)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          name_in(self)
+
 
 
         Get input scheme.
 
+
+
+        .............
 
 
 
@@ -12296,29 +11856,44 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_name_in(self, *args)
 
 
-    def name_out(self, *args):
+    def name_out(self, *args) -> "std::string const &":
         """
           Get output scheme name by index.
 
           name_out(self) -> [str]
-            Get output scheme.
           name_out(self, int ind) -> str
 
 
 
-        > name_out(self, int ind)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          name_out(self, int ind)
+
 
 
         Get output scheme name by index.
 
 
-        > name_out(self)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          name_out(self)
+
 
 
         Get output scheme.
 
+
+
+        .............
 
 
 
@@ -12326,7 +11901,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_name_out(self, *args)
 
 
-    def index_in(self, *args):
+    def index_in(self, *args) -> "casadi_int":
         """
           Find the index for a string describing a particular entry of an input
 
@@ -12344,7 +11919,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_index_in(self, *args)
 
 
-    def index_out(self, *args):
+    def index_out(self, *args) -> "casadi_int":
         """
           Find the index for a string describing a particular entry of an output
 
@@ -12362,7 +11937,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_index_out(self, *args)
 
 
-    def default_in(self, *args):
+    def default_in(self, *args) -> "double":
         """
         Get default input value.
 
@@ -12376,7 +11951,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_default_in(self, *args)
 
 
-    def max_in(self, *args):
+    def max_in(self, *args) -> "double":
         """
         Get largest input value.
 
@@ -12390,7 +11965,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_max_in(self, *args)
 
 
-    def min_in(self, *args):
+    def min_in(self, *args) -> "double":
         """
         Get smallest input value.
 
@@ -12404,7 +11979,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_min_in(self, *args)
 
 
-    def sparsity_in(self, *args):
+    def sparsity_in(self, *args) -> "casadi::Sparsity const &":
         """
         Get sparsity of a given input.
 
@@ -12419,7 +11994,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_sparsity_in(self, *args)
 
 
-    def sparsity_out(self, *args):
+    def sparsity_out(self, *args) -> "casadi::Sparsity const &":
         """
         Get sparsity of a given output.
 
@@ -12434,7 +12009,37 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_sparsity_out(self, *args)
 
 
-    def factory(self, *args):
+    def is_diff_in(self, *args) -> "std::vector< bool,std::allocator< bool > >":
+        """
+        Get differentiability of inputs/output.
+
+        is_diff_in(self) -> [bool]
+        is_diff_in(self, int ind) -> bool
+
+
+
+
+
+        """
+        return _casadi.Function_is_diff_in(self, *args)
+
+
+    def is_diff_out(self, *args) -> "std::vector< bool,std::allocator< bool > >":
+        """
+        Get differentiability of inputs/output.
+
+        is_diff_out(self) -> [bool]
+        is_diff_out(self, int ind) -> bool
+
+
+
+
+
+        """
+        return _casadi.Function_is_diff_out(self, *args)
+
+
+    def factory(self, *args) -> "casadi::Function":
         """
 
 
@@ -12446,7 +12051,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_factory(self, *args)
 
 
-    def oracle(self, *args):
+    def oracle(self, *args) -> "casadi::Function":
         """
         Get oracle.
 
@@ -12460,7 +12065,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_oracle(self, *args)
 
 
-    def wrap(self, *args):
+    def wrap(self, *args) -> "casadi::Function":
         """
         Wrap in an Function instance consisting of only one MX call.
 
@@ -12474,7 +12079,21 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_wrap(self, *args)
 
 
-    def which_depends(self, *args):
+    def wrap_as_needed(self, *args) -> "casadi::Function":
+        """
+        Wrap in a Function with options.
+
+        wrap_as_needed(self, dict opts) -> Function
+
+
+
+
+
+        """
+        return _casadi.Function_wrap_as_needed(self, *args)
+
+
+    def which_depends(self, *args) -> "std::vector< bool,std::allocator< bool > >":
         """
           Which variables enter with some order.
 
@@ -12495,7 +12114,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_which_depends(self, *args)
 
 
-    def print_dimensions(self, *args):
+    def print_dimensions(self, *args) -> "void":
         """
         Print dimensions of inputs and outputs.
 
@@ -12509,7 +12128,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_print_dimensions(self, *args)
 
 
-    def print_options(self, *args):
+    def print_options(self, *args) -> "void":
         """
         Print options to a stream.
 
@@ -12523,7 +12142,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_print_options(self, *args)
 
 
-    def print_option(self, *args):
+    def print_option(self, *args) -> "void":
         """
         Print all information there is to know about a certain option.
 
@@ -12537,7 +12156,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_print_option(self, *args)
 
 
-    def uses_output(self, *args):
+    def uses_output(self, *args) -> "bool":
         """
         Do the derivative functions need nondifferentiated outputs?
 
@@ -12551,7 +12170,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_uses_output(self, *args)
 
 
-    def jacobian_old(self, *args):
+    def jacobian_old(self, *args) -> "casadi::Function":
         """
           Generate a Jacobian function of output oind with respect to input iind.
 
@@ -12574,7 +12193,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_jacobian_old(self, *args)
 
 
-    def hessian_old(self, *args):
+    def hessian_old(self, *args) -> "casadi::Function":
         """
           Generate a Hessian function of output oind with respect to input iind.
 
@@ -12597,7 +12216,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_hessian_old(self, *args)
 
 
-    def jacobian(self, *args):
+    def jacobian(self, *args) -> "casadi::Function":
         """
           Generate a Jacobian function of all the inputs elements with respect to all
 
@@ -12612,7 +12231,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_jacobian(self, *args)
 
 
-    def jac(self, *args):
+    def jac(self, *args) -> "casadi::Function":
         """
           Calculate all Jacobian blocks Generates a function that takes all non-
 
@@ -12634,13 +12253,12 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_jac(self, *args)
 
 
-    def call(self, *args):
+    def call(self, *args) -> "void":
         """
           Generate a Jacobian function of output oind with respect to input iind.
 
           call(self, dict:DM arg, bool always_inline, bool never_inline) -> dict:DM
           call(self, [DM] arg, bool always_inline, bool never_inline) -> [DM]
-            Evaluate the function symbolically or numerically.
           call(self, [SX] arg, bool always_inline, bool never_inline) -> [SX]
           call(self, dict:SX arg, bool always_inline, bool never_inline) -> dict:SX
           call(self, dict:MX arg, bool always_inline, bool never_inline) -> dict:MX
@@ -12657,19 +12275,32 @@ class Function(SharedObject, PrintableCommon):
         pre-CasADi 3.2
 
 
-        > call(self, [DM] arg, bool always_inline, bool never_inline)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          call(self, [DM] arg, bool always_inline, bool never_inline)
+
 
 
         Evaluate the function symbolically or numerically.
 
 
-        > call(self, dict:DM arg, bool always_inline, bool never_inline)
-        > call(self, [SX] arg, bool always_inline, bool never_inline)
-        > call(self, dict:SX arg, bool always_inline, bool never_inline)
-        > call(self, dict:MX arg, bool always_inline, bool never_inline)
-        > call(self, [MX] arg, bool always_inline, bool never_inline)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          call(self, dict:DM arg, bool always_inline, bool never_inline)
+          call(self, [SX] arg, bool always_inline, bool never_inline)
+          call(self, dict:SX arg, bool always_inline, bool never_inline)
+          call(self, dict:MX arg, bool always_inline, bool never_inline)
+          call(self, [MX] arg, bool always_inline, bool never_inline)
+
 
 
         Generate a Jacobian function of output oind with respect to input iind.
@@ -12685,16 +12316,19 @@ class Function(SharedObject, PrintableCommon):
 
 
 
+        .............
+
+
 
         """
         return _casadi.Function_call(self, *args)
 
 
-    def mapsum(self, *args):
+    def mapsum(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
           Evaluate symbolically in parallel and sum (matrix graph)
 
-          mapsum(self, [MX] arg, str parallelization) -> [MX]
+          mapsum(self, [MX] x, str parallelization) -> [MX]
 
 
         Parameters:
@@ -12709,13 +12343,13 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_mapsum(self, *args)
 
 
-    def mapaccum(self, *args):
+    def mapaccum(self, *args) -> "casadi::Function":
         """
           Create a mapaccumulated version of this function.
 
-          mapaccum(self, int n, dict opts) -> Function
-          mapaccum(self, str name, int n, dict opts) -> Function
-          mapaccum(self, str name, int n, int n_accum, dict opts) -> Function
+          mapaccum(self, int N, dict opts) -> Function
+          mapaccum(self, str name, int N, dict opts) -> Function
+          mapaccum(self, str name, int N, int n_accum, dict opts) -> Function
           mapaccum(self, str name, int n, [str] accum_in, [str] accum_out, dict opts) -> Function
           mapaccum(self, str name, int n, [int] accum_in, [int] accum_out, dict opts) -> Function
 
@@ -12774,11 +12408,11 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_mapaccum(self, *args)
 
 
-    def fold(self, *args):
+    def fold(self, *args) -> "casadi::Function":
         """
           Create a mapaccumulated version of this function.
 
-          fold(self, int n, dict opts) -> Function
+          fold(self, int N, dict opts) -> Function
 
 
         Suppose the function has a signature of:
@@ -12835,25 +12469,37 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_fold(self, *args)
 
 
-    def map(self, *args):
+    def map(self, *args) -> "casadi::Function":
         """
           Map with reduction A subset of the inputs are non-repeated and a subset of
 
           map(self, int n, str parallelization) -> Function
-            Create a mapped version of this function.
+          map(self, int n, [bool] reduce_in, [bool] reduce_out, dict opts) -> Function
           map(self, int n, str parallelization, int max_num_threads) -> Function
-
-          map(self, str name, str parallelization, int n, [int] reduce_in, [int] reduce_out, dict opts) -> Function
           map(self, str name, str parallelization, int n, [str] reduce_in, [str] reduce_out, dict opts) -> Function
+          map(self, str name, str parallelization, int n, [int] reduce_in, [int] reduce_out, dict opts) -> Function
 
         the outputs summed up.
 
 
-        > map(self, int n, str parallelization, int max_num_threads)
-        ------------------------------------------------------------------------
 
-        > map(self, int n, str parallelization)
-        ------------------------------------------------------------------------
+        .......
+
+        ::
+
+          map(self, int n, str parallelization, int max_num_threads)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          map(self, int n, str parallelization)
+
 
 
         Create a mapped version of this function.
@@ -12892,9 +12538,18 @@ class Function(SharedObject, PrintableCommon):
         parallelization:  Type of parallelization used: unroll|serial|openmp
 
 
-        > map(self, str name, str parallelization, int n, [int] reduce_in, [int] reduce_out, dict opts)
-        > map(self, str name, str parallelization, int n, [str] reduce_in, [str] reduce_out, dict opts)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          map(self, int n, [bool] reduce_in, [bool] reduce_out, dict opts)
+          map(self, str name, str parallelization, int n, [str] reduce_in, [str] reduce_out, dict opts)
+          map(self, str name, str parallelization, int n, [int] reduce_in, [int] reduce_out, dict opts)
+
 
 
         Map with reduction A subset of the inputs are non-repeated and a subset of
@@ -12902,12 +12557,15 @@ class Function(SharedObject, PrintableCommon):
 
 
 
+        .............
+
+
 
         """
         return _casadi.Function_map(self, *args)
 
 
-    def slice(self, *args):
+    def slice(self, *args) -> "casadi::Function":
         """
         returns a new function with a selection of inputs/outputs of the original
 
@@ -12921,7 +12579,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_slice(self, *args)
 
 
-    def conditional(*args):
+    def conditional(*args) -> "casadi::Function":
         """
 
 
@@ -12934,7 +12592,7 @@ class Function(SharedObject, PrintableCommon):
 
     conditional = staticmethod(conditional)
 
-    def bspline(*args):
+    def bspline(*args) -> "casadi::Function":
         """
 
 
@@ -12947,20 +12605,7 @@ class Function(SharedObject, PrintableCommon):
 
     bspline = staticmethod(bspline)
 
-    def bspline_dual(*args):
-        """
-
-
-        bspline_dual(str name, [[float]] knots, [float] x, [int] degree, int m, bool reverse, dict opts) -> Function
-
-
-
-        """
-        return _casadi.Function_bspline_dual(*args)
-
-    bspline_dual = staticmethod(bspline_dual)
-
-    def if_else(*args):
+    def if_else(*args) -> "casadi::Function":
         """
 
 
@@ -12973,7 +12618,7 @@ class Function(SharedObject, PrintableCommon):
 
     if_else = staticmethod(if_else)
 
-    def forward(self, *args):
+    def forward(self, *args) -> "casadi::Function":
         """
           Get a function that calculates nfwd forward derivatives.
 
@@ -12998,7 +12643,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_forward(self, *args)
 
 
-    def reverse(self, *args):
+    def reverse(self, *args) -> "casadi::Function":
         """
           Get a function that calculates nadj adjoint derivatives.
 
@@ -13025,7 +12670,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_reverse(self, *args)
 
 
-    def sparsity_jac(self, *args):
+    def sparsity_jac(self, *args) -> "casadi::Sparsity const":
         """
         Get, if necessary generate, the sparsity of a Jacobian block
 
@@ -13042,7 +12687,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_sparsity_jac(self, *args)
 
 
-    def generate(self, *args):
+    def generate(self, *args) -> "std::string":
         """
         Export / Generate C code for the function.
 
@@ -13057,7 +12702,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_generate(self, *args)
 
 
-    def generate_dependencies(self, *args):
+    def generate_dependencies(self, *args) -> "std::string":
         """
         Export / Generate C code for the dependency function.
 
@@ -13071,11 +12716,45 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_generate_dependencies(self, *args)
 
 
-    def serialize(self, *args):
+    def generate_in(self, *args) -> "std::vector< casadi::DM,std::allocator< casadi::DM > >":
+        """
+          Export an input file that can be passed to generate C code with a main.
+
+          generate_in(self, str fname) -> [DM]
+          generate_in(self, str fname, [DM] arg)
+
+
+        generate_out  convert_in to convert between dict/map and vector
+
+
+
+
+        """
+        return _casadi.Function_generate_in(self, *args)
+
+
+    def generate_out(self, *args) -> "std::vector< casadi::DM,std::allocator< casadi::DM > >":
+        """
+          Export an output file that can be checked with generated C code output.
+
+          generate_out(self, str fname) -> [DM]
+          generate_out(self, str fname, [DM] arg)
+
+
+        generate_in  convert_out to convert between dict/map and vector
+
+
+
+
+        """
+        return _casadi.Function_generate_out(self, *args)
+
+
+    def serialize(self, *args) -> "std::string":
         """
         Serialize.
 
-        serialize(self) -> str
+        serialize(self, dict opts) -> str
 
 
 
@@ -13085,7 +12764,23 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_serialize(self, *args)
 
 
-    def export_code(self, *args):
+    def save(self, *args) -> "void":
+        """
+          Export function in specific language.
+
+          save(self, str fname, dict opts)
+
+
+        Only allowed for (a subset of) SX/MX Functions
+
+
+
+
+        """
+        return _casadi.Function_save(self, *args)
+
+
+    def export_code(self, *args) -> "std::string":
         """
           Export function in specific language.
 
@@ -13102,7 +12797,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_export_code(self, *args)
 
 
-    def stats(self, *args):
+    def stats(self, *args) -> "casadi::Dict":
         """
         Get all statistics obtained at the end of the last evaluate call.
 
@@ -13116,7 +12811,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_stats(self, *args)
 
 
-    def sx_in(self, *args):
+    def sx_in(self, *args) -> "std::vector< casadi::SX,std::allocator< casadi::SX > > const":
         """
           Get symbolic primitives equivalent to the input expressions There is no
 
@@ -13133,7 +12828,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_sx_in(self, *args)
 
 
-    def mx_in(self, *args):
+    def mx_in(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > > const":
         """
           Get symbolic primitives equivalent to the input expressions There is no
 
@@ -13150,7 +12845,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_mx_in(self, *args)
 
 
-    def sx_out(self, *args):
+    def sx_out(self, *args) -> "std::vector< casadi::SX,std::allocator< casadi::SX > > const":
         """
           Get symbolic primitives equivalent to the output expressions There is no
 
@@ -13167,7 +12862,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_sx_out(self, *args)
 
 
-    def mx_out(self, *args):
+    def mx_out(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > > const":
         """
           Get symbolic primitives equivalent to the output expressions There is no
 
@@ -13184,7 +12879,107 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_mx_out(self, *args)
 
 
-    def has_free(self, *args):
+    def nz_from_in(self, *args) -> "std::vector< double,std::allocator< double > >":
+        """
+        Convert from/to flat vector of input/output nonzeros.
+
+        nz_from_in(self, [DM] arg) -> [float]
+
+
+
+
+
+        """
+        return _casadi.Function_nz_from_in(self, *args)
+
+
+    def nz_from_out(self, *args) -> "std::vector< double,std::allocator< double > >":
+        """
+        Convert from/to flat vector of input/output nonzeros.
+
+        nz_from_out(self, [DM] arg) -> [float]
+
+
+
+
+
+        """
+        return _casadi.Function_nz_from_out(self, *args)
+
+
+    def nz_to_in(self, *args) -> "std::vector< casadi::DM,std::allocator< casadi::DM > >":
+        """
+        Convert from/to flat vector of input/output nonzeros.
+
+        nz_to_in(self, [float] arg) -> [DM]
+
+
+
+
+
+        """
+        return _casadi.Function_nz_to_in(self, *args)
+
+
+    def nz_to_out(self, *args) -> "std::vector< casadi::DM,std::allocator< casadi::DM > >":
+        """
+        Convert from/to flat vector of input/output nonzeros.
+
+        nz_to_out(self, [float] arg) -> [DM]
+
+
+
+
+
+        """
+        return _casadi.Function_nz_to_out(self, *args)
+
+
+    def convert_in(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
+        """
+          Convert from/to input/output lists/map.
+
+          convert_in(self, dict:DM arg) -> [DM]
+          convert_in(self, [DM] arg) -> dict:DM
+          convert_in(self, [SX] arg) -> dict:SX
+          convert_in(self, dict:SX arg) -> [SX]
+          convert_in(self, dict:MX arg) -> [MX]
+          convert_in(self, [MX] arg) -> dict:MX
+
+
+        Will raise an error when an unknown key is used or a list has incorrect
+        size. Does not perform sparsity checking.
+
+
+
+
+        """
+        return _casadi.Function_convert_in(self, *args)
+
+
+    def convert_out(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
+        """
+          Convert from/to input/output lists/map.
+
+          convert_out(self, dict:DM arg) -> [DM]
+          convert_out(self, [DM] arg) -> dict:DM
+          convert_out(self, [SX] arg) -> dict:SX
+          convert_out(self, dict:SX arg) -> [SX]
+          convert_out(self, dict:MX arg) -> [MX]
+          convert_out(self, [MX] arg) -> dict:MX
+
+
+        Will raise an error when an unknown key is used or a list has incorrect
+        size. Does not perform sparsity checking.
+
+
+
+
+        """
+        return _casadi.Function_convert_out(self, *args)
+
+
+    def has_free(self, *args) -> "bool":
         """
         Does the function have free variables.
 
@@ -13198,7 +12993,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_has_free(self, *args)
 
 
-    def get_free(self, *args):
+    def get_free(self, *args) -> "std::vector< std::string,std::allocator< std::string > >":
         """
         Get free variables as a string.
 
@@ -13212,7 +13007,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_get_free(self, *args)
 
 
-    def free_sx(self, *args):
+    def free_sx(self, *args) -> "std::vector< casadi::SX,std::allocator< casadi::SX > >":
         """
         Get all the free variables of the function.
 
@@ -13226,7 +13021,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_free_sx(self, *args)
 
 
-    def free_mx(self, *args):
+    def free_mx(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
         Get all the free variables of the function.
 
@@ -13240,7 +13035,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_free_mx(self, *args)
 
 
-    def generate_lifted(self, *args):
+    def generate_lifted(self, *args) -> "void":
         """
         Extract the functions needed for the Lifted Newton method.
 
@@ -13254,7 +13049,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_generate_lifted(self, *args)
 
 
-    def n_nodes(self, *args):
+    def n_nodes(self, *args) -> "casadi_int":
         """
         Number of nodes in the algorithm.
 
@@ -13268,7 +13063,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_n_nodes(self, *args)
 
 
-    def n_instructions(self, *args):
+    def n_instructions(self, *args) -> "casadi_int":
         """
         Number of instruction in the algorithm (SXFunction/MXFunction)
 
@@ -13282,7 +13077,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_n_instructions(self, *args)
 
 
-    def instruction_id(self, *args):
+    def instruction_id(self, *args) -> "casadi_int":
         """
         Identifier index of the instruction (SXFunction/MXFunction)
 
@@ -13296,7 +13091,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_instruction_id(self, *args)
 
 
-    def instruction_input(self, *args):
+    def instruction_input(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
         """
           Locations in the work vector for the inputs of the instruction
 
@@ -13311,7 +13106,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_instruction_input(self, *args)
 
 
-    def instruction_constant(self, *args):
+    def instruction_constant(self, *args) -> "double":
         """
         Get the floating point output argument of an instruction ( SXFunction)
 
@@ -13325,7 +13120,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_instruction_constant(self, *args)
 
 
-    def instruction_output(self, *args):
+    def instruction_output(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
         """
           Location in the work vector for the output of the instruction
 
@@ -13340,7 +13135,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_instruction_output(self, *args)
 
 
-    def instruction_MX(self, *args):
+    def instruction_MX(self, *args) -> "casadi::MX":
         """
         Get the MX node corresponding to an instruction ( MXFunction)
 
@@ -13354,7 +13149,24 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_instruction_MX(self, *args)
 
 
-    def has_spfwd(self, *args):
+    def instructions_sx(self, *args) -> "casadi::SX":
+        """
+          Get the SX node corresponding to all instructions ( SXFunction)
+
+          instructions_sx(self) -> SX
+
+
+        Note: input and output instructions have no SX representation. This method
+        returns nan for those instructions.
+
+
+
+
+        """
+        return _casadi.Function_instructions_sx(self, *args)
+
+
+    def has_spfwd(self, *args) -> "bool":
         """
         Is the class able to propagate seeds through the algorithm?
 
@@ -13368,7 +13180,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_has_spfwd(self, *args)
 
 
-    def has_sprev(self, *args):
+    def has_sprev(self, *args) -> "bool":
         """
         Is the class able to propagate seeds through the algorithm?
 
@@ -13382,7 +13194,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_has_sprev(self, *args)
 
 
-    def sz_arg(self, *args):
+    def sz_arg(self, *args) -> "size_t":
         """
         Get required length of arg field.
 
@@ -13396,7 +13208,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_sz_arg(self, *args)
 
 
-    def sz_res(self, *args):
+    def sz_res(self, *args) -> "size_t":
         """
         Get required length of res field.
 
@@ -13410,7 +13222,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_sz_res(self, *args)
 
 
-    def sz_iw(self, *args):
+    def sz_iw(self, *args) -> "size_t":
         """
         Get required length of iw field.
 
@@ -13424,7 +13236,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_sz_iw(self, *args)
 
 
-    def sz_w(self, *args):
+    def sz_w(self, *args) -> "size_t":
         """
         Get required length of w field.
 
@@ -13438,7 +13250,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_sz_w(self, *args)
 
 
-    def name(self, *args):
+    def name(self, *args) -> "std::string":
         """
         Name of the function.
 
@@ -13452,7 +13264,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_name(self, *args)
 
 
-    def is_a(self, *args):
+    def is_a(self, *args) -> "bool":
         """
           Check if the function is of a particular type Optionally check if name
 
@@ -13467,7 +13279,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_is_a(self, *args)
 
 
-    def check_name(*args):
+    def check_name(*args) -> "bool":
         """
 
 
@@ -13480,7 +13292,7 @@ class Function(SharedObject, PrintableCommon):
 
     check_name = staticmethod(check_name)
 
-    def fix_name(*args):
+    def fix_name(*args) -> "std::string":
         """
 
 
@@ -13493,11 +13305,25 @@ class Function(SharedObject, PrintableCommon):
 
     fix_name = staticmethod(fix_name)
 
-    def deserialize(*args):
+    def load(*args) -> "casadi::Function":
         """
 
 
-        deserialize(std::istream & istream) -> Function
+        load(str filename) -> Function
+
+
+
+        """
+        return _casadi.Function_load(*args)
+
+    load = staticmethod(load)
+
+    def deserialize(*args) -> "casadi::Function":
+        """
+
+
+        deserialize(std::istream & stream) -> Function
+        deserialize(casadi::DeserializingStream & s) -> Function
         deserialize(str s) -> Function
 
 
@@ -13507,7 +13333,7 @@ class Function(SharedObject, PrintableCommon):
 
     deserialize = staticmethod(deserialize)
 
-    def assert_size_in(self, *args):
+    def assert_size_in(self, *args) -> "void":
         """
         Assert that an input dimension is equal so some given value.
 
@@ -13521,7 +13347,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_assert_size_in(self, *args)
 
 
-    def assert_size_out(self, *args):
+    def assert_size_out(self, *args) -> "void":
         """
         Assert that an output dimension is equal so some given value.
 
@@ -13535,7 +13361,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_assert_size_out(self, *args)
 
 
-    def checkout(self, *args):
+    def checkout(self, *args) -> "casadi_int":
         """
         Checkout a memory object.
 
@@ -13549,7 +13375,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_checkout(self, *args)
 
 
-    def release(self, *args):
+    def release(self, *args) -> "void":
         """
         Release a memory object.
 
@@ -13563,7 +13389,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_release(self, *args)
 
 
-    def get_function(self, *args):
+    def get_function(self, *args) -> "casadi::Function":
         """
 
 
@@ -13576,7 +13402,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_get_function(self, *args)
 
 
-    def has_function(self, *args):
+    def has_function(self, *args) -> "bool":
         """
 
 
@@ -13588,7 +13414,7 @@ class Function(SharedObject, PrintableCommon):
         return _casadi.Function_has_function(self, *args)
 
 
-    def info(self, *args):
+    def info(self, *args) -> "casadi::Dict":
         """
         Obtain information about function
 
@@ -13626,63 +13452,105 @@ class Function(SharedObject, PrintableCommon):
     # Named inputs -> return dictionary
         return self.call(kwargs)
 
+    def buffer(self):
+      """
+      Create a FunctionBuffer object for evaluating with minimal overhead
+
+      """
+      import functools
+      fb = FunctionBuffer(self)
+      caller = functools.partial(_casadi._function_buffer_eval, fb._self())
+      return (fb, caller)
+
 
     def __init__(self, *args):
         """
 
 
           Function()
-            Default constructor, null pointer.
           Function(str fname)
-            Construct from a file.
           Function(Function other)
           Function(str name, [SX] ex_in, [SX] ex_out, dict opts)
-            Construct an SX function.
           Function(str name, [MX] ex_in, [MX] ex_out, dict opts)
-            Construct an MX function.
           Function(str name, dict:SX dict, [str] name_in, [str] name_out, dict opts)
-            Construct an SX function.
           Function(str name, dict:MX dict, [str] name_in, [str] name_out, dict opts)
-            Construct an MX function.
           Function(str name, [SX] ex_in, [SX] ex_out, [str] name_in, [str] name_out, dict opts)
-            Construct an SX function.
           Function(str name, [MX] ex_in, [MX] ex_out, [str] name_in, [str] name_out, dict opts)
-            Construct an MX function.
 
-        > Function(Function other)
-        ------------------------------------------------------------------------
 
-        > Function()
-        ------------------------------------------------------------------------
+        .......
+
+        ::
+
+          Function(Function other)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          Function()
+
 
 
         Default constructor, null pointer.
 
 
-        > Function(str fname)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          Function(str fname)
+
 
 
         Construct from a file.
 
 
-        > Function(str name, [SX] ex_in, [SX] ex_out, dict opts)
-        > Function(str name, dict:SX dict, [str] name_in, [str] name_out, dict opts)
-        > Function(str name, [SX] ex_in, [SX] ex_out, [str] name_in, [str] name_out, dict opts)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          Function(str name, [SX] ex_in, [SX] ex_out, dict opts)
+          Function(str name, dict:SX dict, [str] name_in, [str] name_out, dict opts)
+          Function(str name, [SX] ex_in, [SX] ex_out, [str] name_in, [str] name_out, dict opts)
+
 
 
         Construct an SX function.
 
 
-        > Function(str name, [MX] ex_in, [MX] ex_out, dict opts)
-        > Function(str name, dict:MX dict, [str] name_in, [str] name_out, dict opts)
-        > Function(str name, [MX] ex_in, [MX] ex_out, [str] name_in, [str] name_out, dict opts)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          Function(str name, [MX] ex_in, [MX] ex_out, dict opts)
+          Function(str name, dict:MX dict, [str] name_in, [str] name_out, dict opts)
+          Function(str name, [MX] ex_in, [MX] ex_out, [str] name_in, [str] name_out, dict opts)
+
 
 
         Construct an MX function.
 
+
+
+        .............
 
 
 
@@ -13695,7 +13563,7 @@ class Function(SharedObject, PrintableCommon):
 Function_swigregister = _casadi.Function_swigregister
 Function_swigregister(Function)
 
-def Function_type_name(*args):
+def Function_type_name(*args) -> "std::string":
     """
 
 
@@ -13706,7 +13574,7 @@ def Function_type_name(*args):
     """
     return _casadi.Function_type_name(*args)
 
-def Function_jit(*args):
+def Function_jit(*args) -> "casadi::Function":
     """
       To resolve ambiguity on some compilers.
 
@@ -13741,7 +13609,7 @@ def Function_jit(*args):
     """
     return _casadi.Function_jit(*args)
 
-def Function_conditional(*args):
+def Function_conditional(*args) -> "casadi::Function":
     """
 
 
@@ -13752,7 +13620,7 @@ def Function_conditional(*args):
     """
     return _casadi.Function_conditional(*args)
 
-def Function_bspline(*args):
+def Function_bspline(*args) -> "casadi::Function":
     """
 
 
@@ -13763,18 +13631,7 @@ def Function_bspline(*args):
     """
     return _casadi.Function_bspline(*args)
 
-def Function_bspline_dual(*args):
-    """
-
-
-    bspline_dual(str name, [[float]] knots, [float] x, [int] degree, int m, bool reverse, dict opts) -> Function
-
-
-
-    """
-    return _casadi.Function_bspline_dual(*args)
-
-def Function_if_else(*args):
+def Function_if_else(*args) -> "casadi::Function":
     """
 
 
@@ -13785,7 +13642,7 @@ def Function_if_else(*args):
     """
     return _casadi.Function_if_else(*args)
 
-def Function_check_name(*args):
+def Function_check_name(*args) -> "bool":
     """
 
 
@@ -13796,7 +13653,7 @@ def Function_check_name(*args):
     """
     return _casadi.Function_check_name(*args)
 
-def Function_fix_name(*args):
+def Function_fix_name(*args) -> "std::string":
     """
 
 
@@ -13807,11 +13664,23 @@ def Function_fix_name(*args):
     """
     return _casadi.Function_fix_name(*args)
 
-def Function_deserialize(*args):
+def Function_load(*args) -> "casadi::Function":
     """
 
 
-    deserialize(std::istream & istream) -> Function
+    load(str filename) -> Function
+
+
+
+    """
+    return _casadi.Function_load(*args)
+
+def Function_deserialize(*args) -> "casadi::Function":
+    """
+
+
+    deserialize(std::istream & stream) -> Function
+    deserialize(casadi::DeserializingStream & s) -> Function
     deserialize(str s) -> Function
 
 
@@ -13819,58 +13688,259 @@ def Function_deserialize(*args):
     """
     return _casadi.Function_deserialize(*args)
 
+class FunctionBuffer(_object):
+    """
+      Class to achieve minimal overhead function evaluations.
 
-def external(*args):
+
+
+    C++ includes: function.hpp 
+
+
+    """
+
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, FunctionBuffer, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, FunctionBuffer, name)
+    __repr__ = _swig_repr
+
+    def set_arg(self, *args) -> "void":
+        """
+          Set input buffer for input i.
+
+          set_arg(self, int i, memoryview(ro) a, casadi_int size)
+
+
+        mem.set_arg(0, memoryview(a))
+
+        Note that CasADi uses 'fortran' order: column-by-column
+
+
+
+
+        """
+        return _casadi.FunctionBuffer_set_arg(self, *args)
+
+
+    def set_res(self, *args) -> "void":
+        """
+          Set output buffer for ouput i.
+
+          set_res(self, int i, memoryview(rw) a, casadi_int size)
+
+
+        mem.set_res(0, memoryview(a))
+
+        Note that CasADi uses 'fortran' order: column-by-column
+
+
+
+
+        """
+        return _casadi.FunctionBuffer_set_res(self, *args)
+
+
+    def ret(self, *args) -> "int":
+        """
+        Get last return value.
+
+        ret(self) -> int
+
+
+
+
+
+        """
+        return _casadi.FunctionBuffer_ret(self, *args)
+
+
+    def _eval(self, *args) -> "void":
+        """
+
+
+        _eval(self)
+
+
+
+        """
+        return _casadi.FunctionBuffer__eval(self, *args)
+
+
+    def _self(self, *args) -> "void *":
+        """
+
+
+        _self(self) -> void*
+
+
+
+        """
+        return _casadi.FunctionBuffer__self(self, *args)
+
+
+    def __init__(self, *args):
+        """
+
+
+          FunctionBuffer(FunctionBuffer other)
+          FunctionBuffer(Function f)
+
+
+        .......
+
+        ::
+
+          FunctionBuffer(FunctionBuffer other)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          FunctionBuffer(Function f)
+
+
+
+        Main constructor.
+
+
+
+        .............
+
+
+
+        """
+        this = _casadi.new_FunctionBuffer(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _casadi.delete_FunctionBuffer
+FunctionBuffer_swigregister = _casadi.FunctionBuffer_swigregister
+FunctionBuffer_swigregister(FunctionBuffer)
+
+
+def _function_buffer_eval(*args) -> "void":
+    """
+
+
+    _function_buffer_eval(void* raw)
+
+
+
+    """
+    return _casadi._function_buffer_eval(*args)
+
+def external(*args) -> "casadi::Function":
     """
       Load a just-in-time compiled external function File name given.
 
       external(str name, dict opts) -> Function
-        Load an external function File name is assumed to be ./<f_name>.so.
-      external(str name, Importer compiler, dict opts) -> Function
+      external(str name, Importer li, dict opts) -> Function
       external(str name, str bin_name, dict opts) -> Function
-        Load an external function File name given.
 
 
 
-    > external(str name, str bin_name, dict opts)
-    ------------------------------------------------------------------------
 
+    .......
 
-    Load an external function File name given.
+    ::
 
+      external(str name, Importer li, dict opts)
 
-    > external(str name, dict opts)
-    ------------------------------------------------------------------------
-
-
-    Load an external function File name is assumed to be ./<f_name>.so.
-
-
-    > external(str name, Importer compiler, dict opts)
-    ------------------------------------------------------------------------
 
 
     Load a just-in-time compiled external function File name given.
 
 
 
+    .............
+
+
+    .......
+
+    ::
+
+      external(str name, dict opts)
+
+
+
+    Load an external function from a shared library.
+
+    Parameters:
+    -----------
+
+    name:  Name as in the label assigned to a CasADi Function object:
+    Function(name,...,...) Will be used to look up symbols/functions named eg.
+    <name>_eval Use nm (linux/osx) or depends.exe (win) to check which symbols
+    are present in your shared library
+
+    File name is assumed to be ./<name>.so
+
+
+
+    .............
+
+
+    .......
+
+    ::
+
+      external(str name, str bin_name, dict opts)
+
+
+
+    Load an external function from a shared library.
+
+    Parameters:
+    -----------
+
+    name:  Name as in the label assigned to a CasADi Function object:
+    Function(name,...,...) Will be used to look up symbols/functions named eg.
+    <name>_eval Use nm (linux/osx) or depends.exe (win) to check which symbols
+    are present in your shared library
+
+    bin_name:  File name of the shared library
+
+
+
+    .............
+
+
 
     """
     return _casadi.external(*args)
 
-def integrator(*args):
+def integrator(*args) -> "casadi::Function":
     """
 
 
       integrator(str name, str solver, dict:SX dae, dict opts) -> Function
-        Create an ODE/DAE integrator Solves an initial value problem (IVP) coupled
       integrator(str name, str solver, dict:MX dae, dict opts) -> Function
 
-    > integrator(str name, str solver, dict:MX dae, dict opts)
-    ------------------------------------------------------------------------
 
-    > integrator(str name, str solver, dict:SX dae, dict opts)
-    ------------------------------------------------------------------------
+    .......
+
+    ::
+
+      integrator(str name, str solver, dict:MX dae, dict opts)
+
+
+
+    .............
+
+
+    .......
+
+    ::
+
+      integrator(str name, str solver, dict:SX dae, dict opts)
+
 
 
     Create an ODE/DAE integrator Solves an initial value problem (IVP) coupled
@@ -13957,6 +14027,24 @@ def integrator(*args):
     | rootfinder_optio | OT_DICT         | Options to be    | casadi::Integrat |
     | ns               |                 | passed to the    | or               |
     |                  |                 | NLP Solver       |                  |
+    +------------------+-----------------+------------------+------------------+
+    | show_eval_warnin | OT_BOOL         | Show warnings    | casadi::OracleFu |
+    | gs               |                 | generated from   | nction           |
+    |                  |                 | function         |                  |
+    |                  |                 | evaluations      |                  |
+    |                  |                 | [true]           |                  |
+    +------------------+-----------------+------------------+------------------+
+    | simplify         | OT_BOOL         | Implement as MX  | casadi::Integrat |
+    |                  |                 | Function (codege | or               |
+    |                  |                 | neratable/serial |                  |
+    |                  |                 | izable) default: |                  |
+    |                  |                 | false            |                  |
+    +------------------+-----------------+------------------+------------------+
+    | simplify_options | OT_DICT         | Any options to   | casadi::Integrat |
+    |                  |                 | pass to          | or               |
+    |                  |                 | simplified form  |                  |
+    |                  |                 | Function         |                  |
+    |                  |                 | constructor      |                  |
     +------------------+-----------------+------------------+------------------+
     | specific_options | OT_DICT         | Options for      | casadi::OracleFu |
     |                  |                 | specific auto-   | nction           |
@@ -14090,6 +14178,10 @@ def integrator(*args):
     +----------------------------+-----------+---------------------------------+
     | max_order                  | OT_DOUBLE | Maximum order                   |
     +----------------------------+-----------+---------------------------------+
+    | max_step_size              | OT_DOUBLE | Max step size [default: 0/inf]  |
+    +----------------------------+-----------+---------------------------------+
+    | min_step_size              | OT_DOUBLE | Min step size [default: 0/0.0]  |
+    +----------------------------+-----------+---------------------------------+
     | newton_scheme              | OT_STRING | Linear solver scheme in the     |
     |                            |           | Newton method:                  |
     |                            |           | DIRECT|gmres|bcgstab|tfqmr      |
@@ -14163,6 +14255,12 @@ def integrator(*args):
     | cj_scaling                | OT_BOOL         | IDAS scaling on cj for the |
     |                           |                 | user-defined linear solver |
     |                           |                 | module                     |
+    +---------------------------+-----------------+----------------------------+
+    | constraints               | OT_INTVECTOR    | Constrain the solution     |
+    |                           |                 | y=[x,z]. 0 (default): no   |
+    |                           |                 | constraint on yi, 1: yi >= |
+    |                           |                 | 0.0, -1: yi <= 0.0, 2: yi  |
+    |                           |                 | > 0.0, -2: yi < 0.0.       |
     +---------------------------+-----------------+----------------------------+
     | disable_internal_warnings | OT_BOOL         | Disable SUNDIALS internal  |
     |                           |                 | warning messages           |
@@ -14293,6 +14391,14 @@ def integrator(*args):
     | rootfinder_options        | OT_DICT         | Options to be passed to    |
     |                           |                 | the NLP Solver             |
     +---------------------------+-----------------+----------------------------+
+    | simplify                  | OT_BOOL         | Implement as MX  Function  |
+    |                           |                 | (codegeneratable/serializa |
+    |                           |                 | ble) default: false        |
+    +---------------------------+-----------------+----------------------------+
+    | simplify_options          | OT_DICT         | Any options to pass to     |
+    |                           |                 | simplified form Function   |
+    |                           |                 | constructor                |
+    +---------------------------+-----------------+----------------------------+
     | t0                        | OT_DOUBLE       | Beginning of the time      |
     |                           |                 | horizon                    |
     +---------------------------+-----------------+----------------------------+
@@ -14322,11 +14428,14 @@ def integrator(*args):
 
 
 
+    .............
+
+
 
     """
     return _casadi.integrator(*args)
 
-def has_integrator(*args):
+def has_integrator(*args) -> "bool":
     """
     Check if a particular plugin is available.
 
@@ -14339,7 +14448,7 @@ def has_integrator(*args):
     """
     return _casadi.has_integrator(*args)
 
-def load_integrator(*args):
+def load_integrator(*args) -> "void":
     """
     Explicitly load a plugin dynamically.
 
@@ -14352,7 +14461,7 @@ def load_integrator(*args):
     """
     return _casadi.load_integrator(*args)
 
-def doc_integrator(*args):
+def doc_integrator(*args) -> "std::string":
     """
     Get the documentation string for a plugin.
 
@@ -14365,65 +14474,95 @@ def doc_integrator(*args):
     """
     return _casadi.doc_integrator(*args)
 
-def integrator_in(*args):
+def integrator_in(*args) -> "std::string":
     """
       Get integrator input scheme name by index.
 
       integrator_in() -> [str]
-        Get input scheme of integrators.
       integrator_in(int ind) -> str
 
 
 
-    > integrator_in()
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      integrator_in()
+
 
 
     Get input scheme of integrators.
 
 
-    > integrator_in(int ind)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      integrator_in(int ind)
+
 
 
     Get integrator input scheme name by index.
 
 
 
+    .............
+
+
 
     """
     return _casadi.integrator_in(*args)
 
-def integrator_out(*args):
+def integrator_out(*args) -> "std::string":
     """
       Get output scheme name by index.
 
       integrator_out() -> [str]
-        Get integrator output scheme of integrators.
       integrator_out(int ind) -> str
 
 
 
-    > integrator_out()
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      integrator_out()
+
 
 
     Get integrator output scheme of integrators.
 
 
-    > integrator_out(int ind)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      integrator_out(int ind)
+
 
 
     Get output scheme name by index.
 
 
 
+    .............
+
+
 
     """
     return _casadi.integrator_out(*args)
 
-def integrator_n_in(*args):
+def integrator_n_in(*args) -> "casadi_int":
     """
     Get the number of integrator inputs.
 
@@ -14436,7 +14575,7 @@ def integrator_n_in(*args):
     """
     return _casadi.integrator_n_in(*args)
 
-def integrator_n_out(*args):
+def integrator_n_out(*args) -> "casadi_int":
     """
     Get the number of integrator outputs.
 
@@ -14449,7 +14588,7 @@ def integrator_n_out(*args):
     """
     return _casadi.integrator_n_out(*args)
 
-def conic(*args):
+def conic(*args) -> "casadi::Function":
     """
       Create a QP solver Solves the following strictly convex problem:
 
@@ -14556,10 +14695,28 @@ def conic(*args):
     |                  |                 | respectively.    |                  |
     |                  |                 | Cf. option       |                  |
     |                  |                 | "ad_weight".     |                  |
+    |                  |                 | When set to -1,  |                  |
+    |                  |                 | sparsity is      |                  |
+    |                  |                 | completely       |                  |
+    |                  |                 | ignored and      |                  |
+    |                  |                 | dense matrices   |                  |
+    |                  |                 | are used.        |                  |
+    +------------------+-----------------+------------------+------------------+
+    | always_inline    | OT_BOOL         | Force inlining.  | casadi::Function |
+    |                  |                 |                  | Internal         |
     +------------------+-----------------+------------------+------------------+
     | compiler         | OT_STRING       | Just-in-time     | casadi::Function |
     |                  |                 | compiler plugin  | Internal         |
     |                  |                 | to be used.      |                  |
+    +------------------+-----------------+------------------+------------------+
+    | custom_jacobian  | OT_FUNCTION     | Override         | casadi::Function |
+    |                  |                 | CasADi's AD. Use | Internal         |
+    |                  |                 | together with    |                  |
+    |                  |                 | 'jac_penalty':   |                  |
+    |                  |                 | 0. Note: Highly  |                  |
+    |                  |                 | experimental.    |                  |
+    |                  |                 | Syntax may break |                  |
+    |                  |                 | often.           |                  |
     +------------------+-----------------+------------------+------------------+
     | derivative_of    | OT_FUNCTION     | The function is  | casadi::Function |
     |                  |                 | a derivative of  | Internal         |
@@ -14579,6 +14736,38 @@ def conic(*args):
     |                  |                 | are discrete,    |                  |
     |                  |                 | i.e. integer-    |                  |
     |                  |                 | valued           |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump             | OT_BOOL         | Dump function to | casadi::Function |
+    |                  |                 | file upon first  | Internal         |
+    |                  |                 | evaluation.      |                  |
+    |                  |                 | [false]          |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_dir         | OT_STRING       | Directory to     | casadi::Function |
+    |                  |                 | dump             | Internal         |
+    |                  |                 | inputs/outputs   |                  |
+    |                  |                 | to. Make sure    |                  |
+    |                  |                 | the directory    |                  |
+    |                  |                 | exists [.]       |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_format      | OT_STRING       | Choose file      | casadi::Function |
+    |                  |                 | format to dump   | Internal         |
+    |                  |                 | matrices. See    |                  |
+    |                  |                 | DM.from_file     |                  |
+    |                  |                 | [mtx]            |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_in          | OT_BOOL         | Dump numerical   | casadi::Function |
+    |                  |                 | values of inputs | Internal         |
+    |                  |                 | to file          |                  |
+    |                  |                 | (readable with   |                  |
+    |                  |                 | DM.from_file )   |                  |
+    |                  |                 | [default: false] |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_out         | OT_BOOL         | Dump numerical   | casadi::Function |
+    |                  |                 | values of        | Internal         |
+    |                  |                 | outputs to file  |                  |
+    |                  |                 | (readable with   |                  |
+    |                  |                 | DM.from_file )   |                  |
+    |                  |                 | [default: false] |                  |
     +------------------+-----------------+------------------+------------------+
     | enable_fd        | OT_BOOL         | Enable           | casadi::Function |
     |                  |                 | derivative       | Internal         |
@@ -14629,6 +14818,13 @@ def conic(*args):
     |                  |                 | available.       |                  |
     |                  |                 | [default: true]  |                  |
     +------------------+-----------------+------------------+------------------+
+    | error_on_fail    | OT_BOOL         | When the         | casadi::Conic    |
+    |                  |                 | numerical        |                  |
+    |                  |                 | process returns  |                  |
+    |                  |                 | unsuccessfully,  |                  |
+    |                  |                 | raise an error   |                  |
+    |                  |                 | (default false). |                  |
+    +------------------+-----------------+------------------+------------------+
     | fd_method        | OT_STRING       | Method for       | casadi::Function |
     |                  |                 | finite           | Internal         |
     |                  |                 | differencing     |                  |
@@ -14640,6 +14836,11 @@ def conic(*args):
     |                  |                 | finite           |                  |
     |                  |                 | difference       |                  |
     |                  |                 | instance         |                  |
+    +------------------+-----------------+------------------+------------------+
+    | forward_options  | OT_DICT         | Options to be    | casadi::Function |
+    |                  |                 | passed to a      | Internal         |
+    |                  |                 | forward mode     |                  |
+    |                  |                 | constructor      |                  |
     +------------------+-----------------+------------------+------------------+
     | gather_stats     | OT_BOOL         | Deprecated       | casadi::Function |
     |                  |                 | option           | Internal         |
@@ -14656,6 +14857,16 @@ def conic(*args):
     |                  |                 | numerical values |                  |
     |                  |                 | of the inputs    |                  |
     |                  |                 | don't make sense |                  |
+    +------------------+-----------------+------------------+------------------+
+    | is_diff_in       | OT_BOOLVECTOR   | Indicate for     | casadi::Function |
+    |                  |                 | each input if it | Internal         |
+    |                  |                 | should be        |                  |
+    |                  |                 | differentiable.  |                  |
+    +------------------+-----------------+------------------+------------------+
+    | is_diff_out      | OT_BOOLVECTOR   | Indicate for     | casadi::Function |
+    |                  |                 | each output if   | Internal         |
+    |                  |                 | it should be     |                  |
+    |                  |                 | differentiable.  |                  |
     +------------------+-----------------+------------------+------------------+
     | jac_penalty      | OT_DOUBLE       | When requested   | casadi::Function |
     |                  |                 | for a number of  | Internal         |
@@ -14695,9 +14906,49 @@ def conic(*args):
     |                  |                 | speed up the     |                  |
     |                  |                 | evaluation       |                  |
     +------------------+-----------------+------------------+------------------+
+    | jit_cleanup      | OT_BOOL         | Cleanup up the   | casadi::Function |
+    |                  |                 | temporary source | Internal         |
+    |                  |                 | file that jit    |                  |
+    |                  |                 | creates.         |                  |
+    |                  |                 | Default: true    |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_name         | OT_STRING       | The file name    | casadi::Function |
+    |                  |                 | used to write    | Internal         |
+    |                  |                 | out code. The    |                  |
+    |                  |                 | actual file      |                  |
+    |                  |                 | names used       |                  |
+    |                  |                 | depend on 'jit_t |                  |
+    |                  |                 | emp_suffix' and  |                  |
+    |                  |                 | include          |                  |
+    |                  |                 | extensions.      |                  |
+    |                  |                 | Default:         |                  |
+    |                  |                 | 'jit_tmp'        |                  |
+    +------------------+-----------------+------------------+------------------+
     | jit_options      | OT_DICT         | Options to be    | casadi::Function |
     |                  |                 | passed to the    | Internal         |
     |                  |                 | jit compiler.    |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_serialize    | OT_STRING       | Specify          | casadi::Function |
+    |                  |                 | behaviour when   | Internal         |
+    |                  |                 | serializing a    |                  |
+    |                  |                 | jitted function: |                  |
+    |                  |                 | SOURCE|link|embe |                  |
+    |                  |                 | d.               |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_temp_suffix  | OT_BOOL         | Use a temporary  | casadi::Function |
+    |                  |                 | (seemingly       | Internal         |
+    |                  |                 | random) filename |                  |
+    |                  |                 | suffix for       |                  |
+    |                  |                 | generated code   |                  |
+    |                  |                 | and libraries.   |                  |
+    |                  |                 | This is desired  |                  |
+    |                  |                 | for thread-      |                  |
+    |                  |                 | safety. This     |                  |
+    |                  |                 | behaviour may    |                  |
+    |                  |                 | defeat caching   |                  |
+    |                  |                 | compiler         |                  |
+    |                  |                 | wrappers.        |                  |
+    |                  |                 | Default: true    |                  |
     +------------------+-----------------+------------------+------------------+
     | max_num_dir      | OT_INT          | Specify the      | casadi::Function |
     |                  |                 | maximum number   | Internal         |
@@ -14708,18 +14959,47 @@ def conic(*args):
     |                  |                 | builtin optimize |                  |
     |                  |                 | d_num_dir.       |                  |
     +------------------+-----------------+------------------+------------------+
+    | never_inline     | OT_BOOL         | Forbid inlining. | casadi::Function |
+    |                  |                 |                  | Internal         |
+    +------------------+-----------------+------------------+------------------+
     | output_scheme    | OT_STRINGVECTOR | Deprecated       | casadi::Function |
     |                  |                 | option (ignored) | Internal         |
+    +------------------+-----------------+------------------+------------------+
+    | print_in         | OT_BOOL         | Print numerical  | casadi::Function |
+    |                  |                 | values of inputs | Internal         |
+    |                  |                 | [default: false] |                  |
+    +------------------+-----------------+------------------+------------------+
+    | print_out        | OT_BOOL         | Print numerical  | casadi::Function |
+    |                  |                 | values of        | Internal         |
+    |                  |                 | outputs          |                  |
+    |                  |                 | [default: false] |                  |
+    +------------------+-----------------+------------------+------------------+
+    | print_problem    | OT_BOOL         | Print a numeric  | casadi::Conic    |
+    |                  |                 | description of   |                  |
+    |                  |                 | the problem      |                  |
     +------------------+-----------------+------------------+------------------+
     | print_time       | OT_BOOL         | print            | casadi::Function |
     |                  |                 | information      | Internal         |
     |                  |                 | about execution  |                  |
-    |                  |                 | time             |                  |
+    |                  |                 | time. Implies    |                  |
+    |                  |                 | record_time.     |                  |
+    +------------------+-----------------+------------------+------------------+
+    | record_time      | OT_BOOL         | record           | casadi::Function |
+    |                  |                 | information      | Internal         |
+    |                  |                 | about execution  |                  |
+    |                  |                 | time, for        |                  |
+    |                  |                 | retrieval with   |                  |
+    |                  |                 | stats().         |                  |
     +------------------+-----------------+------------------+------------------+
     | regularity_check | OT_BOOL         | Throw exceptions | casadi::Function |
     |                  |                 | when NaN or Inf  | Internal         |
     |                  |                 | appears during   |                  |
     |                  |                 | evaluation       |                  |
+    +------------------+-----------------+------------------+------------------+
+    | reverse_options  | OT_DICT         | Options to be    | casadi::Function |
+    |                  |                 | passed to a      | Internal         |
+    |                  |                 | reverse mode     |                  |
+    |                  |                 | constructor      |                  |
     +------------------+-----------------+------------------+------------------+
     | user_data        | OT_VOIDPTR      | A user-defined   | casadi::Function |
     |                  |                 | field that can   | Internal         |
@@ -14786,6 +15066,8 @@ def conic(*args):
 
 
 
+    - cbc
+
     - clp
 
     - cplex
@@ -14796,9 +15078,13 @@ def conic(*args):
 
     - ooqp
 
+    - osqp
+
     - qpoases
 
     - sqic
+
+    - superscs
 
     - nlpsol
 
@@ -14813,6 +15099,44 @@ def conic(*args):
 
     --------------------------------------------------------------------------------
 
+    cbc
+    ---
+
+
+
+    Interface to Cbc solver for sparse Quadratic Programs
+
+    >List of available options
+
+    +-------------+-----------------------+------------------------------------+
+    |     Id      |         Type          |            Description             |
+    +=============+=======================+====================================+
+    | cbc         | OT_DICT               | Options to be passed to CBC.Three  |
+    |             |                       | sets of options are supported. The |
+    |             |                       | first can be found in              |
+    |             |                       | OsiSolverParameters.hpp. The       |
+    |             |                       | second can be found in             |
+    |             |                       | CbcModel.hpp. The third are        |
+    |             |                       | options that can be passed to      |
+    |             |                       | CbcMain1.                          |
+    +-------------+-----------------------+------------------------------------+
+    | hot_start   | OT_BOOL               | Hot start with x0 [Default false]. |
+    +-------------+-----------------------+------------------------------------+
+    | sos_groups  | OT_INTVECTORVECTOR    | Definition of SOS groups by        |
+    |             |                       | indices.                           |
+    +-------------+-----------------------+------------------------------------+
+    | sos_types   | OT_INTVECTOR          | Specify 1 or 2 for each SOS group. |
+    +-------------+-----------------------+------------------------------------+
+    | sos_weights | OT_DOUBLEVECTORVECTOR | Weights corresponding to SOS       |
+    |             |                       | entries.                           |
+    +-------------+-----------------------+------------------------------------+
+
+    --------------------------------------------------------------------------------
+
+
+
+    --------------------------------------------------------------------------------
+
     clp
     ---
 
@@ -14820,9 +15144,23 @@ def conic(*args):
 
     Interface to Clp solver for sparse Quadratic Programs
 
+    >List of available options
+
+    +-----+---------+----------------------------------------------------------+
+    | Id  |  Type   |                       Description                        |
+    +=====+=========+==========================================================+
+    | clp | OT_DICT | Options to be passed to CLP. A first set of options can  |
+    |     |         | be found in ClpParameters.hpp. eg. 'PrimalTolerance'.    |
+    |     |         | There are other options in additions. 'AutomaticScaling' |
+    |     |         | (bool) is recognised. 'initial_solve' (default off)      |
+    |     |         | activates the use of Clp's initialSolve.                 |
+    |     |         | 'initial_solve_options' takes a dictionary with          |
+    |     |         | following keys (see ClpSolve.hpp): SolveType (string),   |
+    |     |         | PresolveType (string), NumberPasses, SpecialOptions      |
+    |     |         | (intvectorvector), IndependentOptions (intvectorvector). |
+    +-----+---------+----------------------------------------------------------+
+
     --------------------------------------------------------------------------------
-
-
 
 
 
@@ -14837,24 +15175,39 @@ def conic(*args):
 
     >List of available options
 
-    +---------------+-----------+----------------------------------------------+
-    |      Id       |   Type    |                 Description                  |
-    +===============+===========+==============================================+
-    | cplex         | OT_DICT   | Options to be passed to CPLEX                |
-    +---------------+-----------+----------------------------------------------+
-    | dep_check     | OT_INT    | Detect redundant constraints.                |
-    +---------------+-----------+----------------------------------------------+
-    | dump_filename | OT_STRING | The filename to dump to.                     |
-    +---------------+-----------+----------------------------------------------+
-    | dump_to_file  | OT_BOOL   | Dumps QP to file in CPLEX format.            |
-    +---------------+-----------+----------------------------------------------+
-    | qp_method     | OT_INT    | Determines which CPLEX algorithm to use.     |
-    +---------------+-----------+----------------------------------------------+
-    | tol           | OT_DOUBLE | Tolerance of solver                          |
-    +---------------+-----------+----------------------------------------------+
-    | warm_start    | OT_BOOL   | Use warm start with simplex methods (affects |
-    |               |           | only the simplex methods).                   |
-    +---------------+-----------+----------------------------------------------+
+    +---------------+-----------------------+----------------------------------+
+    |      Id       |         Type          |           Description            |
+    +===============+=======================+==================================+
+    | cplex         | OT_DICT               | Options to be passed to CPLEX    |
+    +---------------+-----------------------+----------------------------------+
+    | dep_check     | OT_INT                | Detect redundant constraints.    |
+    +---------------+-----------------------+----------------------------------+
+    | dump_filename | OT_STRING             | The filename to dump to.         |
+    +---------------+-----------------------+----------------------------------+
+    | dump_to_file  | OT_BOOL               | Dumps QP to file in CPLEX        |
+    |               |                       | format.                          |
+    +---------------+-----------------------+----------------------------------+
+    | mip_start     | OT_BOOL               | Hot start integers with x0       |
+    |               |                       | [Default false].                 |
+    +---------------+-----------------------+----------------------------------+
+    | qp_method     | OT_INT                | Determines which CPLEX algorithm |
+    |               |                       | to use.                          |
+    +---------------+-----------------------+----------------------------------+
+    | sos_groups    | OT_INTVECTORVECTOR    | Definition of SOS groups by      |
+    |               |                       | indices.                         |
+    +---------------+-----------------------+----------------------------------+
+    | sos_types     | OT_INTVECTOR          | Specify 1 or 2 for each SOS      |
+    |               |                       | group.                           |
+    +---------------+-----------------------+----------------------------------+
+    | sos_weights   | OT_DOUBLEVECTORVECTOR | Weights corresponding to SOS     |
+    |               |                       | entries.                         |
+    +---------------+-----------------------+----------------------------------+
+    | tol           | OT_DOUBLE             | Tolerance of solver              |
+    +---------------+-----------------------+----------------------------------+
+    | warm_start    | OT_BOOL               | Use warm start with simplex      |
+    |               |                       | methods (affects only the        |
+    |               |                       | simplex methods).                |
+    +---------------+-----------------------+----------------------------------+
 
     --------------------------------------------------------------------------------
 
@@ -14871,14 +15224,22 @@ def conic(*args):
 
     >List of available options
 
-    +--------+-----------------+-----------------------------------------------+
-    |   Id   |      Type       |                  Description                  |
-    +========+=================+===============================================+
-    | gurobi | OT_DICT         | Options to be passed to gurobi.               |
-    +--------+-----------------+-----------------------------------------------+
-    | vtype  | OT_STRINGVECTOR | Type of variables:                            |
-    |        |                 | [CONTINUOUS|binary|integer|semicont|semiint]  |
-    +--------+-----------------+-----------------------------------------------+
+    +-------------+-----------------------+------------------------------------+
+    |     Id      |         Type          |            Description             |
+    +=============+=======================+====================================+
+    | gurobi      | OT_DICT               | Options to be passed to gurobi.    |
+    +-------------+-----------------------+------------------------------------+
+    | sos_groups  | OT_INTVECTORVECTOR    | Definition of SOS groups by        |
+    |             |                       | indices.                           |
+    +-------------+-----------------------+------------------------------------+
+    | sos_types   | OT_INTVECTOR          | Specify 1 or 2 for each SOS group. |
+    +-------------+-----------------------+------------------------------------+
+    | sos_weights | OT_DOUBLEVECTORVECTOR | Weights corresponding to SOS       |
+    |             |                       | entries.                           |
+    +-------------+-----------------------+------------------------------------+
+    | vtype       | OT_STRINGVECTOR       | Type of variables: [CONTINUOUS|bin |
+    |             |                       | ary|integer|semicont|semiint]      |
+    +-------------+-----------------------+------------------------------------+
 
     --------------------------------------------------------------------------------
 
@@ -14941,6 +15302,9 @@ def conic(*args):
     +----------------+--------------+------------------------------------------+
     | nx             | OT_INTVECTOR | Number of states, length N+1             |
     +----------------+--------------+------------------------------------------+
+    | print_level    | OT_INT       | Amount of diagnostic printing [Default:  |
+    |                |              | 1].                                      |
+    +----------------+--------------+------------------------------------------+
     | target         | OT_STRING    | hpmpc target                             |
     +----------------+--------------+------------------------------------------+
     | tol            | OT_DOUBLE    | Tolerance in the duality measure         |
@@ -14978,6 +15342,32 @@ def conic(*args):
     | print_level | OT_INT    | Print level. OOQP listens to print_level 0, 10 |
     |             |           | and 100                                        |
     +-------------+-----------+------------------------------------------------+
+
+    --------------------------------------------------------------------------------
+
+
+
+    --------------------------------------------------------------------------------
+
+    osqp
+    ----
+
+
+
+    Interface to the OSQP Solver for quadratic programming
+
+    >List of available options
+
+    +-------------------+---------+--------------------------------------------+
+    |        Id         |  Type   |                Description                 |
+    +===================+=========+============================================+
+    | osqp              | OT_DICT | const Options to be passed to osqp.        |
+    +-------------------+---------+--------------------------------------------+
+    | warm_start_dual   | OT_BOOL | Use lam_a0 and lam_x0 input to warmstart   |
+    |                   |         | [Default: truw].                           |
+    +-------------------+---------+--------------------------------------------+
+    | warm_start_primal | OT_BOOL | Use x0 input to warmstart [Default: true]. |
+    +-------------------+---------+--------------------------------------------+
 
     --------------------------------------------------------------------------------
 
@@ -15153,6 +15543,29 @@ def conic(*args):
 
     --------------------------------------------------------------------------------
 
+    superscs
+    --------
+
+
+
+    Interface to the SuperSCS solver for conic programming
+
+    Joris Gillis, 2019
+
+    >List of available options
+
+    +----------+---------+-----------------------------------+
+    |    Id    |  Type   |            Description            |
+    +==========+=========+===================================+
+    | superscs | OT_DICT | Options to be passed to superscs. |
+    +----------+---------+-----------------------------------+
+
+    --------------------------------------------------------------------------------
+
+
+
+    --------------------------------------------------------------------------------
+
     nlpsol
     ------
 
@@ -15186,20 +15599,30 @@ def conic(*args):
 
     >List of available options
 
-    +--------------+-----------+-----------------------------------------------+
-    |      Id      |   Type    |                  Description                  |
-    +==============+===========+===============================================+
-    | du_to_pr     | OT_DOUBLE | How much larger dual than primal error is     |
-    |              |           | acceptable [1000]                             |
-    +--------------+-----------+-----------------------------------------------+
-    | max_iter     | OT_INT    | Maximum number of iterations [1000].          |
-    +--------------+-----------+-----------------------------------------------+
-    | print_header | OT_BOOL   | Print header [true].                          |
-    +--------------+-----------+-----------------------------------------------+
-    | print_iter   | OT_BOOL   | Print iterations [true].                      |
-    +--------------+-----------+-----------------------------------------------+
-    | tol          | OT_DOUBLE | Tolerance [1e-8].                             |
-    +--------------+-----------+-----------------------------------------------+
+    +-----------------+-----------+--------------------------------------------+
+    |       Id        |   Type    |                Description                 |
+    +=================+===========+============================================+
+    | constr_viol_tol | OT_DOUBLE | Constraint violation tolerance [1e-8].     |
+    +-----------------+-----------+--------------------------------------------+
+    | dual_inf_tol    | OT_DOUBLE | Dual feasibility violation tolerance       |
+    |                 |           | [1e-8]                                     |
+    +-----------------+-----------+--------------------------------------------+
+    | max_iter        | OT_INT    | Maximum number of iterations [1000].       |
+    +-----------------+-----------+--------------------------------------------+
+    | min_lam         | OT_DOUBLE | Smallest multiplier treated as inactive    |
+    |                 |           | for the initial active set [0].            |
+    +-----------------+-----------+--------------------------------------------+
+    | print_header    | OT_BOOL   | Print header [true].                       |
+    +-----------------+-----------+--------------------------------------------+
+    | print_info      | OT_BOOL   | Print info [true].                         |
+    +-----------------+-----------+--------------------------------------------+
+    | print_iter      | OT_BOOL   | Print iterations [true].                   |
+    +-----------------+-----------+--------------------------------------------+
+    | print_lincomb   | OT_BOOL   | Print dependant linear combinations of     |
+    |                 |           | constraints [false]. Printed numbers are   |
+    |                 |           | 0-based indices into the vector of [simple |
+    |                 |           | bounds;linear bounds]                      |
+    +-----------------+-----------+--------------------------------------------+
 
     --------------------------------------------------------------------------------
 
@@ -15213,7 +15636,7 @@ def conic(*args):
     """
     return _casadi.conic(*args)
 
-def qpsol(*args):
+def qpsol(*args) -> "casadi::Function":
     """
 
 
@@ -15225,65 +15648,95 @@ def qpsol(*args):
     """
     return _casadi.qpsol(*args)
 
-def conic_in(*args):
+def conic_in(*args) -> "std::string":
     """
       Get QP solver input scheme name by index.
 
       conic_in() -> [str]
-        Get input scheme of QP solvers.
       conic_in(int ind) -> str
 
 
 
-    > conic_in()
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      conic_in()
+
 
 
     Get input scheme of QP solvers.
 
 
-    > conic_in(int ind)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      conic_in(int ind)
+
 
 
     Get QP solver input scheme name by index.
 
 
 
+    .............
+
+
 
     """
     return _casadi.conic_in(*args)
 
-def conic_out(*args):
+def conic_out(*args) -> "std::string":
     """
       Get output scheme name by index.
 
       conic_out() -> [str]
-        Get QP solver output scheme of QP solvers.
       conic_out(int ind) -> str
 
 
 
-    > conic_out()
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      conic_out()
+
 
 
     Get QP solver output scheme of QP solvers.
 
 
-    > conic_out(int ind)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      conic_out(int ind)
+
 
 
     Get output scheme name by index.
 
 
 
+    .............
+
+
 
     """
     return _casadi.conic_out(*args)
 
-def conic_n_in(*args):
+def conic_n_in(*args) -> "casadi_int":
     """
     Get the number of QP solver inputs.
 
@@ -15296,7 +15749,7 @@ def conic_n_in(*args):
     """
     return _casadi.conic_n_in(*args)
 
-def conic_n_out(*args):
+def conic_n_out(*args) -> "casadi_int":
     """
     Get the number of QP solver outputs.
 
@@ -15309,7 +15762,7 @@ def conic_n_out(*args):
     """
     return _casadi.conic_n_out(*args)
 
-def conic_options(*args):
+def conic_options(*args) -> "std::vector< std::string,std::allocator< std::string > >":
     """
     Get all options for a plugin.
 
@@ -15322,7 +15775,7 @@ def conic_options(*args):
     """
     return _casadi.conic_options(*args)
 
-def conic_option_type(*args):
+def conic_option_type(*args) -> "std::string":
     """
     Get type info for a particular option.
 
@@ -15335,7 +15788,7 @@ def conic_option_type(*args):
     """
     return _casadi.conic_option_type(*args)
 
-def conic_option_info(*args):
+def conic_option_info(*args) -> "std::string":
     """
     Get documentation for a particular option.
 
@@ -15348,7 +15801,7 @@ def conic_option_info(*args):
     """
     return _casadi.conic_option_info(*args)
 
-def has_conic(*args):
+def has_conic(*args) -> "bool":
     """
     Check if a particular plugin is available.
 
@@ -15361,7 +15814,7 @@ def has_conic(*args):
     """
     return _casadi.has_conic(*args)
 
-def load_conic(*args):
+def load_conic(*args) -> "void":
     """
     Explicitly load a plugin dynamically.
 
@@ -15374,7 +15827,7 @@ def load_conic(*args):
     """
     return _casadi.load_conic(*args)
 
-def doc_conic(*args):
+def doc_conic(*args) -> "std::string":
     """
     Get the documentation string for a plugin.
 
@@ -15387,7 +15840,7 @@ def doc_conic(*args):
     """
     return _casadi.doc_conic(*args)
 
-def conic_debug(*args):
+def conic_debug(*args) -> "void":
     """
     Generate native code in the interfaced language for debugging
 
@@ -15401,25 +15854,37 @@ def conic_debug(*args):
     """
     return _casadi.conic_debug(*args)
 
-def nlpsol(*args):
+def nlpsol(*args) -> "casadi::Function":
     """
 
 
       nlpsol(str name, str solver, Importer compiler, dict opts) -> Function
       nlpsol(str name, str solver, NlpBuilder nl, dict opts) -> Function
       nlpsol(str name, str solver, dict:SX nlp, dict opts) -> Function
-        Create an NLP solver Creates a solver for the following parametric nonlinear
       nlpsol(str name, str solver, dict:MX nlp, dict opts) -> Function
       nlpsol(str name, str solver, str fname, dict opts) -> Function
 
-    > nlpsol(str name, str solver, Importer compiler, dict opts)
-    > nlpsol(str name, str solver, NlpBuilder nl, dict opts)
-    > nlpsol(str name, str solver, dict:MX nlp, dict opts)
-    > nlpsol(str name, str solver, str fname, dict opts)
-    ------------------------------------------------------------------------
 
-    > nlpsol(str name, str solver, dict:SX nlp, dict opts)
-    ------------------------------------------------------------------------
+    .......
+
+    ::
+
+      nlpsol(str name, str solver, Importer compiler, dict opts)
+      nlpsol(str name, str solver, NlpBuilder nl, dict opts)
+      nlpsol(str name, str solver, dict:MX nlp, dict opts)
+      nlpsol(str name, str solver, str fname, dict opts)
+
+
+
+    .............
+
+
+    .......
+
+    ::
+
+      nlpsol(str name, str solver, dict:SX nlp, dict opts)
+
 
 
     Create an NLP solver Creates a solver for the following parametric nonlinear
@@ -15504,8 +15969,8 @@ def nlpsol(*args):
     |                  |                 | f,g,...,stop the |                  |
     |                  |                 | iterations       |                  |
     +------------------+-----------------+------------------+------------------+
-    | expand           | OT_BOOL         | Replace MX with  | casadi::Nlpsol   |
-    |                  |                 | SX expressions   |                  |
+    | expand           | OT_BOOL         | Replace MX with  | casadi::OracleFu |
+    |                  |                 | SX expressions   | nction           |
     |                  |                 | in problem       |                  |
     |                  |                 | formulation      |                  |
     |                  |                 | [false]          |                  |
@@ -15535,6 +16000,9 @@ def nlpsol(*args):
     |                  |                 | function every   |                  |
     |                  |                 | few iterations.  |                  |
     +------------------+-----------------+------------------+------------------+
+    | min_lam          | OT_DOUBLE       | Minimum allowed  | casadi::Nlpsol   |
+    |                  |                 | multiplier value |                  |
+    +------------------+-----------------+------------------+------------------+
     | monitor          | OT_STRINGVECTOR | Set of user      | casadi::OracleFu |
     |                  |                 | problem          | nction           |
     |                  |                 | functions to be  |                  |
@@ -15548,6 +16016,23 @@ def nlpsol(*args):
     | oracle_options   | OT_DICT         | Options to be    | casadi::Nlpsol   |
     |                  |                 | passed to the    |                  |
     |                  |                 | oracle function  |                  |
+    +------------------+-----------------+------------------+------------------+
+    | sens_linsol      | OT_STRING       | Linear solver    | casadi::Nlpsol   |
+    |                  |                 | used for         |                  |
+    |                  |                 | parametric       |                  |
+    |                  |                 | sensitivities    |                  |
+    |                  |                 | (default 'qr').  |                  |
+    +------------------+-----------------+------------------+------------------+
+    | sens_linsol_opti | OT_DICT         | Linear solver    | casadi::Nlpsol   |
+    | ons              |                 | options used for |                  |
+    |                  |                 | parametric       |                  |
+    |                  |                 | sensitivities.   |                  |
+    +------------------+-----------------+------------------+------------------+
+    | show_eval_warnin | OT_BOOL         | Show warnings    | casadi::OracleFu |
+    | gs               |                 | generated from   | nction           |
+    |                  |                 | function         |                  |
+    |                  |                 | evaluations      |                  |
+    |                  |                 | [true]           |                  |
     +------------------+-----------------+------------------+------------------+
     | specific_options | OT_DICT         | Options for      | casadi::OracleFu |
     |                  |                 | specific auto-   | nction           |
@@ -15640,6 +16125,8 @@ def nlpsol(*args):
     - snopt
 
     - worhp
+
+    - qrsqp
 
     - scpgen
 
@@ -15801,6 +16288,11 @@ def nlpsol(*args):
     +----------------------------+-----------+---------------------------------+
     | print_iteration            | OT_BOOL   | Print SQP iterations            |
     +----------------------------+-----------+---------------------------------+
+    | print_maxit_reached        | OT_BOOL   | Print error when maximum number |
+    |                            |           | of SQP iterations reached       |
+    +----------------------------+-----------+---------------------------------+
+    | qp_init                    | OT_BOOL   | Use warmstarting                |
+    +----------------------------+-----------+---------------------------------+
     | qpsol                      | OT_STRING | The QP solver to be used by the |
     |                            |           | SQP method                      |
     +----------------------------+-----------+---------------------------------+
@@ -15809,6 +16301,9 @@ def nlpsol(*args):
     +----------------------------+-----------+---------------------------------+
     | restore_feas               | OT_BOOL   | Use feasibility restoration     |
     |                            |           | phase                           |
+    +----------------------------+-----------+---------------------------------+
+    | rho                        | OT_DOUBLE | Feasibility restoration phase   |
+    |                            |           | parameter                       |
     +----------------------------+-----------+---------------------------------+
     | s_f                        | OT_DOUBLE | Filter line search parameter,   |
     |                            |           | cf. IPOPT paper                 |
@@ -15833,6 +16328,9 @@ def nlpsol(*args):
     | which_second_derv          | OT_INT    | For which block should second   |
     |                            |           | derivatives be provided by the  |
     |                            |           | user                            |
+    +----------------------------+-----------+---------------------------------+
+    | zeta                       | OT_DOUBLE | Feasibility restoration phase   |
+    |                            |           | parameter                       |
     +----------------------------+-----------+---------------------------------+
 
     --------------------------------------------------------------------------------
@@ -15998,6 +16496,11 @@ def nlpsol(*args):
     +--------------------------+-------------+---------------------------------+
     |            Id            |    Type     |           Description           |
     +==========================+=============+=================================+
+    | clip_inactive_lam        | OT_BOOL     | Explicitly set Lagrange         |
+    |                          |             | multipliers to 0 when bound is  |
+    |                          |             | deemed inactive (default:       |
+    |                          |             | false).                         |
+    +--------------------------+-------------+---------------------------------+
     | con_integer_md           | OT_DICT     | Integer metadata (a dictionary  |
     |                          |             | with lists of integers) about   |
     |                          |             | constraints to be passed to     |
@@ -16013,6 +16516,17 @@ def nlpsol(*args):
     |                          |             | constraints to be passed to     |
     |                          |             | IPOPT                           |
     +--------------------------+-------------+---------------------------------+
+    | convexify_margin         | OT_DOUBLE   | When using a convexification    |
+    |                          |             | strategy, make sure that the    |
+    |                          |             | smallest eigenvalue is at least |
+    |                          |             | this (default: 1e-7).           |
+    +--------------------------+-------------+---------------------------------+
+    | convexify_strategy       | OT_STRING   | NONE|regularize|eigen-reflect   |
+    |                          |             | |eigen-clip. Strategy to        |
+    |                          |             | convexify the Lagrange Hessian  |
+    |                          |             | before passing it to the        |
+    |                          |             | solver.                         |
+    +--------------------------+-------------+---------------------------------+
     | grad_f                   | OT_FUNCTION | Function for calculating the    |
     |                          |             | gradient of the objective       |
     |                          |             | (column, autogenerated by       |
@@ -16022,11 +16536,26 @@ def nlpsol(*args):
     |                          |             | Hessian of the Lagrangian       |
     |                          |             | (autogenerated by default)      |
     +--------------------------+-------------+---------------------------------+
+    | inactive_lam_strategy    | OT_STRING   | Strategy to detect if a bound   |
+    |                          |             | is inactive. RELTOL: use        |
+    |                          |             | solver-defined constraint       |
+    |                          |             | tolerance *                     |
+    |                          |             | inactive_lam_value|abstol: use  |
+    |                          |             | inactive_lam_value              |
+    +--------------------------+-------------+---------------------------------+
+    | inactive_lam_value       | OT_DOUBLE   | Value used in                   |
+    |                          |             | inactive_lam_strategy (default: |
+    |                          |             | 10).                            |
+    +--------------------------+-------------+---------------------------------+
     | ipopt                    | OT_DICT     | Options to be passed to IPOPT   |
     +--------------------------+-------------+---------------------------------+
     | jac_g                    | OT_FUNCTION | Function for calculating the    |
     |                          |             | Jacobian of the constraints     |
     |                          |             | (autogenerated by default)      |
+    +--------------------------+-------------+---------------------------------+
+    | max_iter_eig             | OT_DOUBLE   | Maximum number of iterations to |
+    |                          |             | compute an eigenvalue           |
+    |                          |             | decomposition (default: 50).    |
     +--------------------------+-------------+---------------------------------+
     | pass_nonlinear_variables | OT_BOOL     | Pass list of variables entering |
     |                          |             | nonlinearly to IPOPT            |
@@ -16059,16 +16588,25 @@ def nlpsol(*args):
 
     >List of available options
 
-    +---------------------------+--------------+-------------------------------+
-    |            Id             |     Type     |          Description          |
-    +===========================+==============+===============================+
-    | contype                   | OT_INTVECTOR | Type of constraint            |
-    +---------------------------+--------------+-------------------------------+
-    | detect_linear_constraints | OT_BOOL      | Detect type of constraints    |
-    +---------------------------+--------------+-------------------------------+
-    | knitro                    | OT_DICT      | Options to be passed to       |
-    |                           |              | KNITRO                        |
-    +---------------------------+--------------+-------------------------------+
+    +--------------------------+--------------------+--------------------------+
+    |            Id            |        Type        |       Description        |
+    +==========================+====================+==========================+
+    | complem_variables        | OT_INTVECTORVECTOR | List of complementary    |
+    |                          |                    | constraints on simple    |
+    |                          |                    | bounds. Pair (i, j)      |
+    |                          |                    | encodes complementarity  |
+    |                          |                    | between the bounds on    |
+    |                          |                    | variable i and variable  |
+    |                          |                    | j.                       |
+    +--------------------------+--------------------+--------------------------+
+    | contype                  | OT_INTVECTOR       | Type of constraint       |
+    +--------------------------+--------------------+--------------------------+
+    | detect_linear_constraint | OT_BOOL            | Detect type of           |
+    | s                        |                    | constraints              |
+    +--------------------------+--------------------+--------------------------+
+    | knitro                   | OT_DICT            | Options to be passed to  |
+    |                          |                    | KNITRO                   |
+    +--------------------------+--------------------+--------------------------+
 
     --------------------------------------------------------------------------------
 
@@ -16117,6 +16655,21 @@ def nlpsol(*args):
     +-------+---------+-------------------------------+
 
     --------------------------------------------------------------------------------
+
+
+
+    --------------------------------------------------------------------------------
+
+    qrsqp
+    -----
+
+
+
+    A textbook SQPMethod
+
+    --------------------------------------------------------------------------------
+
+
 
 
 
@@ -16207,54 +16760,76 @@ def nlpsol(*args):
 
     >List of available options
 
-    +-----------------------+-----------+--------------------------------------+
-    |          Id           |   Type    |             Description              |
-    +=======================+===========+======================================+
-    | beta                  | OT_DOUBLE | Line-search parameter, restoration   |
-    |                       |           | factor of stepsize                   |
-    +-----------------------+-----------+--------------------------------------+
-    | c1                    | OT_DOUBLE | Armijo condition, coefficient of     |
-    |                       |           | decrease in merit                    |
-    +-----------------------+-----------+--------------------------------------+
-    | hessian_approximation | OT_STRING | limited-memory|exact                 |
-    +-----------------------+-----------+--------------------------------------+
-    | lbfgs_memory          | OT_INT    | Size of L-BFGS memory.               |
-    +-----------------------+-----------+--------------------------------------+
-    | max_iter              | OT_INT    | Maximum number of SQP iterations     |
-    +-----------------------+-----------+--------------------------------------+
-    | max_iter_ls           | OT_INT    | Maximum number of linesearch         |
-    |                       |           | iterations                           |
-    +-----------------------+-----------+--------------------------------------+
-    | merit_memory          | OT_INT    | Size of memory to store history of   |
-    |                       |           | merit function values                |
-    +-----------------------+-----------+--------------------------------------+
-    | min_iter              | OT_INT    | Minimum number of SQP iterations     |
-    +-----------------------+-----------+--------------------------------------+
-    | min_step_size         | OT_DOUBLE | The size (inf-norm) of the step size |
-    |                       |           | should not become smaller than this. |
-    +-----------------------+-----------+--------------------------------------+
-    | print_header          | OT_BOOL   | Print the header with problem        |
-    |                       |           | statistics                           |
-    +-----------------------+-----------+--------------------------------------+
-    | print_iteration       | OT_BOOL   | Print the iterations                 |
-    +-----------------------+-----------+--------------------------------------+
-    | print_status          | OT_BOOL   | Print a status message after solving |
-    +-----------------------+-----------+--------------------------------------+
-    | qpsol                 | OT_STRING | The QP solver to be used by the SQP  |
-    |                       |           | method [qpoases]                     |
-    +-----------------------+-----------+--------------------------------------+
-    | qpsol_options         | OT_DICT   | Options to be passed to the QP       |
-    |                       |           | solver                               |
-    +-----------------------+-----------+--------------------------------------+
-    | regularize            | OT_BOOL   | Automatic regularization of Lagrange |
-    |                       |           | Hessian.                             |
-    +-----------------------+-----------+--------------------------------------+
-    | tol_du                | OT_DOUBLE | Stopping criterion for dual          |
-    |                       |           | infeasability                        |
-    +-----------------------+-----------+--------------------------------------+
-    | tol_pr                | OT_DOUBLE | Stopping criterion for primal        |
-    |                       |           | infeasibility                        |
-    +-----------------------+-----------+--------------------------------------+
+    +-----------------------+-------------+------------------------------------+
+    |          Id           |    Type     |            Description             |
+    +=======================+=============+====================================+
+    | beta                  | OT_DOUBLE   | Line-search parameter, restoration |
+    |                       |             | factor of stepsize                 |
+    +-----------------------+-------------+------------------------------------+
+    | c1                    | OT_DOUBLE   | Armijo condition, coefficient of   |
+    |                       |             | decrease in merit                  |
+    +-----------------------+-------------+------------------------------------+
+    | convexify_margin      | OT_DOUBLE   | When using a convexification       |
+    |                       |             | strategy, make sure that the       |
+    |                       |             | smallest eigenvalue is at least    |
+    |                       |             | this (default: 1e-7).              |
+    +-----------------------+-------------+------------------------------------+
+    | convexify_strategy    | OT_STRING   | NONE|regularize|eigen-reflect      |
+    |                       |             | |eigen-clip. Strategy to convexify |
+    |                       |             | the Lagrange Hessian before        |
+    |                       |             | passing it to the solver.          |
+    +-----------------------+-------------+------------------------------------+
+    | hess_lag              | OT_FUNCTION | Function for calculating the       |
+    |                       |             | Hessian of the Lagrangian          |
+    |                       |             | (autogenerated by default)         |
+    +-----------------------+-------------+------------------------------------+
+    | hessian_approximation | OT_STRING   | limited-memory|exact               |
+    +-----------------------+-------------+------------------------------------+
+    | jac_fg                | OT_FUNCTION | Function for calculating the       |
+    |                       |             | gradient of the objective and      |
+    |                       |             | Jacobian of the constraints        |
+    |                       |             | (autogenerated by default)         |
+    +-----------------------+-------------+------------------------------------+
+    | lbfgs_memory          | OT_INT      | Size of L-BFGS memory.             |
+    +-----------------------+-------------+------------------------------------+
+    | max_iter              | OT_INT      | Maximum number of SQP iterations   |
+    +-----------------------+-------------+------------------------------------+
+    | max_iter_eig          | OT_DOUBLE   | Maximum number of iterations to    |
+    |                       |             | compute an eigenvalue              |
+    |                       |             | decomposition (default: 50).       |
+    +-----------------------+-------------+------------------------------------+
+    | max_iter_ls           | OT_INT      | Maximum number of linesearch       |
+    |                       |             | iterations                         |
+    +-----------------------+-------------+------------------------------------+
+    | merit_memory          | OT_INT      | Size of memory to store history of |
+    |                       |             | merit function values              |
+    +-----------------------+-------------+------------------------------------+
+    | min_iter              | OT_INT      | Minimum number of SQP iterations   |
+    +-----------------------+-------------+------------------------------------+
+    | min_step_size         | OT_DOUBLE   | The size (inf-norm) of the step    |
+    |                       |             | size should not become smaller     |
+    |                       |             | than this.                         |
+    +-----------------------+-------------+------------------------------------+
+    | print_header          | OT_BOOL     | Print the header with problem      |
+    |                       |             | statistics                         |
+    +-----------------------+-------------+------------------------------------+
+    | print_iteration       | OT_BOOL     | Print the iterations               |
+    +-----------------------+-------------+------------------------------------+
+    | print_status          | OT_BOOL     | Print a status message after       |
+    |                       |             | solving                            |
+    +-----------------------+-------------+------------------------------------+
+    | qpsol                 | OT_STRING   | The QP solver to be used by the    |
+    |                       |             | SQP method [qpoases]               |
+    +-----------------------+-------------+------------------------------------+
+    | qpsol_options         | OT_DICT     | Options to be passed to the QP     |
+    |                       |             | solver                             |
+    +-----------------------+-------------+------------------------------------+
+    | tol_du                | OT_DOUBLE   | Stopping criterion for dual        |
+    |                       |             | infeasability                      |
+    +-----------------------+-------------+------------------------------------+
+    | tol_pr                | OT_DOUBLE   | Stopping criterion for primal      |
+    |                       |             | infeasibility                      |
+    +-----------------------+-------------+------------------------------------+
 
     --------------------------------------------------------------------------------
 
@@ -16264,16 +16839,18 @@ def nlpsol(*args):
 
 
 
+    .............
+
+
 
     """
     return _casadi.nlpsol(*args)
 
-def nlpsol_in(*args):
+def nlpsol_in(*args) -> "std::string":
     """
       Get NLP solver input scheme name by index.
 
       nlpsol_in() -> [str]
-        Get input scheme of NLP solvers.
       nlpsol_in(int ind) -> str
 
 
@@ -16304,8 +16881,13 @@ def nlpsol_in(*args):
     +---------------+--------+-------------------------------------------------+
 
 
-    > nlpsol_in(int ind)
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      nlpsol_in(int ind)
+
 
 
     Get NLP solver input scheme name by index.
@@ -16337,8 +16919,16 @@ def nlpsol_in(*args):
     +---------------+--------+-------------------------------------------------+
 
 
-    > nlpsol_in()
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      nlpsol_in()
+
 
 
     Get input scheme of NLP solvers.
@@ -16371,16 +16961,18 @@ def nlpsol_in(*args):
 
 
 
+    .............
+
+
 
     """
     return _casadi.nlpsol_in(*args)
 
-def nlpsol_out(*args):
+def nlpsol_out(*args) -> "std::string":
     """
       Get output scheme name by index.
 
       nlpsol_out() -> [str]
-        Get NLP solver output scheme of NLP solvers.
       nlpsol_out(int ind) -> str
 
 
@@ -16409,8 +17001,13 @@ def nlpsol_out(*args):
     +--------------+-------+---------------------------------------------------+
 
 
-    > nlpsol_out(int ind)
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      nlpsol_out(int ind)
+
 
 
     Get output scheme name by index.
@@ -16440,8 +17037,16 @@ def nlpsol_out(*args):
     +--------------+-------+---------------------------------------------------+
 
 
-    > nlpsol_out()
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      nlpsol_out()
+
 
 
     Get NLP solver output scheme of NLP solvers.
@@ -16472,11 +17077,14 @@ def nlpsol_out(*args):
 
 
 
+    .............
+
+
 
     """
     return _casadi.nlpsol_out(*args)
 
-def nlpsol_n_in(*args):
+def nlpsol_n_in(*args) -> "casadi_int":
     """
     Number of NLP solver inputs.
 
@@ -16489,7 +17097,7 @@ def nlpsol_n_in(*args):
     """
     return _casadi.nlpsol_n_in(*args)
 
-def nlpsol_n_out(*args):
+def nlpsol_n_out(*args) -> "casadi_int":
     """
     Number of NLP solver outputs.
 
@@ -16502,7 +17110,7 @@ def nlpsol_n_out(*args):
     """
     return _casadi.nlpsol_n_out(*args)
 
-def nlpsol_default_in(*args):
+def nlpsol_default_in(*args) -> "std::vector< double,std::allocator< double > >":
     """
     Default input for an NLP solver.
 
@@ -16516,7 +17124,7 @@ def nlpsol_default_in(*args):
     """
     return _casadi.nlpsol_default_in(*args)
 
-def nlpsol_options(*args):
+def nlpsol_options(*args) -> "std::vector< std::string,std::allocator< std::string > >":
     """
     Get all options for a plugin.
 
@@ -16529,7 +17137,7 @@ def nlpsol_options(*args):
     """
     return _casadi.nlpsol_options(*args)
 
-def nlpsol_option_type(*args):
+def nlpsol_option_type(*args) -> "std::string":
     """
     Get type info for a particular option.
 
@@ -16542,7 +17150,7 @@ def nlpsol_option_type(*args):
     """
     return _casadi.nlpsol_option_type(*args)
 
-def nlpsol_option_info(*args):
+def nlpsol_option_info(*args) -> "std::string":
     """
     Get documentation for a particular option.
 
@@ -16555,7 +17163,7 @@ def nlpsol_option_info(*args):
     """
     return _casadi.nlpsol_option_info(*args)
 
-def has_nlpsol(*args):
+def has_nlpsol(*args) -> "bool":
     """
     Check if a particular plugin is available.
 
@@ -16568,7 +17176,7 @@ def has_nlpsol(*args):
     """
     return _casadi.has_nlpsol(*args)
 
-def load_nlpsol(*args):
+def load_nlpsol(*args) -> "void":
     """
     Explicitly load a plugin dynamically.
 
@@ -16581,7 +17189,7 @@ def load_nlpsol(*args):
     """
     return _casadi.load_nlpsol(*args)
 
-def doc_nlpsol(*args):
+def doc_nlpsol(*args) -> "std::string":
     """
     Get the documentation string for a plugin.
 
@@ -16594,17 +17202,21 @@ def doc_nlpsol(*args):
     """
     return _casadi.doc_nlpsol(*args)
 
-def rootfinder(*args):
+def rootfinder(*args) -> "casadi::Function":
     """
 
 
       rootfinder(str name, str solver, dict:SX rfp, dict opts) -> Function
-        Create a solver for rootfinding problems Takes a function where one of the
       rootfinder(str name, str solver, dict:MX rfp, dict opts) -> Function
       rootfinder(str name, str solver, Function f, dict opts) -> Function
 
-    > rootfinder(str name, str solver, dict:SX rfp, dict opts)
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      rootfinder(str name, str solver, dict:SX rfp, dict opts)
+
 
 
     Create a solver for rootfinding problems Takes a function where one of the
@@ -16652,6 +17264,12 @@ def rootfinder(*args):
     |                  |                 | raise an error   |                  |
     |                  |                 | (default false). |                  |
     +------------------+-----------------+------------------+------------------+
+    | expand           | OT_BOOL         | Replace MX with  | casadi::OracleFu |
+    |                  |                 | SX expressions   | nction           |
+    |                  |                 | in problem       |                  |
+    |                  |                 | formulation      |                  |
+    |                  |                 | [false]          |                  |
+    +------------------+-----------------+------------------+------------------+
     | implicit_input   | OT_INT          | Index of the     | casadi::Rootfind |
     |                  |                 | input that       | er               |
     |                  |                 | corresponds to   |                  |
@@ -16684,6 +17302,12 @@ def rootfinder(*args):
     |                  |                 | problem          | nction           |
     |                  |                 | functions to be  |                  |
     |                  |                 | monitored        |                  |
+    +------------------+-----------------+------------------+------------------+
+    | show_eval_warnin | OT_BOOL         | Show warnings    | casadi::OracleFu |
+    | gs               |                 | generated from   | nction           |
+    |                  |                 | function         |                  |
+    |                  |                 | evaluations      |                  |
+    |                  |                 | [true]           |                  |
     +------------------+-----------------+------------------+------------------+
     | specific_options | OT_DICT         | Options for      | casadi::OracleFu |
     |                  |                 | specific auto-   | nction           |
@@ -16851,6 +17475,8 @@ def rootfinder(*args):
     +-----------------+-----------+--------------------------------------------+
     | abstolStep      | OT_DOUBLE | Stopping criterion tolerance on step size  |
     +-----------------+-----------+--------------------------------------------+
+    | line_search     | OT_BOOL   | Enable line-search (default: true)         |
+    +-----------------+-----------+--------------------------------------------+
     | max_iter        | OT_INT    | Maximum number of Newton iterations to     |
     |                 |           | perform before returning.                  |
     +-----------------+-----------+--------------------------------------------+
@@ -16864,74 +17490,115 @@ def rootfinder(*args):
     Joel Andersson
 
 
-    > rootfinder(str name, str solver, dict:MX rfp, dict opts)
-    > rootfinder(str name, str solver, Function f, dict opts)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      rootfinder(str name, str solver, dict:MX rfp, dict opts)
+      rootfinder(str name, str solver, Function f, dict opts)
+
+
+
+    .............
 
 
 
     """
     return _casadi.rootfinder(*args)
 
-def rootfinder_in(*args):
+def rootfinder_in(*args) -> "std::string":
     """
       Get rootfinder input scheme name by index.
 
       rootfinder_in() -> [str]
-        Get rootfinder input scheme.
       rootfinder_in(int ind) -> str
 
 
 
-    > rootfinder_in(int ind)
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      rootfinder_in(int ind)
+
 
 
     Get rootfinder input scheme name by index.
 
 
-    > rootfinder_in()
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      rootfinder_in()
+
 
 
     Get rootfinder input scheme.
 
 
 
+    .............
+
+
 
     """
     return _casadi.rootfinder_in(*args)
 
-def rootfinder_out(*args):
+def rootfinder_out(*args) -> "std::string":
     """
       Get rootfinder output scheme name by index.
 
       rootfinder_out() -> [str]
-        Get rootfinder output scheme.
       rootfinder_out(int ind) -> str
 
 
 
-    > rootfinder_out(int ind)
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      rootfinder_out(int ind)
+
 
 
     Get rootfinder output scheme name by index.
 
 
-    > rootfinder_out()
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      rootfinder_out()
+
 
 
     Get rootfinder output scheme.
 
 
 
+    .............
+
+
 
     """
     return _casadi.rootfinder_out(*args)
 
-def rootfinder_n_in(*args):
+def rootfinder_n_in(*args) -> "casadi_int":
     """
     Number of rootfinder inputs.
 
@@ -16944,7 +17611,7 @@ def rootfinder_n_in(*args):
     """
     return _casadi.rootfinder_n_in(*args)
 
-def rootfinder_n_out(*args):
+def rootfinder_n_out(*args) -> "casadi_int":
     """
     Number of rootfinder outputs.
 
@@ -16957,7 +17624,7 @@ def rootfinder_n_out(*args):
     """
     return _casadi.rootfinder_n_out(*args)
 
-def rootfinder_options(*args):
+def rootfinder_options(*args) -> "std::vector< std::string,std::allocator< std::string > >":
     """
     Get all options for a plugin.
 
@@ -16970,7 +17637,7 @@ def rootfinder_options(*args):
     """
     return _casadi.rootfinder_options(*args)
 
-def rootfinder_option_type(*args):
+def rootfinder_option_type(*args) -> "std::string":
     """
     Get type info for a particular option.
 
@@ -16983,7 +17650,7 @@ def rootfinder_option_type(*args):
     """
     return _casadi.rootfinder_option_type(*args)
 
-def rootfinder_option_info(*args):
+def rootfinder_option_info(*args) -> "std::string":
     """
     Get documentation for a particular option.
 
@@ -16996,7 +17663,7 @@ def rootfinder_option_info(*args):
     """
     return _casadi.rootfinder_option_info(*args)
 
-def has_rootfinder(*args):
+def has_rootfinder(*args) -> "bool":
     """
     Check if a particular plugin is available.
 
@@ -17009,7 +17676,7 @@ def has_rootfinder(*args):
     """
     return _casadi.has_rootfinder(*args)
 
-def load_rootfinder(*args):
+def load_rootfinder(*args) -> "void":
     """
     Explicitly load a plugin dynamically.
 
@@ -17022,7 +17689,7 @@ def load_rootfinder(*args):
     """
     return _casadi.load_rootfinder(*args)
 
-def doc_rootfinder(*args):
+def doc_rootfinder(*args) -> "std::string":
     """
     Get the documentation string for a plugin.
 
@@ -17064,9 +17731,13 @@ class Linsol(SharedObject, PrintableCommon):
 
     - lapackqr
 
+    - mumps
+
     - ldl
 
     - qr
+
+    - tridiag
 
     - symbolicqr
 
@@ -17167,6 +17838,30 @@ class Linsol(SharedObject, PrintableCommon):
 
     --------------------------------------------------------------------------------
 
+    mumps
+    -----
+
+
+
+    Interface to the sparse direct linear solver MUMPS Works for symmetric
+    indefinite systems Joel Andersson
+
+    >List of available options
+
+    +-----------+---------+-------------------+
+    |    Id     |  Type   |    Description    |
+    +===========+=========+===================+
+    | posdef    | OT_BOOL | Positive definite |
+    +-----------+---------+-------------------+
+    | symmetric | OT_BOOL | Symmetric matrix  |
+    +-----------+---------+-------------------+
+
+    --------------------------------------------------------------------------------
+
+
+
+    --------------------------------------------------------------------------------
+
     ldl
     ---
 
@@ -17187,6 +17882,21 @@ class Linsol(SharedObject, PrintableCommon):
 
 
     Linear solver using sparse direct QR factorization
+
+    --------------------------------------------------------------------------------
+
+
+
+
+
+    --------------------------------------------------------------------------------
+
+    tridiag
+    -------
+
+
+
+    Linear solver for tridiagonal matrices
 
     --------------------------------------------------------------------------------
 
@@ -17236,7 +17946,7 @@ class Linsol(SharedObject, PrintableCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, Linsol, name)
     __repr__ = _swig_repr
 
-    def type_name(*args):
+    def type_name(*args) -> "std::string":
         """
 
 
@@ -17249,20 +17959,7 @@ class Linsol(SharedObject, PrintableCommon):
 
     type_name = staticmethod(type_name)
 
-    def test_cast(*args):
-        """
-
-
-        test_cast(casadi::SharedObjectInternal const * ptr) -> bool
-
-
-
-        """
-        return _casadi.Linsol_test_cast(*args)
-
-    test_cast = staticmethod(test_cast)
-
-    def has_plugin(*args):
+    def has_plugin(*args) -> "bool":
         """
 
 
@@ -17275,7 +17972,7 @@ class Linsol(SharedObject, PrintableCommon):
 
     has_plugin = staticmethod(has_plugin)
 
-    def load_plugin(*args):
+    def load_plugin(*args) -> "void":
         """
 
 
@@ -17288,7 +17985,7 @@ class Linsol(SharedObject, PrintableCommon):
 
     load_plugin = staticmethod(load_plugin)
 
-    def doc(*args):
+    def doc(*args) -> "std::string":
         """
 
 
@@ -17301,7 +17998,7 @@ class Linsol(SharedObject, PrintableCommon):
 
     doc = staticmethod(doc)
 
-    def plugin_name(self, *args):
+    def plugin_name(self, *args) -> "std::string":
         """
         Query plugin name.
 
@@ -17315,7 +18012,7 @@ class Linsol(SharedObject, PrintableCommon):
         return _casadi.Linsol_plugin_name(self, *args)
 
 
-    def sparsity(self, *args):
+    def sparsity(self, *args) -> "casadi::Sparsity const &":
         """
         Get linear system sparsity.
 
@@ -17329,7 +18026,7 @@ class Linsol(SharedObject, PrintableCommon):
         return _casadi.Linsol_sparsity(self, *args)
 
 
-    def sfact(self, *args):
+    def sfact(self, *args) -> "void":
         """
         Symbolic factorization of the linear system, e.g. selecting pivots.
 
@@ -17343,7 +18040,7 @@ class Linsol(SharedObject, PrintableCommon):
         return _casadi.Linsol_sfact(self, *args)
 
 
-    def nfact(self, *args):
+    def nfact(self, *args) -> "void":
         """
         Numeric factorization of the linear system.
 
@@ -17357,7 +18054,7 @@ class Linsol(SharedObject, PrintableCommon):
         return _casadi.Linsol_nfact(self, *args)
 
 
-    def solve(self, *args):
+    def solve(self, *args) -> "casadi::MX":
         """
         Solve linear system of equations
 
@@ -17372,7 +18069,7 @@ class Linsol(SharedObject, PrintableCommon):
         return _casadi.Linsol_solve(self, *args)
 
 
-    def neig(self, *args):
+    def neig(self, *args) -> "casadi_int":
         """
         Number of negative eigenvalues Not available for all solvers.
 
@@ -17386,7 +18083,7 @@ class Linsol(SharedObject, PrintableCommon):
         return _casadi.Linsol_neig(self, *args)
 
 
-    def rank(self, *args):
+    def rank(self, *args) -> "casadi_int":
         """
         Matrix rank Not available for all solvers.
 
@@ -17400,32 +18097,68 @@ class Linsol(SharedObject, PrintableCommon):
         return _casadi.Linsol_rank(self, *args)
 
 
+    def stats(self, *args) -> "casadi::Dict":
+        """
+        Get all statistics obtained at the end of the last evaluate call.
+
+        stats(self, int mem) -> dict
+
+
+
+
+
+        """
+        return _casadi.Linsol_stats(self, *args)
+
+
     def __init__(self, *args):
         """
 
 
           Linsol()
-            Default constructor.
           Linsol(Linsol other)
           Linsol(str name, str solver, Sparsity sp, dict opts)
-            Constructor.
 
-        > Linsol(Linsol other)
-        ------------------------------------------------------------------------
 
-        > Linsol()
-        ------------------------------------------------------------------------
+        .......
+
+        ::
+
+          Linsol(Linsol other)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          Linsol()
+
 
 
         Default constructor.
 
 
-        > Linsol(str name, str solver, Sparsity sp, dict opts)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          Linsol(str name, str solver, Sparsity sp, dict opts)
+
 
 
         Constructor.
 
+
+
+        .............
 
 
 
@@ -17439,7 +18172,7 @@ class Linsol(SharedObject, PrintableCommon):
 Linsol_swigregister = _casadi.Linsol_swigregister
 Linsol_swigregister(Linsol)
 
-def Linsol_type_name(*args):
+def Linsol_type_name(*args) -> "std::string":
     """
 
 
@@ -17450,18 +18183,7 @@ def Linsol_type_name(*args):
     """
     return _casadi.Linsol_type_name(*args)
 
-def Linsol_test_cast(*args):
-    """
-
-
-    test_cast(casadi::SharedObjectInternal const * ptr) -> bool
-
-
-
-    """
-    return _casadi.Linsol_test_cast(*args)
-
-def Linsol_has_plugin(*args):
+def Linsol_has_plugin(*args) -> "bool":
     """
 
 
@@ -17472,7 +18194,7 @@ def Linsol_has_plugin(*args):
     """
     return _casadi.Linsol_has_plugin(*args)
 
-def Linsol_load_plugin(*args):
+def Linsol_load_plugin(*args) -> "void":
     """
 
 
@@ -17483,7 +18205,7 @@ def Linsol_load_plugin(*args):
     """
     return _casadi.Linsol_load_plugin(*args)
 
-def Linsol_doc(*args):
+def Linsol_doc(*args) -> "std::string":
     """
 
 
@@ -17495,7 +18217,7 @@ def Linsol_doc(*args):
     return _casadi.Linsol_doc(*args)
 
 
-def has_linsol(*args):
+def has_linsol(*args) -> "bool":
     """
     Check if a particular plugin is available.
 
@@ -17508,7 +18230,7 @@ def has_linsol(*args):
     """
     return _casadi.has_linsol(*args)
 
-def load_linsol(*args):
+def load_linsol(*args) -> "void":
     """
     Explicitly load a plugin dynamically.
 
@@ -17521,7 +18243,7 @@ def load_linsol(*args):
     """
     return _casadi.load_linsol(*args)
 
-def doc_linsol(*args):
+def doc_linsol(*args) -> "std::string":
     """
     Get the documentation string for a plugin.
 
@@ -17534,23 +18256,35 @@ def doc_linsol(*args):
     """
     return _casadi.doc_linsol(*args)
 
-def dplesol(*args):
+def dplesol(*args) -> "casadi::DMVector":
     """
 
 
       dplesol([DM] A, [DM] V, str solver, dict opts) -> [DM]
       dplesol(MX A, MX V, str solver, dict opts) -> MX
       dplesol([MX] A, [MX] V, str solver, dict opts) -> [MX]
-      dplesol(str name, str solver, dict:Sparsity qp, dict opts) -> Function
-        Discrete periodic Lyapunov Equation solver Given matrices $A_k$ and
+      dplesol(str name, str solver, dict:Sparsity st, dict opts) -> Function
 
-    > dplesol([DM] A, [DM] V, str solver, dict opts)
-    > dplesol(MX A, MX V, str solver, dict opts)
-    > dplesol([MX] A, [MX] V, str solver, dict opts)
-    ------------------------------------------------------------------------
 
-    > dplesol(str name, str solver, dict:Sparsity qp, dict opts)
-    ------------------------------------------------------------------------
+    .......
+
+    ::
+
+      dplesol([DM] A, [DM] V, str solver, dict opts)
+      dplesol(MX A, MX V, str solver, dict opts)
+      dplesol([MX] A, [MX] V, str solver, dict opts)
+
+
+
+    .............
+
+
+    .......
+
+    ::
+
+      dplesol(str name, str solver, dict:Sparsity st, dict opts)
+
 
 
     Discrete periodic Lyapunov Equation solver Given matrices $A_k$ and
@@ -17631,6 +18365,15 @@ def dplesol(*args):
     |                  |                 | respectively.    |                  |
     |                  |                 | Cf. option       |                  |
     |                  |                 | "ad_weight".     |                  |
+    |                  |                 | When set to -1,  |                  |
+    |                  |                 | sparsity is      |                  |
+    |                  |                 | completely       |                  |
+    |                  |                 | ignored and      |                  |
+    |                  |                 | dense matrices   |                  |
+    |                  |                 | are used.        |                  |
+    +------------------+-----------------+------------------+------------------+
+    | always_inline    | OT_BOOL         | Force inlining.  | casadi::Function |
+    |                  |                 |                  | Internal         |
     +------------------+-----------------+------------------+------------------+
     | compiler         | OT_STRING       | Just-in-time     | casadi::Function |
     |                  |                 | compiler plugin  | Internal         |
@@ -17638,6 +18381,15 @@ def dplesol(*args):
     +------------------+-----------------+------------------+------------------+
     | const_dim        | OT_BOOL         | Assume constant  | casadi::Dple     |
     |                  |                 | dimension of P   |                  |
+    +------------------+-----------------+------------------+------------------+
+    | custom_jacobian  | OT_FUNCTION     | Override         | casadi::Function |
+    |                  |                 | CasADi's AD. Use | Internal         |
+    |                  |                 | together with    |                  |
+    |                  |                 | 'jac_penalty':   |                  |
+    |                  |                 | 0. Note: Highly  |                  |
+    |                  |                 | experimental.    |                  |
+    |                  |                 | Syntax may break |                  |
+    |                  |                 | often.           |                  |
     +------------------+-----------------+------------------+------------------+
     | derivative_of    | OT_FUNCTION     | The function is  | casadi::Function |
     |                  |                 | a derivative of  | Internal         |
@@ -17651,6 +18403,38 @@ def dplesol(*args):
     |                  |                 | inferred from    |                  |
     |                  |                 | the function     |                  |
     |                  |                 | name.            |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump             | OT_BOOL         | Dump function to | casadi::Function |
+    |                  |                 | file upon first  | Internal         |
+    |                  |                 | evaluation.      |                  |
+    |                  |                 | [false]          |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_dir         | OT_STRING       | Directory to     | casadi::Function |
+    |                  |                 | dump             | Internal         |
+    |                  |                 | inputs/outputs   |                  |
+    |                  |                 | to. Make sure    |                  |
+    |                  |                 | the directory    |                  |
+    |                  |                 | exists [.]       |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_format      | OT_STRING       | Choose file      | casadi::Function |
+    |                  |                 | format to dump   | Internal         |
+    |                  |                 | matrices. See    |                  |
+    |                  |                 | DM.from_file     |                  |
+    |                  |                 | [mtx]            |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_in          | OT_BOOL         | Dump numerical   | casadi::Function |
+    |                  |                 | values of inputs | Internal         |
+    |                  |                 | to file          |                  |
+    |                  |                 | (readable with   |                  |
+    |                  |                 | DM.from_file )   |                  |
+    |                  |                 | [default: false] |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_out         | OT_BOOL         | Dump numerical   | casadi::Function |
+    |                  |                 | values of        | Internal         |
+    |                  |                 | outputs to file  |                  |
+    |                  |                 | (readable with   |                  |
+    |                  |                 | DM.from_file )   |                  |
+    |                  |                 | [default: false] |                  |
     +------------------+-----------------+------------------+------------------+
     | enable_fd        | OT_BOOL         | Enable           | casadi::Function |
     |                  |                 | derivative       | Internal         |
@@ -17727,6 +18511,11 @@ def dplesol(*args):
     |                  |                 | difference       |                  |
     |                  |                 | instance         |                  |
     +------------------+-----------------+------------------+------------------+
+    | forward_options  | OT_DICT         | Options to be    | casadi::Function |
+    |                  |                 | passed to a      | Internal         |
+    |                  |                 | forward mode     |                  |
+    |                  |                 | constructor      |                  |
+    +------------------+-----------------+------------------+------------------+
     | gather_stats     | OT_BOOL         | Deprecated       | casadi::Function |
     |                  |                 | option           | Internal         |
     |                  |                 | (ignored):       |                  |
@@ -17742,6 +18531,16 @@ def dplesol(*args):
     |                  |                 | numerical values |                  |
     |                  |                 | of the inputs    |                  |
     |                  |                 | don't make sense |                  |
+    +------------------+-----------------+------------------+------------------+
+    | is_diff_in       | OT_BOOLVECTOR   | Indicate for     | casadi::Function |
+    |                  |                 | each input if it | Internal         |
+    |                  |                 | should be        |                  |
+    |                  |                 | differentiable.  |                  |
+    +------------------+-----------------+------------------+------------------+
+    | is_diff_out      | OT_BOOLVECTOR   | Indicate for     | casadi::Function |
+    |                  |                 | each output if   | Internal         |
+    |                  |                 | it should be     |                  |
+    |                  |                 | differentiable.  |                  |
     +------------------+-----------------+------------------+------------------+
     | jac_penalty      | OT_DOUBLE       | When requested   | casadi::Function |
     |                  |                 | for a number of  | Internal         |
@@ -17781,9 +18580,49 @@ def dplesol(*args):
     |                  |                 | speed up the     |                  |
     |                  |                 | evaluation       |                  |
     +------------------+-----------------+------------------+------------------+
+    | jit_cleanup      | OT_BOOL         | Cleanup up the   | casadi::Function |
+    |                  |                 | temporary source | Internal         |
+    |                  |                 | file that jit    |                  |
+    |                  |                 | creates.         |                  |
+    |                  |                 | Default: true    |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_name         | OT_STRING       | The file name    | casadi::Function |
+    |                  |                 | used to write    | Internal         |
+    |                  |                 | out code. The    |                  |
+    |                  |                 | actual file      |                  |
+    |                  |                 | names used       |                  |
+    |                  |                 | depend on 'jit_t |                  |
+    |                  |                 | emp_suffix' and  |                  |
+    |                  |                 | include          |                  |
+    |                  |                 | extensions.      |                  |
+    |                  |                 | Default:         |                  |
+    |                  |                 | 'jit_tmp'        |                  |
+    +------------------+-----------------+------------------+------------------+
     | jit_options      | OT_DICT         | Options to be    | casadi::Function |
     |                  |                 | passed to the    | Internal         |
     |                  |                 | jit compiler.    |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_serialize    | OT_STRING       | Specify          | casadi::Function |
+    |                  |                 | behaviour when   | Internal         |
+    |                  |                 | serializing a    |                  |
+    |                  |                 | jitted function: |                  |
+    |                  |                 | SOURCE|link|embe |                  |
+    |                  |                 | d.               |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_temp_suffix  | OT_BOOL         | Use a temporary  | casadi::Function |
+    |                  |                 | (seemingly       | Internal         |
+    |                  |                 | random) filename |                  |
+    |                  |                 | suffix for       |                  |
+    |                  |                 | generated code   |                  |
+    |                  |                 | and libraries.   |                  |
+    |                  |                 | This is desired  |                  |
+    |                  |                 | for thread-      |                  |
+    |                  |                 | safety. This     |                  |
+    |                  |                 | behaviour may    |                  |
+    |                  |                 | defeat caching   |                  |
+    |                  |                 | compiler         |                  |
+    |                  |                 | wrappers.        |                  |
+    |                  |                 | Default: true    |                  |
     +------------------+-----------------+------------------+------------------+
     | max_num_dir      | OT_INT          | Specify the      | casadi::Function |
     |                  |                 | maximum number   | Internal         |
@@ -17794,6 +18633,9 @@ def dplesol(*args):
     |                  |                 | builtin optimize |                  |
     |                  |                 | d_num_dir.       |                  |
     +------------------+-----------------+------------------+------------------+
+    | never_inline     | OT_BOOL         | Forbid inlining. | casadi::Function |
+    |                  |                 |                  | Internal         |
+    +------------------+-----------------+------------------+------------------+
     | output_scheme    | OT_STRINGVECTOR | Deprecated       | casadi::Function |
     |                  |                 | option (ignored) | Internal         |
     +------------------+-----------------+------------------+------------------+
@@ -17801,15 +18643,37 @@ def dplesol(*args):
     |                  |                 | positive         |                  |
     |                  |                 | definite         |                  |
     +------------------+-----------------+------------------+------------------+
+    | print_in         | OT_BOOL         | Print numerical  | casadi::Function |
+    |                  |                 | values of inputs | Internal         |
+    |                  |                 | [default: false] |                  |
+    +------------------+-----------------+------------------+------------------+
+    | print_out        | OT_BOOL         | Print numerical  | casadi::Function |
+    |                  |                 | values of        | Internal         |
+    |                  |                 | outputs          |                  |
+    |                  |                 | [default: false] |                  |
+    +------------------+-----------------+------------------+------------------+
     | print_time       | OT_BOOL         | print            | casadi::Function |
     |                  |                 | information      | Internal         |
     |                  |                 | about execution  |                  |
-    |                  |                 | time             |                  |
+    |                  |                 | time. Implies    |                  |
+    |                  |                 | record_time.     |                  |
+    +------------------+-----------------+------------------+------------------+
+    | record_time      | OT_BOOL         | record           | casadi::Function |
+    |                  |                 | information      | Internal         |
+    |                  |                 | about execution  |                  |
+    |                  |                 | time, for        |                  |
+    |                  |                 | retrieval with   |                  |
+    |                  |                 | stats().         |                  |
     +------------------+-----------------+------------------+------------------+
     | regularity_check | OT_BOOL         | Throw exceptions | casadi::Function |
     |                  |                 | when NaN or Inf  | Internal         |
     |                  |                 | appears during   |                  |
     |                  |                 | evaluation       |                  |
+    +------------------+-----------------+------------------+------------------+
+    | reverse_options  | OT_DICT         | Options to be    | casadi::Function |
+    |                  |                 | passed to a      | Internal         |
+    |                  |                 | reverse mode     |                  |
+    |                  |                 | constructor      |                  |
     +------------------+-----------------+------------------+------------------+
     | user_data        | OT_VOIDPTR      | A user-defined   | casadi::Function |
     |                  |                 | field that can   | Internal         |
@@ -17902,69 +18766,102 @@ def dplesol(*args):
 
 
 
+    .............
+
+
 
     """
     return _casadi.dplesol(*args)
 
-def dple_in(*args):
+def dple_in(*args) -> "std::string":
     """
       Get DPLE input scheme name by index.
 
       dple_in() -> [str]
-        Get input scheme of DPLE solvers.
       dple_in(int ind) -> str
 
 
 
-    > dple_in()
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      dple_in()
+
 
 
     Get input scheme of DPLE solvers.
 
 
-    > dple_in(int ind)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      dple_in(int ind)
+
 
 
     Get DPLE input scheme name by index.
 
 
 
+    .............
+
+
 
     """
     return _casadi.dple_in(*args)
 
-def dple_out(*args):
+def dple_out(*args) -> "std::string":
     """
       Get DPLE output scheme name by index.
 
       dple_out() -> [str]
-        Get output scheme of DPLE solvers.
       dple_out(int ind) -> str
 
 
 
-    > dple_out()
-    ------------------------------------------------------------------------
+
+    .......
+
+    ::
+
+      dple_out()
+
 
 
     Get output scheme of DPLE solvers.
 
 
-    > dple_out(int ind)
-    ------------------------------------------------------------------------
+
+    .............
+
+
+    .......
+
+    ::
+
+      dple_out(int ind)
+
 
 
     Get DPLE output scheme name by index.
 
 
 
+    .............
+
+
 
     """
     return _casadi.dple_out(*args)
 
-def dple_n_in(*args):
+def dple_n_in(*args) -> "casadi_int":
     """
     Get the number of QP solver inputs.
 
@@ -17977,7 +18874,7 @@ def dple_n_in(*args):
     """
     return _casadi.dple_n_in(*args)
 
-def dple_n_out(*args):
+def dple_n_out(*args) -> "casadi_int":
     """
     Get the number of QP solver outputs.
 
@@ -17990,7 +18887,7 @@ def dple_n_out(*args):
     """
     return _casadi.dple_n_out(*args)
 
-def has_dple(*args):
+def has_dple(*args) -> "bool":
     """
     Check if a particular plugin is available.
 
@@ -18003,7 +18900,7 @@ def has_dple(*args):
     """
     return _casadi.has_dple(*args)
 
-def load_dple(*args):
+def load_dple(*args) -> "void":
     """
     Explicitly load a plugin dynamically.
 
@@ -18016,7 +18913,7 @@ def load_dple(*args):
     """
     return _casadi.load_dple(*args)
 
-def doc_dple(*args):
+def doc_dple(*args) -> "std::string":
     """
     Get the documentation string for a plugin.
 
@@ -18029,7 +18926,7 @@ def doc_dple(*args):
     """
     return _casadi.doc_dple(*args)
 
-def expmsol(*args):
+def expmsol(*args) -> "casadi::Function":
     """
       Performs a matrix exponentiation expm(A)
 
@@ -18095,6 +18992,15 @@ def expmsol(*args):
     |                  |                 | respectively.    |                  |
     |                  |                 | Cf. option       |                  |
     |                  |                 | "ad_weight".     |                  |
+    |                  |                 | When set to -1,  |                  |
+    |                  |                 | sparsity is      |                  |
+    |                  |                 | completely       |                  |
+    |                  |                 | ignored and      |                  |
+    |                  |                 | dense matrices   |                  |
+    |                  |                 | are used.        |                  |
+    +------------------+-----------------+------------------+------------------+
+    | always_inline    | OT_BOOL         | Force inlining.  | casadi::Function |
+    |                  |                 |                  | Internal         |
     +------------------+-----------------+------------------+------------------+
     | compiler         | OT_STRING       | Just-in-time     | casadi::Function |
     |                  |                 | compiler plugin  | Internal         |
@@ -18103,6 +19009,15 @@ def expmsol(*args):
     | const_A          | OT_BOOL         | Assume A is      | casadi::Expm     |
     |                  |                 | constant.        |                  |
     |                  |                 | Default: false.  |                  |
+    +------------------+-----------------+------------------+------------------+
+    | custom_jacobian  | OT_FUNCTION     | Override         | casadi::Function |
+    |                  |                 | CasADi's AD. Use | Internal         |
+    |                  |                 | together with    |                  |
+    |                  |                 | 'jac_penalty':   |                  |
+    |                  |                 | 0. Note: Highly  |                  |
+    |                  |                 | experimental.    |                  |
+    |                  |                 | Syntax may break |                  |
+    |                  |                 | often.           |                  |
     +------------------+-----------------+------------------+------------------+
     | derivative_of    | OT_FUNCTION     | The function is  | casadi::Function |
     |                  |                 | a derivative of  | Internal         |
@@ -18116,6 +19031,38 @@ def expmsol(*args):
     |                  |                 | inferred from    |                  |
     |                  |                 | the function     |                  |
     |                  |                 | name.            |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump             | OT_BOOL         | Dump function to | casadi::Function |
+    |                  |                 | file upon first  | Internal         |
+    |                  |                 | evaluation.      |                  |
+    |                  |                 | [false]          |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_dir         | OT_STRING       | Directory to     | casadi::Function |
+    |                  |                 | dump             | Internal         |
+    |                  |                 | inputs/outputs   |                  |
+    |                  |                 | to. Make sure    |                  |
+    |                  |                 | the directory    |                  |
+    |                  |                 | exists [.]       |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_format      | OT_STRING       | Choose file      | casadi::Function |
+    |                  |                 | format to dump   | Internal         |
+    |                  |                 | matrices. See    |                  |
+    |                  |                 | DM.from_file     |                  |
+    |                  |                 | [mtx]            |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_in          | OT_BOOL         | Dump numerical   | casadi::Function |
+    |                  |                 | values of inputs | Internal         |
+    |                  |                 | to file          |                  |
+    |                  |                 | (readable with   |                  |
+    |                  |                 | DM.from_file )   |                  |
+    |                  |                 | [default: false] |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_out         | OT_BOOL         | Dump numerical   | casadi::Function |
+    |                  |                 | values of        | Internal         |
+    |                  |                 | outputs to file  |                  |
+    |                  |                 | (readable with   |                  |
+    |                  |                 | DM.from_file )   |                  |
+    |                  |                 | [default: false] |                  |
     +------------------+-----------------+------------------+------------------+
     | enable_fd        | OT_BOOL         | Enable           | casadi::Function |
     |                  |                 | derivative       | Internal         |
@@ -18178,6 +19125,11 @@ def expmsol(*args):
     |                  |                 | difference       |                  |
     |                  |                 | instance         |                  |
     +------------------+-----------------+------------------+------------------+
+    | forward_options  | OT_DICT         | Options to be    | casadi::Function |
+    |                  |                 | passed to a      | Internal         |
+    |                  |                 | forward mode     |                  |
+    |                  |                 | constructor      |                  |
+    +------------------+-----------------+------------------+------------------+
     | gather_stats     | OT_BOOL         | Deprecated       | casadi::Function |
     |                  |                 | option           | Internal         |
     |                  |                 | (ignored):       |                  |
@@ -18193,6 +19145,16 @@ def expmsol(*args):
     |                  |                 | numerical values |                  |
     |                  |                 | of the inputs    |                  |
     |                  |                 | don't make sense |                  |
+    +------------------+-----------------+------------------+------------------+
+    | is_diff_in       | OT_BOOLVECTOR   | Indicate for     | casadi::Function |
+    |                  |                 | each input if it | Internal         |
+    |                  |                 | should be        |                  |
+    |                  |                 | differentiable.  |                  |
+    +------------------+-----------------+------------------+------------------+
+    | is_diff_out      | OT_BOOLVECTOR   | Indicate for     | casadi::Function |
+    |                  |                 | each output if   | Internal         |
+    |                  |                 | it should be     |                  |
+    |                  |                 | differentiable.  |                  |
     +------------------+-----------------+------------------+------------------+
     | jac_penalty      | OT_DOUBLE       | When requested   | casadi::Function |
     |                  |                 | for a number of  | Internal         |
@@ -18232,9 +19194,49 @@ def expmsol(*args):
     |                  |                 | speed up the     |                  |
     |                  |                 | evaluation       |                  |
     +------------------+-----------------+------------------+------------------+
+    | jit_cleanup      | OT_BOOL         | Cleanup up the   | casadi::Function |
+    |                  |                 | temporary source | Internal         |
+    |                  |                 | file that jit    |                  |
+    |                  |                 | creates.         |                  |
+    |                  |                 | Default: true    |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_name         | OT_STRING       | The file name    | casadi::Function |
+    |                  |                 | used to write    | Internal         |
+    |                  |                 | out code. The    |                  |
+    |                  |                 | actual file      |                  |
+    |                  |                 | names used       |                  |
+    |                  |                 | depend on 'jit_t |                  |
+    |                  |                 | emp_suffix' and  |                  |
+    |                  |                 | include          |                  |
+    |                  |                 | extensions.      |                  |
+    |                  |                 | Default:         |                  |
+    |                  |                 | 'jit_tmp'        |                  |
+    +------------------+-----------------+------------------+------------------+
     | jit_options      | OT_DICT         | Options to be    | casadi::Function |
     |                  |                 | passed to the    | Internal         |
     |                  |                 | jit compiler.    |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_serialize    | OT_STRING       | Specify          | casadi::Function |
+    |                  |                 | behaviour when   | Internal         |
+    |                  |                 | serializing a    |                  |
+    |                  |                 | jitted function: |                  |
+    |                  |                 | SOURCE|link|embe |                  |
+    |                  |                 | d.               |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_temp_suffix  | OT_BOOL         | Use a temporary  | casadi::Function |
+    |                  |                 | (seemingly       | Internal         |
+    |                  |                 | random) filename |                  |
+    |                  |                 | suffix for       |                  |
+    |                  |                 | generated code   |                  |
+    |                  |                 | and libraries.   |                  |
+    |                  |                 | This is desired  |                  |
+    |                  |                 | for thread-      |                  |
+    |                  |                 | safety. This     |                  |
+    |                  |                 | behaviour may    |                  |
+    |                  |                 | defeat caching   |                  |
+    |                  |                 | compiler         |                  |
+    |                  |                 | wrappers.        |                  |
+    |                  |                 | Default: true    |                  |
     +------------------+-----------------+------------------+------------------+
     | max_num_dir      | OT_INT          | Specify the      | casadi::Function |
     |                  |                 | maximum number   | Internal         |
@@ -18245,18 +19247,43 @@ def expmsol(*args):
     |                  |                 | builtin optimize |                  |
     |                  |                 | d_num_dir.       |                  |
     +------------------+-----------------+------------------+------------------+
+    | never_inline     | OT_BOOL         | Forbid inlining. | casadi::Function |
+    |                  |                 |                  | Internal         |
+    +------------------+-----------------+------------------+------------------+
     | output_scheme    | OT_STRINGVECTOR | Deprecated       | casadi::Function |
     |                  |                 | option (ignored) | Internal         |
+    +------------------+-----------------+------------------+------------------+
+    | print_in         | OT_BOOL         | Print numerical  | casadi::Function |
+    |                  |                 | values of inputs | Internal         |
+    |                  |                 | [default: false] |                  |
+    +------------------+-----------------+------------------+------------------+
+    | print_out        | OT_BOOL         | Print numerical  | casadi::Function |
+    |                  |                 | values of        | Internal         |
+    |                  |                 | outputs          |                  |
+    |                  |                 | [default: false] |                  |
     +------------------+-----------------+------------------+------------------+
     | print_time       | OT_BOOL         | print            | casadi::Function |
     |                  |                 | information      | Internal         |
     |                  |                 | about execution  |                  |
-    |                  |                 | time             |                  |
+    |                  |                 | time. Implies    |                  |
+    |                  |                 | record_time.     |                  |
+    +------------------+-----------------+------------------+------------------+
+    | record_time      | OT_BOOL         | record           | casadi::Function |
+    |                  |                 | information      | Internal         |
+    |                  |                 | about execution  |                  |
+    |                  |                 | time, for        |                  |
+    |                  |                 | retrieval with   |                  |
+    |                  |                 | stats().         |                  |
     +------------------+-----------------+------------------+------------------+
     | regularity_check | OT_BOOL         | Throw exceptions | casadi::Function |
     |                  |                 | when NaN or Inf  | Internal         |
     |                  |                 | appears during   |                  |
     |                  |                 | evaluation       |                  |
+    +------------------+-----------------+------------------+------------------+
+    | reverse_options  | OT_DICT         | Options to be    | casadi::Function |
+    |                  |                 | passed to a      | Internal         |
+    |                  |                 | reverse mode     |                  |
+    |                  |                 | constructor      |                  |
     +------------------+-----------------+------------------+------------------+
     | user_data        | OT_VOIDPTR      | A user-defined   | casadi::Function |
     |                  |                 | field that can   | Internal         |
@@ -18306,7 +19333,7 @@ def expmsol(*args):
     """
     return _casadi.expmsol(*args)
 
-def expm_n_in(*args):
+def expm_n_in(*args) -> "casadi_int":
     """
     Get the number of expm solver inputs.
 
@@ -18319,7 +19346,7 @@ def expm_n_in(*args):
     """
     return _casadi.expm_n_in(*args)
 
-def expm_n_out(*args):
+def expm_n_out(*args) -> "casadi_int":
     """
     Get the number of expm solver outputs.
 
@@ -18332,7 +19359,7 @@ def expm_n_out(*args):
     """
     return _casadi.expm_n_out(*args)
 
-def has_expm(*args):
+def has_expm(*args) -> "bool":
     """
     Check if a particular plugin is available.
 
@@ -18345,7 +19372,7 @@ def has_expm(*args):
     """
     return _casadi.has_expm(*args)
 
-def load_expm(*args):
+def load_expm(*args) -> "void":
     """
     Explicitly load a plugin dynamically.
 
@@ -18358,7 +19385,7 @@ def load_expm(*args):
     """
     return _casadi.load_expm(*args)
 
-def doc_expm(*args):
+def doc_expm(*args) -> "std::string":
     """
     Get the documentation string for a plugin.
 
@@ -18371,12 +19398,76 @@ def doc_expm(*args):
     """
     return _casadi.doc_expm(*args)
 
-def interpolant(*args):
+def interpolant(*args) -> "casadi::Function":
     """
-      An interpolant function for lookup table data
+      Parametric variant of interpolant.
 
+      interpolant(str name, str solver, [[float]] grid, int m, dict opts) -> Function
+      interpolant(str name, str solver, [int] grid_dims, int m, dict opts) -> Function
       interpolant(str name, str solver, [[float]] grid, [float] values, dict opts) -> Function
+      interpolant(str name, str solver, [int] grid_dims, [float] values, dict opts) -> Function
 
+
+    The resulting function will have an additional argument for the grid
+
+    By default, derivatives wrt the coefficients are not supported (zero). Some
+    interpolant plugins may support the inline=true which enables correct
+    derivatives
+
+
+
+    .......
+
+    ::
+
+      interpolant(str name, str solver, [[float]] grid, int m, dict opts)
+
+
+
+    Parametric variant of interpolant.
+
+    The resulting function will have an additional argument for the coefficients
+
+    By default, derivatives wrt the coefficients are not supported (zero). Some
+    interpolant plugins may support the inline=true which enables correct
+    derivatives
+
+
+
+    .............
+
+
+    .......
+
+    ::
+
+      interpolant(str name, str solver, [int] grid_dims, int m, dict opts)
+
+
+
+    Parametric variant of interpolant.
+
+    The resulting function will have additional arguments for the grid and
+    coefficients
+
+    By default, derivatives wrt the coefficients are not supported (zero). Some
+    interpolant plugins may support the inline=true which enables correct
+    derivatives
+
+
+
+    .............
+
+
+    .......
+
+    ::
+
+      interpolant(str name, str solver, [[float]] grid, [float] values, dict opts)
+
+
+
+    An interpolant function for lookup table data
 
     Parameters:
     -----------
@@ -18499,10 +19590,33 @@ def interpolant(*args):
     |                  |                 | respectively.    |                  |
     |                  |                 | Cf. option       |                  |
     |                  |                 | "ad_weight".     |                  |
+    |                  |                 | When set to -1,  |                  |
+    |                  |                 | sparsity is      |                  |
+    |                  |                 | completely       |                  |
+    |                  |                 | ignored and      |                  |
+    |                  |                 | dense matrices   |                  |
+    |                  |                 | are used.        |                  |
+    +------------------+-----------------+------------------+------------------+
+    | always_inline    | OT_BOOL         | Force inlining.  | casadi::Function |
+    |                  |                 |                  | Internal         |
+    +------------------+-----------------+------------------+------------------+
+    | batch_x          | OT_INT          | Evaluate a batch | casadi::Interpol |
+    |                  |                 | of different     | ant              |
+    |                  |                 | inputs at once   |                  |
+    |                  |                 | (default 1).     |                  |
     +------------------+-----------------+------------------+------------------+
     | compiler         | OT_STRING       | Just-in-time     | casadi::Function |
     |                  |                 | compiler plugin  | Internal         |
     |                  |                 | to be used.      |                  |
+    +------------------+-----------------+------------------+------------------+
+    | custom_jacobian  | OT_FUNCTION     | Override         | casadi::Function |
+    |                  |                 | CasADi's AD. Use | Internal         |
+    |                  |                 | together with    |                  |
+    |                  |                 | 'jac_penalty':   |                  |
+    |                  |                 | 0. Note: Highly  |                  |
+    |                  |                 | experimental.    |                  |
+    |                  |                 | Syntax may break |                  |
+    |                  |                 | often.           |                  |
     +------------------+-----------------+------------------+------------------+
     | derivative_of    | OT_FUNCTION     | The function is  | casadi::Function |
     |                  |                 | a derivative of  | Internal         |
@@ -18516,6 +19630,38 @@ def interpolant(*args):
     |                  |                 | inferred from    |                  |
     |                  |                 | the function     |                  |
     |                  |                 | name.            |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump             | OT_BOOL         | Dump function to | casadi::Function |
+    |                  |                 | file upon first  | Internal         |
+    |                  |                 | evaluation.      |                  |
+    |                  |                 | [false]          |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_dir         | OT_STRING       | Directory to     | casadi::Function |
+    |                  |                 | dump             | Internal         |
+    |                  |                 | inputs/outputs   |                  |
+    |                  |                 | to. Make sure    |                  |
+    |                  |                 | the directory    |                  |
+    |                  |                 | exists [.]       |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_format      | OT_STRING       | Choose file      | casadi::Function |
+    |                  |                 | format to dump   | Internal         |
+    |                  |                 | matrices. See    |                  |
+    |                  |                 | DM.from_file     |                  |
+    |                  |                 | [mtx]            |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_in          | OT_BOOL         | Dump numerical   | casadi::Function |
+    |                  |                 | values of inputs | Internal         |
+    |                  |                 | to file          |                  |
+    |                  |                 | (readable with   |                  |
+    |                  |                 | DM.from_file )   |                  |
+    |                  |                 | [default: false] |                  |
+    +------------------+-----------------+------------------+------------------+
+    | dump_out         | OT_BOOL         | Dump numerical   | casadi::Function |
+    |                  |                 | values of        | Internal         |
+    |                  |                 | outputs to file  |                  |
+    |                  |                 | (readable with   |                  |
+    |                  |                 | DM.from_file )   |                  |
+    |                  |                 | [default: false] |                  |
     +------------------+-----------------+------------------+------------------+
     | enable_fd        | OT_BOOL         | Enable           | casadi::Function |
     |                  |                 | derivative       | Internal         |
@@ -18578,12 +19724,31 @@ def interpolant(*args):
     |                  |                 | difference       |                  |
     |                  |                 | instance         |                  |
     +------------------+-----------------+------------------+------------------+
+    | forward_options  | OT_DICT         | Options to be    | casadi::Function |
+    |                  |                 | passed to a      | Internal         |
+    |                  |                 | forward mode     |                  |
+    |                  |                 | constructor      |                  |
+    +------------------+-----------------+------------------+------------------+
     | gather_stats     | OT_BOOL         | Deprecated       | casadi::Function |
     |                  |                 | option           | Internal         |
     |                  |                 | (ignored):       |                  |
     |                  |                 | Statistics are   |                  |
     |                  |                 | now always       |                  |
     |                  |                 | collected.       |                  |
+    +------------------+-----------------+------------------+------------------+
+    | inline           | OT_BOOL         | Implement the    | casadi::Interpol |
+    |                  |                 | lookup table in  | ant              |
+    |                  |                 | MX primitives.   |                  |
+    |                  |                 | Useful when you  |                  |
+    |                  |                 | need derivatives |                  |
+    |                  |                 | with respect to  |                  |
+    |                  |                 | grid and/or      |                  |
+    |                  |                 | coefficients.    |                  |
+    |                  |                 | Such derivatives |                  |
+    |                  |                 | are              |                  |
+    |                  |                 | fundamentally    |                  |
+    |                  |                 | dense, so use    |                  |
+    |                  |                 | with caution.    |                  |
     +------------------+-----------------+------------------+------------------+
     | input_scheme     | OT_STRINGVECTOR | Deprecated       | casadi::Function |
     |                  |                 | option (ignored) | Internal         |
@@ -18593,6 +19758,16 @@ def interpolant(*args):
     |                  |                 | numerical values |                  |
     |                  |                 | of the inputs    |                  |
     |                  |                 | don't make sense |                  |
+    +------------------+-----------------+------------------+------------------+
+    | is_diff_in       | OT_BOOLVECTOR   | Indicate for     | casadi::Function |
+    |                  |                 | each input if it | Internal         |
+    |                  |                 | should be        |                  |
+    |                  |                 | differentiable.  |                  |
+    +------------------+-----------------+------------------+------------------+
+    | is_diff_out      | OT_BOOLVECTOR   | Indicate for     | casadi::Function |
+    |                  |                 | each output if   | Internal         |
+    |                  |                 | it should be     |                  |
+    |                  |                 | differentiable.  |                  |
     +------------------+-----------------+------------------+------------------+
     | jac_penalty      | OT_DOUBLE       | When requested   | casadi::Function |
     |                  |                 | for a number of  | Internal         |
@@ -18632,9 +19807,49 @@ def interpolant(*args):
     |                  |                 | speed up the     |                  |
     |                  |                 | evaluation       |                  |
     +------------------+-----------------+------------------+------------------+
+    | jit_cleanup      | OT_BOOL         | Cleanup up the   | casadi::Function |
+    |                  |                 | temporary source | Internal         |
+    |                  |                 | file that jit    |                  |
+    |                  |                 | creates.         |                  |
+    |                  |                 | Default: true    |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_name         | OT_STRING       | The file name    | casadi::Function |
+    |                  |                 | used to write    | Internal         |
+    |                  |                 | out code. The    |                  |
+    |                  |                 | actual file      |                  |
+    |                  |                 | names used       |                  |
+    |                  |                 | depend on 'jit_t |                  |
+    |                  |                 | emp_suffix' and  |                  |
+    |                  |                 | include          |                  |
+    |                  |                 | extensions.      |                  |
+    |                  |                 | Default:         |                  |
+    |                  |                 | 'jit_tmp'        |                  |
+    +------------------+-----------------+------------------+------------------+
     | jit_options      | OT_DICT         | Options to be    | casadi::Function |
     |                  |                 | passed to the    | Internal         |
     |                  |                 | jit compiler.    |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_serialize    | OT_STRING       | Specify          | casadi::Function |
+    |                  |                 | behaviour when   | Internal         |
+    |                  |                 | serializing a    |                  |
+    |                  |                 | jitted function: |                  |
+    |                  |                 | SOURCE|link|embe |                  |
+    |                  |                 | d.               |                  |
+    +------------------+-----------------+------------------+------------------+
+    | jit_temp_suffix  | OT_BOOL         | Use a temporary  | casadi::Function |
+    |                  |                 | (seemingly       | Internal         |
+    |                  |                 | random) filename |                  |
+    |                  |                 | suffix for       |                  |
+    |                  |                 | generated code   |                  |
+    |                  |                 | and libraries.   |                  |
+    |                  |                 | This is desired  |                  |
+    |                  |                 | for thread-      |                  |
+    |                  |                 | safety. This     |                  |
+    |                  |                 | behaviour may    |                  |
+    |                  |                 | defeat caching   |                  |
+    |                  |                 | compiler         |                  |
+    |                  |                 | wrappers.        |                  |
+    |                  |                 | Default: true    |                  |
     +------------------+-----------------+------------------+------------------+
     | lookup_mode      | OT_STRINGVECTOR | Specifies, for   | casadi::Interpol |
     |                  |                 | each grid        | ant              |
@@ -18665,18 +19880,43 @@ def interpolant(*args):
     |                  |                 | builtin optimize |                  |
     |                  |                 | d_num_dir.       |                  |
     +------------------+-----------------+------------------+------------------+
+    | never_inline     | OT_BOOL         | Forbid inlining. | casadi::Function |
+    |                  |                 |                  | Internal         |
+    +------------------+-----------------+------------------+------------------+
     | output_scheme    | OT_STRINGVECTOR | Deprecated       | casadi::Function |
     |                  |                 | option (ignored) | Internal         |
+    +------------------+-----------------+------------------+------------------+
+    | print_in         | OT_BOOL         | Print numerical  | casadi::Function |
+    |                  |                 | values of inputs | Internal         |
+    |                  |                 | [default: false] |                  |
+    +------------------+-----------------+------------------+------------------+
+    | print_out        | OT_BOOL         | Print numerical  | casadi::Function |
+    |                  |                 | values of        | Internal         |
+    |                  |                 | outputs          |                  |
+    |                  |                 | [default: false] |                  |
     +------------------+-----------------+------------------+------------------+
     | print_time       | OT_BOOL         | print            | casadi::Function |
     |                  |                 | information      | Internal         |
     |                  |                 | about execution  |                  |
-    |                  |                 | time             |                  |
+    |                  |                 | time. Implies    |                  |
+    |                  |                 | record_time.     |                  |
+    +------------------+-----------------+------------------+------------------+
+    | record_time      | OT_BOOL         | record           | casadi::Function |
+    |                  |                 | information      | Internal         |
+    |                  |                 | about execution  |                  |
+    |                  |                 | time, for        |                  |
+    |                  |                 | retrieval with   |                  |
+    |                  |                 | stats().         |                  |
     +------------------+-----------------+------------------+------------------+
     | regularity_check | OT_BOOL         | Throw exceptions | casadi::Function |
     |                  |                 | when NaN or Inf  | Internal         |
     |                  |                 | appears during   |                  |
     |                  |                 | evaluation       |                  |
+    +------------------+-----------------+------------------+------------------+
+    | reverse_options  | OT_DICT         | Options to be    | casadi::Function |
+    |                  |                 | passed to a      | Internal         |
+    |                  |                 | reverse mode     |                  |
+    |                  |                 | constructor      |                  |
     +------------------+-----------------+------------------+------------------+
     | user_data        | OT_VOIDPTR      | A user-defined   | casadi::Function |
     |                  |                 | field that can   | Internal         |
@@ -18716,25 +19956,28 @@ def interpolant(*args):
 
     >List of available options
 
-    +--------------------+--------------+--------------------------------------+
-    |         Id         |     Type     |             Description              |
-    +====================+==============+======================================+
-    | algorithm          | OT_STRING    | Algorithm used for fitting the data: |
-    |                    |              | 'not_a_knot' (default, same as       |
-    |                    |              | Matlab), 'smooth_linear'.            |
-    +--------------------+--------------+--------------------------------------+
-    | degree             | OT_INTVECTOR | Sets, for each grid dimension, the   |
-    |                    |              | degree of the spline.                |
-    +--------------------+--------------+--------------------------------------+
-    | linear_solver      | OT_STRING    | Solver used for constructing the     |
-    |                    |              | coefficient tensor.                  |
-    +--------------------+--------------+--------------------------------------+
-    | smooth_linear_frac | OT_DOUBLE    | When 'smooth_linear' algorithm is    |
-    |                    |              | active, determines sharpness between |
-    |                    |              | 0 (sharp, as linear interpolation)   |
-    |                    |              | and 0.5 (smooth).Default value is    |
-    |                    |              | 0.1.                                 |
-    +--------------------+--------------+--------------------------------------+
+    +-----------------------+--------------+-----------------------------------+
+    |          Id           |     Type     |            Description            |
+    +=======================+==============+===================================+
+    | algorithm             | OT_STRING    | Algorithm used for fitting the    |
+    |                       |              | data: 'not_a_knot' (default, same |
+    |                       |              | as Matlab), 'smooth_linear'.      |
+    +-----------------------+--------------+-----------------------------------+
+    | degree                | OT_INTVECTOR | Sets, for each grid dimension,    |
+    |                       |              | the degree of the spline.         |
+    +-----------------------+--------------+-----------------------------------+
+    | linear_solver         | OT_STRING    | Solver used for constructing the  |
+    |                       |              | coefficient tensor.               |
+    +-----------------------+--------------+-----------------------------------+
+    | linear_solver_options | OT_DICT      | Options to be passed to the       |
+    |                       |              | linear solver.                    |
+    +-----------------------+--------------+-----------------------------------+
+    | smooth_linear_frac    | OT_DOUBLE    | When 'smooth_linear' algorithm is |
+    |                       |              | active, determines sharpness      |
+    |                       |              | between 0 (sharp, as linear       |
+    |                       |              | interpolation) and 0.5            |
+    |                       |              | (smooth).Default value is 0.1.    |
+    +-----------------------+--------------+-----------------------------------+
 
     --------------------------------------------------------------------------------
 
@@ -18767,11 +20010,35 @@ def interpolant(*args):
 
 
 
+    .............
+
+
+    .......
+
+    ::
+
+      interpolant(str name, str solver, [int] grid_dims, [float] values, dict opts)
+
+
+
+    Parametric variant of interpolant.
+
+    The resulting function will have an additional argument for the grid
+
+    By default, derivatives wrt the coefficients are not supported (zero). Some
+    interpolant plugins may support the inline=true which enables correct
+    derivatives
+
+
+
+    .............
+
+
 
     """
     return _casadi.interpolant(*args)
 
-def has_interpolant(*args):
+def has_interpolant(*args) -> "bool":
     """
     Check if a particular plugin is available.
 
@@ -18784,7 +20051,7 @@ def has_interpolant(*args):
     """
     return _casadi.has_interpolant(*args)
 
-def load_interpolant(*args):
+def load_interpolant(*args) -> "void":
     """
     Explicitly load a plugin dynamically.
 
@@ -18797,7 +20064,7 @@ def load_interpolant(*args):
     """
     return _casadi.load_interpolant(*args)
 
-def doc_interpolant(*args):
+def doc_interpolant(*args) -> "std::string":
     """
     Get the documentation string for a plugin.
 
@@ -18845,7 +20112,7 @@ class CodeGenerator(_object):
         except __builtin__.Exception:
             self.this = this
 
-    def add(self, *args):
+    def add(self, *args) -> "void":
         """
         Add a function (name generated)
 
@@ -18859,7 +20126,7 @@ class CodeGenerator(_object):
         return _casadi.CodeGenerator_add(self, *args)
 
 
-    def dump(self, *args):
+    def dump(self, *args) -> "std::string":
         """
         Generate a file, return code as string.
 
@@ -18873,7 +20140,7 @@ class CodeGenerator(_object):
         return _casadi.CodeGenerator_dump(self, *args)
 
 
-    def generate(self, *args):
+    def generate(self, *args) -> "std::string":
         """
           Generate file(s) The "prefix" argument will be prepended to the generated
 
@@ -18888,7 +20155,7 @@ class CodeGenerator(_object):
         return _casadi.CodeGenerator_generate(self, *args)
 
 
-    def add_include(self, *args):
+    def add_include(self, *args) -> "void":
         """
           Add an include file optionally using a relative path "..." instead of an
 
@@ -18908,12 +20175,11 @@ CodeGenerator_swigregister(CodeGenerator)
 
 FLAG = _casadi.FLAG
 
-def _horzcat(*args):
+def _horzcat(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     _horzcat([Sparsity] v) -> Sparsity
-    _horzcat([IM] v) -> IM
     _horzcat([DM] v) -> DM
     _horzcat([SX] v) -> SX
     _horzcat([MX] v) -> MX
@@ -18923,12 +20189,11 @@ def _horzcat(*args):
     """
     return _casadi._horzcat(*args)
 
-def _vertcat(*args):
+def _vertcat(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     _vertcat([Sparsity] v) -> Sparsity
-    _vertcat([IM] v) -> IM
     _vertcat([DM] v) -> DM
     _vertcat([SX] v) -> SX
     _vertcat([MX] v) -> MX
@@ -18938,17 +20203,15 @@ def _vertcat(*args):
     """
     return _casadi._vertcat(*args)
 
-def horzsplit(*args):
+def horzsplit(*args) -> "std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >":
     """
 
 
     horzsplit(Sparsity v, int incr) -> [Sparsity]
-    horzsplit(IM v, int incr) -> std::vector< casadi::Matrix< casadi_int >,std::allocator< casadi::Matrix< casadi_int > > >
     horzsplit(DM v, int incr) -> [DM]
     horzsplit(SX v, int incr) -> [SX]
     horzsplit(MX v, int incr) -> [MX]
     horzsplit(Sparsity v, [int] offset) -> [Sparsity]
-    horzsplit(IM v, [int] offset) -> std::vector< casadi::Matrix< casadi_int >,std::allocator< casadi::Matrix< casadi_int > > >
     horzsplit(DM v, [int] offset) -> [DM]
     horzsplit(SX v, [int] offset) -> [SX]
     horzsplit(MX v, [int] offset) -> [MX]
@@ -18958,12 +20221,11 @@ def horzsplit(*args):
     """
     return _casadi.horzsplit(*args)
 
-def offset(*args):
+def offset(*args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
     """
 
 
     offset([Sparsity] v, bool vert) -> [int]
-    offset([IM] v, bool vert) -> [int]
     offset([DM] v, bool vert) -> [int]
     offset([SX] v, bool vert) -> [int]
     offset([MX] v, bool vert) -> [int]
@@ -18973,17 +20235,15 @@ def offset(*args):
     """
     return _casadi.offset(*args)
 
-def vertsplit(*args):
+def vertsplit(*args) -> "std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >":
     """
 
 
     vertsplit(Sparsity v, int incr) -> [Sparsity]
-    vertsplit(IM v, int incr) -> std::vector< casadi::Matrix< casadi_int >,std::allocator< casadi::Matrix< casadi_int > > >
     vertsplit(DM v, int incr) -> [DM]
     vertsplit(SX v, int incr) -> [SX]
     vertsplit(MX v, int incr) -> [MX]
     vertsplit(Sparsity v, [int] offset) -> [Sparsity]
-    vertsplit(IM v, [int] offset) -> std::vector< casadi::Matrix< casadi_int >,std::allocator< casadi::Matrix< casadi_int > > >
     vertsplit(DM v, [int] offset) -> [DM]
     vertsplit(SX v, [int] offset) -> [SX]
     vertsplit(MX v, [int] offset) -> [MX]
@@ -18993,17 +20253,15 @@ def vertsplit(*args):
     """
     return _casadi.vertsplit(*args)
 
-def blocksplit(*args):
+def blocksplit(*args) -> "std::vector< std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >,std::allocator< std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > > > >":
     """
 
 
     blocksplit(Sparsity x, int vert_incr, int horz_incr) -> [[Sparsity]]
-    blocksplit(IM x, int vert_incr, int horz_incr) -> [[IM]]
     blocksplit(DM x, int vert_incr, int horz_incr) -> [[DM]]
     blocksplit(SX x, int vert_incr, int horz_incr) -> [[SX]]
     blocksplit(MX x, int vert_incr, int horz_incr) -> [[MX]]
     blocksplit(Sparsity x, [int] vert_offset, [int] horz_offset) -> [[Sparsity]]
-    blocksplit(IM x, [int] vert_offset, [int] horz_offset) -> [[IM]]
     blocksplit(DM x, [int] vert_offset, [int] horz_offset) -> [[DM]]
     blocksplit(SX x, [int] vert_offset, [int] horz_offset) -> [[SX]]
     blocksplit(MX x, [int] vert_offset, [int] horz_offset) -> [[MX]]
@@ -19013,12 +20271,11 @@ def blocksplit(*args):
     """
     return _casadi.blocksplit(*args)
 
-def _diagcat(*args):
+def _diagcat(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     _diagcat([Sparsity] A) -> Sparsity
-    _diagcat([IM] A) -> IM
     _diagcat([DM] A) -> DM
     _diagcat([SX] A) -> SX
     _diagcat([MX] A) -> MX
@@ -19028,24 +20285,20 @@ def _diagcat(*args):
     """
     return _casadi._diagcat(*args)
 
-def diagsplit(*args):
+def diagsplit(*args) -> "std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >":
     """
 
 
     diagsplit(Sparsity x, int incr) -> [Sparsity]
-    diagsplit(IM x, int incr) -> std::vector< casadi::Matrix< casadi_int >,std::allocator< casadi::Matrix< casadi_int > > >
     diagsplit(DM x, int incr) -> [DM]
     diagsplit(SX x, int incr) -> [SX]
     diagsplit(MX x, int incr) -> [MX]
     diagsplit(Sparsity x, [int] output_offset) -> [Sparsity]
-    diagsplit(IM x, [int] output_offset) -> std::vector< casadi::Matrix< casadi_int >,std::allocator< casadi::Matrix< casadi_int > > >
     diagsplit(DM x, [int] output_offset) -> [DM]
     diagsplit(SX x, [int] output_offset) -> [SX]
     diagsplit(MX x, [int] output_offset) -> [MX]
     diagsplit(Sparsity x, int incr1, int incr2) -> [Sparsity]
     diagsplit(Sparsity x, [int] output_offset1, [int] output_offset2) -> [Sparsity]
-    diagsplit(IM x, int incr1, int incr2) -> std::vector< casadi::Matrix< casadi_int >,std::allocator< casadi::Matrix< casadi_int > > >
-    diagsplit(IM x, [int] output_offset1, [int] output_offset2) -> std::vector< casadi::Matrix< casadi_int >,std::allocator< casadi::Matrix< casadi_int > > >
     diagsplit(DM x, int incr1, int incr2) -> [DM]
     diagsplit(DM x, [int] output_offset1, [int] output_offset2) -> [DM]
     diagsplit(SX x, int incr1, int incr2) -> [SX]
@@ -19058,12 +20311,11 @@ def diagsplit(*args):
     """
     return _casadi.diagsplit(*args)
 
-def _veccat(*args):
+def _veccat(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     _veccat([Sparsity] x) -> Sparsity
-    _veccat([IM] x) -> IM
     _veccat([DM] x) -> DM
     _veccat([SX] x) -> SX
     _veccat([MX] x) -> MX
@@ -19073,17 +20325,15 @@ def _veccat(*args):
     """
     return _casadi._veccat(*args)
 
-def mtimes(*args):
+def mtimes(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     mtimes([Sparsity] args) -> Sparsity
-    mtimes([IM] args) -> IM
     mtimes([DM] args) -> DM
     mtimes([SX] args) -> SX
     mtimes([MX] args) -> MX
     mtimes(Sparsity x, Sparsity y) -> Sparsity
-    mtimes(IM x, IM y) -> IM
     mtimes(DM x, DM y) -> DM
     mtimes(SX x, SX y) -> SX
     mtimes(MX x, MX y) -> MX
@@ -19093,12 +20343,11 @@ def mtimes(*args):
     """
     return _casadi.mtimes(*args)
 
-def mac(*args):
+def mac(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     mac(Sparsity X, Sparsity Y, Sparsity Z) -> Sparsity
-    mac(IM X, IM Y, IM Z) -> IM
     mac(DM X, DM Y, DM Z) -> DM
     mac(SX X, SX Y, SX Z) -> SX
     mac(MX X, MX Y, MX Z) -> MX
@@ -19108,12 +20357,11 @@ def mac(*args):
     """
     return _casadi.mac(*args)
 
-def transpose(*args):
+def transpose(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Transpose the matrix and get the reordering of the non-zero entries.
 
       transpose(Sparsity X) -> Sparsity
-      transpose(IM X) -> IM
       transpose(DM X) -> DM
       transpose(SX X) -> SX
       transpose(MX X) -> MX
@@ -19131,12 +20379,11 @@ def transpose(*args):
     """
     return _casadi.transpose(*args)
 
-def vec(*args):
+def vec(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     vec(Sparsity a) -> Sparsity
-    vec(IM a) -> IM
     vec(DM a) -> DM
     vec(SX a) -> SX
     vec(MX a) -> MX
@@ -19146,14 +20393,12 @@ def vec(*args):
     """
     return _casadi.vec(*args)
 
-def reshape(*args):
+def reshape(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     reshape(Sparsity a, (int,int) rc) -> Sparsity
     reshape(Sparsity a, Sparsity sp) -> Sparsity
-    reshape(IM a, (int,int) rc) -> IM
-    reshape(IM a, Sparsity sp) -> IM
     reshape(DM a, (int,int) rc) -> DM
     reshape(DM a, Sparsity sp) -> DM
     reshape(SX a, (int,int) rc) -> SX
@@ -19161,7 +20406,6 @@ def reshape(*args):
     reshape(MX a, (int,int) rc) -> MX
     reshape(MX a, Sparsity sp) -> MX
     reshape(Sparsity a, int nrow, int ncol) -> Sparsity
-    reshape(IM a, int nrow, int ncol) -> IM
     reshape(DM a, int nrow, int ncol) -> DM
     reshape(SX a, int nrow, int ncol) -> SX
     reshape(MX a, int nrow, int ncol) -> MX
@@ -19171,12 +20415,11 @@ def reshape(*args):
     """
     return _casadi.reshape(*args)
 
-def sprank(*args):
+def sprank(*args) -> "casadi_int":
     """
 
 
     sprank(Sparsity A) -> int
-    sprank(IM A) -> int
     sprank(DM A) -> int
     sprank(SX A) -> int
     sprank(MX A) -> int
@@ -19186,12 +20429,11 @@ def sprank(*args):
     """
     return _casadi.sprank(*args)
 
-def norm_0_mul(*args):
+def norm_0_mul(*args) -> "casadi_int":
     """
 
 
     norm_0_mul(Sparsity x, Sparsity y) -> int
-    norm_0_mul(IM x, IM y) -> int
     norm_0_mul(DM x, DM y) -> int
     norm_0_mul(SX x, SX y) -> int
     norm_0_mul(MX x, MX y) -> int
@@ -19201,12 +20443,11 @@ def norm_0_mul(*args):
     """
     return _casadi.norm_0_mul(*args)
 
-def triu(*args):
+def triu(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     triu(Sparsity a, bool includeDiagonal) -> Sparsity
-    triu(IM a, bool includeDiagonal) -> IM
     triu(DM a, bool includeDiagonal) -> DM
     triu(SX a, bool includeDiagonal) -> SX
     triu(MX a, bool includeDiagonal) -> MX
@@ -19216,12 +20457,11 @@ def triu(*args):
     """
     return _casadi.triu(*args)
 
-def tril(*args):
+def tril(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     tril(Sparsity a, bool includeDiagonal) -> Sparsity
-    tril(IM a, bool includeDiagonal) -> IM
     tril(DM a, bool includeDiagonal) -> DM
     tril(SX a, bool includeDiagonal) -> SX
     tril(MX a, bool includeDiagonal) -> MX
@@ -19231,12 +20471,11 @@ def tril(*args):
     """
     return _casadi.tril(*args)
 
-def kron(*args):
+def kron(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     kron(Sparsity a, Sparsity b) -> Sparsity
-    kron(IM a, IM b) -> IM
     kron(DM a, DM b) -> DM
     kron(SX a, SX b) -> SX
     kron(MX a, MX b) -> MX
@@ -19246,14 +20485,12 @@ def kron(*args):
     """
     return _casadi.kron(*args)
 
-def repmat(*args):
+def repmat(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     repmat(Sparsity A, int n, int m) -> Sparsity
     repmat(Sparsity A, (int,int) rc) -> Sparsity
-    repmat(IM A, int n, int m) -> IM
-    repmat(IM A, (int,int) rc) -> IM
     repmat(DM A, int n, int m) -> DM
     repmat(DM A, (int,int) rc) -> DM
     repmat(SX A, int n, int m) -> SX
@@ -19266,12 +20503,11 @@ def repmat(*args):
     """
     return _casadi.repmat(*args)
 
-def sum2(*args):
+def sum2(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     sum2(Sparsity x) -> Sparsity
-    sum2(IM x) -> IM
     sum2(DM x) -> DM
     sum2(SX x) -> SX
     sum2(MX x) -> MX
@@ -19281,12 +20517,11 @@ def sum2(*args):
     """
     return _casadi.sum2(*args)
 
-def sum1(*args):
+def sum1(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
     sum1(Sparsity x) -> Sparsity
-    sum1(IM x) -> IM
     sum1(DM x) -> DM
     sum1(SX x) -> SX
     sum1(MX x) -> MX
@@ -19296,12 +20531,11 @@ def sum1(*args):
     """
     return _casadi.sum1(*args)
 
-def plus(*args):
+def plus(*args) -> "double":
     """
 
 
     plus(float x, float y) -> float
-    plus(IM x, IM y) -> IM
     plus(DM x, DM y) -> DM
     plus(SX x, SX y) -> SX
     plus(MX x, MX y) -> MX
@@ -19311,12 +20545,11 @@ def plus(*args):
     """
     return _casadi.plus(*args)
 
-def minus(*args):
+def minus(*args) -> "double":
     """
 
 
     minus(float x, float y) -> float
-    minus(IM x, IM y) -> IM
     minus(DM x, DM y) -> DM
     minus(SX x, SX y) -> SX
     minus(MX x, MX y) -> MX
@@ -19326,12 +20559,11 @@ def minus(*args):
     """
     return _casadi.minus(*args)
 
-def times(*args):
+def times(*args) -> "double":
     """
 
 
     times(float x, float y) -> float
-    times(IM x, IM y) -> IM
     times(DM x, DM y) -> DM
     times(SX x, SX y) -> SX
     times(MX x, MX y) -> MX
@@ -19341,12 +20573,11 @@ def times(*args):
     """
     return _casadi.times(*args)
 
-def rdivide(*args):
+def rdivide(*args) -> "double":
     """
 
 
     rdivide(float x, float y) -> float
-    rdivide(IM x, IM y) -> IM
     rdivide(DM x, DM y) -> DM
     rdivide(SX x, SX y) -> SX
     rdivide(MX x, MX y) -> MX
@@ -19356,12 +20587,11 @@ def rdivide(*args):
     """
     return _casadi.rdivide(*args)
 
-def ldivide(*args):
+def ldivide(*args) -> "double":
     """
 
 
     ldivide(float x, float y) -> float
-    ldivide(IM x, IM y) -> IM
     ldivide(DM x, DM y) -> DM
     ldivide(SX x, SX y) -> SX
     ldivide(MX x, MX y) -> MX
@@ -19371,12 +20601,11 @@ def ldivide(*args):
     """
     return _casadi.ldivide(*args)
 
-def lt(*args):
+def lt(*args) -> "double":
     """
 
 
     lt(float x, float y) -> float
-    lt(IM x, IM y) -> IM
     lt(DM x, DM y) -> DM
     lt(SX x, SX y) -> SX
     lt(MX x, MX y) -> MX
@@ -19386,12 +20615,11 @@ def lt(*args):
     """
     return _casadi.lt(*args)
 
-def le(*args):
+def le(*args) -> "double":
     """
 
 
     le(float x, float y) -> float
-    le(IM x, IM y) -> IM
     le(DM x, DM y) -> DM
     le(SX x, SX y) -> SX
     le(MX x, MX y) -> MX
@@ -19401,12 +20629,11 @@ def le(*args):
     """
     return _casadi.le(*args)
 
-def gt(*args):
+def gt(*args) -> "double":
     """
 
 
     gt(float x, float y) -> float
-    gt(IM x, IM y) -> IM
     gt(DM x, DM y) -> DM
     gt(SX x, SX y) -> SX
     gt(MX x, MX y) -> MX
@@ -19416,12 +20643,11 @@ def gt(*args):
     """
     return _casadi.gt(*args)
 
-def ge(*args):
+def ge(*args) -> "double":
     """
 
 
     ge(float x, float y) -> float
-    ge(IM x, IM y) -> IM
     ge(DM x, DM y) -> DM
     ge(SX x, SX y) -> SX
     ge(MX x, MX y) -> MX
@@ -19431,12 +20657,11 @@ def ge(*args):
     """
     return _casadi.ge(*args)
 
-def eq(*args):
+def eq(*args) -> "double":
     """
 
 
     eq(float x, float y) -> float
-    eq(IM x, IM y) -> IM
     eq(DM x, DM y) -> DM
     eq(SX x, SX y) -> SX
     eq(MX x, MX y) -> MX
@@ -19446,12 +20671,11 @@ def eq(*args):
     """
     return _casadi.eq(*args)
 
-def ne(*args):
+def ne(*args) -> "double":
     """
 
 
     ne(float x, float y) -> float
-    ne(IM x, IM y) -> IM
     ne(DM x, DM y) -> DM
     ne(SX x, SX y) -> SX
     ne(MX x, MX y) -> MX
@@ -19461,12 +20685,11 @@ def ne(*args):
     """
     return _casadi.ne(*args)
 
-def logic_and(*args):
+def logic_and(*args) -> "double":
     """
 
 
     logic_and(float x, float y) -> float
-    logic_and(IM x, IM y) -> IM
     logic_and(DM x, DM y) -> DM
     logic_and(SX x, SX y) -> SX
     logic_and(MX x, MX y) -> MX
@@ -19476,12 +20699,11 @@ def logic_and(*args):
     """
     return _casadi.logic_and(*args)
 
-def logic_or(*args):
+def logic_or(*args) -> "double":
     """
 
 
     logic_or(float x, float y) -> float
-    logic_or(IM x, IM y) -> IM
     logic_or(DM x, DM y) -> DM
     logic_or(SX x, SX y) -> SX
     logic_or(MX x, MX y) -> MX
@@ -19491,12 +20713,11 @@ def logic_or(*args):
     """
     return _casadi.logic_or(*args)
 
-def logic_not(*args):
+def logic_not(*args) -> "double":
     """
 
 
     logic_not(float x) -> float
-    logic_not(IM x) -> IM
     logic_not(DM x) -> DM
     logic_not(SX x) -> SX
     logic_not(MX x) -> MX
@@ -19506,12 +20727,11 @@ def logic_not(*args):
     """
     return _casadi.logic_not(*args)
 
-def fabs(*args):
+def fabs(*args) -> "double":
     """
 
 
     fabs(float x) -> float
-    fabs(IM x) -> IM
     fabs(DM x) -> DM
     fabs(SX x) -> SX
     fabs(MX x) -> MX
@@ -19521,12 +20741,11 @@ def fabs(*args):
     """
     return _casadi.fabs(*args)
 
-def sqrt(*args):
+def sqrt(*args) -> "double":
     """
 
 
     sqrt(float x) -> float
-    sqrt(IM x) -> IM
     sqrt(DM x) -> DM
     sqrt(SX x) -> SX
     sqrt(MX x) -> MX
@@ -19536,12 +20755,11 @@ def sqrt(*args):
     """
     return _casadi.sqrt(*args)
 
-def sin(*args):
+def sin(*args) -> "double":
     """
 
 
     sin(float x) -> float
-    sin(IM x) -> IM
     sin(DM x) -> DM
     sin(SX x) -> SX
     sin(MX x) -> MX
@@ -19551,12 +20769,11 @@ def sin(*args):
     """
     return _casadi.sin(*args)
 
-def cos(*args):
+def cos(*args) -> "double":
     """
 
 
     cos(float x) -> float
-    cos(IM x) -> IM
     cos(DM x) -> DM
     cos(SX x) -> SX
     cos(MX x) -> MX
@@ -19566,12 +20783,11 @@ def cos(*args):
     """
     return _casadi.cos(*args)
 
-def tan(*args):
+def tan(*args) -> "double":
     """
 
 
     tan(float x) -> float
-    tan(IM x) -> IM
     tan(DM x) -> DM
     tan(SX x) -> SX
     tan(MX x) -> MX
@@ -19581,12 +20797,11 @@ def tan(*args):
     """
     return _casadi.tan(*args)
 
-def atan(*args):
+def atan(*args) -> "double":
     """
 
 
     atan(float x) -> float
-    atan(IM x) -> IM
     atan(DM x) -> DM
     atan(SX x) -> SX
     atan(MX x) -> MX
@@ -19596,12 +20811,11 @@ def atan(*args):
     """
     return _casadi.atan(*args)
 
-def asin(*args):
+def asin(*args) -> "double":
     """
 
 
     asin(float x) -> float
-    asin(IM x) -> IM
     asin(DM x) -> DM
     asin(SX x) -> SX
     asin(MX x) -> MX
@@ -19611,12 +20825,11 @@ def asin(*args):
     """
     return _casadi.asin(*args)
 
-def acos(*args):
+def acos(*args) -> "double":
     """
 
 
     acos(float x) -> float
-    acos(IM x) -> IM
     acos(DM x) -> DM
     acos(SX x) -> SX
     acos(MX x) -> MX
@@ -19626,12 +20839,11 @@ def acos(*args):
     """
     return _casadi.acos(*args)
 
-def tanh(*args):
+def tanh(*args) -> "double":
     """
 
 
     tanh(float x) -> float
-    tanh(IM x) -> IM
     tanh(DM x) -> DM
     tanh(SX x) -> SX
     tanh(MX x) -> MX
@@ -19641,12 +20853,11 @@ def tanh(*args):
     """
     return _casadi.tanh(*args)
 
-def sinh(*args):
+def sinh(*args) -> "double":
     """
 
 
     sinh(float x) -> float
-    sinh(IM x) -> IM
     sinh(DM x) -> DM
     sinh(SX x) -> SX
     sinh(MX x) -> MX
@@ -19656,12 +20867,11 @@ def sinh(*args):
     """
     return _casadi.sinh(*args)
 
-def cosh(*args):
+def cosh(*args) -> "double":
     """
 
 
     cosh(float x) -> float
-    cosh(IM x) -> IM
     cosh(DM x) -> DM
     cosh(SX x) -> SX
     cosh(MX x) -> MX
@@ -19671,12 +20881,11 @@ def cosh(*args):
     """
     return _casadi.cosh(*args)
 
-def atanh(*args):
+def atanh(*args) -> "double":
     """
 
 
     atanh(float x) -> float
-    atanh(IM x) -> IM
     atanh(DM x) -> DM
     atanh(SX x) -> SX
     atanh(MX x) -> MX
@@ -19686,12 +20895,11 @@ def atanh(*args):
     """
     return _casadi.atanh(*args)
 
-def asinh(*args):
+def asinh(*args) -> "double":
     """
 
 
     asinh(float x) -> float
-    asinh(IM x) -> IM
     asinh(DM x) -> DM
     asinh(SX x) -> SX
     asinh(MX x) -> MX
@@ -19701,12 +20909,11 @@ def asinh(*args):
     """
     return _casadi.asinh(*args)
 
-def acosh(*args):
+def acosh(*args) -> "double":
     """
 
 
     acosh(float x) -> float
-    acosh(IM x) -> IM
     acosh(DM x) -> DM
     acosh(SX x) -> SX
     acosh(MX x) -> MX
@@ -19716,12 +20923,11 @@ def acosh(*args):
     """
     return _casadi.acosh(*args)
 
-def exp(*args):
+def exp(*args) -> "double":
     """
 
 
     exp(float x) -> float
-    exp(IM x) -> IM
     exp(DM x) -> DM
     exp(SX x) -> SX
     exp(MX x) -> MX
@@ -19731,12 +20937,11 @@ def exp(*args):
     """
     return _casadi.exp(*args)
 
-def log(*args):
+def log(*args) -> "double":
     """
 
 
     log(float x) -> float
-    log(IM x) -> IM
     log(DM x) -> DM
     log(SX x) -> SX
     log(MX x) -> MX
@@ -19746,12 +20951,11 @@ def log(*args):
     """
     return _casadi.log(*args)
 
-def log10(*args):
+def log10(*args) -> "double":
     """
 
 
     log10(float x) -> float
-    log10(IM x) -> IM
     log10(DM x) -> DM
     log10(SX x) -> SX
     log10(MX x) -> MX
@@ -19761,12 +20965,11 @@ def log10(*args):
     """
     return _casadi.log10(*args)
 
-def floor(*args):
+def floor(*args) -> "double":
     """
 
 
     floor(float x) -> float
-    floor(IM x) -> IM
     floor(DM x) -> DM
     floor(SX x) -> SX
     floor(MX x) -> MX
@@ -19776,12 +20979,11 @@ def floor(*args):
     """
     return _casadi.floor(*args)
 
-def ceil(*args):
+def ceil(*args) -> "double":
     """
 
 
     ceil(float x) -> float
-    ceil(IM x) -> IM
     ceil(DM x) -> DM
     ceil(SX x) -> SX
     ceil(MX x) -> MX
@@ -19791,12 +20993,11 @@ def ceil(*args):
     """
     return _casadi.ceil(*args)
 
-def erf(*args):
+def erf(*args) -> "double":
     """
 
 
     erf(float x) -> float
-    erf(IM x) -> IM
     erf(DM x) -> DM
     erf(SX x) -> SX
     erf(MX x) -> MX
@@ -19806,12 +21007,11 @@ def erf(*args):
     """
     return _casadi.erf(*args)
 
-def erfinv(*args):
+def erfinv(*args) -> "double":
     """
 
 
     erfinv(float x) -> float
-    erfinv(IM x) -> IM
     erfinv(DM x) -> DM
     erfinv(SX x) -> SX
     erfinv(MX x) -> MX
@@ -19821,12 +21021,11 @@ def erfinv(*args):
     """
     return _casadi.erfinv(*args)
 
-def sign(*args):
+def sign(*args) -> "double":
     """
 
 
     sign(float x) -> float
-    sign(IM x) -> IM
     sign(DM x) -> DM
     sign(SX x) -> SX
     sign(MX x) -> MX
@@ -19836,12 +21035,11 @@ def sign(*args):
     """
     return _casadi.sign(*args)
 
-def power(*args):
+def power(*args) -> "double":
     """
 
 
     power(float x, float n) -> float
-    power(IM x, IM n) -> IM
     power(DM x, DM n) -> DM
     power(SX x, SX n) -> SX
     power(MX x, MX n) -> MX
@@ -19851,12 +21049,11 @@ def power(*args):
     """
     return _casadi.power(*args)
 
-def mod(*args):
+def mod(*args) -> "double":
     """
 
 
     mod(float x, float y) -> float
-    mod(IM x, IM y) -> IM
     mod(DM x, DM y) -> DM
     mod(SX x, SX y) -> SX
     mod(MX x, MX y) -> MX
@@ -19866,12 +21063,25 @@ def mod(*args):
     """
     return _casadi.mod(*args)
 
-def atan2(*args):
+def fmod(*args) -> "double":
+    """
+
+
+    fmod(float x, float y) -> float
+    fmod(DM x, DM y) -> DM
+    fmod(SX x, SX y) -> SX
+    fmod(MX x, MX y) -> MX
+
+
+
+    """
+    return _casadi.fmod(*args)
+
+def atan2(*args) -> "double":
     """
 
 
     atan2(float x, float y) -> float
-    atan2(IM x, IM y) -> IM
     atan2(DM x, DM y) -> DM
     atan2(SX x, SX y) -> SX
     atan2(MX x, MX y) -> MX
@@ -19881,12 +21091,11 @@ def atan2(*args):
     """
     return _casadi.atan2(*args)
 
-def fmin(*args):
+def fmin(*args) -> "double":
     """
 
 
     fmin(float x, float y) -> float
-    fmin(IM x, IM y) -> IM
     fmin(DM x, DM y) -> DM
     fmin(SX x, SX y) -> SX
     fmin(MX x, MX y) -> MX
@@ -19896,12 +21105,11 @@ def fmin(*args):
     """
     return _casadi.fmin(*args)
 
-def fmax(*args):
+def fmax(*args) -> "double":
     """
 
 
     fmax(float x, float y) -> float
-    fmax(IM x, IM y) -> IM
     fmax(DM x, DM y) -> DM
     fmax(SX x, SX y) -> SX
     fmax(MX x, MX y) -> MX
@@ -19911,12 +21119,11 @@ def fmax(*args):
     """
     return _casadi.fmax(*args)
 
-def simplify(*args):
+def simplify(*args) -> "double":
     """
     Simplify an expression.
 
     simplify(float x) -> float
-    simplify(IM x) -> IM
     simplify(DM x) -> DM
     simplify(SX x) -> SX
     simplify(MX x) -> MX
@@ -19928,12 +21135,11 @@ def simplify(*args):
     """
     return _casadi.simplify(*args)
 
-def is_equal(*args):
+def is_equal(*args) -> "bool":
     """
 
 
     is_equal(float x, float y, int depth) -> bool
-    is_equal(IM x, IM y, int depth) -> bool
     is_equal(DM x, DM y, int depth) -> bool
     is_equal(SX x, SX y, int depth) -> bool
     is_equal(MX x, MX y, int depth) -> bool
@@ -19943,12 +21149,11 @@ def is_equal(*args):
     """
     return _casadi.is_equal(*args)
 
-def copysign(*args):
+def copysign(*args) -> "double":
     """
 
 
     copysign(float x, float y) -> float
-    copysign(IM x, IM y) -> IM
     copysign(DM x, DM y) -> DM
     copysign(SX x, SX y) -> SX
     copysign(MX x, MX y) -> MX
@@ -19958,12 +21163,11 @@ def copysign(*args):
     """
     return _casadi.copysign(*args)
 
-def constpow(*args):
+def constpow(*args) -> "double":
     """
 
 
     constpow(float x, float y) -> float
-    constpow(IM x, IM y) -> IM
     constpow(DM x, DM y) -> DM
     constpow(SX x, SX y) -> SX
     constpow(MX x, MX y) -> MX
@@ -19973,11 +21177,10 @@ def constpow(*args):
     """
     return _casadi.constpow(*args)
 
-def mpower(*args):
+def mpower(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Matrix power x^n.
 
-    mpower(IM x, IM n) -> IM
     mpower(DM x, DM n) -> DM
     mpower(SX x, SX n) -> SX
     mpower(MX x, MX n) -> MX
@@ -19989,11 +21192,10 @@ def mpower(*args):
     """
     return _casadi.mpower(*args)
 
-def mrdivide(*args):
+def mrdivide(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Matrix divide (cf. slash '/' in MATLAB)
 
-    mrdivide(IM x, IM y) -> IM
     mrdivide(DM x, DM y) -> DM
     mrdivide(SX x, SX y) -> SX
     mrdivide(MX x, MX y) -> MX
@@ -20005,11 +21207,10 @@ def mrdivide(*args):
     """
     return _casadi.mrdivide(*args)
 
-def mldivide(*args):
+def mldivide(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Matrix divide (cf. backslash '\\' in MATLAB)
 
-    mldivide(IM x, IM y) -> IM
     mldivide(DM x, DM y) -> DM
     mldivide(SX x, SX y) -> SX
     mldivide(MX x, MX y) -> MX
@@ -20021,11 +21222,10 @@ def mldivide(*args):
     """
     return _casadi.mldivide(*args)
 
-def symvar(*args):
+def symvar(*args) -> "std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >":
     """
       Get symbols present in expression.
 
-      symvar(IM x) -> std::vector< casadi::Matrix< casadi_int >,std::allocator< casadi::Matrix< casadi_int > > >
       symvar(DM x) -> [DM]
       symvar(SX x) -> [SX]
       symvar(MX x) -> [MX]
@@ -20040,11 +21240,10 @@ def symvar(*args):
     """
     return _casadi.symvar(*args)
 
-def bilin(*args):
+def bilin(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Calculate bilinear form x^T A y.
 
-    bilin(IM A, IM x, IM y) -> IM
     bilin(DM A, DM x, DM y) -> DM
     bilin(SX A, SX x, SX y) -> SX
     bilin(MX A, MX x, MX y) -> MX
@@ -20056,11 +21255,10 @@ def bilin(*args):
     """
     return _casadi.bilin(*args)
 
-def rank1(*args):
+def rank1(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Make a rank-1 update to a matrix A Calculates A + 1/2 * alpha * x*y'.
 
-    rank1(IM A, IM alpha, IM x, IM y) -> IM
     rank1(DM A, DM alpha, DM x, DM y) -> DM
     rank1(SX A, SX alpha, SX x, SX y) -> SX
     rank1(MX A, MX alpha, MX x, MX y) -> MX
@@ -20072,11 +21270,10 @@ def rank1(*args):
     """
     return _casadi.rank1(*args)
 
-def sumsqr(*args):
+def sumsqr(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Calculate sum of squares: sum_ij X_ij^2.
 
-    sumsqr(IM X) -> IM
     sumsqr(DM X) -> DM
     sumsqr(SX X) -> SX
     sumsqr(MX X) -> MX
@@ -20088,11 +21285,10 @@ def sumsqr(*args):
     """
     return _casadi.sumsqr(*args)
 
-def linspace(*args):
+def linspace(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Matlab's linspace command.
 
-    linspace(IM a, IM b, int nsteps) -> IM
     linspace(DM a, DM b, int nsteps) -> DM
     linspace(SX a, SX b, int nsteps) -> SX
     linspace(MX a, MX b, int nsteps) -> MX
@@ -20104,11 +21300,10 @@ def linspace(*args):
     """
     return _casadi.linspace(*args)
 
-def interp1d(*args):
+def interp1d(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Performs 1d linear interpolation.
 
-      interp1d([float] x, IM v, [float] xq, str mode, bool equidistant) -> IM
       interp1d([float] x, DM v, [float] xq, str mode, bool equidistant) -> DM
       interp1d([float] x, SX v, [float] xq, str mode, bool equidistant) -> SX
       interp1d([float] x, MX v, [float] xq, str mode, bool equidistant) -> MX
@@ -20123,11 +21318,10 @@ def interp1d(*args):
     """
     return _casadi.interp1d(*args)
 
-def soc(*args):
+def soc(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Construct second-order-convex.
 
-      soc(IM x, IM y) -> IM
       soc(DM x, DM y) -> DM
       soc(SX x, SX y) -> SX
       soc(MX x, MX y) -> MX
@@ -20150,11 +21344,10 @@ def soc(*args):
     """
     return _casadi.soc(*args)
 
-def cross(*args):
+def cross(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Matlab's cross command.
 
-    cross(IM a, IM b, int dim) -> IM
     cross(DM a, DM b, int dim) -> DM
     cross(SX a, SX b, int dim) -> SX
     cross(MX a, MX b, int dim) -> MX
@@ -20166,11 +21359,10 @@ def cross(*args):
     """
     return _casadi.cross(*args)
 
-def skew(*args):
+def skew(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Generate a skew symmetric matrix from a 3-vector.
 
-    skew(IM a) -> IM
     skew(DM a) -> DM
     skew(SX a) -> SX
     skew(MX a) -> MX
@@ -20182,11 +21374,10 @@ def skew(*args):
     """
     return _casadi.skew(*args)
 
-def inv_skew(*args):
+def inv_skew(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Generate the 3-vector progenitor of a skew symmetric matrix.
 
-    inv_skew(IM a) -> IM
     inv_skew(DM a) -> DM
     inv_skew(SX a) -> SX
     inv_skew(MX a) -> MX
@@ -20198,11 +21389,10 @@ def inv_skew(*args):
     """
     return _casadi.inv_skew(*args)
 
-def det(*args):
+def det(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Matrix determinant (experimental)
 
-    det(IM A) -> IM
     det(DM A) -> DM
     det(SX A) -> SX
     det(MX A) -> MX
@@ -20214,11 +21404,10 @@ def det(*args):
     """
     return _casadi.det(*args)
 
-def inv_minor(*args):
+def inv_minor(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Matrix inverse (experimental)
 
-    inv_minor(IM A) -> IM
     inv_minor(DM A) -> DM
     inv_minor(SX A) -> SX
     inv_minor(MX A) -> MX
@@ -20230,15 +21419,13 @@ def inv_minor(*args):
     """
     return _casadi.inv_minor(*args)
 
-def inv(*args):
+def inv(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Matrix inverse.
 
-    inv(IM A) -> IM
     inv(DM A) -> DM
     inv(SX A) -> SX
     inv(MX A) -> MX
-    inv(IM A, str lsolver, dict opts) -> IM
     inv(DM A, str lsolver, dict opts) -> DM
     inv(SX A, str lsolver, dict opts) -> SX
     inv(MX A, str lsolver, dict opts) -> MX
@@ -20250,11 +21437,10 @@ def inv(*args):
     """
     return _casadi.inv(*args)
 
-def trace(*args):
+def trace(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Matrix trace.
 
-    trace(IM a) -> IM
     trace(DM a) -> DM
     trace(SX a) -> SX
     trace(MX a) -> MX
@@ -20266,11 +21452,10 @@ def trace(*args):
     """
     return _casadi.trace(*args)
 
-def tril2symm(*args):
+def tril2symm(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Convert a lower triangular matrix to a symmetric one.
 
-    tril2symm(IM a) -> IM
     tril2symm(DM a) -> DM
     tril2symm(SX a) -> SX
     tril2symm(MX a) -> MX
@@ -20282,11 +21467,10 @@ def tril2symm(*args):
     """
     return _casadi.tril2symm(*args)
 
-def triu2symm(*args):
+def triu2symm(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Convert a upper triangular matrix to a symmetric one.
 
-    triu2symm(IM a) -> IM
     triu2symm(DM a) -> DM
     triu2symm(SX a) -> SX
     triu2symm(MX a) -> MX
@@ -20298,11 +21482,10 @@ def triu2symm(*args):
     """
     return _casadi.triu2symm(*args)
 
-def norm_fro(*args):
+def norm_fro(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Frobenius norm.
 
-    norm_fro(IM x) -> IM
     norm_fro(DM x) -> DM
     norm_fro(SX x) -> SX
     norm_fro(MX x) -> MX
@@ -20314,11 +21497,10 @@ def norm_fro(*args):
     """
     return _casadi.norm_fro(*args)
 
-def norm_2(*args):
+def norm_2(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     2-norm
 
-    norm_2(IM x) -> IM
     norm_2(DM x) -> DM
     norm_2(SX x) -> SX
     norm_2(MX x) -> MX
@@ -20330,11 +21512,10 @@ def norm_2(*args):
     """
     return _casadi.norm_2(*args)
 
-def norm_1(*args):
+def norm_1(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     1-norm
 
-    norm_1(IM x) -> IM
     norm_1(DM x) -> DM
     norm_1(SX x) -> SX
     norm_1(MX x) -> MX
@@ -20346,11 +21527,10 @@ def norm_1(*args):
     """
     return _casadi.norm_1(*args)
 
-def norm_inf(*args):
+def norm_inf(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Infinity-norm.
 
-    norm_inf(IM x) -> IM
     norm_inf(DM x) -> DM
     norm_inf(SX x) -> SX
     norm_inf(MX x) -> MX
@@ -20362,11 +21542,10 @@ def norm_inf(*args):
     """
     return _casadi.norm_inf(*args)
 
-def dot(*args):
+def dot(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Inner product of two matrices with x and y matrices of the same dimension.
 
-    dot(IM x, IM y) -> IM
     dot(DM x, DM y) -> DM
     dot(SX x, SX y) -> SX
     dot(MX x, MX y) -> MX
@@ -20378,11 +21557,10 @@ def dot(*args):
     """
     return _casadi.dot(*args)
 
-def nullspace(*args):
+def nullspace(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Computes the nullspace of a matrix A.
 
-      nullspace(IM A) -> IM
       nullspace(DM A) -> DM
       nullspace(SX A) -> SX
       nullspace(MX A) -> MX
@@ -20400,11 +21578,10 @@ def nullspace(*args):
     """
     return _casadi.nullspace(*args)
 
-def polyval(*args):
+def polyval(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Evaluate a polynomial with coefficients p in x.
 
-    polyval(IM p, IM x) -> IM
     polyval(DM p, DM x) -> DM
     polyval(SX p, SX x) -> SX
     polyval(MX p, MX x) -> MX
@@ -20416,11 +21593,10 @@ def polyval(*args):
     """
     return _casadi.polyval(*args)
 
-def diag(*args):
+def diag(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Create diagonal sparsity pattern.
 
-    diag(IM A) -> IM
     diag(DM A) -> DM
     diag(SX A) -> SX
     diag(MX A) -> MX
@@ -20432,11 +21608,10 @@ def diag(*args):
     """
     return _casadi.diag(*args)
 
-def unite(*args):
+def unite(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Union of two sparsity patterns.
 
-    unite(IM A, IM B) -> IM
     unite(DM A, DM B) -> DM
     unite(SX A, SX B) -> SX
     unite(MX A, MX B) -> MX
@@ -20448,11 +21623,10 @@ def unite(*args):
     """
     return _casadi.unite(*args)
 
-def densify(*args):
+def densify(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Make the matrix dense and assign nonzeros to a value.
 
-    densify(IM x) -> IM
     densify(DM x) -> DM
     densify(SX x) -> SX
     densify(MX x) -> MX
@@ -20464,11 +21638,10 @@ def densify(*args):
     """
     return _casadi.densify(*args)
 
-def project(*args):
+def project(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Create a new matrix with a given sparsity pattern but with the nonzeros
 
-      project(IM A, Sparsity sp, bool intersect) -> IM
       project(DM A, Sparsity sp, bool intersect) -> DM
       project(SX A, Sparsity sp, bool intersect) -> SX
       project(MX A, Sparsity sp, bool intersect) -> MX
@@ -20481,11 +21654,10 @@ def project(*args):
     """
     return _casadi.project(*args)
 
-def if_else(*args):
+def if_else(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Branching on MX nodes Ternary operator, "cond ? if_true : if_false".
 
-    if_else(IM cond, IM if_true, IM if_false, bool short_circuit) -> IM
     if_else(DM cond, DM if_true, DM if_false, bool short_circuit) -> DM
     if_else(SX cond, SX if_true, SX if_false, bool short_circuit) -> SX
     if_else(MX cond, MX if_true, MX if_false, bool short_circuit) -> MX
@@ -20497,11 +21669,10 @@ def if_else(*args):
     """
     return _casadi.if_else(*args)
 
-def conditional(*args):
+def conditional(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Create a switch.
 
-      conditional(IM ind, [IM] x, IM x_default, bool short_circuit) -> IM
       conditional(DM ind, [DM] x, DM x_default, bool short_circuit) -> DM
       conditional(SX ind, [SX] x, SX x_default, bool short_circuit) -> SX
       conditional(MX ind, [MX] x, MX x_default, bool short_circuit) -> MX
@@ -20523,11 +21694,10 @@ def conditional(*args):
     """
     return _casadi.conditional(*args)
 
-def depends_on(*args):
+def depends_on(*args) -> "bool":
     """
     Check if expression depends on the argument The argument must be symbolic.
 
-    depends_on(IM f, IM arg) -> bool
     depends_on(DM f, DM arg) -> bool
     depends_on(SX f, SX arg) -> bool
     depends_on(MX f, MX arg) -> bool
@@ -20539,15 +21709,13 @@ def depends_on(*args):
     """
     return _casadi.depends_on(*args)
 
-def solve(*args):
+def solve(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
-    Crunch the numbers; solve the problem.
+    Solve the QP.
 
-    solve(IM A, IM b) -> IM
     solve(DM A, DM b) -> DM
     solve(SX A, SX b) -> SX
     solve(MX A, MX b) -> MX
-    solve(IM A, IM b, str lsolver, dict opts) -> IM
     solve(DM A, DM b, str lsolver, dict opts) -> DM
     solve(SX A, SX b, str lsolver, dict opts) -> SX
     solve(MX A, MX b, str lsolver, dict opts) -> MX
@@ -20559,15 +21727,13 @@ def solve(*args):
     """
     return _casadi.solve(*args)
 
-def pinv(*args):
+def pinv(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Computes the Moore-Penrose pseudo-inverse.
 
-      pinv(IM A) -> IM
       pinv(DM A) -> DM
       pinv(SX A) -> SX
       pinv(MX A) -> MX
-      pinv(IM A, str lsolver, dict opts) -> IM
       pinv(DM A, str lsolver, dict opts) -> DM
       pinv(SX A, str lsolver, dict opts) -> SX
       pinv(MX A, str lsolver, dict opts) -> MX
@@ -20582,11 +21748,10 @@ def pinv(*args):
     """
     return _casadi.pinv(*args)
 
-def expm_const(*args):
+def expm_const(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
-    expm_const(IM A, IM t) -> IM
     expm_const(DM A, DM t) -> DM
     expm_const(SX A, SX t) -> SX
     expm_const(MX A, MX t) -> MX
@@ -20596,11 +21761,10 @@ def expm_const(*args):
     """
     return _casadi.expm_const(*args)
 
-def expm(*args):
+def expm(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
-    expm(IM A) -> IM
     expm(DM A) -> DM
     expm(SX A) -> SX
     expm(MX A) -> MX
@@ -20610,11 +21774,10 @@ def expm(*args):
     """
     return _casadi.expm(*args)
 
-def jacobian(*args):
+def jacobian(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Calculate Jacobian.
 
-    jacobian(IM ex, IM arg, dict opts) -> IM
     jacobian(DM ex, DM arg, dict opts) -> DM
     jacobian(SX ex, SX arg, dict opts) -> SX
     jacobian(MX ex, MX arg, dict opts) -> MX
@@ -20626,11 +21789,10 @@ def jacobian(*args):
     """
     return _casadi.jacobian(*args)
 
-def jtimes(*args):
+def jtimes(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Calculate the Jacobian and multiply by a vector from the right This is
 
-      jtimes(IM ex, IM arg, IM v, bool tr) -> IM
       jtimes(DM ex, DM arg, DM v, bool tr) -> DM
       jtimes(SX ex, SX arg, SX v, bool tr) -> SX
       jtimes(MX ex, MX arg, MX v, bool tr) -> MX
@@ -20646,11 +21808,10 @@ def jtimes(*args):
     """
     return _casadi.jtimes(*args)
 
-def linearize(*args):
+def linearize(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Linearize an expression.
 
-    linearize(IM f, IM x, IM x0) -> IM
     linearize(DM f, DM x, DM x0) -> DM
     linearize(SX f, SX x, SX x0) -> SX
     linearize(MX f, MX x, MX x0) -> MX
@@ -20662,11 +21823,10 @@ def linearize(*args):
     """
     return _casadi.linearize(*args)
 
-def which_depends(*args):
+def which_depends(*args) -> "std::vector< bool,std::allocator< bool > >":
     """
     Find out which variables enter with some order.
 
-    which_depends(IM expr, IM var, int order, bool tr) -> [bool]
     which_depends(DM expr, DM var, int order, bool tr) -> [bool]
     which_depends(SX expr, SX var, int order, bool tr) -> [bool]
     which_depends(MX expr, MX var, int order, bool tr) -> [bool]
@@ -20678,11 +21838,10 @@ def which_depends(*args):
     """
     return _casadi.which_depends(*args)
 
-def is_linear(*args):
+def is_linear(*args) -> "bool":
     """
       Is expr linear in var?
 
-      is_linear(IM expr, IM var) -> bool
       is_linear(DM expr, DM var) -> bool
       is_linear(SX expr, SX var) -> bool
       is_linear(MX expr, MX var) -> bool
@@ -20697,11 +21856,10 @@ def is_linear(*args):
     """
     return _casadi.is_linear(*args)
 
-def is_quadratic(*args):
+def is_quadratic(*args) -> "bool":
     """
       Is expr quadratic in var?
 
-      is_quadratic(IM expr, IM var) -> bool
       is_quadratic(DM expr, DM var) -> bool
       is_quadratic(SX expr, SX var) -> bool
       is_quadratic(MX expr, MX var) -> bool
@@ -20716,11 +21874,10 @@ def is_quadratic(*args):
     """
     return _casadi.is_quadratic(*args)
 
-def gradient(*args):
+def gradient(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Calculate Jacobian.
 
-    gradient(IM ex, IM arg) -> IM
     gradient(DM ex, DM arg) -> DM
     gradient(SX ex, SX arg) -> SX
     gradient(MX ex, MX arg) -> MX
@@ -20732,11 +21889,10 @@ def gradient(*args):
     """
     return _casadi.gradient(*args)
 
-def tangent(*args):
+def tangent(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Calculate Jacobian.
 
-    tangent(IM ex, IM arg) -> IM
     tangent(DM ex, DM arg) -> DM
     tangent(SX ex, SX arg) -> SX
     tangent(MX ex, MX arg) -> MX
@@ -20748,11 +21904,10 @@ def tangent(*args):
     """
     return _casadi.tangent(*args)
 
-def hessian(*args):
+def hessian(*args) -> "casadi::Matrix< casadi::SXElem > &":
     """
 
 
-    hessian(IM ex, IM arg) -> (IM , IM OUTPUT1)
     hessian(DM ex, DM arg) -> (DM , DM OUTPUT1)
     hessian(SX ex, SX arg) -> (SX , SX OUTPUT1)
     hessian(MX ex, MX arg) -> (MX , MX OUTPUT1)
@@ -20762,19 +21917,24 @@ def hessian(*args):
     """
     return _casadi.hessian(*args)
 
-def quadratic_coeff(*args):
+def quadratic_coeff(*args) -> "casadi::Matrix< casadi::SXElem > &, casadi::Matrix< casadi::SXElem > &, casadi::Matrix< casadi::SXElem > &":
     """
       Recognizes quadratic form in scalar expression.
 
-      quadratic_coeff(IM ex, IM arg) -> (IM OUTPUT1, IM OUTPUT2, IM OUTPUT3)
-      quadratic_coeff(DM ex, DM arg) -> (DM OUTPUT1, DM OUTPUT2, DM OUTPUT3)
-      quadratic_coeff(SX ex, SX arg) -> (SX OUTPUT1, SX OUTPUT2, SX OUTPUT3)
-      quadratic_coeff(MX ex, MX arg) -> (MX OUTPUT1, MX OUTPUT2, MX OUTPUT3)
+      quadratic_coeff(DM ex, DM arg, bool check) -> (DM OUTPUT1, DM OUTPUT2, DM OUTPUT3)
+      quadratic_coeff(SX ex, SX arg, bool check) -> (SX OUTPUT1, SX OUTPUT2, SX OUTPUT3)
+      quadratic_coeff(MX ex, MX arg, bool check) -> (MX OUTPUT1, MX OUTPUT2, MX OUTPUT3)
 
 
     1/2*x' A x + b' x + c
 
     e = 0.5*bilin(A,x,x)+dot(b,x)+c
+
+    Parameters:
+    -----------
+
+    check[in]:  When true (default), A is checked to be independent of x.
+    Provided to deal with false positive dependency checks.
 
 
 
@@ -20782,17 +21942,22 @@ def quadratic_coeff(*args):
     """
     return _casadi.quadratic_coeff(*args)
 
-def linear_coeff(*args):
+def linear_coeff(*args) -> "casadi::Matrix< casadi::SXElem > &, casadi::Matrix< casadi::SXElem > &":
     """
       Recognizes linear form in vector expression.
 
-      linear_coeff(IM ex, IM arg) -> (IM OUTPUT1, IM OUTPUT2)
-      linear_coeff(DM ex, DM arg) -> (DM OUTPUT1, DM OUTPUT2)
-      linear_coeff(SX ex, SX arg) -> (SX OUTPUT1, SX OUTPUT2)
-      linear_coeff(MX ex, MX arg) -> (MX OUTPUT1, MX OUTPUT2)
+      linear_coeff(DM ex, DM arg, bool check) -> (DM OUTPUT1, DM OUTPUT2)
+      linear_coeff(SX ex, SX arg, bool check) -> (SX OUTPUT1, SX OUTPUT2)
+      linear_coeff(MX ex, MX arg, bool check) -> (MX OUTPUT1, MX OUTPUT2)
 
 
     A x + b
+
+    Parameters:
+    -----------
+
+    check[in]:  When true (default)m, A is checked to be independent of x.
+    Provided to deal with false positive dependency checks.
 
 
 
@@ -20800,11 +21965,10 @@ def linear_coeff(*args):
     """
     return _casadi.linear_coeff(*args)
 
-def n_nodes(*args):
+def n_nodes(*args) -> "casadi_int":
     """
 
 
-    n_nodes(IM A) -> int
     n_nodes(DM A) -> int
     n_nodes(SX A) -> int
     n_nodes(MX A) -> int
@@ -20814,11 +21978,10 @@ def n_nodes(*args):
     """
     return _casadi.n_nodes(*args)
 
-def print_operator(*args):
+def print_operator(*args) -> "std::string":
     """
     Get a string representation for a binary MatType, using custom arguments.
 
-    print_operator(IM xb, [str] args) -> str
     print_operator(DM xb, [str] args) -> str
     print_operator(SX xb, [str] args) -> str
     print_operator(MX xb, [str] args) -> str
@@ -20830,11 +21993,10 @@ def print_operator(*args):
     """
     return _casadi.print_operator(*args)
 
-def repsum(*args):
+def repsum(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Given a repeated matrix, computes the sum of repeated parts.
 
-    repsum(IM A, int n, int m) -> IM
     repsum(DM A, int n, int m) -> DM
     repsum(SX A, int n, int m) -> SX
     repsum(MX A, int n, int m) -> MX
@@ -20846,11 +22008,10 @@ def repsum(*args):
     """
     return _casadi.repsum(*args)
 
-def diff(*args):
+def diff(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Returns difference (n-th order) along given axis (MATLAB convention)
 
-    diff(IM A, int n, int axis) -> IM
     diff(DM A, int n, int axis) -> DM
     diff(SX A, int n, int axis) -> SX
     diff(MX A, int n, int axis) -> MX
@@ -20862,11 +22023,10 @@ def diff(*args):
     """
     return _casadi.diff(*args)
 
-def cumsum(*args):
+def cumsum(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Returns cumulative sum along given axis (MATLAB convention)
 
-    cumsum(IM A, int axis) -> IM
     cumsum(DM A, int axis) -> DM
     cumsum(SX A, int axis) -> SX
     cumsum(MX A, int axis) -> MX
@@ -20878,15 +22038,13 @@ def cumsum(*args):
     """
     return _casadi.cumsum(*args)
 
-def einstein(*args):
+def einstein(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Computes an einstein dense tensor contraction.
 
-      einstein(IM A, IM B, [int] dim_a, [int] dim_b, [int] dim_c, [int] a, [int] b, [int] c) -> IM
       einstein(DM A, DM B, [int] dim_a, [int] dim_b, [int] dim_c, [int] a, [int] b, [int] c) -> DM
       einstein(SX A, SX B, [int] dim_a, [int] dim_b, [int] dim_c, [int] a, [int] b, [int] c) -> SX
       einstein(MX A, MX B, [int] dim_a, [int] dim_b, [int] dim_c, [int] a, [int] b, [int] c) -> MX
-      einstein(IM A, IM B, IM C, [int] dim_a, [int] dim_b, [int] dim_c, [int] a, [int] b, [int] c) -> IM
       einstein(DM A, DM B, DM C, [int] dim_a, [int] dim_b, [int] dim_c, [int] a, [int] b, [int] c) -> DM
       einstein(SX A, SX B, SX C, [int] dim_a, [int] dim_b, [int] dim_c, [int] a, [int] b, [int] c) -> SX
       einstein(MX A, MX B, MX C, [int] dim_a, [int] dim_b, [int] dim_c, [int] a, [int] b, [int] c) -> MX
@@ -20906,11 +22064,10 @@ def einstein(*args):
     """
     return _casadi.einstein(*args)
 
-def mmin(*args):
+def mmin(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Smallest element in a matrix.
 
-    mmin(IM x) -> IM
     mmin(DM x) -> DM
     mmin(SX x) -> SX
     mmin(MX x) -> MX
@@ -20922,11 +22079,10 @@ def mmin(*args):
     """
     return _casadi.mmin(*args)
 
-def mmax(*args):
+def mmax(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Largest element in a matrix.
 
-    mmax(IM x) -> IM
     mmax(DM x) -> DM
     mmax(SX x) -> SX
     mmax(MX x) -> MX
@@ -20938,11 +22094,10 @@ def mmax(*args):
     """
     return _casadi.mmax(*args)
 
-def evalf(*args):
+def evalf(*args) -> "casadi::DM":
     """
       Evaluates the expression numerically.
 
-      evalf(IM x) -> DM
       evalf(DM x) -> DM
       evalf(SX x) -> DM
       evalf(MX x) -> DM
@@ -20956,11 +22111,10 @@ def evalf(*args):
     """
     return _casadi.evalf(*args)
 
-def forward(*args):
+def forward(*args) -> "std::vector< std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >,std::allocator< std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > > > >":
     """
     Forward directional derivative.
 
-    forward([IM] ex, [IM] arg, [[IM]] v, dict opts) -> [[IM]]
     forward([DM] ex, [DM] arg, [[DM]] v, dict opts) -> [[DM]]
     forward([SX] ex, [SX] arg, [[SX]] v, dict opts) -> [[SX]]
     forward([MX] ex, [MX] arg, [[MX]] v, dict opts) -> [[MX]]
@@ -20972,11 +22126,10 @@ def forward(*args):
     """
     return _casadi.forward(*args)
 
-def reverse(*args):
+def reverse(*args) -> "std::vector< std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >,std::allocator< std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > > > >":
     """
     Reverse directional derivative.
 
-    reverse([IM] ex, [IM] arg, [[IM]] v, dict opts) -> [[IM]]
     reverse([DM] ex, [DM] arg, [[DM]] v, dict opts) -> [[DM]]
     reverse([SX] ex, [SX] arg, [[SX]] v, dict opts) -> [[SX]]
     reverse([MX] ex, [MX] arg, [[MX]] v, dict opts) -> [[MX]]
@@ -20988,12 +22141,10 @@ def reverse(*args):
     """
     return _casadi.reverse(*args)
 
-def substitute(*args):
+def substitute(*args) -> "std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >":
     """
     Substitute variable var with expression expr in multiple expressions.
 
-    substitute(IM ex, IM v, IM vdef) -> IM
-    substitute([IM] ex, [IM] v, [IM] vdef) -> std::vector< casadi::Matrix< casadi_int >,std::allocator< casadi::Matrix< casadi_int > > >
     substitute(DM ex, DM v, DM vdef) -> DM
     substitute([DM] ex, [DM] v, [DM] vdef) -> [DM]
     substitute(SX ex, SX v, SX vdef) -> SX
@@ -21008,11 +22159,10 @@ def substitute(*args):
     """
     return _casadi.substitute(*args)
 
-def substitute_inplace(*args):
+def substitute_inplace(*args) -> "std::vector< casadi::Matrix< casadi::SXElem > > &, std::vector< casadi::Matrix< casadi::SXElem > > &":
     """
       Inplace substitution with piggyback expressions Substitute variables v out
 
-      substitute_inplace([IM] v, bool reverse) -> ([IM] INOUT1, [IM] INOUT2)
       substitute_inplace([DM] v, bool reverse) -> ([DM] INOUT1, [DM] INOUT2)
       substitute_inplace([SX] v, bool reverse) -> ([SX] INOUT1, [SX] INOUT2)
       substitute_inplace([MX] v, bool reverse) -> ([MX] INOUT1, [MX] INOUT2)
@@ -21026,11 +22176,10 @@ def substitute_inplace(*args):
     """
     return _casadi.substitute_inplace(*args)
 
-def shared(*args):
+def shared(*args) -> "std::vector< casadi::Matrix< casadi::SXElem > > &, std::vector< casadi::Matrix< casadi::SXElem > > &, std::vector< casadi::Matrix< casadi::SXElem > > &":
     """
     Get a shared (owning) reference.
 
-    shared([IM] ex, str v_prefix, str v_suffix) -> ([IM] OUTPUT1, [IM] OUTPUT2, [IM] OUTPUT3)
     shared([DM] ex, str v_prefix, str v_suffix) -> ([DM] OUTPUT1, [DM] OUTPUT2, [DM] OUTPUT3)
     shared([SX] ex, str v_prefix, str v_suffix) -> ([SX] OUTPUT1, [SX] OUTPUT2, [SX] OUTPUT3)
     shared([MX] ex, str v_prefix, str v_suffix) -> ([MX] OUTPUT1, [MX] OUTPUT2, [MX] OUTPUT3)
@@ -21042,16 +22191,14 @@ def shared(*args):
     """
     return _casadi.shared(*args)
 
-def blockcat(*args):
+def blockcat(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
 
 
-    blockcat([[IM]] v) -> IM
     blockcat([[DM]] v) -> DM
     blockcat([[SX]] v) -> SX
     blockcat([[MX]] v) -> MX
     blockcat(Sparsity A, Sparsity B, Sparsity C, Sparsity D) -> Sparsity
-    blockcat(IM A, IM B, IM C, IM D) -> IM
     blockcat(DM A, DM B, DM C, DM D) -> DM
     blockcat(SX A, SX B, SX C, SX D) -> SX
     blockcat(MX A, MX B, MX C, MX D) -> MX
@@ -21061,11 +22208,10 @@ def blockcat(*args):
     """
     return _casadi.blockcat(*args)
 
-def logic_all(*args):
+def logic_all(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Get a vector of indices (nested slice)
 
-    logic_all(IM x) -> IM
     logic_all(DM x) -> DM
     logic_all(SX x) -> SX
 
@@ -21076,11 +22222,10 @@ def logic_all(*args):
     """
     return _casadi.logic_all(*args)
 
-def logic_any(*args):
+def logic_any(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Returns true only if any element in the matrix is true.
 
-    logic_any(IM x) -> IM
     logic_any(DM x) -> DM
     logic_any(SX x) -> SX
 
@@ -21091,11 +22236,10 @@ def logic_any(*args):
     """
     return _casadi.logic_any(*args)
 
-def adj(*args):
+def adj(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Matrix adjoint.
 
-    adj(IM A) -> IM
     adj(DM A) -> DM
     adj(SX A) -> SX
 
@@ -21106,11 +22250,10 @@ def adj(*args):
     """
     return _casadi.adj(*args)
 
-def minor(*args):
+def minor(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Get the (i,j) minor matrix.
 
-    minor(IM x, int i, int j) -> IM
     minor(DM x, int i, int j) -> DM
     minor(SX x, int i, int j) -> SX
 
@@ -21121,11 +22264,10 @@ def minor(*args):
     """
     return _casadi.minor(*args)
 
-def cofactor(*args):
+def cofactor(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Get the (i,j) cofactor matrix.
 
-    cofactor(IM x, int i, int j) -> IM
     cofactor(DM x, int i, int j) -> DM
     cofactor(SX x, int i, int j) -> SX
 
@@ -21136,11 +22278,10 @@ def cofactor(*args):
     """
     return _casadi.cofactor(*args)
 
-def qr(*args):
+def qr(*args) -> "casadi::Matrix< casadi::SXElem > &, casadi::Matrix< casadi::SXElem > &":
     """
       QR factorization using the modified Gram-Schmidt algorithm More stable than
 
-      qr(IM A) -> (IM OUTPUT1, IM OUTPUT2)
       qr(DM A) -> (DM OUTPUT1, DM OUTPUT2)
       qr(SX A) -> (SX OUTPUT1, SX OUTPUT2)
 
@@ -21154,11 +22295,10 @@ def qr(*args):
     """
     return _casadi.qr(*args)
 
-def qr_sparse(*args):
+def qr_sparse(*args) -> "casadi::Matrix< casadi::SXElem > &, casadi::Matrix< casadi::SXElem > &, casadi::Matrix< casadi::SXElem > &, std::vector< casadi_int > &, std::vector< casadi_int > &":
     """
       Symbolic QR factorization Returns the sparsity pattern of V (compact
 
-      qr_sparse(IM A, bool amd) -> (IM OUTPUT1, IM OUTPUT2, IM OUTPUT3, [int] OUTPUT4, [int] OUTPUT5)
       qr_sparse(DM A, bool amd) -> (DM OUTPUT1, DM OUTPUT2, DM OUTPUT3, [int] OUTPUT4, [int] OUTPUT5)
       qr_sparse(SX A, bool amd) -> (SX OUTPUT1, SX OUTPUT2, SX OUTPUT3, [int] OUTPUT4, [int] OUTPUT5)
 
@@ -21173,11 +22313,10 @@ def qr_sparse(*args):
     """
     return _casadi.qr_sparse(*args)
 
-def qr_solve(*args):
+def qr_solve(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Solve using a sparse QR factorization.
 
-    qr_solve(IM b, IM v, IM r, IM beta, [int] prinv, [int] pc, bool tr) -> IM
     qr_solve(DM b, DM v, DM r, DM beta, [int] prinv, [int] pc, bool tr) -> DM
     qr_solve(SX b, SX v, SX r, SX beta, [int] prinv, [int] pc, bool tr) -> SX
 
@@ -21188,11 +22327,10 @@ def qr_solve(*args):
     """
     return _casadi.qr_solve(*args)
 
-def ldl(*args):
+def ldl(*args) -> "casadi::Matrix< casadi::SXElem > &, casadi::Matrix< casadi::SXElem > &, std::vector< casadi_int > &":
     """
       Symbolic LDL factorization Returns the sparsity pattern of L^T.
 
-      ldl(IM A, bool amd) -> (IM OUTPUT1, IM OUTPUT2, [int] OUTPUT3)
       ldl(DM A, bool amd) -> (DM OUTPUT1, DM OUTPUT2, [int] OUTPUT3)
       ldl(SX A, bool amd) -> (SX OUTPUT1, SX OUTPUT2, [int] OUTPUT3)
 
@@ -21206,11 +22344,10 @@ def ldl(*args):
     """
     return _casadi.ldl(*args)
 
-def ldl_solve(*args):
+def ldl_solve(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Solve using a sparse LDL^T factorization.
 
-    ldl_solve(IM b, IM D, IM LT, [int] p) -> IM
     ldl_solve(DM b, DM D, DM LT, [int] p) -> DM
     ldl_solve(SX b, SX D, SX LT, [int] p) -> SX
 
@@ -21221,11 +22358,10 @@ def ldl_solve(*args):
     """
     return _casadi.ldl_solve(*args)
 
-def chol(*args):
+def chol(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Obtain a Cholesky factorisation of a matrix Performs and LDL transformation
 
-      chol(IM A) -> IM
       chol(DM A) -> DM
       chol(SX A) -> SX
 
@@ -21237,11 +22373,10 @@ def chol(*args):
     """
     return _casadi.chol(*args)
 
-def norm_inf_mul(*args):
+def norm_inf_mul(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Inf-norm of a Matrix-Matrix product.
 
-    norm_inf_mul(IM x, IM y) -> IM
     norm_inf_mul(DM x, DM y) -> DM
     norm_inf_mul(SX x, SX y) -> SX
 
@@ -21252,11 +22387,10 @@ def norm_inf_mul(*args):
     """
     return _casadi.norm_inf_mul(*args)
 
-def sparsify(*args):
+def sparsify(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Make a matrix sparse by removing numerical zeros.
 
-    sparsify(IM A, float tol) -> IM
     sparsify(DM A, float tol) -> DM
     sparsify(SX A, float tol) -> SX
 
@@ -21267,11 +22401,10 @@ def sparsify(*args):
     """
     return _casadi.sparsify(*args)
 
-def expand(*args):
+def expand(*args) -> "casadi::Matrix< casadi::SXElem > &, casadi::Matrix< casadi::SXElem > &":
     """
     Expand the expression as a weighted sum (with constant weights)
 
-    expand(IM ex) -> (IM OUTPUT1, IM OUTPUT2)
     expand(DM ex) -> (DM OUTPUT1, DM OUTPUT2)
     expand(SX ex) -> (SX OUTPUT1, SX OUTPUT2)
 
@@ -21282,11 +22415,10 @@ def expand(*args):
     """
     return _casadi.expand(*args)
 
-def pw_const(*args):
+def pw_const(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Create a piecewise constant function Create a piecewise constant function
 
-      pw_const(IM t, IM tval, IM val) -> IM
       pw_const(DM t, DM tval, DM val) -> DM
       pw_const(SX t, SX tval, SX val) -> SX
 
@@ -21310,11 +22442,10 @@ def pw_const(*args):
     """
     return _casadi.pw_const(*args)
 
-def pw_lin(*args):
+def pw_lin(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       t a scalar variable (e.g. time)
 
-      pw_lin(IM t, IM tval, IM val) -> IM
       pw_lin(DM t, DM tval, DM val) -> DM
       pw_lin(SX t, SX tval, SX val) -> SX
 
@@ -21331,11 +22462,10 @@ def pw_lin(*args):
     """
     return _casadi.pw_lin(*args)
 
-def heaviside(*args):
+def heaviside(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Heaviside function.
 
-      heaviside(IM x) -> IM
       heaviside(DM x) -> DM
       heaviside(SX x) -> SX
 
@@ -21349,11 +22479,10 @@ def heaviside(*args):
     """
     return _casadi.heaviside(*args)
 
-def rectangle(*args):
+def rectangle(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       rectangle function
 
-      rectangle(IM x) -> IM
       rectangle(DM x) -> DM
       rectangle(SX x) -> SX
 
@@ -21370,11 +22499,10 @@ def rectangle(*args):
     """
     return _casadi.rectangle(*args)
 
-def triangle(*args):
+def triangle(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       triangle function
 
-      triangle(IM x) -> IM
       triangle(DM x) -> DM
       triangle(SX x) -> SX
 
@@ -21388,11 +22516,10 @@ def triangle(*args):
     """
     return _casadi.triangle(*args)
 
-def ramp(*args):
+def ramp(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       ramp function
 
-      ramp(IM x) -> IM
       ramp(DM x) -> DM
       ramp(SX x) -> SX
 
@@ -21408,14 +22535,12 @@ def ramp(*args):
     """
     return _casadi.ramp(*args)
 
-def gauss_quadrature(*args):
+def gauss_quadrature(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
     Matrix adjoint.
 
-    gauss_quadrature(IM f, IM x, IM a, IM b, int order) -> IM
     gauss_quadrature(DM f, DM x, DM a, DM b, int order) -> DM
     gauss_quadrature(SX f, SX x, SX a, SX b, int order) -> SX
-    gauss_quadrature(IM f, IM x, IM a, IM b, int order, IM w) -> IM
     gauss_quadrature(DM f, DM x, DM a, DM b, int order, DM w) -> DM
     gauss_quadrature(SX f, SX x, SX a, SX b, int order, SX w) -> SX
 
@@ -21426,11 +22551,10 @@ def gauss_quadrature(*args):
     """
     return _casadi.gauss_quadrature(*args)
 
-def taylor(*args):
+def taylor(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       univariate Taylor series expansion
 
-      taylor(IM ex, IM x, IM a, int order) -> IM
       taylor(DM ex, DM x, DM a, int order) -> DM
       taylor(SX ex, SX x, SX a, int order) -> SX
 
@@ -21455,14 +22579,12 @@ def taylor(*args):
     """
     return _casadi.taylor(*args)
 
-def mtaylor(*args):
+def mtaylor(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       multivariate Taylor series expansion
 
-      mtaylor(IM ex, IM x, IM a, int order) -> IM
       mtaylor(DM ex, DM x, DM a, int order) -> DM
       mtaylor(SX ex, SX x, SX a, int order) -> SX
-      mtaylor(IM ex, IM x, IM a, int order, [int] order_contributions) -> IM
       mtaylor(DM ex, DM x, DM a, int order, [int] order_contributions) -> DM
       mtaylor(SX ex, SX x, SX a, int order, [int] order_contributions) -> SX
 
@@ -21485,11 +22607,10 @@ def mtaylor(*args):
     """
     return _casadi.mtaylor(*args)
 
-def poly_coeff(*args):
+def poly_coeff(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       extracts polynomial coefficients from an expression
 
-      poly_coeff(IM ex, IM x) -> IM
       poly_coeff(DM ex, DM x) -> DM
       poly_coeff(SX ex, SX x) -> SX
 
@@ -21507,11 +22628,10 @@ def poly_coeff(*args):
     """
     return _casadi.poly_coeff(*args)
 
-def poly_roots(*args):
+def poly_roots(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Attempts to find the roots of a polynomial.
 
-      poly_roots(IM p) -> IM
       poly_roots(DM p) -> DM
       poly_roots(SX p) -> SX
 
@@ -21525,11 +22645,10 @@ def poly_roots(*args):
     """
     return _casadi.poly_roots(*args)
 
-def eig_symbolic(*args):
+def eig_symbolic(*args) -> "casadi::Matrix< casadi::SXElem >":
     """
       Attempts to find the eigenvalues of a symbolic matrix This will only work
 
-      eig_symbolic(IM m) -> IM
       eig_symbolic(DM m) -> DM
       eig_symbolic(SX m) -> SX
 
@@ -21541,7 +22660,7 @@ def eig_symbolic(*args):
     """
     return _casadi.eig_symbolic(*args)
 
-def find(*args):
+def find(*args) -> "casadi::MX":
     """
       Get the location of all non-zero elements as they would appear in a Dense
 
@@ -21560,7 +22679,20 @@ def find(*args):
     """
     return _casadi.find(*args)
 
-def inv_node(*args):
+def low(*args) -> "casadi::MX":
+    """
+    Find first nonzero If failed, returns the number of rows.
+
+    low(MX v, MX p, dict options) -> MX
+
+
+
+
+
+    """
+    return _casadi.low(*args)
+
+def inv_node(*args) -> "casadi::MX":
     """
     Inverse node.
 
@@ -21573,7 +22705,7 @@ def inv_node(*args):
     """
     return _casadi.inv_node(*args)
 
-def matrix_expand(*args):
+def matrix_expand(*args) -> "casadi::MX":
     """
       Expand MX graph to SXFunction call.
 
@@ -21590,7 +22722,7 @@ def matrix_expand(*args):
     """
     return _casadi.matrix_expand(*args)
 
-def graph_substitute(*args):
+def graph_substitute(*args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
     """
       Substitute multiple expressions in graph Substitute variable var with
 
@@ -21604,6 +22736,33 @@ def graph_substitute(*args):
 
     """
     return _casadi.graph_substitute(*args)
+
+def bspline(*args) -> "casadi::MX":
+    """
+    Find first nonzero If failed, returns the number of rows.
+
+    bspline(MX x, DM coeffs, [[float]] knots, [int] degree, int m, dict opts) -> MX
+    bspline(MX x, MX coeffs, [[float]] knots, [int] degree, int m, dict opts) -> MX
+
+
+
+
+
+    """
+    return _casadi.bspline(*args)
+
+def convexify(*args) -> "casadi::MX":
+    """
+    Find first nonzero If failed, returns the number of rows.
+
+    convexify(MX H, dict opts) -> MX
+
+
+
+
+
+    """
+    return _casadi.convexify(*args)
 class Importer(SharedObject, PrintableCommon):
     """
       Importer.
@@ -21711,6 +22870,20 @@ class Importer(SharedObject, PrintableCommon):
     |                      |                 | is the prefered way to set      |
     |                      |                 | custom flags.                   |
     +----------------------+-----------------+---------------------------------+
+    | name                 | OT_STRING       | The file name used to write out |
+    |                      |                 | compiled objects/libraries. The |
+    |                      |                 | actual file names used depend   |
+    |                      |                 | on 'temp_suffix' and include    |
+    |                      |                 | extensions. Default:            |
+    |                      |                 | 'tmp_casadi_compiler_shell'     |
+    +----------------------+-----------------+---------------------------------+
+    | temp_suffix          | OT_BOOL         | Use a temporary (seemingly      |
+    |                      |                 | random) filename suffix for     |
+    |                      |                 | file names. This is desired for |
+    |                      |                 | thread-safety. This behaviour   |
+    |                      |                 | may defeat caching compiler     |
+    |                      |                 | wrappers. Default: true         |
+    +----------------------+-----------------+---------------------------------+
 
     --------------------------------------------------------------------------------
 
@@ -21733,7 +22906,7 @@ class Importer(SharedObject, PrintableCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, Importer, name)
     __repr__ = _swig_repr
 
-    def type_name(*args):
+    def type_name(*args) -> "std::string":
         """
 
 
@@ -21746,7 +22919,7 @@ class Importer(SharedObject, PrintableCommon):
 
     type_name = staticmethod(type_name)
 
-    def test_cast(*args):
+    def test_cast(*args) -> "bool":
         """
 
 
@@ -21759,7 +22932,7 @@ class Importer(SharedObject, PrintableCommon):
 
     test_cast = staticmethod(test_cast)
 
-    def has_plugin(*args):
+    def has_plugin(*args) -> "bool":
         """
 
 
@@ -21772,7 +22945,7 @@ class Importer(SharedObject, PrintableCommon):
 
     has_plugin = staticmethod(has_plugin)
 
-    def load_plugin(*args):
+    def load_plugin(*args) -> "void":
         """
 
 
@@ -21785,7 +22958,7 @@ class Importer(SharedObject, PrintableCommon):
 
     load_plugin = staticmethod(load_plugin)
 
-    def doc(*args):
+    def doc(*args) -> "std::string":
         """
 
 
@@ -21798,7 +22971,7 @@ class Importer(SharedObject, PrintableCommon):
 
     doc = staticmethod(doc)
 
-    def plugin_name(self, *args):
+    def plugin_name(self, *args) -> "std::string":
         """
         Query plugin name.
 
@@ -21812,7 +22985,7 @@ class Importer(SharedObject, PrintableCommon):
         return _casadi.Importer_plugin_name(self, *args)
 
 
-    def has_function(self, *args):
+    def has_function(self, *args) -> "bool":
         """
 
 
@@ -21824,7 +22997,7 @@ class Importer(SharedObject, PrintableCommon):
         return _casadi.Importer_has_function(self, *args)
 
 
-    def has_meta(self, *args):
+    def has_meta(self, *args) -> "bool":
         """
         Does a meta entry exist?
 
@@ -21838,7 +23011,7 @@ class Importer(SharedObject, PrintableCommon):
         return _casadi.Importer_has_meta(self, *args)
 
 
-    def get_meta(self, *args):
+    def get_meta(self, *args) -> "std::string":
         """
         Get entry as a text.
 
@@ -21852,7 +23025,7 @@ class Importer(SharedObject, PrintableCommon):
         return _casadi.Importer_get_meta(self, *args)
 
 
-    def inlined(self, *args):
+    def inlined(self, *args) -> "bool":
         """
         Check if a function is inlined.
 
@@ -21866,7 +23039,7 @@ class Importer(SharedObject, PrintableCommon):
         return _casadi.Importer_inlined(self, *args)
 
 
-    def body(self, *args):
+    def body(self, *args) -> "std::string":
         """
         Get the function body, if inlined.
 
@@ -21880,32 +23053,95 @@ class Importer(SharedObject, PrintableCommon):
         return _casadi.Importer_body(self, *args)
 
 
+    def library(self, *args) -> "std::string":
+        """
+        Get library name.
+
+        library(self) -> str
+
+
+
+
+
+        """
+        return _casadi.Importer_library(self, *args)
+
+
+    def serialize(self, *args) -> "void":
+        """
+        Serialize an object.
+
+        serialize(self, casadi::SerializingStream & s)
+
+
+
+
+
+        """
+        return _casadi.Importer_serialize(self, *args)
+
+
+    def deserialize(*args) -> "casadi::Importer":
+        """
+
+
+        deserialize(casadi::DeserializingStream & s) -> Importer
+
+
+
+        """
+        return _casadi.Importer_deserialize(*args)
+
+    deserialize = staticmethod(deserialize)
+
     def __init__(self, *args):
         """
 
 
           Importer()
-            Default constructor.
           Importer(Importer other)
           Importer(str name, str compiler, dict opts)
-            Importer factory.
 
-        > Importer(Importer other)
-        ------------------------------------------------------------------------
 
-        > Importer(str name, str compiler, dict opts)
-        ------------------------------------------------------------------------
+        .......
+
+        ::
+
+          Importer(Importer other)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          Importer(str name, str compiler, dict opts)
+
 
 
         Importer factory.
 
 
-        > Importer()
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          Importer()
+
 
 
         Default constructor.
 
+
+
+        .............
 
 
 
@@ -21919,7 +23155,7 @@ class Importer(SharedObject, PrintableCommon):
 Importer_swigregister = _casadi.Importer_swigregister
 Importer_swigregister(Importer)
 
-def Importer_type_name(*args):
+def Importer_type_name(*args) -> "std::string":
     """
 
 
@@ -21930,7 +23166,7 @@ def Importer_type_name(*args):
     """
     return _casadi.Importer_type_name(*args)
 
-def Importer_test_cast(*args):
+def Importer_test_cast(*args) -> "bool":
     """
 
 
@@ -21941,7 +23177,7 @@ def Importer_test_cast(*args):
     """
     return _casadi.Importer_test_cast(*args)
 
-def Importer_has_plugin(*args):
+def Importer_has_plugin(*args) -> "bool":
     """
 
 
@@ -21952,7 +23188,7 @@ def Importer_has_plugin(*args):
     """
     return _casadi.Importer_has_plugin(*args)
 
-def Importer_load_plugin(*args):
+def Importer_load_plugin(*args) -> "void":
     """
 
 
@@ -21963,7 +23199,7 @@ def Importer_load_plugin(*args):
     """
     return _casadi.Importer_load_plugin(*args)
 
-def Importer_doc(*args):
+def Importer_doc(*args) -> "std::string":
     """
 
 
@@ -21973,6 +23209,17 @@ def Importer_doc(*args):
 
     """
     return _casadi.Importer_doc(*args)
+
+def Importer_deserialize(*args) -> "casadi::Importer":
+    """
+
+
+    deserialize(casadi::DeserializingStream & s) -> Importer
+
+
+
+    """
+    return _casadi.Importer_deserialize(*args)
 
 class Callback(Function):
     """
@@ -22005,7 +23252,7 @@ class Callback(Function):
     __getattr__ = lambda self, name: _swig_getattr(self, Callback, name)
     __repr__ = _swig_repr
 
-    def type_name(*args):
+    def type_name(*args) -> "std::string":
         """
 
 
@@ -22023,24 +23270,39 @@ class Callback(Function):
           Copy constructor (throws an error)
 
           Callback(self)
-            Default constructor.
           Callback(self, Callback obj)
 
 
 
-        > Callback(self)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          Callback(self)
+
 
 
         Default constructor.
 
 
-        > Callback(self, Callback obj)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          Callback(self, Callback obj)
+
 
 
         Copy constructor (throws an error)
 
+
+
+        .............
 
 
 
@@ -22056,7 +23318,7 @@ class Callback(Function):
             self.this = this
     __swig_destroy__ = _casadi.delete_Callback
 
-    def construct(self, *args):
+    def construct(self, *args) -> "void":
         """
           Construct internal object This is the step that actually construct the
 
@@ -22072,7 +23334,7 @@ class Callback(Function):
         return _casadi.Callback_construct(self, *args)
 
 
-    def init(self, *args):
+    def init(self, *args) -> "void":
         """
           Initialize the object This function is called after the object construction
 
@@ -22089,7 +23351,7 @@ class Callback(Function):
         return _casadi.Callback_init(self, *args)
 
 
-    def finalize(self, *args):
+    def finalize(self, *args) -> "void":
         """
           Finalize the object This function is called after the construction and init
 
@@ -22105,12 +23367,15 @@ class Callback(Function):
         return _casadi.Callback_finalize(self, *args)
 
 
-    def eval(self, *args):
+    def eval(self, *args) -> "std::vector< casadi::DM,std::allocator< casadi::DM > >":
         """
-        Evaluate numerically, temporary matrices and work vectors.
+          Evaluate numerically, using temporary matrices and work vectors.
 
-        eval(self, [DM] arg) -> [DM]
+          eval(self, [DM] arg) -> [DM]
 
+
+        This signature is not thread-safe. For guaranteed thread-safety, use
+        eval_buffer
 
 
 
@@ -22119,7 +23384,35 @@ class Callback(Function):
         return _casadi.Callback_eval(self, *args)
 
 
-    def get_n_in(self, *args):
+    def eval_buffer(self, *args) -> "int":
+        """
+          A copy-free low level interface.
+
+          eval_buffer(self, double const ** arg, [int] sizes_arg, double ** res, [int] sizes_res) -> int
+
+
+        In Python, you will be passed two tuples of memoryview objects
+
+
+
+
+        """
+        return _casadi.Callback_eval_buffer(self, *args)
+
+
+    def has_eval_buffer(self, *args) -> "bool":
+        """
+
+
+        has_eval_buffer(self) -> bool
+
+
+
+        """
+        return _casadi.Callback_has_eval_buffer(self, *args)
+
+
+    def get_n_in(self, *args) -> "casadi_int":
         """
         Get the number of inputs This function is called during construction.
 
@@ -22133,7 +23426,7 @@ class Callback(Function):
         return _casadi.Callback_get_n_in(self, *args)
 
 
-    def get_n_out(self, *args):
+    def get_n_out(self, *args) -> "casadi_int":
         """
         Get the number of outputs This function is called during construction.
 
@@ -22147,7 +23440,7 @@ class Callback(Function):
         return _casadi.Callback_get_n_out(self, *args)
 
 
-    def get_sparsity_in(self, *args):
+    def get_sparsity_in(self, *args) -> "casadi::Sparsity":
         """
         Get the sparsity of an input This function is called during construction.
 
@@ -22161,7 +23454,7 @@ class Callback(Function):
         return _casadi.Callback_get_sparsity_in(self, *args)
 
 
-    def get_sparsity_out(self, *args):
+    def get_sparsity_out(self, *args) -> "casadi::Sparsity":
         """
         Get the sparsity of an output This function is called during construction.
 
@@ -22175,7 +23468,7 @@ class Callback(Function):
         return _casadi.Callback_get_sparsity_out(self, *args)
 
 
-    def get_name_in(self, *args):
+    def get_name_in(self, *args) -> "std::string":
         """
         Get the sparsity of an input This function is called during construction.
 
@@ -22189,7 +23482,7 @@ class Callback(Function):
         return _casadi.Callback_get_name_in(self, *args)
 
 
-    def get_name_out(self, *args):
+    def get_name_out(self, *args) -> "std::string":
         """
         Get the sparsity of an output This function is called during construction.
 
@@ -22203,7 +23496,7 @@ class Callback(Function):
         return _casadi.Callback_get_name_out(self, *args)
 
 
-    def uses_output(self, *args):
+    def uses_output(self, *args) -> "bool":
         """
         Do the derivative functions need nondifferentiated outputs?
 
@@ -22217,7 +23510,7 @@ class Callback(Function):
         return _casadi.Callback_uses_output(self, *args)
 
 
-    def has_jacobian(self, *args):
+    def has_jacobian(self, *args) -> "bool":
         """
         Return Jacobian of all input elements with respect to all output elements.
 
@@ -22231,7 +23524,7 @@ class Callback(Function):
         return _casadi.Callback_has_jacobian(self, *args)
 
 
-    def get_jacobian(self, *args):
+    def get_jacobian(self, *args) -> "casadi::Function":
         """
         Return Jacobian of all input elements with respect to all output elements.
 
@@ -22245,7 +23538,7 @@ class Callback(Function):
         return _casadi.Callback_get_jacobian(self, *args)
 
 
-    def has_forward(self, *args):
+    def has_forward(self, *args) -> "bool":
         """
           Return function that calculates forward derivatives forward(nfwd) returns a
 
@@ -22261,7 +23554,7 @@ class Callback(Function):
         return _casadi.Callback_has_forward(self, *args)
 
 
-    def get_forward(self, *args):
+    def get_forward(self, *args) -> "casadi::Function":
         """
           Return function that calculates forward derivatives forward(nfwd) returns a
 
@@ -22277,7 +23570,7 @@ class Callback(Function):
         return _casadi.Callback_get_forward(self, *args)
 
 
-    def has_reverse(self, *args):
+    def has_reverse(self, *args) -> "bool":
         """
           Return function that calculates adjoint derivatives reverse(nadj) returns a
 
@@ -22293,7 +23586,7 @@ class Callback(Function):
         return _casadi.Callback_has_reverse(self, *args)
 
 
-    def get_reverse(self, *args):
+    def get_reverse(self, *args) -> "casadi::Function":
         """
           Return function that calculates adjoint derivatives reverse(nadj) returns a
 
@@ -22309,60 +23602,34 @@ class Callback(Function):
         return _casadi.Callback_get_reverse(self, *args)
 
 
-    def alloc_w(self, *args):
+    def has_jacobian_sparsity(self, *args) -> "bool":
         """
-        Allocate work vectors.
+          Return sparsity of Jacobian of all input elements with respect to all output
 
-        alloc_w(self, size_t sz_w, bool persist)
+          has_jacobian_sparsity(self) -> bool
 
-
-
-
-
-        """
-        return _casadi.Callback_alloc_w(self, *args)
-
-
-    def alloc_iw(self, *args):
-        """
-        Allocate work vectors.
-
-        alloc_iw(self, size_t sz_iw, bool persist)
-
+        elements.
 
 
 
 
         """
-        return _casadi.Callback_alloc_iw(self, *args)
+        return _casadi.Callback_has_jacobian_sparsity(self, *args)
 
 
-    def alloc_arg(self, *args):
+    def get_jacobian_sparsity(self, *args) -> "casadi::Sparsity":
         """
-        Allocate work vectors.
+          Return sparsity of Jacobian of all input elements with respect to all output
 
-        alloc_arg(self, size_t sz_arg, bool persist)
+          get_jacobian_sparsity(self) -> Sparsity
 
-
-
-
-
-        """
-        return _casadi.Callback_alloc_arg(self, *args)
-
-
-    def alloc_res(self, *args):
-        """
-        Allocate work vectors.
-
-        alloc_res(self, size_t sz_res, bool persist)
-
+        elements.
 
 
 
 
         """
-        return _casadi.Callback_alloc_res(self, *args)
+        return _casadi.Callback_get_jacobian_sparsity(self, *args)
 
     def __disown__(self):
         self.this.disown()
@@ -22371,7 +23638,7 @@ class Callback(Function):
 Callback_swigregister = _casadi.Callback_swigregister
 Callback_swigregister(Callback)
 
-def Callback_type_name(*args):
+def Callback_type_name(*args) -> "std::string":
     """
 
 
@@ -22405,7 +23672,7 @@ class GlobalOptions(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, GlobalOptions, name)
     __repr__ = _swig_repr
 
-    def setSimplificationOnTheFly(*args):
+    def setSimplificationOnTheFly(*args) -> "void":
         """
 
 
@@ -22418,7 +23685,7 @@ class GlobalOptions(_object):
 
     setSimplificationOnTheFly = staticmethod(setSimplificationOnTheFly)
 
-    def getSimplificationOnTheFly(*args):
+    def getSimplificationOnTheFly(*args) -> "bool":
         """
 
 
@@ -22431,7 +23698,7 @@ class GlobalOptions(_object):
 
     getSimplificationOnTheFly = staticmethod(getSimplificationOnTheFly)
 
-    def setHierarchicalSparsity(*args):
+    def setHierarchicalSparsity(*args) -> "void":
         """
 
 
@@ -22444,7 +23711,7 @@ class GlobalOptions(_object):
 
     setHierarchicalSparsity = staticmethod(setHierarchicalSparsity)
 
-    def getHierarchicalSparsity(*args):
+    def getHierarchicalSparsity(*args) -> "bool":
         """
 
 
@@ -22457,7 +23724,7 @@ class GlobalOptions(_object):
 
     getHierarchicalSparsity = staticmethod(getHierarchicalSparsity)
 
-    def setCasadiPath(*args):
+    def setCasadiPath(*args) -> "void":
         """
 
 
@@ -22470,7 +23737,7 @@ class GlobalOptions(_object):
 
     setCasadiPath = staticmethod(setCasadiPath)
 
-    def getCasadiPath(*args):
+    def getCasadiPath(*args) -> "std::string":
         """
 
 
@@ -22483,7 +23750,33 @@ class GlobalOptions(_object):
 
     getCasadiPath = staticmethod(getCasadiPath)
 
-    def setMaxNumDir(*args):
+    def setCasadiIncludePath(*args) -> "void":
+        """
+
+
+        setCasadiIncludePath(str path)
+
+
+
+        """
+        return _casadi.GlobalOptions_setCasadiIncludePath(*args)
+
+    setCasadiIncludePath = staticmethod(setCasadiIncludePath)
+
+    def getCasadiIncludePath(*args) -> "std::string":
+        """
+
+
+        getCasadiIncludePath() -> str
+
+
+
+        """
+        return _casadi.GlobalOptions_getCasadiIncludePath(*args)
+
+    getCasadiIncludePath = staticmethod(getCasadiIncludePath)
+
+    def setMaxNumDir(*args) -> "void":
         """
 
 
@@ -22496,7 +23789,7 @@ class GlobalOptions(_object):
 
     setMaxNumDir = staticmethod(setMaxNumDir)
 
-    def getMaxNumDir(*args):
+    def getMaxNumDir(*args) -> "casadi_int":
         """
 
 
@@ -22527,7 +23820,7 @@ class GlobalOptions(_object):
 GlobalOptions_swigregister = _casadi.GlobalOptions_swigregister
 GlobalOptions_swigregister(GlobalOptions)
 
-def GlobalOptions_setSimplificationOnTheFly(*args):
+def GlobalOptions_setSimplificationOnTheFly(*args) -> "void":
     """
 
 
@@ -22538,7 +23831,7 @@ def GlobalOptions_setSimplificationOnTheFly(*args):
     """
     return _casadi.GlobalOptions_setSimplificationOnTheFly(*args)
 
-def GlobalOptions_getSimplificationOnTheFly(*args):
+def GlobalOptions_getSimplificationOnTheFly(*args) -> "bool":
     """
 
 
@@ -22549,7 +23842,7 @@ def GlobalOptions_getSimplificationOnTheFly(*args):
     """
     return _casadi.GlobalOptions_getSimplificationOnTheFly(*args)
 
-def GlobalOptions_setHierarchicalSparsity(*args):
+def GlobalOptions_setHierarchicalSparsity(*args) -> "void":
     """
 
 
@@ -22560,7 +23853,7 @@ def GlobalOptions_setHierarchicalSparsity(*args):
     """
     return _casadi.GlobalOptions_setHierarchicalSparsity(*args)
 
-def GlobalOptions_getHierarchicalSparsity(*args):
+def GlobalOptions_getHierarchicalSparsity(*args) -> "bool":
     """
 
 
@@ -22571,7 +23864,7 @@ def GlobalOptions_getHierarchicalSparsity(*args):
     """
     return _casadi.GlobalOptions_getHierarchicalSparsity(*args)
 
-def GlobalOptions_setCasadiPath(*args):
+def GlobalOptions_setCasadiPath(*args) -> "void":
     """
 
 
@@ -22582,7 +23875,7 @@ def GlobalOptions_setCasadiPath(*args):
     """
     return _casadi.GlobalOptions_setCasadiPath(*args)
 
-def GlobalOptions_getCasadiPath(*args):
+def GlobalOptions_getCasadiPath(*args) -> "std::string":
     """
 
 
@@ -22593,7 +23886,29 @@ def GlobalOptions_getCasadiPath(*args):
     """
     return _casadi.GlobalOptions_getCasadiPath(*args)
 
-def GlobalOptions_setMaxNumDir(*args):
+def GlobalOptions_setCasadiIncludePath(*args) -> "void":
+    """
+
+
+    setCasadiIncludePath(str path)
+
+
+
+    """
+    return _casadi.GlobalOptions_setCasadiIncludePath(*args)
+
+def GlobalOptions_getCasadiIncludePath(*args) -> "std::string":
+    """
+
+
+    getCasadiIncludePath() -> str
+
+
+
+    """
+    return _casadi.GlobalOptions_getCasadiIncludePath(*args)
+
+def GlobalOptions_setMaxNumDir(*args) -> "void":
     """
 
 
@@ -22604,7 +23919,7 @@ def GlobalOptions_setMaxNumDir(*args):
     """
     return _casadi.GlobalOptions_setMaxNumDir(*args)
 
-def GlobalOptions_getMaxNumDir(*args):
+def GlobalOptions_getMaxNumDir(*args) -> "casadi_int":
     """
 
 
@@ -22634,7 +23949,7 @@ class CasadiMeta(_object):
     __getattr__ = lambda self, name: _swig_getattr(self, CasadiMeta, name)
     __repr__ = _swig_repr
 
-    def version(*args):
+    def version(*args) -> "char const *":
         """
 
 
@@ -22647,7 +23962,7 @@ class CasadiMeta(_object):
 
     version = staticmethod(version)
 
-    def git_revision(*args):
+    def git_revision(*args) -> "char const *":
         """
 
 
@@ -22660,7 +23975,7 @@ class CasadiMeta(_object):
 
     git_revision = staticmethod(git_revision)
 
-    def git_describe(*args):
+    def git_describe(*args) -> "char const *":
         """
 
 
@@ -22673,7 +23988,7 @@ class CasadiMeta(_object):
 
     git_describe = staticmethod(git_describe)
 
-    def feature_list(*args):
+    def feature_list(*args) -> "char const *":
         """
 
 
@@ -22686,7 +24001,7 @@ class CasadiMeta(_object):
 
     feature_list = staticmethod(feature_list)
 
-    def build_type(*args):
+    def build_type(*args) -> "char const *":
         """
 
 
@@ -22699,7 +24014,7 @@ class CasadiMeta(_object):
 
     build_type = staticmethod(build_type)
 
-    def compiler_id(*args):
+    def compiler_id(*args) -> "char const *":
         """
 
 
@@ -22712,7 +24027,7 @@ class CasadiMeta(_object):
 
     compiler_id = staticmethod(compiler_id)
 
-    def compiler(*args):
+    def compiler(*args) -> "char const *":
         """
 
 
@@ -22725,7 +24040,7 @@ class CasadiMeta(_object):
 
     compiler = staticmethod(compiler)
 
-    def compiler_flags(*args):
+    def compiler_flags(*args) -> "char const *":
         """
 
 
@@ -22738,7 +24053,7 @@ class CasadiMeta(_object):
 
     compiler_flags = staticmethod(compiler_flags)
 
-    def modules(*args):
+    def modules(*args) -> "char const *":
         """
 
 
@@ -22751,7 +24066,7 @@ class CasadiMeta(_object):
 
     modules = staticmethod(modules)
 
-    def plugins(*args):
+    def plugins(*args) -> "char const *":
         """
 
 
@@ -22764,7 +24079,7 @@ class CasadiMeta(_object):
 
     plugins = staticmethod(plugins)
 
-    def install_prefix(*args):
+    def install_prefix(*args) -> "char const *":
         """
 
 
@@ -22795,7 +24110,7 @@ class CasadiMeta(_object):
 CasadiMeta_swigregister = _casadi.CasadiMeta_swigregister
 CasadiMeta_swigregister(CasadiMeta)
 
-def CasadiMeta_version(*args):
+def CasadiMeta_version(*args) -> "char const *":
     """
 
 
@@ -22806,7 +24121,7 @@ def CasadiMeta_version(*args):
     """
     return _casadi.CasadiMeta_version(*args)
 
-def CasadiMeta_git_revision(*args):
+def CasadiMeta_git_revision(*args) -> "char const *":
     """
 
 
@@ -22817,7 +24132,7 @@ def CasadiMeta_git_revision(*args):
     """
     return _casadi.CasadiMeta_git_revision(*args)
 
-def CasadiMeta_git_describe(*args):
+def CasadiMeta_git_describe(*args) -> "char const *":
     """
 
 
@@ -22828,7 +24143,7 @@ def CasadiMeta_git_describe(*args):
     """
     return _casadi.CasadiMeta_git_describe(*args)
 
-def CasadiMeta_feature_list(*args):
+def CasadiMeta_feature_list(*args) -> "char const *":
     """
 
 
@@ -22839,7 +24154,7 @@ def CasadiMeta_feature_list(*args):
     """
     return _casadi.CasadiMeta_feature_list(*args)
 
-def CasadiMeta_build_type(*args):
+def CasadiMeta_build_type(*args) -> "char const *":
     """
 
 
@@ -22850,7 +24165,7 @@ def CasadiMeta_build_type(*args):
     """
     return _casadi.CasadiMeta_build_type(*args)
 
-def CasadiMeta_compiler_id(*args):
+def CasadiMeta_compiler_id(*args) -> "char const *":
     """
 
 
@@ -22861,7 +24176,7 @@ def CasadiMeta_compiler_id(*args):
     """
     return _casadi.CasadiMeta_compiler_id(*args)
 
-def CasadiMeta_compiler(*args):
+def CasadiMeta_compiler(*args) -> "char const *":
     """
 
 
@@ -22872,7 +24187,7 @@ def CasadiMeta_compiler(*args):
     """
     return _casadi.CasadiMeta_compiler(*args)
 
-def CasadiMeta_compiler_flags(*args):
+def CasadiMeta_compiler_flags(*args) -> "char const *":
     """
 
 
@@ -22883,7 +24198,7 @@ def CasadiMeta_compiler_flags(*args):
     """
     return _casadi.CasadiMeta_compiler_flags(*args)
 
-def CasadiMeta_modules(*args):
+def CasadiMeta_modules(*args) -> "char const *":
     """
 
 
@@ -22894,7 +24209,7 @@ def CasadiMeta_modules(*args):
     """
     return _casadi.CasadiMeta_modules(*args)
 
-def CasadiMeta_plugins(*args):
+def CasadiMeta_plugins(*args) -> "char const *":
     """
 
 
@@ -22905,7 +24220,7 @@ def CasadiMeta_plugins(*args):
     """
     return _casadi.CasadiMeta_plugins(*args)
 
-def CasadiMeta_install_prefix(*args):
+def CasadiMeta_install_prefix(*args) -> "char const *":
     """
 
 
@@ -22917,7 +24232,7 @@ def CasadiMeta_install_prefix(*args):
     return _casadi.CasadiMeta_install_prefix(*args)
 
 
-def collocation_points(*args):
+def collocation_points(*args) -> "std::vector< double,std::allocator< double > >":
     """
       Obtain collocation points of specific order and scheme.
 
@@ -22937,7 +24252,7 @@ def collocation_points(*args):
     """
     return _casadi.collocation_points(*args)
 
-def collocation_interpolators(*args):
+def collocation_interpolators(*args) -> "std::vector< std::vector< double > > &, std::vector< double > &":
     """
       Obtain collocation interpolating matrices.
 
@@ -22987,10 +24302,76 @@ def collocation_interpolators(*args):
 
     """
     return _casadi.collocation_interpolators(*args)
+
+def collocation_coeff(*args) -> "casadi::Matrix< double > &, casadi::Matrix< double > &, casadi::Matrix< double > &":
+    """
+      Obtain collocation interpolating matrices.
+
+      collocation_coeff([float] tau) -> (DM OUTPUT, DM OUTPUT, DM OUTPUT)
+
+
+    A collocation method poses a polynomial Pi that interpolates exactly through
+    an initial state (0,X_0) and helper states at collocation points
+    (tau_j,Xc_j) with j=1..degree.
+
+    This function computes the linear mapping between dPi/dt and coefficients
+    Z=[X_0 Xc].
+
+    Parameters:
+    -----------
+
+    tau:  location of collocation points (length: degree), as obtained from
+    collocation_points
+
+    C:  interpolating coefficients to obtain derivatives. Size: (degree+1)-by-
+    degree
+
+    You may find the slopes of Pi at the collocation points as
+
+    ::
+
+    dPi/dt @ Xc = (1/h) Z*C,
+
+
+
+    with h the length of the integration interval.
+
+    Parameters:
+    -----------
+
+    D:  interpolating coefficients to obtain end state. Size: (degree+1)-by-1
+
+    You may find the end point of Pi as
+
+    ::
+
+    Pi @X_f = Z*D
+
+
+
+    Parameters:
+    -----------
+
+    B:  quadrature coefficients Size: degree-by-1
+
+    Given quadrature righ-hand-sides 'quad' evaluated at the collocation points,
+    you may find the integrated quadratures as
+
+    ::
+
+    q = quad*B*h
+
+
+
+
+
+
+    """
+    return _casadi.collocation_coeff(*args)
 LEGENDRE = _casadi.LEGENDRE
 RADAU = _casadi.RADAU
 
-def simpleRK(*args):
+def simpleRK(*args) -> "casadi::Function":
     """
       Construct an explicit Runge-Kutta integrator The constructed function has
 
@@ -23014,7 +24395,7 @@ def simpleRK(*args):
     """
     return _casadi.simpleRK(*args)
 
-def simpleIRK(*args):
+def simpleIRK(*args) -> "casadi::Function":
     """
       Construct an implicit Runge-Kutta integrator using a collocation scheme The
 
@@ -23045,7 +24426,7 @@ def simpleIRK(*args):
     """
     return _casadi.simpleIRK(*args)
 
-def simpleIntegrator(*args):
+def simpleIntegrator(*args) -> "casadi::Function":
     """
       Simplified wrapper for the Integrator class Constructs an integrator using
 
@@ -23071,6 +24452,46 @@ def simpleIntegrator(*args):
 
     """
     return _casadi.simpleIntegrator(*args)
+
+def detect_simple_bounds(*args) -> "std::vector< casadi_int > &, casadi::MX &, casadi::MX &, casadi::Function &, casadi::Function &":
+    """
+      Detect simple bounds from general constraints.
+
+      detect_simple_bounds(SX xX, SX p, SX g, SX lbg, SX ubg) -> ([int] OUTPUT, SX OUTPUT, SX OUTPUT, Function OUTPUT, Function OUTPUT)
+      detect_simple_bounds(MX xX, MX p, MX g, MX lbg, MX ubg) -> ([int] OUTPUT, MX OUTPUT, MX OUTPUT, Function OUTPUT, Function OUTPUT)
+
+
+    Given parametric constraints:
+
+    ::
+
+      *   subject to lbg(p) <= g(x,p) <= ubg(p)
+      * 
+
+
+
+    Returns an equivalent set
+
+    ::
+
+      *   subject to  lbg(p)(gi) <= g(x,p)(gi) <= ubg(p)(gi)
+      *               lbx(p) <= x                 <= ubx(p)
+      * 
+
+
+
+    Parameters:
+    -----------
+
+    lam_forward:  (lam_g,p)->(lam_sg,lam_x)
+
+    lam_backward:  (lam_sg,lam_x,p)->(lam_g)
+
+
+
+
+    """
+    return _casadi.detect_simple_bounds(*args)
 class NlpBuilder(PrintableCommon):
     """
       A symbolic NLP representation.
@@ -23124,7 +24545,7 @@ class NlpBuilder(PrintableCommon):
     if _newclass:
         discrete = _swig_property(_casadi.NlpBuilder_discrete_get)
 
-    def import_nl(self, *args):
+    def import_nl(self, *args) -> "void":
         """
         Import an .nl file.
 
@@ -23138,7 +24559,7 @@ class NlpBuilder(PrintableCommon):
         return _casadi.NlpBuilder_import_nl(self, *args)
 
 
-    def type_name(self, *args):
+    def type_name(self, *args) -> "std::string":
         """
         Readable name of the class.
 
@@ -23152,7 +24573,7 @@ class NlpBuilder(PrintableCommon):
         return _casadi.NlpBuilder_type_name(self, *args)
 
 
-    def disp(self, *args):
+    def disp(self, *args) -> "void":
         """
         Print a description of the object.
 
@@ -23166,7 +24587,7 @@ class NlpBuilder(PrintableCommon):
         return _casadi.NlpBuilder_disp(self, *args)
 
 
-    def str(self, *args):
+    def str(self, *args) -> "std::string":
         """
         Get string representation.
 
@@ -23239,7 +24660,7 @@ class Variable(PrintableCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, Variable, name)
     __repr__ = _swig_repr
 
-    def name(self, *args):
+    def name(self, *args) -> "std::string":
         """
 
 
@@ -23302,7 +24723,7 @@ class Variable(PrintableCommon):
     if _newclass:
         free = _swig_property(_casadi.Variable_free_get)
 
-    def type_name(self, *args):
+    def type_name(self, *args) -> "std::string":
         """
 
 
@@ -23314,7 +24735,7 @@ class Variable(PrintableCommon):
         return _casadi.Variable_type_name(self, *args)
 
 
-    def disp(self, *args):
+    def disp(self, *args) -> "void":
         """
 
 
@@ -23326,7 +24747,7 @@ class Variable(PrintableCommon):
         return _casadi.Variable_disp(self, *args)
 
 
-    def str(self, *args):
+    def str(self, *args) -> "std::string":
         """
 
 
@@ -23549,7 +24970,7 @@ class DaeBuilder(PrintableCommon):
     if _newclass:
         init = _swig_property(_casadi.DaeBuilder_init_get)
 
-    def add_p(self, *args):
+    def add_p(self, *args) -> "casadi::MX":
         """
         Add a new parameter
 
@@ -23563,7 +24984,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_p(self, *args)
 
 
-    def add_u(self, *args):
+    def add_u(self, *args) -> "casadi::MX":
         """
         Add a new control.
 
@@ -23577,7 +24998,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_u(self, *args)
 
 
-    def add_x(self, *args):
+    def add_x(self, *args) -> "casadi::MX":
         """
         Add a new differential state.
 
@@ -23591,7 +25012,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_x(self, *args)
 
 
-    def add_s(self, *args):
+    def add_s(self, *args) -> "std::pair< casadi::MX,casadi::MX >":
         """
         Add a implicit state.
 
@@ -23605,7 +25026,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_s(self, *args)
 
 
-    def add_z(self, *args):
+    def add_z(self, *args) -> "casadi::MX":
         """
         Add a new algebraic variable.
 
@@ -23619,7 +25040,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_z(self, *args)
 
 
-    def add_q(self, *args):
+    def add_q(self, *args) -> "casadi::MX":
         """
         Add a new quadrature state.
 
@@ -23633,7 +25054,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_q(self, *args)
 
 
-    def add_d(self, *args):
+    def add_d(self, *args) -> "casadi::MX":
         """
         Add a new dependent parameter.
 
@@ -23647,7 +25068,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_d(self, *args)
 
 
-    def add_y(self, *args):
+    def add_y(self, *args) -> "casadi::MX":
         """
         Add a new output.
 
@@ -23661,7 +25082,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_y(self, *args)
 
 
-    def add_ode(self, *args):
+    def add_ode(self, *args) -> "void":
         """
         Add an ordinary differential equation.
 
@@ -23675,7 +25096,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_ode(self, *args)
 
 
-    def add_dae(self, *args):
+    def add_dae(self, *args) -> "void":
         """
         Add a differential-algebraic equation.
 
@@ -23689,7 +25110,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_dae(self, *args)
 
 
-    def add_alg(self, *args):
+    def add_alg(self, *args) -> "void":
         """
         Add an algebraic equation.
 
@@ -23703,7 +25124,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_alg(self, *args)
 
 
-    def add_quad(self, *args):
+    def add_quad(self, *args) -> "void":
         """
         Add a quadrature equation.
 
@@ -23717,7 +25138,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_quad(self, *args)
 
 
-    def add_aux(self, *args):
+    def add_aux(self, *args) -> "casadi::MX":
         """
         Add an auxiliary variable.
 
@@ -23731,7 +25152,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_aux(self, *args)
 
 
-    def sanity_check(self, *args):
+    def sanity_check(self, *args) -> "void":
         """
         Check if dimensions match.
 
@@ -23745,7 +25166,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_sanity_check(self, *args)
 
 
-    def split_dae(self, *args):
+    def split_dae(self, *args) -> "void":
         """
         Identify and separate the algebraic variables and equations in the DAE.
 
@@ -23759,7 +25180,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_split_dae(self, *args)
 
 
-    def eliminate_alg(self, *args):
+    def eliminate_alg(self, *args) -> "void":
         """
         Eliminate algebraic variables and equations transforming them into outputs.
 
@@ -23773,7 +25194,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_eliminate_alg(self, *args)
 
 
-    def make_semi_explicit(self, *args):
+    def make_semi_explicit(self, *args) -> "void":
         """
         Transform the implicit DAE to a semi-explicit DAE.
 
@@ -23787,7 +25208,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_make_semi_explicit(self, *args)
 
 
-    def make_explicit(self, *args):
+    def make_explicit(self, *args) -> "void":
         """
         Transform the implicit DAE or semi-explicit DAE into an explicit ODE.
 
@@ -23801,7 +25222,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_make_explicit(self, *args)
 
 
-    def sort_d(self, *args):
+    def sort_d(self, *args) -> "void":
         """
         Sort dependent parameters.
 
@@ -23815,7 +25236,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_sort_d(self, *args)
 
 
-    def split_d(self, *args):
+    def split_d(self, *args) -> "void":
         """
         Eliminate interdependencies amongst dependent parameters.
 
@@ -23829,7 +25250,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_split_d(self, *args)
 
 
-    def eliminate_d(self, *args):
+    def eliminate_d(self, *args) -> "void":
         """
         Eliminate dependent parameters.
 
@@ -23843,7 +25264,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_eliminate_d(self, *args)
 
 
-    def eliminate_quad(self, *args):
+    def eliminate_quad(self, *args) -> "void":
         """
         Eliminate quadrature states and turn them into ODE states.
 
@@ -23857,7 +25278,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_eliminate_quad(self, *args)
 
 
-    def sort_dae(self, *args):
+    def sort_dae(self, *args) -> "void":
         """
         Sort the DAE and implicitly defined states.
 
@@ -23871,7 +25292,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_sort_dae(self, *args)
 
 
-    def sort_alg(self, *args):
+    def sort_alg(self, *args) -> "void":
         """
         Sort the algebraic equations and algebraic states.
 
@@ -23885,7 +25306,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_sort_alg(self, *args)
 
 
-    def scale_variables(self, *args):
+    def scale_variables(self, *args) -> "void":
         """
         Scale the variables.
 
@@ -23899,7 +25320,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_scale_variables(self, *args)
 
 
-    def scale_equations(self, *args):
+    def scale_equations(self, *args) -> "void":
         """
         Scale the implicit equations.
 
@@ -23913,38 +25334,60 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_scale_equations(self, *args)
 
 
-    def add_fun(self, *args):
+    def add_fun(self, *args) -> "casadi::Function":
         """
           Add an external function.
 
           add_fun(self, Function f) -> Function
-            Add an already existing function.
           add_fun(self, str name, Importer compiler, dict opts) -> Function
           add_fun(self, str name, [str] arg, [str] res, dict opts) -> Function
-            Add a function from loaded expressions.
 
 
 
-        > add_fun(self, Function f)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          add_fun(self, Function f)
+
 
 
         Add an already existing function.
 
 
-        > add_fun(self, str name, Importer compiler, dict opts)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          add_fun(self, str name, Importer compiler, dict opts)
+
 
 
         Add an external function.
 
 
-        > add_fun(self, str name, [str] arg, [str] res, dict opts)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          add_fun(self, str name, [str] arg, [str] res, dict opts)
+
 
 
         Add a function from loaded expressions.
 
+
+
+        .............
 
 
 
@@ -23952,7 +25395,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_fun(self, *args)
 
 
-    def has_fun(self, *args):
+    def has_fun(self, *args) -> "bool":
         """
         Does a particular function already exist?
 
@@ -23966,7 +25409,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_has_fun(self, *args)
 
 
-    def fun(self, *args):
+    def fun(self, *args) -> "casadi::Function":
         """
         Get function by name.
 
@@ -23980,7 +25423,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_fun(self, *args)
 
 
-    def parse_fmi(self, *args):
+    def parse_fmi(self, *args) -> "void":
         """
         Import existing problem from FMI/XML
 
@@ -23994,7 +25437,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_parse_fmi(self, *args)
 
 
-    def add_lc(self, *args):
+    def add_lc(self, *args) -> "casadi::MX":
         """
         Add a named linear combination of output expressions.
 
@@ -24008,7 +25451,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_lc(self, *args)
 
 
-    def create(self, *args):
+    def create(self, *args) -> "casadi::Function":
         """
         Construct a function object.
 
@@ -24022,7 +25465,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_create(self, *args)
 
 
-    def var(self, *args):
+    def var(self, *args) -> "casadi::MX":
         """
         Get variable expression by name.
 
@@ -24036,7 +25479,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_var(self, *args)
 
 
-    def __call__(self, *args):
+    def __call__(self, *args) -> "casadi::MX":
         """
 
 
@@ -24048,29 +25491,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder___call__(self, *args)
 
 
-    def der(self, *args):
+    def der(self, *args) -> "casadi::MX":
         """
           Get a derivative expression by non-differentiated expression.
 
           der(self, MX var) -> MX
           der(self, str name) -> MX
-            Get a derivative expression by name.
 
 
 
-        > der(self, str name)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          der(self, str name)
+
 
 
         Get a derivative expression by name.
 
 
-        > der(self, MX var)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          der(self, MX var)
+
 
 
         Get a derivative expression by non-differentiated expression.
 
+
+
+        .............
 
 
 
@@ -24078,29 +25536,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_der(self, *args)
 
 
-    def nominal(self, *args):
+    def nominal(self, *args) -> "std::vector< double,std::allocator< double > >":
         """
           Get the nominal value(s) by expression.
 
           nominal(self, MX var) -> [float]
           nominal(self, str name) -> float
-            Get the nominal value by name.
 
 
 
-        > nominal(self, MX var)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          nominal(self, MX var)
+
 
 
         Get the nominal value(s) by expression.
 
 
-        > nominal(self, str name)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          nominal(self, str name)
+
 
 
         Get the nominal value by name.
 
+
+
+        .............
 
 
 
@@ -24108,29 +25581,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_nominal(self, *args)
 
 
-    def set_nominal(self, *args):
+    def set_nominal(self, *args) -> "void":
         """
           Set the nominal value(s) by expression.
 
           set_nominal(self, MX var, [float] val)
           set_nominal(self, str name, float val)
-            Set the nominal value by name.
 
 
 
-        > set_nominal(self, MX var, [float] val)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          set_nominal(self, MX var, [float] val)
+
 
 
         Set the nominal value(s) by expression.
 
 
-        > set_nominal(self, str name, float val)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          set_nominal(self, str name, float val)
+
 
 
         Set the nominal value by name.
 
+
+
+        .............
 
 
 
@@ -24138,29 +25626,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_set_nominal(self, *args)
 
 
-    def min(self, *args):
+    def min(self, *args) -> "std::vector< double,std::allocator< double > >":
         """
           Get the lower bound(s) by expression.
 
           min(self, MX var, bool normalized) -> [float]
           min(self, str name, bool normalized) -> float
-            Get the lower bound by name.
 
 
 
-        > min(self, MX var, bool normalized)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          min(self, MX var, bool normalized)
+
 
 
         Get the lower bound(s) by expression.
 
 
-        > min(self, str name, bool normalized)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          min(self, str name, bool normalized)
+
 
 
         Get the lower bound by name.
 
+
+
+        .............
 
 
 
@@ -24168,29 +25671,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_min(self, *args)
 
 
-    def set_min(self, *args):
+    def set_min(self, *args) -> "void":
         """
           Set the lower bound(s) by expression.
 
           set_min(self, MX var, [float] val, bool normalized)
           set_min(self, str name, float val, bool normalized)
-            Set the lower bound by name.
 
 
 
-        > set_min(self, MX var, [float] val, bool normalized)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          set_min(self, MX var, [float] val, bool normalized)
+
 
 
         Set the lower bound(s) by expression.
 
 
-        > set_min(self, str name, float val, bool normalized)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          set_min(self, str name, float val, bool normalized)
+
 
 
         Set the lower bound by name.
 
+
+
+        .............
 
 
 
@@ -24198,29 +25716,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_set_min(self, *args)
 
 
-    def max(self, *args):
+    def max(self, *args) -> "std::vector< double,std::allocator< double > >":
         """
           Get the upper bound(s) by expression.
 
           max(self, MX var, bool normalized) -> [float]
           max(self, str name, bool normalized) -> float
-            Get the upper bound by name.
 
 
 
-        > max(self, MX var, bool normalized)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          max(self, MX var, bool normalized)
+
 
 
         Get the upper bound(s) by expression.
 
 
-        > max(self, str name, bool normalized)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          max(self, str name, bool normalized)
+
 
 
         Get the upper bound by name.
 
+
+
+        .............
 
 
 
@@ -24228,29 +25761,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_max(self, *args)
 
 
-    def set_max(self, *args):
+    def set_max(self, *args) -> "void":
         """
           Set the upper bound(s) by expression.
 
           set_max(self, MX var, [float] val, bool normalized)
           set_max(self, str name, float val, bool normalized)
-            Set the upper bound by name.
 
 
 
-        > set_max(self, MX var, [float] val, bool normalized)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          set_max(self, MX var, [float] val, bool normalized)
+
 
 
         Set the upper bound(s) by expression.
 
 
-        > set_max(self, str name, float val, bool normalized)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          set_max(self, str name, float val, bool normalized)
+
 
 
         Set the upper bound by name.
 
+
+
+        .............
 
 
 
@@ -24258,29 +25806,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_set_max(self, *args)
 
 
-    def guess(self, *args):
+    def guess(self, *args) -> "std::vector< double,std::allocator< double > >":
         """
           Get the initial guess(es) by expression.
 
           guess(self, MX var, bool normalized) -> [float]
           guess(self, str name, bool normalized) -> float
-            Get the initial guess by name.
 
 
 
-        > guess(self, MX var, bool normalized)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          guess(self, MX var, bool normalized)
+
 
 
         Get the initial guess(es) by expression.
 
 
-        > guess(self, str name, bool normalized)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          guess(self, str name, bool normalized)
+
 
 
         Get the initial guess by name.
 
+
+
+        .............
 
 
 
@@ -24288,29 +25851,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_guess(self, *args)
 
 
-    def set_guess(self, *args):
+    def set_guess(self, *args) -> "void":
         """
           Set the initial guess(es) by expression.
 
           set_guess(self, MX var, [float] val, bool normalized)
           set_guess(self, str name, float val, bool normalized)
-            Set the initial guess by name.
 
 
 
-        > set_guess(self, MX var, [float] val, bool normalized)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          set_guess(self, MX var, [float] val, bool normalized)
+
 
 
         Set the initial guess(es) by expression.
 
 
-        > set_guess(self, str name, float val, bool normalized)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          set_guess(self, str name, float val, bool normalized)
+
 
 
         Set the initial guess by name.
 
+
+
+        .............
 
 
 
@@ -24318,29 +25896,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_set_guess(self, *args)
 
 
-    def start(self, *args):
+    def start(self, *args) -> "std::vector< double,std::allocator< double > >":
         """
           Get the (optionally normalized) value(s) at time 0 by expression.
 
           start(self, MX var, bool normalized) -> [float]
           start(self, str name, bool normalized) -> float
-            Get the (optionally normalized) value at time 0 by name.
 
 
 
-        > start(self, MX var, bool normalized)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          start(self, MX var, bool normalized)
+
 
 
         Get the (optionally normalized) value(s) at time 0 by expression.
 
 
-        > start(self, str name, bool normalized)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          start(self, str name, bool normalized)
+
 
 
         Get the (optionally normalized) value at time 0 by name.
 
+
+
+        .............
 
 
 
@@ -24348,29 +25941,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_start(self, *args)
 
 
-    def set_start(self, *args):
+    def set_start(self, *args) -> "void":
         """
           Set the (optionally normalized) value(s) at time 0 by expression.
 
           set_start(self, MX var, [float] val, bool normalized)
           set_start(self, str name, float val, bool normalized)
-            Set the (optionally normalized) value at time 0 by name.
 
 
 
-        > set_start(self, MX var, [float] val, bool normalized)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          set_start(self, MX var, [float] val, bool normalized)
+
 
 
         Set the (optionally normalized) value(s) at time 0 by expression.
 
 
-        > set_start(self, str name, float val, bool normalized)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          set_start(self, str name, float val, bool normalized)
+
 
 
         Set the (optionally normalized) value at time 0 by name.
 
+
+
+        .............
 
 
 
@@ -24378,29 +25986,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_set_start(self, *args)
 
 
-    def derivative_start(self, *args):
+    def derivative_start(self, *args) -> "std::vector< double,std::allocator< double > >":
         """
           Get the (optionally normalized) derivative value(s) at time 0 by expression.
 
           derivative_start(self, MX var, bool normalized) -> [float]
           derivative_start(self, str name, bool normalized) -> float
-            Get the (optionally normalized) derivative value at time 0 by name.
 
 
 
-        > derivative_start(self, MX var, bool normalized)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          derivative_start(self, MX var, bool normalized)
+
 
 
         Get the (optionally normalized) derivative value(s) at time 0 by expression.
 
 
-        > derivative_start(self, str name, bool normalized)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          derivative_start(self, str name, bool normalized)
+
 
 
         Get the (optionally normalized) derivative value at time 0 by name.
 
+
+
+        .............
 
 
 
@@ -24408,29 +26031,44 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_derivative_start(self, *args)
 
 
-    def set_derivative_start(self, *args):
+    def set_derivative_start(self, *args) -> "void":
         """
           Set the (optionally normalized) derivative value(s) at time 0 by expression.
 
           set_derivative_start(self, MX var, [float] val, bool normalized)
           set_derivative_start(self, str name, float val, bool normalized)
-            Set the (optionally normalized) derivative value at time 0 by name.
 
 
 
-        > set_derivative_start(self, MX var, [float] val, bool normalized)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          set_derivative_start(self, MX var, [float] val, bool normalized)
+
 
 
         Set the (optionally normalized) derivative value(s) at time 0 by expression.
 
 
-        > set_derivative_start(self, str name, float val, bool normalized)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          set_derivative_start(self, str name, float val, bool normalized)
+
 
 
         Set the (optionally normalized) derivative value at time 0 by name.
 
+
+
+        .............
 
 
 
@@ -24438,31 +26076,46 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_set_derivative_start(self, *args)
 
 
-    def unit(self, *args):
+    def unit(self, *args) -> "std::string":
         """
           Get the unit given a vector of symbolic variables (all units must be
 
           unit(self, MX var) -> str
           unit(self, str name) -> str
-            Get the unit for a component.
 
         identical)
 
 
-        > unit(self, MX var)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          unit(self, MX var)
+
 
 
         Get the unit given a vector of symbolic variables (all units must be
         identical)
 
 
-        > unit(self, str name)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          unit(self, str name)
+
 
 
         Get the unit for a component.
 
+
+
+        .............
 
 
 
@@ -24470,7 +26123,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_unit(self, *args)
 
 
-    def set_unit(self, *args):
+    def set_unit(self, *args) -> "void":
         """
         Set the unit for a component.
 
@@ -24484,7 +26137,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_set_unit(self, *args)
 
 
-    def type_name(self, *args):
+    def type_name(self, *args) -> "std::string":
         """
         Readable name of the class.
 
@@ -24498,7 +26151,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_type_name(self, *args)
 
 
-    def disp(self, *args):
+    def disp(self, *args) -> "void":
         """
         Print representation.
 
@@ -24512,7 +26165,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_disp(self, *args)
 
 
-    def str(self, *args):
+    def str(self, *args) -> "std::string":
         """
         Get string representation.
 
@@ -24526,31 +26179,46 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_str(self, *args)
 
 
-    def add_variable(self, *args):
+    def add_variable(self, *args) -> "casadi::MX":
         """
           Add a new variable: returns corresponding symbolic expression.
 
           add_variable(self, str name, int n) -> MX
           add_variable(self, str name, Variable var)
-            Add a variable.
           add_variable(self, str name, Sparsity sp) -> MX
 
 
 
-        > add_variable(self, str name, Variable var)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          add_variable(self, str name, Variable var)
+
 
 
         Add a variable.
 
 
-        > add_variable(self, str name, int n)
-        > add_variable(self, str name, Sparsity sp)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          add_variable(self, str name, int n)
+          add_variable(self, str name, Sparsity sp)
+
 
 
         Add a new variable: returns corresponding symbolic expression.
 
+
+
+        .............
 
 
 
@@ -24558,7 +26226,7 @@ class DaeBuilder(PrintableCommon):
         return _casadi.DaeBuilder_add_variable(self, *args)
 
 
-    def variable(self, *args):
+    def variable(self, *args) -> "casadi::Variable const &":
         """
         Access a variable by name
 
@@ -24578,18 +26246,33 @@ class DaeBuilder(PrintableCommon):
 
 
           DaeBuilder()
-            Default constructor.
           DaeBuilder(DaeBuilder other)
 
-        > DaeBuilder(DaeBuilder other)
-        ------------------------------------------------------------------------
 
-        > DaeBuilder()
-        ------------------------------------------------------------------------
+        .......
+
+        ::
+
+          DaeBuilder(DaeBuilder other)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          DaeBuilder()
+
 
 
         Default constructor.
 
+
+
+        .............
 
 
 
@@ -24626,7 +26309,7 @@ class XmlFile(SharedObject, PrintableCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, XmlFile, name)
     __repr__ = _swig_repr
 
-    def type_name(*args):
+    def type_name(*args) -> "std::string":
         """
 
 
@@ -24640,7 +26323,7 @@ class XmlFile(SharedObject, PrintableCommon):
     type_name = staticmethod(type_name)
     __swig_destroy__ = _casadi.delete_XmlFile
 
-    def load_plugin(*args):
+    def load_plugin(*args) -> "void":
         """
 
 
@@ -24653,7 +26336,7 @@ class XmlFile(SharedObject, PrintableCommon):
 
     load_plugin = staticmethod(load_plugin)
 
-    def doc(*args):
+    def doc(*args) -> "std::string":
         """
 
 
@@ -24685,7 +26368,7 @@ class XmlFile(SharedObject, PrintableCommon):
 XmlFile_swigregister = _casadi.XmlFile_swigregister
 XmlFile_swigregister(XmlFile)
 
-def XmlFile_type_name(*args):
+def XmlFile_type_name(*args) -> "std::string":
     """
 
 
@@ -24696,7 +26379,7 @@ def XmlFile_type_name(*args):
     """
     return _casadi.XmlFile_type_name(*args)
 
-def XmlFile_load_plugin(*args):
+def XmlFile_load_plugin(*args) -> "void":
     """
 
 
@@ -24707,7 +26390,7 @@ def XmlFile_load_plugin(*args):
     """
     return _casadi.XmlFile_load_plugin(*args)
 
-def XmlFile_doc(*args):
+def XmlFile_doc(*args) -> "std::string":
     """
 
 
@@ -24717,6 +26400,859 @@ def XmlFile_doc(*args):
 
     """
     return _casadi.XmlFile_doc(*args)
+
+class SerializerBase(_object):
+    """
+    C++ includes: serializer.hpp 
+
+
+
+
+    """
+
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, SerializerBase, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, SerializerBase, name)
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _casadi.delete_SerializerBase
+
+    def pack(self, *args) -> "void":
+        """
+
+
+        pack(self, Linsol e)
+        pack(self, std::vector< casadi::Linsol,std::allocator< casadi::Linsol > > const & e)
+        pack(self, int e)
+        pack(self, float e)
+        pack(self, [Sparsity] e)
+        pack(self, Sparsity e)
+        pack(self, [float] e)
+        pack(self, [int] e)
+        pack(self, [str] e)
+        pack(self, DM e)
+        pack(self, [DM] e)
+        pack(self, SX e)
+        pack(self, [SX] e)
+        pack(self, MX e)
+        pack(self, [MX] e)
+        pack(self, str e)
+        pack(self, [Function] e)
+        pack(self, Function e)
+        pack(self, [GenericType] e)
+        pack(self, GenericType e)
+
+
+
+        """
+        return _casadi.SerializerBase_pack(self, *args)
+
+    _SERIALIZED_SPARSITY = _casadi.SerializerBase__SERIALIZED_SPARSITY
+    _SERIALIZED_MX = _casadi.SerializerBase__SERIALIZED_MX
+    _SERIALIZED_DM = _casadi.SerializerBase__SERIALIZED_DM
+    _SERIALIZED_SX = _casadi.SerializerBase__SERIALIZED_SX
+    _SERIALIZED_LINSOL = _casadi.SerializerBase__SERIALIZED_LINSOL
+    _SERIALIZED_FUNCTION = _casadi.SerializerBase__SERIALIZED_FUNCTION
+    _SERIALIZED_GENERICTYPE = _casadi.SerializerBase__SERIALIZED_GENERICTYPE
+    _SERIALIZED_INT = _casadi.SerializerBase__SERIALIZED_INT
+    _SERIALIZED_DOUBLE = _casadi.SerializerBase__SERIALIZED_DOUBLE
+    _SERIALIZED_STRING = _casadi.SerializerBase__SERIALIZED_STRING
+    _SERIALIZED_SPARSITY_VECTOR = _casadi.SerializerBase__SERIALIZED_SPARSITY_VECTOR
+    _SERIALIZED_MX_VECTOR = _casadi.SerializerBase__SERIALIZED_MX_VECTOR
+    _SERIALIZED_DM_VECTOR = _casadi.SerializerBase__SERIALIZED_DM_VECTOR
+    _SERIALIZED_SX_VECTOR = _casadi.SerializerBase__SERIALIZED_SX_VECTOR
+    _SERIALIZED_LINSOL_VECTOR = _casadi.SerializerBase__SERIALIZED_LINSOL_VECTOR
+    _SERIALIZED_FUNCTION_VECTOR = _casadi.SerializerBase__SERIALIZED_FUNCTION_VECTOR
+    _SERIALIZED_GENERICTYPE_VECTOR = _casadi.SerializerBase__SERIALIZED_GENERICTYPE_VECTOR
+    _SERIALIZED_INT_VECTOR = _casadi.SerializerBase__SERIALIZED_INT_VECTOR
+    _SERIALIZED_DOUBLE_VECTOR = _casadi.SerializerBase__SERIALIZED_DOUBLE_VECTOR
+    _SERIALIZED_STRING_VECTOR = _casadi.SerializerBase__SERIALIZED_STRING_VECTOR
+
+    def type_to_string(*args) -> "std::string":
+        """
+
+
+        type_to_string(casadi::SerializerBase::SerializationType type) -> str
+
+
+
+        """
+        return _casadi.SerializerBase_type_to_string(*args)
+
+    type_to_string = staticmethod(type_to_string)
+
+    def connect(self, *args) -> "void":
+        """
+
+
+        connect(self, DeserializerBase s)
+
+
+
+        """
+        return _casadi.SerializerBase_connect(self, *args)
+
+
+    def reset(self, *args) -> "void":
+        """
+
+
+        reset(self)
+
+
+
+        """
+        return _casadi.SerializerBase_reset(self, *args)
+
+SerializerBase_swigregister = _casadi.SerializerBase_swigregister
+SerializerBase_swigregister(SerializerBase)
+
+def SerializerBase_type_to_string(*args) -> "std::string":
+    """
+
+
+    type_to_string(casadi::SerializerBase::SerializationType type) -> str
+
+
+
+    """
+    return _casadi.SerializerBase_type_to_string(*args)
+
+class DeserializerBase(_object):
+    """
+    C++ includes: serializer.hpp 
+
+
+
+
+    """
+
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, DeserializerBase, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, DeserializerBase, name)
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _casadi.delete_DeserializerBase
+
+    def _pop_type(self, *args) -> "casadi::SerializerBase::SerializationType":
+        """
+
+
+        _pop_type(self) -> casadi::SerializerBase::SerializationType
+
+
+
+        """
+        return _casadi.DeserializerBase__pop_type(self, *args)
+
+
+    def blind_unpack_sparsity(self, *args) -> "casadi::Sparsity":
+        """
+
+
+        blind_unpack_sparsity(self) -> Sparsity
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_sparsity(self, *args)
+
+
+    def blind_unpack_mx(self, *args) -> "casadi::MX":
+        """
+
+
+        blind_unpack_mx(self) -> MX
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_mx(self, *args)
+
+
+    def blind_unpack_dm(self, *args) -> "casadi::Matrix< double >":
+        """
+
+
+        blind_unpack_dm(self) -> DM
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_dm(self, *args)
+
+
+    def blind_unpack_sx(self, *args) -> "casadi::Matrix< casadi::SXElem >":
+        """
+
+
+        blind_unpack_sx(self) -> SX
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_sx(self, *args)
+
+
+    def blind_unpack_linsol(self, *args) -> "casadi::Linsol":
+        """
+
+
+        blind_unpack_linsol(self) -> Linsol
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_linsol(self, *args)
+
+
+    def blind_unpack_function(self, *args) -> "casadi::Function":
+        """
+
+
+        blind_unpack_function(self) -> Function
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_function(self, *args)
+
+
+    def blind_unpack_generictype(self, *args) -> "casadi::GenericType":
+        """
+
+
+        blind_unpack_generictype(self) -> GenericType
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_generictype(self, *args)
+
+
+    def blind_unpack_int(self, *args) -> "casadi_int":
+        """
+
+
+        blind_unpack_int(self) -> int
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_int(self, *args)
+
+
+    def blind_unpack_double(self, *args) -> "double":
+        """
+
+
+        blind_unpack_double(self) -> float
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_double(self, *args)
+
+
+    def blind_unpack_string(self, *args) -> "std::string":
+        """
+
+
+        blind_unpack_string(self) -> str
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_string(self, *args)
+
+
+    def blind_unpack_sparsity_vector(self, *args) -> "std::vector< casadi::Sparsity,std::allocator< casadi::Sparsity > >":
+        """
+
+
+        blind_unpack_sparsity_vector(self) -> [Sparsity]
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_sparsity_vector(self, *args)
+
+
+    def blind_unpack_mx_vector(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
+        """
+
+
+        blind_unpack_mx_vector(self) -> [MX]
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_mx_vector(self, *args)
+
+
+    def blind_unpack_dm_vector(self, *args) -> "std::vector< casadi::Matrix< double >,std::allocator< casadi::Matrix< double > > >":
+        """
+
+
+        blind_unpack_dm_vector(self) -> [DM]
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_dm_vector(self, *args)
+
+
+    def blind_unpack_sx_vector(self, *args) -> "std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >":
+        """
+
+
+        blind_unpack_sx_vector(self) -> [SX]
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_sx_vector(self, *args)
+
+
+    def blind_unpack_linsol_vector(self, *args) -> "std::vector< casadi::Linsol,std::allocator< casadi::Linsol > >":
+        """
+
+
+        blind_unpack_linsol_vector(self) -> std::vector< casadi::Linsol,std::allocator< casadi::Linsol > >
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_linsol_vector(self, *args)
+
+
+    def blind_unpack_function_vector(self, *args) -> "std::vector< casadi::Function,std::allocator< casadi::Function > >":
+        """
+
+
+        blind_unpack_function_vector(self) -> [Function]
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_function_vector(self, *args)
+
+
+    def blind_unpack_generictype_vector(self, *args) -> "std::vector< casadi::GenericType,std::allocator< casadi::GenericType > >":
+        """
+
+
+        blind_unpack_generictype_vector(self) -> [GenericType]
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_generictype_vector(self, *args)
+
+
+    def blind_unpack_int_vector(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
+        """
+
+
+        blind_unpack_int_vector(self) -> [int]
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_int_vector(self, *args)
+
+
+    def blind_unpack_double_vector(self, *args) -> "std::vector< double,std::allocator< double > >":
+        """
+
+
+        blind_unpack_double_vector(self) -> [float]
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_double_vector(self, *args)
+
+
+    def blind_unpack_string_vector(self, *args) -> "std::vector< std::string,std::allocator< std::string > >":
+        """
+
+
+        blind_unpack_string_vector(self) -> [str]
+
+
+
+        """
+        return _casadi.DeserializerBase_blind_unpack_string_vector(self, *args)
+
+
+    def unpack_sparsity(self, *args) -> "casadi::Sparsity":
+        """
+
+
+        unpack_sparsity(self) -> Sparsity
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_sparsity(self, *args)
+
+
+    def unpack_mx(self, *args) -> "casadi::MX":
+        """
+
+
+        unpack_mx(self) -> MX
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_mx(self, *args)
+
+
+    def unpack_dm(self, *args) -> "casadi::Matrix< double >":
+        """
+
+
+        unpack_dm(self) -> DM
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_dm(self, *args)
+
+
+    def unpack_sx(self, *args) -> "casadi::Matrix< casadi::SXElem >":
+        """
+
+
+        unpack_sx(self) -> SX
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_sx(self, *args)
+
+
+    def unpack_linsol(self, *args) -> "casadi::Linsol":
+        """
+
+
+        unpack_linsol(self) -> Linsol
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_linsol(self, *args)
+
+
+    def unpack_function(self, *args) -> "casadi::Function":
+        """
+
+
+        unpack_function(self) -> Function
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_function(self, *args)
+
+
+    def unpack_generictype(self, *args) -> "casadi::GenericType":
+        """
+
+
+        unpack_generictype(self) -> GenericType
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_generictype(self, *args)
+
+
+    def unpack_int(self, *args) -> "casadi_int":
+        """
+
+
+        unpack_int(self) -> int
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_int(self, *args)
+
+
+    def unpack_double(self, *args) -> "double":
+        """
+
+
+        unpack_double(self) -> float
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_double(self, *args)
+
+
+    def unpack_string(self, *args) -> "std::string":
+        """
+
+
+        unpack_string(self) -> str
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_string(self, *args)
+
+
+    def unpack_sparsity_vector(self, *args) -> "std::vector< casadi::Sparsity,std::allocator< casadi::Sparsity > >":
+        """
+
+
+        unpack_sparsity_vector(self) -> [Sparsity]
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_sparsity_vector(self, *args)
+
+
+    def unpack_mx_vector(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
+        """
+
+
+        unpack_mx_vector(self) -> [MX]
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_mx_vector(self, *args)
+
+
+    def unpack_dm_vector(self, *args) -> "std::vector< casadi::Matrix< double >,std::allocator< casadi::Matrix< double > > >":
+        """
+
+
+        unpack_dm_vector(self) -> [DM]
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_dm_vector(self, *args)
+
+
+    def unpack_sx_vector(self, *args) -> "std::vector< casadi::Matrix< casadi::SXElem >,std::allocator< casadi::Matrix< casadi::SXElem > > >":
+        """
+
+
+        unpack_sx_vector(self) -> [SX]
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_sx_vector(self, *args)
+
+
+    def unpack_linsol_vector(self, *args) -> "std::vector< casadi::Linsol,std::allocator< casadi::Linsol > >":
+        """
+
+
+        unpack_linsol_vector(self) -> std::vector< casadi::Linsol,std::allocator< casadi::Linsol > >
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_linsol_vector(self, *args)
+
+
+    def unpack_function_vector(self, *args) -> "std::vector< casadi::Function,std::allocator< casadi::Function > >":
+        """
+
+
+        unpack_function_vector(self) -> [Function]
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_function_vector(self, *args)
+
+
+    def unpack_generictype_vector(self, *args) -> "std::vector< casadi::GenericType,std::allocator< casadi::GenericType > >":
+        """
+
+
+        unpack_generictype_vector(self) -> [GenericType]
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_generictype_vector(self, *args)
+
+
+    def unpack_int_vector(self, *args) -> "std::vector< casadi_int,std::allocator< casadi_int > >":
+        """
+
+
+        unpack_int_vector(self) -> [int]
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_int_vector(self, *args)
+
+
+    def unpack_double_vector(self, *args) -> "std::vector< double,std::allocator< double > >":
+        """
+
+
+        unpack_double_vector(self) -> [float]
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_double_vector(self, *args)
+
+
+    def unpack_string_vector(self, *args) -> "std::vector< std::string,std::allocator< std::string > >":
+        """
+
+
+        unpack_string_vector(self) -> [str]
+
+
+
+        """
+        return _casadi.DeserializerBase_unpack_string_vector(self, *args)
+
+
+    def connect(self, *args) -> "void":
+        """
+
+
+        connect(self, SerializerBase s)
+
+
+
+        """
+        return _casadi.DeserializerBase_connect(self, *args)
+
+
+    def reset(self, *args) -> "void":
+        """
+
+
+        reset(self)
+
+
+
+        """
+        return _casadi.DeserializerBase_reset(self, *args)
+
+
+    def unpack(self):
+      type = SerializerBase.type_to_string(self._pop_type())
+      f = getattr(self, "blind_unpack_"+type)
+      return f()
+
+DeserializerBase_swigregister = _casadi.DeserializerBase_swigregister
+DeserializerBase_swigregister(DeserializerBase)
+
+class StringSerializer(SerializerBase):
+    """
+    C++ includes: serializer.hpp 
+
+
+
+
+    """
+
+    __swig_setmethods__ = {}
+    for _s in [SerializerBase]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, StringSerializer, name, value)
+    __swig_getmethods__ = {}
+    for _s in [SerializerBase]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, StringSerializer, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+
+
+        StringSerializer(dict opts)
+
+
+
+        """
+        this = _casadi.new_StringSerializer(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _casadi.delete_StringSerializer
+
+    def encode(self, *args) -> "std::string":
+        """
+          Returns a string that holds the serialized objects.
+
+          encode(self) -> str
+
+
+        As a side effect, this method clears the internal buffer
+
+
+
+
+        """
+        return _casadi.StringSerializer_encode(self, *args)
+
+StringSerializer_swigregister = _casadi.StringSerializer_swigregister
+StringSerializer_swigregister(StringSerializer)
+
+class FileSerializer(SerializerBase):
+    """
+    C++ includes: serializer.hpp 
+
+
+
+
+    """
+
+    __swig_setmethods__ = {}
+    for _s in [SerializerBase]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, FileSerializer, name, value)
+    __swig_getmethods__ = {}
+    for _s in [SerializerBase]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, FileSerializer, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+          Advanced serialization of CasADi objects.
+
+          FileSerializer(str fname, dict opts)
+
+
+        StringSerializer, FileDeserializer
+
+
+
+
+        """
+        this = _casadi.new_FileSerializer(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _casadi.delete_FileSerializer
+FileSerializer_swigregister = _casadi.FileSerializer_swigregister
+FileSerializer_swigregister(FileSerializer)
+
+class StringDeserializer(DeserializerBase):
+    """
+    C++ includes: serializer.hpp 
+
+
+
+
+    """
+
+    __swig_setmethods__ = {}
+    for _s in [DeserializerBase]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, StringDeserializer, name, value)
+    __swig_getmethods__ = {}
+    for _s in [DeserializerBase]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, StringDeserializer, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+          Advanced deserialization of CasADi objects.
+
+          StringDeserializer(str string)
+
+
+        StringDeserializer
+
+
+
+
+        """
+        this = _casadi.new_StringDeserializer(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _casadi.delete_StringDeserializer
+
+    def decode(self, *args) -> "void":
+        """
+        Sets the string to deserialize objects from.
+
+        decode(self, str string)
+
+
+
+
+
+        """
+        return _casadi.StringDeserializer_decode(self, *args)
+
+StringDeserializer_swigregister = _casadi.StringDeserializer_swigregister
+StringDeserializer_swigregister(StringDeserializer)
+
+class FileDeserializer(DeserializerBase):
+    """
+    C++ includes: serializer.hpp 
+
+
+
+
+    """
+
+    __swig_setmethods__ = {}
+    for _s in [DeserializerBase]:
+        __swig_setmethods__.update(getattr(_s, '__swig_setmethods__', {}))
+    __setattr__ = lambda self, name, value: _swig_setattr(self, FileDeserializer, name, value)
+    __swig_getmethods__ = {}
+    for _s in [DeserializerBase]:
+        __swig_getmethods__.update(getattr(_s, '__swig_getmethods__', {}))
+    __getattr__ = lambda self, name: _swig_getattr(self, FileDeserializer, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+          Advanced deserialization of CasADi objects.
+
+          FileDeserializer(str fname)
+
+
+        FileSerializer
+
+
+
+
+        """
+        this = _casadi.new_FileDeserializer(*args)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _casadi.delete_FileDeserializer
+FileDeserializer_swigregister = _casadi.FileDeserializer_swigregister
+FileDeserializer_swigregister(FileDeserializer)
 
 class Opti(PrintableCommon, SharedObject):
     """
@@ -24789,7 +27325,7 @@ class Opti(PrintableCommon, SharedObject):
     __getattr__ = lambda self, name: _swig_getattr(self, Opti, name)
     __repr__ = _swig_repr
 
-    def _variable(self, *args):
+    def _variable(self, *args) -> "casadi::MX":
         """
           Create a decision variable (symbol)
 
@@ -24816,7 +27352,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__variable(self, *args)
 
 
-    def _parameter(self, *args):
+    def _parameter(self, *args) -> "casadi::MX":
         """
           Create a parameter (symbol); fixed during optimization.
 
@@ -24843,7 +27379,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__parameter(self, *args)
 
 
-    def minimize(self, *args):
+    def minimize(self, *args) -> "void":
         """
           Set objective.
 
@@ -24860,28 +27396,39 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_minimize(self, *args)
 
 
-    def _subject_to(self, *args):
+    def _subject_to(self, *args) -> "void":
         """
           Clear constraints.
 
           _subject_to(self)
           _subject_to(self, MX g)
-            Add constraints.
           _subject_to(self, [MX] g)
-            Add constraints.
 
 
 
-        > _subject_to(self)
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          _subject_to(self)
+
 
 
         Clear constraints.
 
 
-        > _subject_to(self, MX g)
-        > _subject_to(self, [MX] g)
-        ------------------------------------------------------------------------
+
+        .............
+
+
+        .......
+
+        ::
+
+          _subject_to(self, MX g)
+          _subject_to(self, [MX] g)
+
 
 
         Add constraints.
@@ -24915,12 +27462,15 @@ class Opti(PrintableCommon, SharedObject):
 
 
 
+        .............
+
+
 
         """
         return _casadi.Opti__subject_to(self, *args)
 
 
-    def solver(self, *args):
+    def solver(self, *args) -> "void":
         """
           Set a solver.
 
@@ -24946,7 +27496,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_solver(self, *args)
 
 
-    def set_initial(self, *args):
+    def set_initial(self, *args) -> "void":
         """
           Set initial guess for decision variables
 
@@ -24969,7 +27519,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_set_initial(self, *args)
 
 
-    def set_value(self, *args):
+    def set_value(self, *args) -> "void":
         """
           Set value of parameter.
 
@@ -24986,7 +27536,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_set_value(self, *args)
 
 
-    def solve(self, *args):
+    def solve(self, *args) -> "casadi::OptiSol":
         """
         Crunch the numbers; solve the problem.
 
@@ -25000,7 +27550,24 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_solve(self, *args)
 
 
-    def value(self, *args):
+    def solve_limited(self, *args) -> "casadi::OptiSol":
+        """
+          Crunch the numbers; solve the problem.
+
+          solve_limited(self) -> OptiSol
+
+
+        Allows the solver to return without error when an iteration or time limit is
+        reached
+
+
+
+
+        """
+        return _casadi.Opti_solve_limited(self, *args)
+
+
+    def value(self, *args) -> "casadi::native_DM":
         """
           Obtain value of expression at the current value
 
@@ -25025,7 +27592,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_value(self, *args)
 
 
-    def stats(self, *args):
+    def stats(self, *args) -> "casadi::Dict":
         """
           Get statistics.
 
@@ -25042,7 +27609,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_stats(self, *args)
 
 
-    def return_status(self, *args):
+    def return_status(self, *args) -> "std::string":
         """
           Get return status of solver passed as-is from nlpsol No stability can be
 
@@ -25057,7 +27624,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_return_status(self, *args)
 
 
-    def initial(self, *args):
+    def initial(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
         get assignment expressions for initial values
 
@@ -25071,7 +27638,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_initial(self, *args)
 
 
-    def value_variables(self, *args):
+    def value_variables(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
         get assignment expressions for latest values
 
@@ -25085,7 +27652,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_value_variables(self, *args)
 
 
-    def value_parameters(self, *args):
+    def value_parameters(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
 
 
@@ -25097,7 +27664,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_value_parameters(self, *args)
 
 
-    def dual(self, *args):
+    def dual(self, *args) -> "casadi::MX":
         """
           get the dual variable
 
@@ -25114,7 +27681,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_dual(self, *args)
 
 
-    def _nx(self, *args):
+    def _nx(self, *args) -> "casadi_int":
         """
         Number of (scalarised) decision variables.
 
@@ -25128,7 +27695,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__nx(self, *args)
 
 
-    def _np(self, *args):
+    def _np(self, *args) -> "casadi_int":
         """
         Number of (scalarised) parameters.
 
@@ -25142,7 +27709,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__np(self, *args)
 
 
-    def _ng(self, *args):
+    def _ng(self, *args) -> "casadi_int":
         """
         Number of (scalarised) constraints.
 
@@ -25156,7 +27723,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__ng(self, *args)
 
 
-    def _x(self, *args):
+    def _x(self, *args) -> "casadi::MX":
         """
         Get all (scalarised) decision variables as a symbolic column vector.
 
@@ -25170,7 +27737,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__x(self, *args)
 
 
-    def _p(self, *args):
+    def _p(self, *args) -> "casadi::MX":
         """
         Get all (scalarised) parameters as a symbolic column vector.
 
@@ -25184,7 +27751,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__p(self, *args)
 
 
-    def _g(self, *args):
+    def _g(self, *args) -> "casadi::MX":
         """
         Get all (scalarised) constraint expressions as a column vector.
 
@@ -25198,7 +27765,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__g(self, *args)
 
 
-    def _f(self, *args):
+    def _f(self, *args) -> "casadi::MX":
         """
         Get objective expression.
 
@@ -25212,7 +27779,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__f(self, *args)
 
 
-    def _lbg(self, *args):
+    def _lbg(self, *args) -> "casadi::MX":
         """
         Get all (scalarised) bounds on constraints as a column vector.
 
@@ -25226,7 +27793,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__lbg(self, *args)
 
 
-    def _ubg(self, *args):
+    def _ubg(self, *args) -> "casadi::MX":
         """
 
 
@@ -25238,7 +27805,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__ubg(self, *args)
 
 
-    def _lam_g(self, *args):
+    def _lam_g(self, *args) -> "casadi::MX":
         """
           Get all (scalarised) dual variables as a symbolic column vector.
 
@@ -25262,7 +27829,48 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__lam_g(self, *args)
 
 
-    def bounded(*args):
+    def to_function(self, *args) -> "casadi::Function":
+        """
+
+
+          to_function(self, str name, [MX] args, [MX] res, dict opts) -> Function
+          to_function(self, str name, dict:MX dict, [str] name_in, [str] name_out, dict opts) -> Function
+          to_function(self, str name, [MX] args, [MX] res, [str] name_in, [str] name_out, dict opts) -> Function
+
+
+        .......
+
+        ::
+
+          to_function(self, str name, dict:MX dict, [str] name_in, [str] name_out, dict opts)
+          to_function(self, str name, [MX] args, [MX] res, [str] name_in, [str] name_out, dict opts)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          to_function(self, str name, [MX] args, [MX] res, dict opts)
+
+
+
+        Create a CasADi Function from the Opti solver.
+
+
+
+        .............
+
+
+
+        """
+        return _casadi.Opti_to_function(self, *args)
+
+
+    def bounded(*args) -> "casadi::MX":
         """
 
 
@@ -25275,7 +27883,7 @@ class Opti(PrintableCommon, SharedObject):
 
     bounded = staticmethod(bounded)
 
-    def _debug(self, *args):
+    def _debug(self, *args) -> "casadi::OptiAdvanced":
         """
           Get a copy with advanced functionality.
 
@@ -25295,7 +27903,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__debug(self, *args)
 
 
-    def _advanced(self, *args):
+    def _advanced(self, *args) -> "casadi::OptiAdvanced":
         """
           Get a copy with advanced functionality.
 
@@ -25315,7 +27923,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti__advanced(self, *args)
 
 
-    def copy(self, *args):
+    def copy(self, *args) -> "casadi::Opti":
         """
           Get a copy of the.
 
@@ -25332,19 +27940,31 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_copy(self, *args)
 
 
-    def update_user_dict(self, *args):
+    def update_user_dict(self, *args) -> "void":
         """
 
 
           update_user_dict(self, MX m, dict meta)
-            add user data Add arbitrary data in the form of a dictionary to symbols or
           update_user_dict(self, [MX] m, dict meta)
 
-        > update_user_dict(self, [MX] m, dict meta)
-        ------------------------------------------------------------------------
 
-        > update_user_dict(self, MX m, dict meta)
-        ------------------------------------------------------------------------
+        .......
+
+        ::
+
+          update_user_dict(self, [MX] m, dict meta)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          update_user_dict(self, MX m, dict meta)
+
 
 
         add user data Add arbitrary data in the form of a dictionary to symbols or
@@ -25352,12 +27972,15 @@ class Opti(PrintableCommon, SharedObject):
 
 
 
+        .............
+
+
 
         """
         return _casadi.Opti_update_user_dict(self, *args)
 
 
-    def user_dict(self, *args):
+    def user_dict(self, *args) -> "casadi::Dict":
         """
         Get user data.
 
@@ -25371,7 +27994,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_user_dict(self, *args)
 
 
-    def type_name(self, *args):
+    def type_name(self, *args) -> "std::string":
         """
         Readable name of the class.
 
@@ -25385,7 +28008,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_type_name(self, *args)
 
 
-    def disp(self, *args):
+    def disp(self, *args) -> "void":
         """
         Print representation.
 
@@ -25399,7 +28022,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_disp(self, *args)
 
 
-    def str(self, *args):
+    def str(self, *args) -> "std::string":
         """
         Get string representation.
 
@@ -25413,7 +28036,7 @@ class Opti(PrintableCommon, SharedObject):
         return _casadi.Opti_str(self, *args)
 
 
-    def callback_class(self, *args):
+    def callback_class(self, *args) -> "void":
         """
           Helper methods for callback()
 
@@ -25554,19 +28177,39 @@ class Opti(PrintableCommon, SharedObject):
         """
 
 
-          Opti()
-            Create Opti Context.
+          Opti(str problem_type)
           Opti(Opti other)
 
-        > Opti()
-        ------------------------------------------------------------------------
+
+        .......
+
+        ::
+
+          Opti(Opti other)
+
+
+
+        .............
+
+
+        .......
+
+        ::
+
+          Opti(str problem_type)
+
 
 
         Create Opti Context.
 
+        Parameters:
+        -----------
 
-        > Opti(Opti other)
-        ------------------------------------------------------------------------
+        problem_type:  of optimization 'nlp' or 'conic' (default nlp)
+
+
+
+        .............
 
 
 
@@ -25580,7 +28223,7 @@ class Opti(PrintableCommon, SharedObject):
 Opti_swigregister = _casadi.Opti_swigregister
 Opti_swigregister(Opti)
 
-def Opti_bounded(*args):
+def Opti_bounded(*args) -> "casadi::MX":
     """
 
 
@@ -25748,6 +28391,9 @@ class MetaVar(IndexAbstraction):
     __swig_getmethods__["i"] = _casadi.MetaVar_i_get
     if _newclass:
         i = _swig_property(_casadi.MetaVar_i_get)
+    __swig_getmethods__["active_i"] = _casadi.MetaVar_active_i_get
+    if _newclass:
+        active_i = _swig_property(_casadi.MetaVar_active_i_get)
     __swig_getmethods__["extra"] = _casadi.MetaVar_extra_get
     if _newclass:
         extra = _swig_property(_casadi.MetaVar_extra_get)
@@ -25806,7 +28452,7 @@ class OptiCallback(_object):
         except __builtin__.Exception:
             self.this = this
 
-    def call(self, *args):
+    def call(self, *args) -> "void":
         """
 
 
@@ -25845,7 +28491,7 @@ class OptiAdvanced(Opti):
     __repr__ = _swig_repr
     __swig_destroy__ = _casadi.delete_OptiAdvanced
 
-    def _casadi_solver(self, *args):
+    def _casadi_solver(self, *args) -> "casadi::Function":
         """
         Get the underlying CasADi solver of the Opti stack.
 
@@ -25859,7 +28505,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced__casadi_solver(self, *args)
 
 
-    def is_parametric(self, *args):
+    def is_parametric(self, *args) -> "bool":
         """
           return true if expression is only dependant on Opti parameters, not
 
@@ -25874,7 +28520,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_is_parametric(self, *args)
 
 
-    def symvar(self, *args):
+    def symvar(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
           Get symbols present in expression.
 
@@ -25893,7 +28539,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_symvar(self, *args)
 
 
-    def canon_expr(self, *args):
+    def canon_expr(self, *args) -> "casadi::MetaCon":
         """
         Interpret an expression (for internal use only)
 
@@ -25907,7 +28553,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_canon_expr(self, *args)
 
 
-    def get_meta(self, *args):
+    def get_meta(self, *args) -> "casadi::MetaVar":
         """
         Get meta-data of symbol (for internal use only)
 
@@ -25921,7 +28567,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_get_meta(self, *args)
 
 
-    def get_meta_con(self, *args):
+    def get_meta_con(self, *args) -> "casadi::MetaCon":
         """
         Get meta-data of symbol (for internal use only)
 
@@ -25935,7 +28581,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_get_meta_con(self, *args)
 
 
-    def set_meta(self, *args):
+    def set_meta(self, *args) -> "void":
         """
         Set meta-data of an expression.
 
@@ -25949,7 +28595,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_set_meta(self, *args)
 
 
-    def set_meta_con(self, *args):
+    def set_meta_con(self, *args) -> "void":
         """
         Set meta-data of an expression.
 
@@ -25963,7 +28609,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_set_meta_con(self, *args)
 
 
-    def assert_active_symbol(self, *args):
+    def assert_active_symbol(self, *args) -> "void":
         """
 
 
@@ -25975,7 +28621,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_assert_active_symbol(self, *args)
 
 
-    def active_symvar(self, *args):
+    def active_symvar(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
 
 
@@ -25987,7 +28633,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_active_symvar(self, *args)
 
 
-    def active_values(self, *args):
+    def active_values(self, *args) -> "std::vector< casadi::DM,std::allocator< casadi::DM > >":
         """
 
 
@@ -25999,7 +28645,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_active_values(self, *args)
 
 
-    def x_lookup(self, *args):
+    def x_lookup(self, *args) -> "casadi::MX":
         """
 
 
@@ -26011,7 +28657,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_x_lookup(self, *args)
 
 
-    def g_lookup(self, *args):
+    def g_lookup(self, *args) -> "casadi::MX":
         """
 
 
@@ -26023,7 +28669,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_g_lookup(self, *args)
 
 
-    def x_describe(self, *args):
+    def x_describe(self, *args) -> "std::string":
         """
 
 
@@ -26035,7 +28681,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_x_describe(self, *args)
 
 
-    def g_describe(self, *args):
+    def g_describe(self, *args) -> "std::string":
         """
 
 
@@ -26047,7 +28693,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_g_describe(self, *args)
 
 
-    def describe(self, *args):
+    def describe(self, *args) -> "std::string":
         """
 
 
@@ -26059,7 +28705,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_describe(self, *args)
 
 
-    def show_infeasibilities(self, *args):
+    def show_infeasibilities(self, *args) -> "void":
         """
 
 
@@ -26071,7 +28717,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_show_infeasibilities(self, *args)
 
 
-    def solve_prepare(self, *args):
+    def solve_prepare(self, *args) -> "void":
         """
 
 
@@ -26083,7 +28729,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_solve_prepare(self, *args)
 
 
-    def solve_actual(self, *args):
+    def solve_actual(self, *args) -> "casadi::DMDict":
         """
 
 
@@ -26095,7 +28741,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_solve_actual(self, *args)
 
 
-    def arg(self, *args):
+    def arg(self, *args) -> "casadi::DMDict":
         """
 
 
@@ -26107,7 +28753,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_arg(self, *args)
 
 
-    def res(self, *args):
+    def res(self, *args) -> "casadi::DMDict":
         """
 
 
@@ -26120,7 +28766,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_res(self, *args)
 
 
-    def constraints(self, *args):
+    def constraints(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
 
 
@@ -26132,7 +28778,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_constraints(self, *args)
 
 
-    def objective(self, *args):
+    def objective(self, *args) -> "casadi::MX":
         """
 
 
@@ -26144,7 +28790,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_objective(self, *args)
 
 
-    def baked_copy(self, *args):
+    def baked_copy(self, *args) -> "casadi::OptiAdvanced":
         """
 
 
@@ -26156,7 +28802,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_baked_copy(self, *args)
 
 
-    def assert_empty(self, *args):
+    def assert_empty(self, *args) -> "void":
         """
 
 
@@ -26168,7 +28814,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_assert_empty(self, *args)
 
 
-    def bake(self, *args):
+    def bake(self, *args) -> "void":
         """
         Fix the structure of the optimization problem.
 
@@ -26185,7 +28831,7 @@ class OptiAdvanced(Opti):
     if _newclass:
         problem_dirty_ = _swig_property(_casadi.OptiAdvanced_problem_dirty__get)
 
-    def mark_problem_dirty(self, *args):
+    def mark_problem_dirty(self, *args) -> "void":
         """
 
 
@@ -26197,7 +28843,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_mark_problem_dirty(self, *args)
 
 
-    def problem_dirty(self, *args):
+    def problem_dirty(self, *args) -> "bool":
         """
 
 
@@ -26212,7 +28858,7 @@ class OptiAdvanced(Opti):
     if _newclass:
         solver_dirty_ = _swig_property(_casadi.OptiAdvanced_solver_dirty__get)
 
-    def mark_solver_dirty(self, *args):
+    def mark_solver_dirty(self, *args) -> "void":
         """
 
 
@@ -26224,7 +28870,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_mark_solver_dirty(self, *args)
 
 
-    def solver_dirty(self, *args):
+    def solver_dirty(self, *args) -> "bool":
         """
 
 
@@ -26239,7 +28885,7 @@ class OptiAdvanced(Opti):
     if _newclass:
         solved_ = _swig_property(_casadi.OptiAdvanced_solved__get)
 
-    def mark_solved(self, *args):
+    def mark_solved(self, *args) -> "void":
         """
 
 
@@ -26251,7 +28897,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_mark_solved(self, *args)
 
 
-    def solved(self, *args):
+    def solved(self, *args) -> "bool":
         """
 
 
@@ -26263,7 +28909,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_solved(self, *args)
 
 
-    def assert_solved(self, *args):
+    def assert_solved(self, *args) -> "void":
         """
 
 
@@ -26275,7 +28921,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_assert_solved(self, *args)
 
 
-    def assert_baked(self, *args):
+    def assert_baked(self, *args) -> "void":
         """
 
 
@@ -26287,7 +28933,7 @@ class OptiAdvanced(Opti):
         return _casadi.OptiAdvanced_assert_baked(self, *args)
 
 
-    def instance_number(self, *args):
+    def instance_number(self, *args) -> "casadi_int":
         """
 
 
@@ -26343,7 +28989,7 @@ class OptiSol(PrintableCommon):
     __getattr__ = lambda self, name: _swig_getattr(self, OptiSol, name)
     __repr__ = _swig_repr
 
-    def type_name(self, *args):
+    def type_name(self, *args) -> "std::string":
         """
 
 
@@ -26355,7 +29001,7 @@ class OptiSol(PrintableCommon):
         return _casadi.OptiSol_type_name(self, *args)
 
 
-    def disp(self, *args):
+    def disp(self, *args) -> "void":
         """
 
 
@@ -26367,7 +29013,7 @@ class OptiSol(PrintableCommon):
         return _casadi.OptiSol_disp(self, *args)
 
 
-    def str(self, *args):
+    def str(self, *args) -> "std::string":
         """
 
 
@@ -26379,7 +29025,7 @@ class OptiSol(PrintableCommon):
         return _casadi.OptiSol_str(self, *args)
 
 
-    def value(self, *args):
+    def value(self, *args) -> "casadi::native_DM":
         """
           Obtain value of expression at the current value
 
@@ -26404,7 +29050,7 @@ class OptiSol(PrintableCommon):
         return _casadi.OptiSol_value(self, *args)
 
 
-    def value_variables(self, *args):
+    def value_variables(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
         get assignment expressions for the optimal solution
 
@@ -26418,7 +29064,7 @@ class OptiSol(PrintableCommon):
         return _casadi.OptiSol_value_variables(self, *args)
 
 
-    def value_parameters(self, *args):
+    def value_parameters(self, *args) -> "std::vector< casadi::MX,std::allocator< casadi::MX > >":
         """
 
 
@@ -26430,7 +29076,7 @@ class OptiSol(PrintableCommon):
         return _casadi.OptiSol_value_parameters(self, *args)
 
 
-    def stats(self, *args):
+    def stats(self, *args) -> "casadi::Dict":
         """
           Get statistics.
 
@@ -26447,7 +29093,7 @@ class OptiSol(PrintableCommon):
         return _casadi.OptiSol_stats(self, *args)
 
 
-    def _opti(self, *args):
+    def _opti(self, *args) -> "casadi::Opti":
         """
 
 

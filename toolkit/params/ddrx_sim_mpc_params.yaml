@@ -7,8 +7,11 @@ map_name: map416_track
 is_3D_vis: True         # Visualize 3D curvature data
 # is_3D_vis: False      # Not visualize 3D curvature data
 
-# is_plot_data: True    # Visualize lap data
-is_plot_data: False     # Not visualize lap data
+is_plot_data: True    # Visualize lap data
+# is_plot_data: False     # Not visualize lap data
+
+use_jit: True           # Enabling JIT compilation can typically significantly improve performance
+# use_jit: False            # Disable JIT compilation, more suitable for debugging or one-time computing scenarios
 
 window_size: 30
 N: 10
