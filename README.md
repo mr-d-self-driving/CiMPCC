@@ -120,7 +120,7 @@ Track files are located in `toolkit/tracks/`, where path and boundaries are defi
 
 ### ✏️ Parameter Tuning
 
-Parameter files are saved in `toolkit/params/`, where the parameter definitions are consistent with those described in the paper. Try tuning the parameters to improve the performance (reduce the lap time) of the planner 🏁.
+Parameter files are saved in `toolkit/params/`, where the parameter definitions are consistent with those described in the [paper](https://arxiv.org/abs/2502.03695v1). Try tuning the parameters to improve the performance (reduce the lap time) of the planner 🏁.
 
 Feel that parameter tuning is troublesome? Check out my [latest work](https://arxiv.org/pdf/2410.11570), which uses Bayesian optimization for automatic parameter tuning.
 
