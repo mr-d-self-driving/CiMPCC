@@ -1,8 +1,0 @@
-prefix=/home/ddrx/f1tenth_ws/devel
-
-Name: osuf1_common
-Description: Description of osuf1_common
-Version: 0.0.0
-Cflags: -I/home/ddrx/f1tenth_ws/devel/include
-Libs: -L${prefix}/lib 
-Requires: message_runtime std_msgs
