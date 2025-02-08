@@ -7,9 +7,9 @@ Deploy and visualize the trajectory planner from ITSC 2024 paper "[Reduce Lap Ti
   <img src="./media/cimpcc.gif" alt="teaser" width="360" />
 </div>
 
-Update:
+**Update**:
 
-  The ROS environment for the current branch is neotic under Ubuntu 20.04. For the version of melodic, see the branch `melodic_py27`.
+  The ROS environment for the current branch is neotic under Ubuntu 20.04. For the version of melodic, please see the branch `melodic_py27`.
 
 ## 🪄 Quickstart
 
@@ -30,10 +30,25 @@ Either of the following two methods can be used to deploy the environment.
 
 ### ✅ Run directly using the pre-built Docker image
 
-Alternatively, the Docker configuration can be pulled from Google Drive. Simply download it to your Linux system.
+Alternatively, the Docker configuration can be pulled from [Google Drive](https://drive.google.com/file/d/1pk2MK0nKocj3GiwBniOZNmhHBxJ0LjpT/view?usp=drive_link). Simply download it to your Linux system.
 
-Coming soon.
+**[1/2]** Import the `prebuilt_cimpcc_v1.0.tar` file as a new image using Docker import:
 
+```
+docker import prebuilt_cimpcc_v1.0.tar prebuilt_cimpcc_v1.0
+```
+
+**[2/2]** Now, you can use the imported image to create and launch a new container:
+
+```
+sudo docker run -it \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -e DISPLAY=$DISPLAY \
+  -v /home/ddrx/f1tenth_ws:/home/ddrx/f1tenth_ws \
+  -w /home/ddrx/f1tenth_ws \
+  prebuilt_cimpcc_v1.0 \
+  /bin/bash
+```
 ### ✅ [Optional] Reconfigure from scratch using Docker
 
 **[1/3]** Pull Docker image:
