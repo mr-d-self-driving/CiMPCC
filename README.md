@@ -140,14 +140,14 @@ Please contact [Zhouheng Li](https://zhouhengli.github.io) if you have any quest
 If you find our work useful, please consider citing:
 
 ```
-@misc{li2025reducelaptimeautonomous,
-      title={Reduce Lap Time for Autonomous Racing with Curvature-Integrated MPCC Local Trajectory Planning Method}, 
-      author={Zhouheng Li and Lei Xie and Cheng Hu and Hongye Su},
-      year={2025},
-      eprint={2502.03695},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO},
-      url={https://arxiv.org/abs/2502.03695}, 
+@INPROCEEDINGS{10920215,
+  author={Li, Zhouheng and Xie, Lei and Hu, Cheng and Su, Hongye},
+  booktitle={2024 IEEE 27th International Conference on Intelligent Transportation Systems (ITSC)}, 
+  title={Reduce Lap Time for Autonomous Racing with Curvature-Integrated MPCC Local Trajectory Planning Method}, 
+  year={2024},
+  pages={1066-1073},
+  keywords={Technological innovation;Limiting;Codes;Trajectory planning;Predictive models;Cost function;Trajectory;Intelligent transportation systems;Autonomous vehicles},
+  doi={10.1109/ITSC58415.2024.10920215}
 }
 ```
 
